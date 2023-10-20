@@ -1,0 +1,61 @@
+{
+    "name": "webparking/logic4-client",
+    "description": "A package to connect with Logic4",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.8",
+        "psr/simple-cache": "^3.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.35",
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^8.13",
+        "phpro/grumphp-shim": "^2.1",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-mockery": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpunit/phpunit": "^10.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webparking\\Logic4Client\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Webparking\\Logic4Client\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "php-cs-fixer": [
+            "vendor/bin/php-cs-fixer fix"
+        ],
+        "phpstan": [
+            "@php vendor/bin/phpstan analyse --memory-limit=-1"
+        ],
+        "check-coverage": [
+            "@php vendor/bin/coverage-check coverage.xml 100"
+        ],
+        "test": [
+            "vendor/bin/grumphp run"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpro/grumphp-shim": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "authors": [
+        {
+            "name": "Ruben de Vos",
+            "email": "ruben.devos@webparking.nl"
+        }
+    ]
+}
