@@ -45,7 +45,7 @@
         "check-coverage": [
             "@php vendor/bin/coverage-check coverage.xml 100"
         ],
-        "test-all": [
+        "test": [
             "composer phpstan",
             "composer php-cs-fixer",
             "@php vendor/bin/phpunit --coverage-clover=coverage.xml",
