@@ -20,6 +20,11 @@ build: composer-install
 composer-install: ## Installs composer dependencies
 	"$(EXEC)" composer install
 
+generate: ## Generates request classes based on API definition
+	"$(EXEC)" php generate.php
+	make rector
+	make cs-fix
+
 ##@ Analyze
 analyze: phpstan cs ## Run code analyzers
 
@@ -35,6 +40,9 @@ cs: ## Runs PHP-CS-Fixer analyzer
 cs-fix: ## Runs PHP-CS-Fixer and fixes all problems
 	"$(EXEC_NON_TTY)" vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php $(target)
 
+rector: ## Runs PHP-CS-Fixer and fixes all problems
+	"$(EXEC_NON_TTY)" vendor/bin/rector process --no-diffs --ansi --memory-limit=2G
+
 ##@ Test
 test: ## Run test suite
 	"$(EXEC)" vendor/bin/phpunit
@@ -45,8 +53,5 @@ test-all: ## Run composer test
 ##@ Workspace
 cmd: ## [user=user] Open workspace shell
 	clear && "$(EXEC)" bash || true && clear
-
-grumphp: ## Run grumphp
-	"$(EXEC)" php -d memory_limit=-1 vendor/bin/grumphp run
 
 

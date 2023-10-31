@@ -27,6 +27,8 @@ RUN apk add --no-cache --virtual .build-deps \
     && \
     rm -rf /tmp/pear
 
+RUN echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/docker-memory-limit.ini;
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html

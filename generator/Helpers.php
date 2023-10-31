@@ -1,0 +1,78 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Webparking\Logic4Client\Generator;
+
+use cebe\openapi\spec\Reference;
+use cebe\openapi\spec\Schema;
+
+class Helpers
+{
+    public static function emptyDirectory(string $path, string|array $keepFiles = null): void
+    {
+        if (!is_dir($path)) {
+            return;
+        }
+
+        foreach (scandir($path) ?: [] as $file) {
+            if ('.' === $file || '..' === $file || \in_array($file, (array) $keepFiles, true)) {
+                continue;
+            }
+
+            if (is_dir($path.'/'.$file)) {
+                self::emptyDirectory($path.'/'.$file);
+            } else {
+                unlink($path.'/'.$file);
+            }
+        }
+
+        if (null === $keepFiles) {
+            rmdir($path);
+        }
+    }
+
+    public static function createDirectory(string $path): void
+    {
+        if (!is_dir($path)) {
+            if (!mkdir($path, 0o755, true) && !is_dir($path)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
+            }
+        }
+    }
+
+    public static function resolveParameterType(Schema $property): string
+    {
+        if ('array' === $property->type) {
+            if ($property->items instanceof Schema) {
+                $type = sprintf('array<%s>', self::resolveParameterType($property->items));
+            } else {
+                $type = 'array<mixed>';
+            }
+        } elseif ('object' === $property->type) {
+            $properties = [];
+            foreach ($property->properties as $parameterName => $propertyValue) {
+                $properties[] = sprintf('%s?: %s', $parameterName, self::resolveParameterType($propertyValue));
+            }
+
+            $type = sprintf('array{%s}', implode(', ', $properties));
+        } else {
+            $type = $property->type;
+        }
+
+        return $type;
+    }
+
+    /** @param Reference[]|Schema[] $properties */
+    public static function makePhpDoc(array $properties, string $format): array
+    {
+        $parameters = [];
+        foreach ($properties as $name => $property) {
+            if ($property instanceof Schema) {
+                $parameters[] = sprintf($format, sprintf('%s?: %s', $name, self::resolveParameterType($property)));
+            }
+        }
+
+        return $parameters;
+    }
+}

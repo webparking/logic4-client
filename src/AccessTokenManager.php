@@ -10,23 +10,49 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 
 class AccessTokenManager
 {
+    private string $publicKey;
+    private string $companyKey;
+    private string $username;
+    private string $secretKey;
+    private string $password;
+    private string $administrationId;
+
     public function __construct(
-        private readonly CredentialBag $credentialBag,
         private readonly CacheInterface $cache,
         private readonly Client $client = new Client(),
+        private readonly string $tokenUrl = 'https://idp.logic4server.nl/token',
     ) {
+    }
+
+    /** @param array{
+     *     public_key: string,
+     *     company_key: string,
+     *     username: string,
+     *     secret_key: string,
+     *     password: string,
+     *     administration_id: string,
+     *  } $options
+     */
+    public function configure(array $options): void
+    {
+        $this->publicKey = $options['public_key'];
+        $this->companyKey = $options['company_key'];
+        $this->username = $options['username'];
+        $this->secretKey = $options['secret_key'];
+        $this->password = $options['password'];
+        $this->administrationId = $options['administration_id'];
     }
 
     public function getAccessToken(): string
     {
-        $cacheKey = 'logic4_access_token';
+        $cacheKey = 'logic4:access_token';
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
         }
 
         $response = $this->client
-            ->post($this->credentialBag->authUrl, [
+            ->post($this->tokenUrl, [
                 'form_params' => [
                     'client_id' => $this->makeClientId(),
                     'client_secret' => $this->makeClientSecret(),
@@ -50,21 +76,21 @@ class AccessTokenManager
 
     private function makeScope(): string
     {
-        return 'api administration.'.$this->credentialBag->administrationId;
+        return 'api administration.'.$this->administrationId;
     }
 
     private function makeClientId(): string
     {
-        return implode(' ', [$this->credentialBag->publicKey, $this->credentialBag->companyKey, $this->getEncodedUsername()]);
+        return implode(' ', [$this->publicKey, $this->companyKey, $this->getEncodedUsername()]);
     }
 
     private function makeClientSecret(): string
     {
-        return implode(' ', [$this->credentialBag->secretKey, $this->credentialBag->password]);
+        return implode(' ', [$this->secretKey, $this->password]);
     }
 
     protected function getEncodedUsername(): string
     {
-        return str_replace(['_', ' '], ['__', '_'], $this->credentialBag->username);
+        return str_replace(['_', ' '], ['__', '_'], $this->username);
     }
 }

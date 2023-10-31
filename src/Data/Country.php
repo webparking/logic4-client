@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Webparking\Logic4Client\Data;
+
+class Country
+{
+    /** @param array<Translation> $names */
+    public function __construct(
+        public int $id,
+        public int $zoneId,
+        public ?array $names,
+        public ?string $isoCode,
+    ) {
+    }
+
+    /** @param array<mixed> $data */
+    public static function make(array $data): self
+    {
+        return new self(
+            id: $data['Id'],
+            zoneId: $data['ZoneId'],
+            names: array_map(static fn (array $item) => Translation::make($item), $data['Names'] ?? []),
+            isoCode: $data['IsoCode'],
+        );
+    }
+}

@@ -5,33 +5,61 @@ declare(strict_types=1);
 namespace Webparking\Logic4Client;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 
 class ClientFactory
 {
+    private HandlerStack $handlerStack;
+
     /** @param array<string, mixed> $options */
     public function __construct(
-        private readonly string $baseUrl,
         private readonly AccessTokenManager $tokenManager,
         private readonly array $options = [],
+        private readonly string $baseUrl = 'https://api.logic4server.nl',
     ) {
+        $this->setHandlerStack(HandlerStack::create());
     }
 
     public function make(): Client
     {
-        $handlerStack = HandlerStack::create();
-        $handlerStack->push(Middleware::mapRequest(function ($request) {
+        return new Client([
+            'base_uri' => $this->baseUrl,
+            ...$this->options,
+            'timeout' => 60,
+            'handler' => $this->handlerStack,
+        ]);
+    }
+
+    public function setHandlerStack(HandlerStack $handlerStack): self
+    {
+        $this->handlerStack = $handlerStack;
+
+        $this->handlerStack->push(Middleware::mapRequest(function ($request) {
             $accessToken = $this->tokenManager->getAccessToken();
 
             return $request->withHeader('Authorization', "Bearer {$accessToken}");
         }));
 
-        return new Client([
-            'base_uri' => $this->baseUrl,
-            ...$this->options,
-            'timeout' => 60,
-            'handler' => $handlerStack,
-        ]);
+        $this->handlerStack->push($this->makeRequestExceptionMiddleware());
+
+        return $this;
+    }
+
+    private function makeRequestExceptionMiddleware(): \Closure
+    {
+        return static fn (callable $handler): callable => static fn (RequestInterface $request, array $options) => $handler($request, $options)->then(function (ResponseInterface $response) use ($request): ResponseInterface {
+            if ($response->getStatusCode() >= 400) {
+                $previous = RequestException::create($request, $response);
+
+                throw new Logic4ApiException(message: $previous->getMessage(), code: $previous->getCode(), previous: $previous);
+            }
+
+            return $response;
+        });
     }
 }
