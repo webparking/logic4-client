@@ -25,9 +25,5 @@ return (new PhpCsFixer\Config())
             ->in([
                 __DIR__,
             ])
-            ->exclude([
-                'bootstrap/cache',
-                'storage',
-            ])
             ->ignoreUnreadableDirs()
     );

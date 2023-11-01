@@ -6,5 +6,4 @@ namespace Webparking\Logic4Client\Tests;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-
 }

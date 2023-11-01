@@ -9,27 +9,34 @@ use GuzzleHttp\Psr7\Response;
 use Mockery\MockInterface;
 use Psr\SimpleCache\CacheInterface;
 use Webparking\Logic4Client\AccessTokenManager;
-use Webparking\Logic4Client\CredentialBag;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Tests\TestCase;
 
 final class AccessTokenManagerTest extends TestCase
 {
-    private CredentialBag $credentials;
+    /** @var array{
+     *     public_key: string,
+     *     company_key: string,
+     *     username: string,
+     *     secret_key: string,
+     *     password: string,
+     *     administration_id: string,
+     *  }
+     */
+    private array $credentials;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->credentials = new CredentialBag(
-            'https://idp.logic4server.nl/token',
-            'publicKey',
-            'companyKey',
-            'user_name (2)',
-            'secretKey',
-            'password',
-            'administration-1',
-        );
+        $this->credentials = [
+            'public_key' => 'publicKey',
+            'company_key' => 'companyKey',
+            'username' => 'user_name (2)',
+            'secret_key' => 'secretKey',
+            'password' => 'password',
+            'administration_id' => 'administration-1',
+        ];
     }
 
     public function testGetFromLogic4WhenNotInCache(): void
@@ -37,12 +44,12 @@ final class AccessTokenManagerTest extends TestCase
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('has')
                 ->once()
-                ->with('logic4_access_token')
+                ->with('logic4:access_token')
                 ->andReturnFalse();
 
             $mock->shouldReceive('set')
                 ->once()
-                ->with('logic4_access_token', 'the-new-access-token', 3600);
+                ->with('logic4:access_token', 'the-new-access-token', 3600);
         });
 
         $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
@@ -67,7 +74,8 @@ final class AccessTokenManagerTest extends TestCase
                 ], \JSON_THROW_ON_ERROR)));
         });
 
-        $manager = new AccessTokenManager($this->credentials, $cache, $client);
+        $manager = new AccessTokenManager($cache, $client);
+        $manager->configure($this->credentials);
 
         static::assertSame(
             'the-new-access-token',
@@ -80,16 +88,17 @@ final class AccessTokenManagerTest extends TestCase
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('has')
                 ->once()
-                ->with('logic4_access_token')
+                ->with('logic4:access_token')
                 ->andReturnTrue();
 
             $mock->shouldReceive('get')
                 ->once()
-                ->with('logic4_access_token')
+                ->with('logic4:access_token')
                 ->andReturn('the-access-token');
         });
 
-        $manager = new AccessTokenManager($this->credentials, $cache);
+        $manager = new AccessTokenManager($cache);
+        $manager->configure($this->credentials);
 
         static::assertSame(
             'the-access-token',
@@ -102,7 +111,7 @@ final class AccessTokenManagerTest extends TestCase
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('has')
                 ->once()
-                ->with('logic4_access_token')
+                ->with('logic4:access_token')
                 ->andReturnFalse();
         });
 
@@ -116,7 +125,8 @@ final class AccessTokenManagerTest extends TestCase
                 ], \JSON_THROW_ON_ERROR)));
         });
 
-        $manager = new AccessTokenManager($this->credentials, $cache, $client);
+        $manager = new AccessTokenManager($cache, $client);
+        $manager->configure($this->credentials);
 
         $this->expectExceptionObject(new Logic4ApiException('Could not get access token: {"error":"invalid_client","error_description":"Invalid client credentials"}'));
 
