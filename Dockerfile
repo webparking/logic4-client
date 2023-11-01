@@ -10,24 +10,18 @@ RUN apk add --no-cache --virtual .build-deps \
     && \
     apk add --no-cache \
         bash \
-        # grumphp
-        git \
     && \
     pecl install \
         # for coverage runs
         pcov \
-        # for cache, queue and session
-        redis \
     && \
-    docker-php-ext-enable pcov redis \
+    docker-php-ext-enable pcov \
     && \
     echo "pcov.enabled = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini \
     && \
     apk del .build-deps \
     && \
     rm -rf /tmp/pear
-
-RUN echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/docker-memory-limit.ini;
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
