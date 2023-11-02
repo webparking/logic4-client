@@ -7,7 +7,6 @@ namespace Webparking\Logic4Client\Requests;
 use Webparking\Logic4Client\Data\GetRound;
 use Webparking\Logic4Client\Data\GetRoundOrder;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
@@ -15,21 +14,21 @@ use Webparking\Logic4Client\Responses\TypeRoundOrderStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\TypeRoundStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\VehicleLogic4ResponseList;
 
-class Round extends Request
+class RoundRequest extends Request
 {
     /**
      * Voeg een rit toe aan de database. Het ID van de zojuist aangemaakte rit wordt als response teruggegeven.
      *
      * @param array{
-     *     TypeId?: integer,
-     *     Description?: string,
-     *     Memo?: string,
-     *     DateTimePlanned?: string,
-     *     VehicleId?: integer,
-     *     DriverId?: integer,
-     *     CoDriverId?: integer,
-     *     StatusId?: integer,
-     *     HideInSystem?: boolean,
+     *     TypeId?: integer|null,
+     *     Description?: string|null,
+     *     Memo?: string|null,
+     *     DateTimePlanned?: string|null,
+     *     VehicleId?: integer|null,
+     *     DriverId?: integer|null,
+     *     CoDriverId?: integer|null,
+     *     StatusId?: integer|null,
+     *     HideInSystem?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -49,13 +48,13 @@ class Round extends Request
      * Het voertuig bepaalt of je Orders, of ITS of beide mag toevoegen.
      *
      * @param array{
-     *     OrderId?: integer,
-     *     ITSIssueId?: integer,
-     *     RoundId?: integer,
-     *     Remarks?: string,
-     *     StatusId?: integer,
-     *     Sorting?: integer,
-     *     EstimatedArrivalDateTime?: string,
+     *     OrderId?: integer|null,
+     *     ITSIssueId?: integer|null,
+     *     RoundId?: integer|null,
+     *     Remarks?: string|null,
+     *     StatusId?: integer|null,
+     *     Sorting?: integer|null,
+     *     EstimatedArrivalDateTime?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -75,22 +74,23 @@ class Round extends Request
      * Om meer regels op te halen dien je gebruik te maken van de skip/take filtering.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     RoundId?: integer,
-     *     StatusId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     RoundId?: integer|null,
+     *     StatusId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<GetRoundOrder>
+     * @return \Generator<array-key, GetRoundOrder>
      *
      * @throws Logic4ApiException
      */
-    public function getRoundOrders(array $parameters = []): PaginatedResponse
+    public function getRoundOrders(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1/Round/GetRoundOrders', $parameters),
-            GetRoundOrder::class,
-        );
+        $iterator = $this->paginateRecords('/v1/Round/GetRoundOrders', $parameters);
+
+        foreach ($iterator as $record) {
+            yield GetRoundOrder::make($record);
+        }
     }
 
     /**
@@ -112,27 +112,28 @@ class Round extends Request
      * Verkrijg een collectie van ritten (maximaal 1000 records).
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     DateTimeCreatedFrom?: string,
-     *     DateTimeCreatedTo?: string,
-     *     TypeId?: integer,
-     *     StatusId?: integer,
-     *     VehicleId?: integer,
-     *     ItsIds?: array<integer>,
-     *     OrderIds?: array<integer>,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     DateTimeCreatedFrom?: string|null,
+     *     DateTimeCreatedTo?: string|null,
+     *     TypeId?: integer|null,
+     *     StatusId?: integer|null,
+     *     VehicleId?: integer|null,
+     *     ItsIds?: array<integer>|null,
+     *     OrderIds?: array<integer>|null,
      * } $parameters
      *
-     * @return PaginatedResponse<GetRound>
+     * @return \Generator<array-key, GetRound>
      *
      * @throws Logic4ApiException
      */
-    public function getRounds(array $parameters = []): PaginatedResponse
+    public function getRounds(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1/Round/GetRounds', $parameters),
-            GetRound::class,
-        );
+        $iterator = $this->paginateRecords('/v1/Round/GetRounds', $parameters);
+
+        foreach ($iterator as $record) {
+            yield GetRound::make($record);
+        }
     }
 
     /**
@@ -170,16 +171,16 @@ class Round extends Request
      * Let op, je moet het gehele object vullen. Lege waardes worden ook overgenomen.
      *
      * @param array{
-     *     Id?: integer,
-     *     TypeId?: integer,
-     *     Description?: string,
-     *     Memo?: string,
-     *     DateTimePlanned?: string,
-     *     VehicleId?: integer,
-     *     DriverId?: integer,
-     *     CoDriverId?: integer,
-     *     StatusId?: integer,
-     *     HideInSystem?: boolean,
+     *     Id?: integer|null,
+     *     TypeId?: integer|null,
+     *     Description?: string|null,
+     *     Memo?: string|null,
+     *     DateTimePlanned?: string|null,
+     *     VehicleId?: integer|null,
+     *     DriverId?: integer|null,
+     *     CoDriverId?: integer|null,
+     *     StatusId?: integer|null,
+     *     HideInSystem?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -199,11 +200,11 @@ class Round extends Request
      * Let op, je moet het gehele object vullen. Lege waardes worden ook overgenomen.
      *
      * @param array{
-     *     Id?: integer,
-     *     Remarks?: string,
-     *     StatusId?: integer,
-     *     Sorting?: integer,
-     *     EstimatedArrivalDateTime?: string,
+     *     Id?: integer|null,
+     *     Remarks?: string|null,
+     *     StatusId?: integer|null,
+     *     Sorting?: integer|null,
+     *     EstimatedArrivalDateTime?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

@@ -8,14 +8,14 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\SubscriberLogic4ResponseList;
 
-class Marketing extends Request
+class MarketingRequest extends Request
 {
     /**
      * Verkrijg abonnees op basis van het opgestuurde filter.
      *
      * @param array{
-     *     DateTimeSubscribedFrom?: string,
-     *     DateTimeSubscribedTo?: string,
+     *     DateTimeSubscribedFrom?: string|null,
+     *     DateTimeSubscribedTo?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

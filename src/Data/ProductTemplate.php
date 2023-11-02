@@ -16,8 +16,8 @@ class ProductTemplate
     public static function make(array $data): self
     {
         return new self(
-            templateId: $data['TemplateId'],
-            name: $data['Name'],
+            templateId: $data['TemplateId'] ?? 0,
+            name: $data['Name'] ?? null,
         );
     }
 }

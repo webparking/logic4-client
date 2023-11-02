@@ -22,11 +22,11 @@ class ProductStockInformation
     public static function make(array $data): self
     {
         return new self(
-            totalStock: $data['TotalStock'],
-            reservedStock: $data['ReservedStock'],
-            freeStock: $data['FreeStock'],
+            totalStock: $data['TotalStock'] ?? 0.0,
+            reservedStock: $data['ReservedStock'] ?? 0.0,
+            freeStock: $data['FreeStock'] ?? 0.0,
             stockLocations: array_map(static fn (array $item) => ProductStockLocations::make($item), $data['StockLocations'] ?? []),
-            nextDelivery: $data['NextDelivery'] ? Carbon::parse($data['NextDelivery']) : null,
+            nextDelivery: isset($data['NextDelivery']) ? Carbon::parse($data['NextDelivery']) : null,
         );
     }
 }

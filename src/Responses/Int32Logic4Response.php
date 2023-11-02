@@ -17,8 +17,8 @@ class Int32Logic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'],
-            validationMessages: $data['ValidationMessages'],
+            value: $data['Value'] ?? 0,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

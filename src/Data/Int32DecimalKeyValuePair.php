@@ -16,8 +16,8 @@ class Int32DecimalKeyValuePair
     public static function make(array $data): self
     {
         return new self(
-            key: $data['Key'],
-            value: $data['Value'],
+            key: $data['Key'] ?? 0,
+            value: $data['Value'] ?? 0.0,
         );
     }
 }

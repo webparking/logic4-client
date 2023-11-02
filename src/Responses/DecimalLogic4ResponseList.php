@@ -21,9 +21,9 @@ class DecimalLogic4ResponseList
     public static function make(array $data): self
     {
         return new self(
-            records: $data['Records'],
-            recordsCounter: $data['RecordsCounter'],
-            validationMessages: $data['ValidationMessages'],
+            records: $data['Records'] ?? [],
+            recordsCounter: $data['RecordsCounter'] ?? 0,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

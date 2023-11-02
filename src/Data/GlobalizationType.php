@@ -17,9 +17,9 @@ class GlobalizationType
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            description: $data['Description'],
-            value: $data['Value'],
+            id: $data['Id'] ?? 0,
+            description: $data['Description'] ?? null,
+            value: $data['Value'] ?? null,
         );
     }
 }

@@ -17,9 +17,9 @@ class ReturnProblem
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            description: $data['Description'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            description: $data['Description'] ?? null,
         );
     }
 }

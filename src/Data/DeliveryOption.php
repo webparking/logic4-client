@@ -20,12 +20,12 @@ class DeliveryOption
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            code: $data['Code'],
-            isPickupLocation: $data['IsPickupLocation'],
-            shipperTypeId: $data['ShipperTypeId'],
-            externalTypeValue: $data['ExternalTypeValue'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            code: $data['Code'] ?? null,
+            isPickupLocation: $data['IsPickupLocation'] ?? false,
+            shipperTypeId: $data['ShipperTypeId'] ?? 0,
+            externalTypeValue: $data['ExternalTypeValue'] ?? null,
         );
     }
 }

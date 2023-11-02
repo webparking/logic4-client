@@ -6,7 +6,6 @@ namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\FinancialJournal;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\FinancialBookLogic4ResponseList;
@@ -19,20 +18,20 @@ use Webparking\Logic4Client\Responses\TypeLedgerColumnLogic4ResponseList;
 use Webparking\Logic4Client\Responses\TypeTransactionCodeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\VatCodeLogic4ResponseList;
 
-class Financial extends Request
+class FinancialRequest extends Request
 {
     /**
      * Maak een financiele dagboekboeking met mutaties aan.
      *
      * @param array{
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
-     *     Description?: string,
-     *     Reference?: string,
-     *     BookingDateTime?: string,
-     *     FinancialBookId?: integer,
-     *     Mutations?: array<mixed>,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     Description?: string|null,
+     *     Reference?: string|null,
+     *     BookingDateTime?: string|null,
+     *     FinancialBookId?: integer|null,
+     *     Mutations?: array<mixed>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -51,8 +50,8 @@ class Financial extends Request
      * Verkrijg de beschikbare financiële dagboeken o.b.v. het aangeleverde filter.
      *
      * @param array{
-     *     LedgerId?: integer,
-     *     FinancialBookType?: integer,
+     *     LedgerId?: integer|null,
+     *     FinancialBookType?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -73,23 +72,24 @@ class Financial extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     LedgerCode?: integer,
-     *     DateTimeFrom?: string,
-     *     DateTimeTo?: string,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     LedgerCode?: integer|null,
+     *     DateTimeFrom?: string|null,
+     *     DateTimeTo?: string|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<FinancialJournal>
+     * @return \Generator<array-key, FinancialJournal>
      *
      * @throws Logic4ApiException
      */
-    public function getFinancialJournals(array $parameters = []): PaginatedResponse
+    public function getFinancialJournals(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1/Financial/GetFinancialJournals', $parameters),
-            FinancialJournal::class,
-        );
+        $iterator = $this->paginateRecords('/v1/Financial/GetFinancialJournals', $parameters);
+
+        foreach ($iterator as $record) {
+            yield FinancialJournal::make($record);
+        }
     }
 
     /**
@@ -194,10 +194,10 @@ class Financial extends Request
      * Plaats een UBL document in het inkoopboek. Deze worden opgeslagen als voorstellen, en moeten nog worden gecontroleerd voordat ze kunnen worden verwerkt.
      *
      * @param array{
-     *     Xml?: string,
-     *     BookId?: integer,
-     *     StatusId?: integer,
-     *     UserId?: integer,
+     *     Xml?: string|null,
+     *     BookId?: integer|null,
+     *     StatusId?: integer|null,
+     *     UserId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

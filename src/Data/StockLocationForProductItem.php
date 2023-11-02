@@ -23,15 +23,15 @@ class StockLocationForProductItem
     public static function make(array $data): self
     {
         return new self(
-            isDefault: $data['IsDefault'],
-            location: $data['Location'],
-            locationId: $data['LocationId'],
-            qty: $data['Qty'],
-            warehouseSortId: $data['WarehouseSortId'],
-            rowSortId: $data['RowSortId'],
-            columnSortId: $data['ColumnSortId'],
-            locationSortId: $data['LocationSortId'],
-            productId: $data['ProductId'],
+            isDefault: $data['IsDefault'] ?? false,
+            location: $data['Location'] ?? null,
+            locationId: $data['LocationId'] ?? 0,
+            qty: $data['Qty'] ?? 0.0,
+            warehouseSortId: $data['WarehouseSortId'] ?? 0,
+            rowSortId: $data['RowSortId'] ?? 0,
+            columnSortId: $data['ColumnSortId'] ?? 0,
+            locationSortId: $data['LocationSortId'] ?? 0,
+            productId: $data['ProductId'] ?? 0,
         );
     }
 }

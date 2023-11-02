@@ -20,10 +20,10 @@ class ProductStockSuppliers
     public static function make(array $data): self
     {
         return new self(
-            supplierId: $data['SupplierId'],
-            productNextDelivery: $data['ProductNextDelivery'] ? Carbon::parse($data['ProductNextDelivery']) : null,
-            productId: $data['ProductId'],
-            qty: $data['Qty'],
+            supplierId: $data['SupplierId'] ?? 0,
+            productNextDelivery: isset($data['ProductNextDelivery']) ? Carbon::parse($data['ProductNextDelivery']) : null,
+            productId: $data['ProductId'] ?? 0,
+            qty: $data['Qty'] ?? 0.0,
         );
     }
 }

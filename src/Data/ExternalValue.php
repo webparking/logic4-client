@@ -16,8 +16,8 @@ class ExternalValue
     public static function make(array $data): self
     {
         return new self(
-            typeId: $data['TypeId'],
-            value: $data['Value'],
+            typeId: $data['TypeId'] ?? 0,
+            value: $data['Value'] ?? null,
         );
     }
 }

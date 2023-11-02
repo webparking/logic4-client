@@ -17,9 +17,9 @@ class DebtorCostCentre
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            code: $data['Code'],
-            description: $data['Description'],
+            id: $data['Id'] ?? 0,
+            code: $data['Code'] ?? null,
+            description: $data['Description'] ?? null,
         );
     }
 }

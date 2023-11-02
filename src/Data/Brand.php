@@ -17,9 +17,9 @@ class Brand
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            visibleOnWebsite: $data['VisibleOnWebsite'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            visibleOnWebsite: $data['VisibleOnWebsite'] ?? false,
         );
     }
 }

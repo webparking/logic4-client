@@ -6,7 +6,6 @@ namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\CRMActivity;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\CRMActivityStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\CRMActivityTypeLogic4ResponseList;
@@ -14,7 +13,7 @@ use Webparking\Logic4Client\Responses\CRMProjectLogic4ResponseList;
 use Webparking\Logic4Client\Responses\CRMProjectStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\CRMProjectTypeLogic4ResponseList;
 
-class CRM extends Request
+class CRMRequest extends Request
 {
     /**
      * Verkrijg CRM activiteiten o.b.v. het meegestuurde filter en de opgegeven gebruiker.
@@ -22,36 +21,37 @@ class CRM extends Request
      * TakeRecords wordt gelimiteerd op 10.000.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     CrmProjectId?: integer,
-     *     CreatedDateFrom?: string,
-     *     CreatedDateTo?: string,
-     *     StatusIds?: array<integer>,
-     *     CreatedByUserIds?: array<integer>,
-     *     CarriedOutByUserId?: integer,
-     *     StartDateFrom?: string,
-     *     StartDateTo?: string,
-     *     Name?: string,
-     *     TypeId?: integer,
-     *     CrmProjectStatusId?: integer,
-     *     CrmProjectTypeId?: integer,
-     *     CrmProjectName?: string,
-     *     ShowOnlyOpenActivities?: boolean,
-     *     UserIdForRights?: integer,
-     *     CarriedOutByUserIds?: array<integer>,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     CrmProjectId?: integer|null,
+     *     CreatedDateFrom?: string|null,
+     *     CreatedDateTo?: string|null,
+     *     StatusIds?: array<integer>|null,
+     *     CreatedByUserIds?: array<integer>|null,
+     *     CarriedOutByUserId?: integer|null,
+     *     StartDateFrom?: string|null,
+     *     StartDateTo?: string|null,
+     *     Name?: string|null,
+     *     TypeId?: integer|null,
+     *     CrmProjectStatusId?: integer|null,
+     *     CrmProjectTypeId?: integer|null,
+     *     CrmProjectName?: string|null,
+     *     ShowOnlyOpenActivities?: boolean|null,
+     *     UserIdForRights?: integer|null,
+     *     CarriedOutByUserIds?: array<integer>|null,
      * } $parameters
      *
-     * @return PaginatedResponse<CRMActivity>
+     * @return \Generator<array-key, CRMActivity>
      *
      * @throws Logic4ApiException
      */
-    public function getCRMActivities(array $parameters = []): PaginatedResponse
+    public function getCRMActivities(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/CRM/GetCRMActivities', $parameters),
-            CRMActivity::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/CRM/GetCRMActivities', $parameters);
+
+        foreach ($iterator as $record) {
+            yield CRMActivity::make($record);
+        }
     }
 
     /**
@@ -86,14 +86,14 @@ class CRM extends Request
      * Verkrijg CRM projecten o.b.v. het meegestuurde filter en de opgegeven gebruiker.
      *
      * @param array{
-     *     CrmProjectId?: integer,
-     *     StartDate?: string,
-     *     EndDate?: string,
-     *     StatusIds?: array<integer>,
-     *     ResponsibleUserIds?: array<integer>,
-     *     Name?: string,
-     *     TypeId?: integer,
-     *     UserIdForRights?: integer,
+     *     CrmProjectId?: integer|null,
+     *     StartDate?: string|null,
+     *     EndDate?: string|null,
+     *     StatusIds?: array<integer>|null,
+     *     ResponsibleUserIds?: array<integer>|null,
+     *     Name?: string|null,
+     *     TypeId?: integer|null,
+     *     UserIdForRights?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

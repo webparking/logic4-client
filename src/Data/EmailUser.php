@@ -22,11 +22,11 @@ class EmailUser
     {
         return new self(
             emailAddresses: array_map(static fn (array $item) => EmailUserEmailAddress::make($item), $data['EmailAddresses'] ?? []),
-            startBoxId: $data['StartBoxId'],
-            deleteBoxId: $data['DeleteBoxId'],
-            sendBoxId: $data['SendBoxId'],
-            outBoxId: $data['OutBoxId'],
-            conceptBoxId: $data['ConceptBoxId'],
+            startBoxId: $data['StartBoxId'] ?? null,
+            deleteBoxId: $data['DeleteBoxId'] ?? null,
+            sendBoxId: $data['SendBoxId'] ?? null,
+            outBoxId: $data['OutBoxId'] ?? null,
+            conceptBoxId: $data['ConceptBoxId'] ?? null,
         );
     }
 }

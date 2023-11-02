@@ -21,11 +21,11 @@ class ProductStockSupplierWithActive
     public static function make(array $data): self
     {
         return new self(
-            active: $data['Active'],
-            supplierId: $data['SupplierId'],
-            productNextDelivery: $data['ProductNextDelivery'] ? Carbon::parse($data['ProductNextDelivery']) : null,
-            productId: $data['ProductId'],
-            qty: $data['Qty'],
+            active: $data['Active'] ?? false,
+            supplierId: $data['SupplierId'] ?? 0,
+            productNextDelivery: isset($data['ProductNextDelivery']) ? Carbon::parse($data['ProductNextDelivery']) : null,
+            productId: $data['ProductId'] ?? 0,
+            qty: $data['Qty'] ?? 0.0,
         );
     }
 }

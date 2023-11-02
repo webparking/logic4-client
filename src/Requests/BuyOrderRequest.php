@@ -7,31 +7,30 @@ namespace Webparking\Logic4Client\Requests;
 use Webparking\Logic4Client\Data\BuyOrderBaseInfo;
 use Webparking\Logic4Client\Data\BuyOrderRow;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\BuyOrderBaseInfoLogic4ResponseList;
 use Webparking\Logic4Client\Responses\BuyOrderRowLogic4ResponseList;
 use Webparking\Logic4Client\Responses\Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response;
 
-class BuyOrder extends Request
+class BuyOrderRequest extends Request
 {
     /**
      * Voeg een nieuwe inkooporderregel aan een bestaande inkooporder.
      *
      * @param array{
-     *     BuyOrderId?: integer,
-     *     OrderId?: integer,
-     *     ProductCode?: string,
-     *     ProductId?: integer,
-     *     Price?: number,
-     *     Description?: string,
-     *     ProductDesc2?: string,
-     *     ExpectedDeliveryDate?: string,
-     *     QtyToOrder?: number,
-     *     OrderedOnDateByDistributor?: string,
-     *     OrderRowId?: integer,
-     *     InternalNote?: string,
+     *     BuyOrderId?: integer|null,
+     *     OrderId?: integer|null,
+     *     ProductCode?: string|null,
+     *     ProductId?: integer|null,
+     *     Price?: number|null,
+     *     Description?: string|null,
+     *     ProductDesc2?: string|null,
+     *     ExpectedDeliveryDate?: string|null,
+     *     QtyToOrder?: number|null,
+     *     OrderedOnDateByDistributor?: string|null,
+     *     OrderRowId?: integer|null,
+     *     InternalNote?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -49,26 +48,26 @@ class BuyOrder extends Request
      * Voeg een nieuwe inkooporderregel toe of update een bestaande regel.
      *
      * @param array{
-     *     BuyOrderRowId?: integer,
-     *     BuyOrderId?: integer,
-     *     DebtorName?: string,
-     *     QtyToDeliver?: number,
-     *     CreditorProductCode?: string,
-     *     ProductDesc1?: string,
-     *     StandardAmountQTY?: number,
-     *     StandardAmountQTYUnitId?: integer,
-     *     RepackingQty?: integer,
-     *     OrderId?: integer,
-     *     ProductCode?: string,
-     *     ProductId?: integer,
-     *     Price?: number,
-     *     Description?: string,
-     *     ProductDesc2?: string,
-     *     ExpectedDeliveryDate?: string,
-     *     QtyToOrder?: number,
-     *     OrderedOnDateByDistributor?: string,
-     *     OrderRowId?: integer,
-     *     InternalNote?: string,
+     *     BuyOrderRowId?: integer|null,
+     *     BuyOrderId?: integer|null,
+     *     DebtorName?: string|null,
+     *     QtyToDeliver?: number|null,
+     *     CreditorProductCode?: string|null,
+     *     ProductDesc1?: string|null,
+     *     StandardAmountQTY?: number|null,
+     *     StandardAmountQTYUnitId?: integer|null,
+     *     RepackingQty?: integer|null,
+     *     OrderId?: integer|null,
+     *     ProductCode?: string|null,
+     *     ProductId?: integer|null,
+     *     Price?: number|null,
+     *     Description?: string|null,
+     *     ProductDesc2?: string|null,
+     *     ExpectedDeliveryDate?: string|null,
+     *     QtyToOrder?: number|null,
+     *     OrderedOnDateByDistributor?: string|null,
+     *     OrderRowId?: integer|null,
+     *     InternalNote?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -89,16 +88,16 @@ class BuyOrder extends Request
      * Maak een nieuwe inkooporder.
      *
      * @param array{
-     *     CreditorId?: integer,
-     *     DatabaseAdministrationId?: integer,
-     *     CreatedAt?: string,
-     *     BuyOrderRows?: array<mixed>,
-     *     Remarks?: string,
-     *     BranchId?: integer,
-     *     OrderId?: integer,
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
+     *     CreditorId?: integer|null,
+     *     DatabaseAdministrationId?: integer|null,
+     *     CreatedAt?: string|null,
+     *     BuyOrderRows?: array<mixed>|null,
+     *     Remarks?: string|null,
+     *     BranchId?: integer|null,
+     *     OrderId?: integer|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -132,35 +131,36 @@ class BuyOrder extends Request
      * <strong>Let op:</strong> het kan zijn dat niet alle inkoopregels van een bepaalde order worden opgehaald, doordat de uitvoer wordt gelimiteerd via de Skip- en TakeRecords.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ProductId?: integer,
-     *     ProductCode?: string,
-     *     BuyOrderStatusId?: integer,
-     *     IsDropShipment?: boolean,
-     *     OrderId?: integer,
-     *     BuyOrderId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ProductId?: integer|null,
+     *     ProductCode?: string|null,
+     *     BuyOrderStatusId?: integer|null,
+     *     IsDropShipment?: boolean|null,
+     *     OrderId?: integer|null,
+     *     BuyOrderId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<BuyOrderRow>
+     * @return \Generator<array-key, BuyOrderRow>
      *
      * @throws Logic4ApiException
      */
-    public function getBuyOrderRowsByFilter(array $parameters = []): PaginatedResponse
+    public function getBuyOrderRowsByFilter(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/BuyOrders/GetBuyOrderRowsByFilter', $parameters),
-            BuyOrderRow::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/BuyOrders/GetBuyOrderRowsByFilter', $parameters);
+
+        foreach ($iterator as $record) {
+            yield BuyOrderRow::make($record);
+        }
     }
 
     /**
      * Haal per artikel openstaande inkoopordersregels op o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     ProductIds?: array<integer>,
-     *     Dropshipment?: boolean,
-     *     MinimumDeliveryDate?: string,
+     *     ProductIds?: array<integer>|null,
+     *     Dropshipment?: boolean|null,
+     *     MinimumDeliveryDate?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -180,43 +180,44 @@ class BuyOrder extends Request
      * TakeRecords wordt gelimiteerd op 10.000.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     BranchId?: integer,
-     *     BuyOrderIsClosed?: boolean,
-     *     SupplierId?: integer,
-     *     BuyOrderId?: integer,
-     *     BuyOrderIdFrom?: integer,
-     *     Remarks?: string,
-     *     BuyOrderDateFrom?: string,
-     *     BuyOrderDateTo?: string,
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     BranchId?: integer|null,
+     *     BuyOrderIsClosed?: boolean|null,
+     *     SupplierId?: integer|null,
+     *     BuyOrderId?: integer|null,
+     *     BuyOrderIdFrom?: integer|null,
+     *     Remarks?: string|null,
+     *     BuyOrderDateFrom?: string|null,
+     *     BuyOrderDateTo?: string|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
      * } $parameters
      *
-     * @return PaginatedResponse<BuyOrderBaseInfo>
+     * @return \Generator<array-key, BuyOrderBaseInfo>
      *
      * @throws Logic4ApiException
      */
-    public function getBuyOrders(array $parameters = []): PaginatedResponse
+    public function getBuyOrders(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/BuyOrders/GetBuyOrders', $parameters),
-            BuyOrderBaseInfo::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/BuyOrders/GetBuyOrders', $parameters);
+
+        foreach ($iterator as $record) {
+            yield BuyOrderBaseInfo::make($record);
+        }
     }
 
     /**
      * Wijzig een bestaande inkooporder.
      *
      * @param array{
-     *     Id?: integer,
-     *     CreditorId?: integer,
-     *     Remarks?: string,
-     *     BranchId?: integer,
-     *     BuyOrderClosed?: boolean,
-     *     CreatedAt?: string,
+     *     Id?: integer|null,
+     *     CreditorId?: integer|null,
+     *     Remarks?: string|null,
+     *     BranchId?: integer|null,
+     *     BuyOrderClosed?: boolean|null,
+     *     CreatedAt?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -235,18 +236,18 @@ class BuyOrder extends Request
      * Update een bestaande inkooporderregel.
      *
      * @param array{
-     *     BuyOrderRowId?: integer,
-     *     OrderId?: integer,
-     *     ProductCode?: string,
-     *     ProductId?: integer,
-     *     Price?: number,
-     *     Description?: string,
-     *     ProductDesc2?: string,
-     *     ExpectedDeliveryDate?: string,
-     *     QtyToOrder?: number,
-     *     OrderedOnDateByDistributor?: string,
-     *     OrderRowId?: integer,
-     *     InternalNote?: string,
+     *     BuyOrderRowId?: integer|null,
+     *     OrderId?: integer|null,
+     *     ProductCode?: string|null,
+     *     ProductId?: integer|null,
+     *     Price?: number|null,
+     *     Description?: string|null,
+     *     ProductDesc2?: string|null,
+     *     ExpectedDeliveryDate?: string|null,
+     *     QtyToOrder?: number|null,
+     *     OrderedOnDateByDistributor?: string|null,
+     *     OrderRowId?: integer|null,
+     *     InternalNote?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

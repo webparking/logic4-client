@@ -16,8 +16,8 @@ class WebshopUserProductType
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            description: $data['Description'],
+            id: $data['Id'] ?? 0,
+            description: $data['Description'] ?? null,
         );
     }
 }

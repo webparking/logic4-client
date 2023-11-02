@@ -16,8 +16,8 @@ class TypeContactGroup
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            value: $data['Value'],
+            id: $data['Id'] ?? 0,
+            value: $data['Value'] ?? null,
         );
     }
 }

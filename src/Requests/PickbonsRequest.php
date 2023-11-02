@@ -6,7 +6,6 @@ namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\OrderHeadPickbon;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
 use Webparking\Logic4Client\Responses\OrderHeadPickbonRowLogic4ResponseList;
@@ -15,12 +14,12 @@ use Webparking\Logic4Client\Responses\PickbonSoftBlockedLogic4ResponseList;
 use Webparking\Logic4Client\Responses\StringLogic4Response;
 use Webparking\Logic4Client\Responses\WarehouseZoneLogic4ResponseList;
 
-class Pickbons extends Request
+class PickbonsRequest extends Request
 {
     /**
      * @param array{
-     *     OrderId?: integer,
-     *     UseNewWorkflow?: boolean,
+     *     OrderId?: integer|null,
+     *     UseNewWorkflow?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -95,25 +94,26 @@ class Pickbons extends Request
      * Verkrijg pickbonnen op basis van het meegegeven filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     OnlyUnprocessedItems?: boolean,
-     *     OrderCreatedFrom?: string,
-     *     WarehouseZoneId?: integer,
-     *     WarehouseId?: integer,
-     *     PickBonId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     OnlyUnprocessedItems?: boolean|null,
+     *     OrderCreatedFrom?: string|null,
+     *     WarehouseZoneId?: integer|null,
+     *     WarehouseId?: integer|null,
+     *     PickBonId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<OrderHeadPickbon>
+     * @return \Generator<array-key, OrderHeadPickbon>
      *
      * @throws Logic4ApiException
      */
-    public function getOrderHeadPickbons(array $parameters = []): PaginatedResponse
+    public function getOrderHeadPickbons(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Pickbons/GetOrderHeadPickbons', $parameters),
-            OrderHeadPickbon::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Pickbons/GetOrderHeadPickbons', $parameters);
+
+        foreach ($iterator as $record) {
+            yield OrderHeadPickbon::make($record);
+        }
     }
 
     /**
@@ -176,11 +176,11 @@ class Pickbons extends Request
      * Verwerk een pickbon.
      *
      * @param array{
-     *     AmountOfColli?: integer,
-     *     Corrections?: array<mixed>,
-     *     Mutations?: array<mixed>,
-     *     OrderHeadPickbonId?: integer,
-     *     Remarks?: string,
+     *     AmountOfColli?: integer|null,
+     *     Corrections?: array<mixed>|null,
+     *     Mutations?: array<mixed>|null,
+     *     OrderHeadPickbonId?: integer|null,
+     *     Remarks?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

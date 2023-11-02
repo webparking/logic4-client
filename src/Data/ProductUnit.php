@@ -16,8 +16,8 @@ class ProductUnit
     public static function make(array $data): self
     {
         return new self(
-            unitId: $data['UnitId'],
-            description: $data['Description'],
+            unitId: $data['UnitId'] ?? 0,
+            description: $data['Description'] ?? null,
         );
     }
 }

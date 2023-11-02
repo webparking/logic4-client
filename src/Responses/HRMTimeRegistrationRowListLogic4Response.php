@@ -23,7 +23,7 @@ class HRMTimeRegistrationRowListLogic4Response
     {
         return new self(
             value: array_map(static fn (array $item) => HRMTimeRegistrationRow::make($item), $data['Value'] ?? []),
-            validationMessages: $data['ValidationMessages'],
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

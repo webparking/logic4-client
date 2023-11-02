@@ -22,12 +22,12 @@ class ProductSalesInformation
     public static function make(array $data): self
     {
         return new self(
-            productCode: $data['ProductCode'],
-            productDescription: $data['ProductDescription'],
-            value: $data['Value'],
-            dateStart: $data['DateStart'] ? Carbon::parse($data['DateStart']) : null,
-            dateEnd: $data['DateEnd'] ? Carbon::parse($data['DateEnd']) : null,
-            periodDescription: $data['PeriodDescription'],
+            productCode: $data['ProductCode'] ?? null,
+            productDescription: $data['ProductDescription'] ?? null,
+            value: $data['Value'] ?? 0.0,
+            dateStart: isset($data['DateStart']) ? Carbon::parse($data['DateStart']) : null,
+            dateEnd: isset($data['DateEnd']) ? Carbon::parse($data['DateEnd']) : null,
+            periodDescription: $data['PeriodDescription'] ?? null,
         );
     }
 }

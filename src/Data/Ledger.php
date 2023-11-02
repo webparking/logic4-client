@@ -17,9 +17,9 @@ class Ledger
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            description: $data['Description'],
-            code: $data['Code'],
+            id: $data['Id'] ?? 0,
+            description: $data['Description'] ?? null,
+            code: $data['Code'] ?? 0,
         );
     }
 }

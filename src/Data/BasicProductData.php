@@ -23,15 +23,15 @@ class BasicProductData
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            vendorCode: $data['VendorCode'],
-            productCode: $data['ProductCode'],
-            description1: $data['Description1'],
-            description2: $data['Description2'],
-            pictureName: $data['PictureName'],
-            domain: $data['Domain'],
-            defaultPickStockLocationId: $data['DefaultPickStockLocationId'],
-            statusName: $data['StatusName'],
+            productId: $data['ProductId'] ?? 0,
+            vendorCode: $data['VendorCode'] ?? null,
+            productCode: $data['ProductCode'] ?? null,
+            description1: $data['Description1'] ?? null,
+            description2: $data['Description2'] ?? null,
+            pictureName: $data['PictureName'] ?? null,
+            domain: $data['Domain'] ?? null,
+            defaultPickStockLocationId: $data['DefaultPickStockLocationId'] ?? null,
+            statusName: $data['StatusName'] ?? null,
         );
     }
 }

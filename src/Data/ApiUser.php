@@ -18,10 +18,10 @@ class ApiUser
     public static function make(array $data): self
     {
         return new self(
-            fullName: $data['FullName'],
-            userId: $data['UserId'],
-            username: $data['Username'],
-            employeeNumber: $data['EmployeeNumber'],
+            fullName: $data['FullName'] ?? null,
+            userId: $data['UserId'] ?? 0,
+            username: $data['Username'] ?? null,
+            employeeNumber: $data['EmployeeNumber'] ?? null,
         );
     }
 }

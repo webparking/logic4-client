@@ -21,11 +21,11 @@ class ProductSupplier
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            creditorName: $data['CreditorName'],
-            creditorProductCode: $data['CreditorProductCode'],
-            isActive: $data['IsActive'],
-            creditorId: $data['CreditorId'],
+            productId: $data['ProductId'] ?? 0,
+            creditorName: $data['CreditorName'] ?? null,
+            creditorProductCode: $data['CreditorProductCode'] ?? null,
+            isActive: $data['IsActive'] ?? false,
+            creditorId: $data['CreditorId'] ?? 0,
             creditorBuyPrices: array_map(static fn (array $item) => Int32DecimalKeyValuePair::make($item), $data['CreditorBuyPrices'] ?? []),
         );
     }

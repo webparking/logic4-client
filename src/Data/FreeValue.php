@@ -16,8 +16,8 @@ class FreeValue
     public static function make(array $data): self
     {
         return new self(
-            key: $data['Key'],
-            value: $data['Value'],
+            key: $data['Key'] ?? null,
+            value: $data['Value'] ?? null,
         );
     }
 }

@@ -21,11 +21,11 @@ class ProductPricelistContractPrice
     public static function make(array $data): self
     {
         return new self(
-            priceEx: $data['PriceEx'],
-            qty: $data['Qty'],
-            fromDate: $data['FromDate'] ? Carbon::parse($data['FromDate']) : null,
-            toDate: $data['ToDate'] ? Carbon::parse($data['ToDate']) : null,
-            productId: $data['ProductId'],
+            priceEx: $data['PriceEx'] ?? 0.0,
+            qty: $data['Qty'] ?? 0,
+            fromDate: isset($data['FromDate']) ? Carbon::parse($data['FromDate']) : null,
+            toDate: isset($data['ToDate']) ? Carbon::parse($data['ToDate']) : null,
+            productId: $data['ProductId'] ?? 0,
         );
     }
 }

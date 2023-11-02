@@ -9,13 +9,13 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\SalesOrderDeliveryLogic4ResponseList;
 use Webparking\Logic4Client\Responses\SalesOrderDeliveryRowLogic4ResponseList;
 
-class Delivery extends Request
+class DeliveryRequest extends Request
 {
     /**
      * Maak een nieuwe uitlevering aan o.b.v. opgestuurde orderregels. Het systeem bepaalt automatisch vanaf welke voorraadlocatie de voorraad afgeboekt wordt.
      *
      * @param array{
-     *     DeliveryRows?: array<mixed>,
+     *     DeliveryRows?: array<mixed>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -32,16 +32,16 @@ class Delivery extends Request
 
     /**
      * @param array{
-     *     DateFrom?: string,
-     *     DateTo?: string,
-     *     OrderId?: integer,
-     *     DebtorId?: integer,
-     *     OrderShipperMethodeId?: integer,
-     *     OrderStatusId?: integer,
-     *     BranchId?: integer,
-     *     WebsiteDomainId?: integer,
-     *     Skip?: integer,
-     *     Take?: integer,
+     *     DateFrom?: string|null,
+     *     DateTo?: string|null,
+     *     OrderId?: integer|null,
+     *     DebtorId?: integer|null,
+     *     OrderShipperMethodeId?: integer|null,
+     *     OrderStatusId?: integer|null,
+     *     BranchId?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     Skip?: integer|null,
+     *     Take?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

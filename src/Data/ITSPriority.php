@@ -16,8 +16,8 @@ class ITSPriority
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
         );
     }
 }

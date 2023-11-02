@@ -24,8 +24,8 @@ class ProductBarcodeLogic4ResponseList
     {
         return new self(
             records: array_map(static fn (array $item) => ProductBarcode::make($item), $data['Records'] ?? []),
-            recordsCounter: $data['RecordsCounter'],
-            validationMessages: $data['ValidationMessages'],
+            recordsCounter: $data['RecordsCounter'] ?? 0,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

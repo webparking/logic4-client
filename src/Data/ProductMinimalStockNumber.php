@@ -19,9 +19,9 @@ class ProductMinimalStockNumber
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            minimalStockForAdministrationLevel: $data['MinimalStockForAdministrationLevel'],
-            minimalStockProductLevel: $data['MinimalStockProductLevel'],
+            productId: $data['ProductId'] ?? 0,
+            minimalStockForAdministrationLevel: $data['MinimalStockForAdministrationLevel'] ?? null,
+            minimalStockProductLevel: $data['MinimalStockProductLevel'] ?? null,
             minimalStockWarehouses: array_map(static fn (array $item) => WarehouseMinimalStockNumber::make($item), $data['MinimalStockWarehouses'] ?? []),
         );
     }

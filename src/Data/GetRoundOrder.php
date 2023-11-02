@@ -24,14 +24,14 @@ class GetRoundOrder
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            orderId: $data['OrderId'],
-            ITSIssueId: $data['ITSIssueId'],
-            roundId: $data['RoundId'],
-            remarks: $data['Remarks'],
-            statusId: $data['StatusId'],
-            sorting: $data['Sorting'],
-            estimatedArrivalDateTime: $data['EstimatedArrivalDateTime'] ? Carbon::parse($data['EstimatedArrivalDateTime']) : null,
+            id: $data['Id'] ?? 0,
+            orderId: $data['OrderId'] ?? null,
+            ITSIssueId: $data['ITSIssueId'] ?? null,
+            roundId: $data['RoundId'] ?? 0,
+            remarks: $data['Remarks'] ?? null,
+            statusId: $data['StatusId'] ?? 0,
+            sorting: $data['Sorting'] ?? 0,
+            estimatedArrivalDateTime: isset($data['EstimatedArrivalDateTime']) ? Carbon::parse($data['EstimatedArrivalDateTime']) : null,
         );
     }
 }

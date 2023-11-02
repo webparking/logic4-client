@@ -22,12 +22,12 @@ class ProductOffer
     public static function make(array $data): self
     {
         return new self(
-            startDate: $data['StartDate'] ? Carbon::parse($data['StartDate']) : null,
-            endDate: $data['EndDate'] ? Carbon::parse($data['EndDate']) : null,
-            fromPrice: $data['FromPrice'],
-            toPrice: $data['ToPrice'],
-            offerGroupId: $data['OfferGroupId'],
-            productId: $data['ProductId'],
+            startDate: isset($data['StartDate']) ? Carbon::parse($data['StartDate']) : null,
+            endDate: isset($data['EndDate']) ? Carbon::parse($data['EndDate']) : null,
+            fromPrice: $data['FromPrice'] ?? null,
+            toPrice: $data['ToPrice'] ?? null,
+            offerGroupId: $data['OfferGroupId'] ?? null,
+            productId: $data['ProductId'] ?? 0,
         );
     }
 }

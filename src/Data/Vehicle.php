@@ -25,17 +25,17 @@ class Vehicle
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            description: $data['Description'],
-            licensePlate: $data['LicensePlate'],
-            startAddress: $data['StartAddress'],
-            startPostalCode: $data['StartPostalCode'],
-            startCity: $data['StartCity'],
-            endAddress: $data['EndAddress'],
-            endPostalCode: $data['EndPostalCode'],
-            endCity: $data['EndCity'],
-            type: $data['Type'],
-            minutes: $data['Minutes'],
+            id: $data['Id'] ?? 0,
+            description: $data['Description'] ?? null,
+            licensePlate: $data['LicensePlate'] ?? null,
+            startAddress: $data['StartAddress'] ?? null,
+            startPostalCode: $data['StartPostalCode'] ?? null,
+            startCity: $data['StartCity'] ?? null,
+            endAddress: $data['EndAddress'] ?? null,
+            endPostalCode: $data['EndPostalCode'] ?? null,
+            endCity: $data['EndCity'] ?? null,
+            type: $data['Type'] ?? null,
+            minutes: $data['Minutes'] ?? null,
         );
     }
 }

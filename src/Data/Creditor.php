@@ -22,14 +22,14 @@ class Creditor
     public static function make(array $data): self
     {
         return new self(
-            companyName: $data['CompanyName'],
-            emailAddress: $data['EmailAddress'],
-            faxnumber: $data['Faxnumber'],
-            firstName: $data['FirstName'],
-            id: $data['Id'],
-            lastName: $data['LastName'],
-            mobileNumber: $data['MobileNumber'],
-            telephoneNumber: $data['TelephoneNumber'],
+            companyName: $data['CompanyName'] ?? null,
+            emailAddress: $data['EmailAddress'] ?? null,
+            faxnumber: $data['Faxnumber'] ?? null,
+            firstName: $data['FirstName'] ?? null,
+            id: $data['Id'] ?? 0,
+            lastName: $data['LastName'] ?? null,
+            mobileNumber: $data['MobileNumber'] ?? null,
+            telephoneNumber: $data['TelephoneNumber'] ?? null,
         );
     }
 }

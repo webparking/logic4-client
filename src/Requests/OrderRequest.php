@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests;
 
+use Webparking\Logic4Client\Data\Order;
 use Webparking\Logic4Client\Data\OrderOpenPayment;
 use Webparking\Logic4Client\Data\ReturnProblem;
 use Webparking\Logic4Client\Data\ReturnSolution;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
@@ -22,12 +22,12 @@ use Webparking\Logic4Client\Responses\OrderRowLogic4ResponseList;
 use Webparking\Logic4Client\Responses\OrderStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ReturnCategoryLogic4ResponseList;
 
-class Order extends Request
+class OrderRequest extends Request
 {
     /**
      * @param array{
-     *     SerialNumberTypeId?: integer,
-     *     OrderRowSerialNumbers?: array<mixed>,
+     *     SerialNumberTypeId?: integer|null,
+     *     OrderRowSerialNumbers?: array<mixed>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -46,14 +46,14 @@ class Order extends Request
      * Voeg een betaling toe aan een order of factuur.
      *
      * @param array{
-     *     OrderId?: integer,
-     *     InvoiceId?: integer,
-     *     AmountIncl?: number,
-     *     Description?: string,
-     *     BookingId?: integer,
-     *     MatchingLedgerId?: integer,
-     *     DateTime?: string,
-     *     LedgerCode?: integer,
+     *     OrderId?: integer|null,
+     *     InvoiceId?: integer|null,
+     *     AmountIncl?: number|null,
+     *     Description?: string|null,
+     *     BookingId?: integer|null,
+     *     MatchingLedgerId?: integer|null,
+     *     DateTime?: string|null,
+     *     LedgerCode?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -73,36 +73,36 @@ class Order extends Request
      * Bij het succesvol aanmaken/updaten wordt het (nieuwe) factuurnummer in de response gevuld.
      *
      * @param array{
-     *     CheckForOrderCostAndPaymentRegulation?: boolean,
-     *     DebtorId?: integer,
-     *     Id?: integer,
-     *     OrderRows?: array<mixed>,
-     *     AcceptTermsAndConditions?: boolean,
-     *     CreationDate?: string,
-     *     Description?: string,
-     *     Reference?: string,
-     *     BranchId?: integer,
-     *     UserId?: integer,
-     *     WebsiteDomainId?: integer,
-     *     DeliveryOptionId?: integer,
-     *     DeliveryDate?: string,
-     *     Notes?: string,
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
-     *     FreeValue4?: string,
-     *     FreeValue5?: string,
-     *     FreeValue6?: string,
-     *     FreeValue7?: string,
-     *     FreeValue8?: string,
-     *     OrderType1Id?: integer,
-     *     OrderType2Id?: integer,
-     *     OrderType3Id?: integer,
-     *     OrderType4Id?: integer,
-     *     OrderType5Id?: integer,
-     *     OrderType6Id?: integer,
-     *     OrderType7Id?: integer,
-     *     OrderType8Id?: integer,
+     *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
+     *     DebtorId?: integer|null,
+     *     Id?: integer|null,
+     *     OrderRows?: array<mixed>|null,
+     *     AcceptTermsAndConditions?: boolean|null,
+     *     CreationDate?: string|null,
+     *     Description?: string|null,
+     *     Reference?: string|null,
+     *     BranchId?: integer|null,
+     *     UserId?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     DeliveryOptionId?: integer|null,
+     *     DeliveryDate?: string|null,
+     *     Notes?: string|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     FreeValue4?: string|null,
+     *     FreeValue5?: string|null,
+     *     FreeValue6?: string|null,
+     *     FreeValue7?: string|null,
+     *     FreeValue8?: string|null,
+     *     OrderType1Id?: integer|null,
+     *     OrderType2Id?: integer|null,
+     *     OrderType3Id?: integer|null,
+     *     OrderType4Id?: integer|null,
+     *     OrderType5Id?: integer|null,
+     *     OrderType6Id?: integer|null,
+     *     OrderType7Id?: integer|null,
+     *     OrderType8Id?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -123,36 +123,36 @@ class Order extends Request
      * Met v1.2 of hoger kan het Id van het afleveradres gebruikt worden om het afleveradres te bepalen.
      *
      * @param array{
-     *     CheckForOrderCostAndPaymentRegulation?: boolean,
-     *     DebtorId?: integer,
-     *     Id?: integer,
-     *     OrderRows?: array<mixed>,
-     *     AcceptTermsAndConditions?: boolean,
-     *     CreationDate?: string,
-     *     Description?: string,
-     *     Reference?: string,
-     *     BranchId?: integer,
-     *     UserId?: integer,
-     *     WebsiteDomainId?: integer,
-     *     DeliveryOptionId?: integer,
-     *     DeliveryDate?: string,
-     *     Notes?: string,
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
-     *     FreeValue4?: string,
-     *     FreeValue5?: string,
-     *     FreeValue6?: string,
-     *     FreeValue7?: string,
-     *     FreeValue8?: string,
-     *     OrderType1Id?: integer,
-     *     OrderType2Id?: integer,
-     *     OrderType3Id?: integer,
-     *     OrderType4Id?: integer,
-     *     OrderType5Id?: integer,
-     *     OrderType6Id?: integer,
-     *     OrderType7Id?: integer,
-     *     OrderType8Id?: integer,
+     *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
+     *     DebtorId?: integer|null,
+     *     Id?: integer|null,
+     *     OrderRows?: array<mixed>|null,
+     *     AcceptTermsAndConditions?: boolean|null,
+     *     CreationDate?: string|null,
+     *     Description?: string|null,
+     *     Reference?: string|null,
+     *     BranchId?: integer|null,
+     *     UserId?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     DeliveryOptionId?: integer|null,
+     *     DeliveryDate?: string|null,
+     *     Notes?: string|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     FreeValue4?: string|null,
+     *     FreeValue5?: string|null,
+     *     FreeValue6?: string|null,
+     *     FreeValue7?: string|null,
+     *     FreeValue8?: string|null,
+     *     OrderType1Id?: integer|null,
+     *     OrderType2Id?: integer|null,
+     *     OrderType3Id?: integer|null,
+     *     OrderType4Id?: integer|null,
+     *     OrderType5Id?: integer|null,
+     *     OrderType6Id?: integer|null,
+     *     OrderType7Id?: integer|null,
+     *     OrderType8Id?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -176,41 +176,41 @@ class Order extends Request
      * De optie "ForceAddProductComposition" zorgt ervoor dat samenstellingen <strong>altijd</strong> worden toegevoegd, ongeacht of er reeds samenstellingen bestaan voor deze orderregel.
      *
      * @param array{
-     *     InclPrice?: number,
-     *     GrossInclPrice?: number,
-     *     Id?: integer,
-     *     Description?: string,
-     *     Description2?: string,
-     *     ProductId?: integer,
-     *     Qty?: number,
-     *     BuyPrice?: number,
-     *     GrossPrice?: number,
-     *     NettPrice?: number,
-     *     QtyDeliverd?: number,
-     *     QtyDeliverd_NotInvoiced?: number,
-     *     ProductCode?: string,
-     *     ProductBarcode1?: string,
-     *     VATPercentage?: number,
-     *     Notes?: string,
-     *     DebtorId?: integer,
-     *     OrderId?: integer,
-     *     WarehouseId?: integer,
-     *     Commission?: string,
-     *     DeliveryOptionId?: integer,
-     *     VatCodeId?: integer,
-     *     VatCodeIdOverrule?: integer,
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
-     *     FreeValue4?: string,
-     *     FreeValue5?: string,
-     *     ExpectedNextDelivery?: string,
-     *     AgreedDeliveryDate?: string,
-     *     Type1Id?: integer,
-     *     Type2Id?: integer,
-     *     Type3Id?: integer,
-     *     Type4Id?: integer,
-     *     Type5Id?: integer,
+     *     InclPrice?: number|null,
+     *     GrossInclPrice?: number|null,
+     *     Id?: integer|null,
+     *     Description?: string|null,
+     *     Description2?: string|null,
+     *     ProductId?: integer|null,
+     *     Qty?: number|null,
+     *     BuyPrice?: number|null,
+     *     GrossPrice?: number|null,
+     *     NettPrice?: number|null,
+     *     QtyDeliverd?: number|null,
+     *     QtyDeliverd_NotInvoiced?: number|null,
+     *     ProductCode?: string|null,
+     *     ProductBarcode1?: string|null,
+     *     VATPercentage?: number|null,
+     *     Notes?: string|null,
+     *     DebtorId?: integer|null,
+     *     OrderId?: integer|null,
+     *     WarehouseId?: integer|null,
+     *     Commission?: string|null,
+     *     DeliveryOptionId?: integer|null,
+     *     VatCodeId?: integer|null,
+     *     VatCodeIdOverrule?: integer|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     FreeValue4?: string|null,
+     *     FreeValue5?: string|null,
+     *     ExpectedNextDelivery?: string|null,
+     *     AgreedDeliveryDate?: string|null,
+     *     Type1Id?: integer|null,
+     *     Type2Id?: integer|null,
+     *     Type3Id?: integer|null,
+     *     Type4Id?: integer|null,
+     *     Type5Id?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -242,10 +242,10 @@ class Order extends Request
      * Verkrijg factuurregels o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     OrderId?: integer,
-     *     BrandName?: string,
-     *     LoadNextDeliveryDate?: boolean,
-     *     ChangedAfter?: string,
+     *     OrderId?: integer|null,
+     *     BrandName?: string|null,
+     *     LoadNextDeliveryDate?: boolean|null,
+     *     ChangedAfter?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -263,57 +263,58 @@ class Order extends Request
      * Verkrijg facturen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ChangedAfter?: string,
-     *     Id?: integer,
-     *     DebtorId?: integer,
-     *     CreationDateFrom?: string,
-     *     CreationDateTo?: string,
-     *     Barcode1?: string,
-     *     ProductCode?: string,
-     *     Delivery_Address?: string,
-     *     Delivery_PostalCode?: string,
-     *     Delivery_City?: string,
-     *     Delivery_ContactName?: string,
-     *     Delivery_CompanyName?: string,
-     *     Delivery_Email?: string,
-     *     Invoice_Address?: string,
-     *     Invoice_PostalCode?: string,
-     *     Invoice_City?: string,
-     *     Invoice_ContactName?: string,
-     *     Invoice_CompanyName?: string,
-     *     Invoice_Email?: string,
-     *     LastActionFrom?: string,
-     *     LastActionTo?: string,
-     *     Reference?: string,
-     *     LoadPayments?: boolean,
-     *     StatusId?: integer,
-     *     Type1Id?: integer,
-     *     Type2Id?: integer,
-     *     Type3Id?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ChangedAfter?: string|null,
+     *     Id?: integer|null,
+     *     DebtorId?: integer|null,
+     *     CreationDateFrom?: string|null,
+     *     CreationDateTo?: string|null,
+     *     Barcode1?: string|null,
+     *     ProductCode?: string|null,
+     *     Delivery_Address?: string|null,
+     *     Delivery_PostalCode?: string|null,
+     *     Delivery_City?: string|null,
+     *     Delivery_ContactName?: string|null,
+     *     Delivery_CompanyName?: string|null,
+     *     Delivery_Email?: string|null,
+     *     Invoice_Address?: string|null,
+     *     Invoice_PostalCode?: string|null,
+     *     Invoice_City?: string|null,
+     *     Invoice_ContactName?: string|null,
+     *     Invoice_CompanyName?: string|null,
+     *     Invoice_Email?: string|null,
+     *     LastActionFrom?: string|null,
+     *     LastActionTo?: string|null,
+     *     Reference?: string|null,
+     *     LoadPayments?: boolean|null,
+     *     StatusId?: integer|null,
+     *     Type1Id?: integer|null,
+     *     Type2Id?: integer|null,
+     *     Type3Id?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<\Webparking\Logic4Client\Data\Order>
+     * @return \Generator<array-key, Order>
      *
      * @throws Logic4ApiException
      */
-    public function getInvoices(array $parameters = []): PaginatedResponse
+    public function getInvoices(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.2/Orders/GetInvoices', $parameters),
-            \Webparking\Logic4Client\Data\Order::class,
-        );
+        $iterator = $this->paginateRecords('/v1.2/Orders/GetInvoices', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Order::make($record);
+        }
     }
 
     /**
      * Verkrijg het nog te betalen bedrag van openstaande facturen.
      *
      * @param array{
-     *     DebtorId?: integer,
-     *     DateFrom?: string,
-     *     DateTo?: string,
-     *     DaysPastDueDate?: integer,
+     *     DebtorId?: integer|null,
+     *     DateFrom?: string|null,
+     *     DateTo?: string|null,
+     *     DaysPastDueDate?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -333,40 +334,41 @@ class Order extends Request
      * Indien historypoints zijn aangegeven, moet timeframe een van de volgende waarden hebben: ['Day', 'Week', 'Month', 'Quarter', 'Year'].
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     TimeFrame?: string,
-     *     HistoryPoints?: integer,
-     *     OrderstatusIds?: array<integer>,
-     *     WebsiteDomainIds?: array<integer>,
-     *     NotLinkedToWebsiteDomain?: boolean,
-     *     EmployeeIds?: array<integer>,
-     *     BranchIds?: array<integer>,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     TimeFrame?: string|null,
+     *     HistoryPoints?: integer|null,
+     *     OrderstatusIds?: array<integer>|null,
+     *     WebsiteDomainIds?: array<integer>|null,
+     *     NotLinkedToWebsiteDomain?: boolean|null,
+     *     EmployeeIds?: array<integer>|null,
+     *     BranchIds?: array<integer>|null,
      * } $parameters
      *
-     * @return PaginatedResponse<OrderOpenPayment>
+     * @return \Generator<array-key, OrderOpenPayment>
      *
      * @throws Logic4ApiException
      */
-    public function getOpenPaymentOrders(array $parameters = []): PaginatedResponse
+    public function getOpenPaymentOrders(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Orders/GetOpenPaymentOrders', $parameters),
-            OrderOpenPayment::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Orders/GetOpenPaymentOrders', $parameters);
+
+        foreach ($iterator as $record) {
+            yield OrderOpenPayment::make($record);
+        }
     }
 
     /**
      * Verkrijg het nog te betalen bedrag van nog niet uitgeleverde orders in totalen.
      *
      * @param array{
-     *     TimeFrame?: string,
-     *     HistoryPoints?: integer,
-     *     OrderstatusIds?: array<integer>,
-     *     WebsiteDomainIds?: array<integer>,
-     *     NotLinkedToWebsiteDomain?: boolean,
-     *     EmployeeIds?: array<integer>,
-     *     BranchIds?: array<integer>,
+     *     TimeFrame?: string|null,
+     *     HistoryPoints?: integer|null,
+     *     OrderstatusIds?: array<integer>|null,
+     *     WebsiteDomainIds?: array<integer>|null,
+     *     NotLinkedToWebsiteDomain?: boolean|null,
+     *     EmployeeIds?: array<integer>|null,
+     *     BranchIds?: array<integer>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -385,10 +387,10 @@ class Order extends Request
      * Verkrijg acties die hebben plaatsgevonden op een order bv. het wijzigen van een betaalmethode.
      *
      * @param array{
-     *     StartDateTime?: string,
-     *     EndDateTime?: string,
-     *     OrderId?: integer,
-     *     TypeId?: integer,
+     *     StartDateTime?: string|null,
+     *     EndDateTime?: string|null,
+     *     OrderId?: integer|null,
+     *     TypeId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -421,14 +423,14 @@ class Order extends Request
      * Verkrijg order Id's o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     OnlyCompleteForDelivery?: boolean,
-     *     OnlyWithCompletePayment?: boolean,
-     *     OrderStatus?: integer,
-     *     Warehouses?: array<integer>,
-     *     MustHaveQtyToDeliverNowAboveZero?: boolean,
-     *     HasPickbon?: boolean,
-     *     OnlyGetOrderIdsToCreatePickbonNow?: boolean,
-     *     ChangedAfter?: string,
+     *     OnlyCompleteForDelivery?: boolean|null,
+     *     OnlyWithCompletePayment?: boolean|null,
+     *     OrderStatus?: integer|null,
+     *     Warehouses?: array<integer>|null,
+     *     MustHaveQtyToDeliverNowAboveZero?: boolean|null,
+     *     HasPickbon?: boolean|null,
+     *     OnlyGetOrderIdsToCreatePickbonNow?: boolean|null,
+     *     ChangedAfter?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -446,10 +448,10 @@ class Order extends Request
      * Verkrijg ordersregels o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     OrderId?: integer,
-     *     BrandName?: string,
-     *     LoadNextDeliveryDate?: boolean,
-     *     ChangedAfter?: string,
+     *     OrderId?: integer|null,
+     *     BrandName?: string|null,
+     *     LoadNextDeliveryDate?: boolean|null,
+     *     ChangedAfter?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -467,47 +469,48 @@ class Order extends Request
      * Verkrijg orders o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ChangedAfter?: string,
-     *     Id?: integer,
-     *     DebtorId?: integer,
-     *     CreationDateFrom?: string,
-     *     CreationDateTo?: string,
-     *     Barcode1?: string,
-     *     ProductCode?: string,
-     *     Delivery_Address?: string,
-     *     Delivery_PostalCode?: string,
-     *     Delivery_City?: string,
-     *     Delivery_ContactName?: string,
-     *     Delivery_CompanyName?: string,
-     *     Delivery_Email?: string,
-     *     Invoice_Address?: string,
-     *     Invoice_PostalCode?: string,
-     *     Invoice_City?: string,
-     *     Invoice_ContactName?: string,
-     *     Invoice_CompanyName?: string,
-     *     Invoice_Email?: string,
-     *     LastActionFrom?: string,
-     *     LastActionTo?: string,
-     *     Reference?: string,
-     *     LoadPayments?: boolean,
-     *     StatusId?: integer,
-     *     Type1Id?: integer,
-     *     Type2Id?: integer,
-     *     Type3Id?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ChangedAfter?: string|null,
+     *     Id?: integer|null,
+     *     DebtorId?: integer|null,
+     *     CreationDateFrom?: string|null,
+     *     CreationDateTo?: string|null,
+     *     Barcode1?: string|null,
+     *     ProductCode?: string|null,
+     *     Delivery_Address?: string|null,
+     *     Delivery_PostalCode?: string|null,
+     *     Delivery_City?: string|null,
+     *     Delivery_ContactName?: string|null,
+     *     Delivery_CompanyName?: string|null,
+     *     Delivery_Email?: string|null,
+     *     Invoice_Address?: string|null,
+     *     Invoice_PostalCode?: string|null,
+     *     Invoice_City?: string|null,
+     *     Invoice_ContactName?: string|null,
+     *     Invoice_CompanyName?: string|null,
+     *     Invoice_Email?: string|null,
+     *     LastActionFrom?: string|null,
+     *     LastActionTo?: string|null,
+     *     Reference?: string|null,
+     *     LoadPayments?: boolean|null,
+     *     StatusId?: integer|null,
+     *     Type1Id?: integer|null,
+     *     Type2Id?: integer|null,
+     *     Type3Id?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<\Webparking\Logic4Client\Data\Order>
+     * @return \Generator<array-key, Order>
      *
      * @throws Logic4ApiException
      */
-    public function getOrders(array $parameters = []): PaginatedResponse
+    public function getOrders(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.2/Orders/GetOrders', $parameters),
-            \Webparking\Logic4Client\Data\Order::class,
-        );
+        $iterator = $this->paginateRecords('/v1.2/Orders/GetOrders', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Order::make($record);
+        }
     }
 
     /**
@@ -542,36 +545,36 @@ class Order extends Request
      * Verkrijg retourorders o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SolutionId?: integer,
-     *     ProblemId?: integer,
-     *     CategoryId?: integer,
-     *     BelongsToOrderId?: integer,
-     *     Id?: integer,
-     *     DebtorId?: integer,
-     *     CreationDateFrom?: string,
-     *     CreationDateTo?: string,
-     *     Barcode1?: string,
-     *     ProductCode?: string,
-     *     Delivery_Address?: string,
-     *     Delivery_PostalCode?: string,
-     *     Delivery_City?: string,
-     *     Delivery_ContactName?: string,
-     *     Delivery_CompanyName?: string,
-     *     Delivery_Email?: string,
-     *     Invoice_Address?: string,
-     *     Invoice_PostalCode?: string,
-     *     Invoice_City?: string,
-     *     Invoice_ContactName?: string,
-     *     Invoice_CompanyName?: string,
-     *     Invoice_Email?: string,
-     *     LastActionFrom?: string,
-     *     LastActionTo?: string,
-     *     Reference?: string,
-     *     LoadPayments?: boolean,
-     *     StatusId?: integer,
-     *     Type1Id?: integer,
-     *     Type2Id?: integer,
-     *     Type3Id?: integer,
+     *     SolutionId?: integer|null,
+     *     ProblemId?: integer|null,
+     *     CategoryId?: integer|null,
+     *     BelongsToOrderId?: integer|null,
+     *     Id?: integer|null,
+     *     DebtorId?: integer|null,
+     *     CreationDateFrom?: string|null,
+     *     CreationDateTo?: string|null,
+     *     Barcode1?: string|null,
+     *     ProductCode?: string|null,
+     *     Delivery_Address?: string|null,
+     *     Delivery_PostalCode?: string|null,
+     *     Delivery_City?: string|null,
+     *     Delivery_ContactName?: string|null,
+     *     Delivery_CompanyName?: string|null,
+     *     Delivery_Email?: string|null,
+     *     Invoice_Address?: string|null,
+     *     Invoice_PostalCode?: string|null,
+     *     Invoice_City?: string|null,
+     *     Invoice_ContactName?: string|null,
+     *     Invoice_CompanyName?: string|null,
+     *     Invoice_Email?: string|null,
+     *     LastActionFrom?: string|null,
+     *     LastActionTo?: string|null,
+     *     Reference?: string|null,
+     *     LoadPayments?: boolean|null,
+     *     StatusId?: integer|null,
+     *     Type1Id?: integer|null,
+     *     Type2Id?: integer|null,
+     *     Type3Id?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -589,40 +592,42 @@ class Order extends Request
      * Verkrijg retourproblemen o.b.v. het filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ReturnProblem>
+     * @return \Generator<array-key, ReturnProblem>
      *
      * @throws Logic4ApiException
      */
-    public function getReturnProblems(array $parameters = []): PaginatedResponse
+    public function getReturnProblems(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Orders/GetReturnProblems', $parameters),
-            ReturnProblem::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Orders/GetReturnProblems', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ReturnProblem::make($record);
+        }
     }
 
     /**
      * Verkrijg order retouroplossingen o.b.v. het filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ReturnSolution>
+     * @return \Generator<array-key, ReturnSolution>
      *
      * @throws Logic4ApiException
      */
-    public function getReturnSolutions(array $parameters = []): PaginatedResponse
+    public function getReturnSolutions(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Orders/GetReturnSolutions', $parameters),
-            ReturnSolution::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Orders/GetReturnSolutions', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ReturnSolution::make($record);
+        }
     }
 
     /**
@@ -655,8 +660,8 @@ class Order extends Request
      * Wijzig het contactadres van een order of factuur o.b.v. de meegestuurde gegevens.
      *
      * @param array{
-     *     OrderId?: integer,
-     *     InvoiceId?: integer,
+     *     OrderId?: integer|null,
+     *     InvoiceId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -675,8 +680,8 @@ class Order extends Request
      * Wijzig het afleveradres van een order of factuur o.b.v. de meegestuurde gegevens.
      *
      * @param array{
-     *     OrderId?: integer,
-     *     InvoiceId?: integer,
+     *     OrderId?: integer|null,
+     *     InvoiceId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -695,8 +700,8 @@ class Order extends Request
      * Wijzig het factuuradres van een order of factuur o.b.v. de meegestuurde gegevens.
      *
      * @param array{
-     *     OrderId?: integer,
-     *     InvoiceId?: integer,
+     *     OrderId?: integer|null,
+     *     InvoiceId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -715,8 +720,8 @@ class Order extends Request
      * Update de status van een order.
      *
      * @param array{
-     *     StatusId?: integer,
-     *     OrderId?: integer,
+     *     StatusId?: integer|null,
+     *     OrderId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

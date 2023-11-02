@@ -9,7 +9,7 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\ApiUserLogic4ResponseList;
 use Webparking\Logic4Client\Responses\StringLogic4Response;
 
-class User extends Request
+class UserRequest extends Request
 {
     /**
      * Haal alle gebruikers op.

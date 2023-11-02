@@ -16,15 +16,15 @@ use Webparking\Logic4Client\Responses\EmailMessageStatusLogic4Response;
 use Webparking\Logic4Client\Responses\EmailUserLogic4Response;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
 
-class Email extends Request
+class EmailRequest extends Request
 {
     /**
      * @param array{
-     *     Id?: integer,
-     *     EmailMessageId?: integer,
-     *     Name?: string,
-     *     ContentId?: string,
-     *     IsEmbeddedContent?: boolean,
+     *     Id?: integer|null,
+     *     EmailMessageId?: integer|null,
+     *     Name?: string|null,
+     *     ContentId?: string|null,
+     *     IsEmbeddedContent?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -55,14 +55,14 @@ class Email extends Request
      * Als het om een submap van de inbox gaat worden deze rechten overgenomen.
      *
      * @param array{
-     *     Id?: integer,
-     *     Name?: string,
-     *     ParentId?: integer,
-     *     UserCanRead?: boolean,
-     *     UserCanDelete?: boolean,
-     *     SortId?: integer,
-     *     NewMessages?: integer,
-     *     HasEmails?: boolean,
+     *     Id?: integer|null,
+     *     Name?: string|null,
+     *     ParentId?: integer|null,
+     *     UserCanRead?: boolean|null,
+     *     UserCanDelete?: boolean|null,
+     *     SortId?: integer|null,
+     *     NewMessages?: integer|null,
+     *     HasEmails?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -78,22 +78,22 @@ class Email extends Request
 
     /**
      * @param array{
-     *     Id?: integer,
-     *     Subject?: string,
-     *     EmailBody?: string,
-     *     IsHTMLBody?: boolean,
-     *     BoxId?: integer,
-     *     DateTimeSend?: string,
-     *     IsInbound?: boolean,
-     *     IsRead?: boolean,
-     *     IsReplyedOn?: string,
-     *     IsForwardedOn?: string,
-     *     ToEmailAddresses?: array<mixed>,
-     *     CCEmailAddresses?: array<mixed>,
-     *     BCCEmailAddresses?: array<mixed>,
-     *     HasAttachment?: boolean,
-     *     PreviousEmailId?: integer,
-     *     CanDelete?: boolean,
+     *     Id?: integer|null,
+     *     Subject?: string|null,
+     *     EmailBody?: string|null,
+     *     IsHTMLBody?: boolean|null,
+     *     BoxId?: integer|null,
+     *     DateTimeSend?: string|null,
+     *     IsInbound?: boolean|null,
+     *     IsRead?: boolean|null,
+     *     IsReplyedOn?: string|null,
+     *     IsForwardedOn?: string|null,
+     *     ToEmailAddresses?: array<mixed>|null,
+     *     CCEmailAddresses?: array<mixed>|null,
+     *     BCCEmailAddresses?: array<mixed>|null,
+     *     HasAttachment?: boolean|null,
+     *     PreviousEmailId?: integer|null,
+     *     CanDelete?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -147,11 +147,11 @@ class Email extends Request
 
     /**
      * @param array{
-     *     EmailIds?: array<integer>,
-     *     EmailBoxId?: integer,
-     *     EmailStatusId?: integer,
-     *     IsRead?: boolean,
-     *     Action?: string,
+     *     EmailIds?: array<integer>|null,
+     *     EmailBoxId?: integer|null,
+     *     EmailStatusId?: integer|null,
+     *     IsRead?: boolean|null,
+     *     Action?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -167,7 +167,7 @@ class Email extends Request
 
     /**
      * @param array{
-     *     EmailMessageId?: integer,
+     *     EmailMessageId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -184,8 +184,8 @@ class Email extends Request
 
     /**
      * @param array{
-     *     ParentId?: integer,
-     *     ShowOnlyTopLevelEmailboxes?: boolean,
+     *     ParentId?: integer|null,
+     *     ShowOnlyTopLevelEmailboxes?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -201,27 +201,27 @@ class Email extends Request
 
     /**
      * @param array{
-     *     EmailId?: integer,
-     *     EmailboxId?: integer,
-     *     IncludedSubEmailboxes?: boolean,
-     *     StartDate?: string,
-     *     EndDate?: string,
-     *     OnlyWithAttachment?: boolean,
-     *     StatusId?: integer,
-     *     IsInbound?: boolean,
-     *     SearchText1?: string,
-     *     SearchText1Type?: string,
-     *     SearchText2?: string,
-     *     SearchText2Type?: string,
-     *     SearchText2Switch?: string,
-     *     SearchText3?: string,
-     *     SearchText3Type?: string,
-     *     SearchText3Switch?: string,
-     *     GetEmailMessageBody?: boolean,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     OrderByNewestFirst?: boolean,
-     *     LoadRights?: boolean,
+     *     EmailId?: integer|null,
+     *     EmailboxId?: integer|null,
+     *     IncludedSubEmailboxes?: boolean|null,
+     *     StartDate?: string|null,
+     *     EndDate?: string|null,
+     *     OnlyWithAttachment?: boolean|null,
+     *     StatusId?: integer|null,
+     *     IsInbound?: boolean|null,
+     *     SearchText1?: string|null,
+     *     SearchText1Type?: string|null,
+     *     SearchText2?: string|null,
+     *     SearchText2Type?: string|null,
+     *     SearchText2Switch?: string|null,
+     *     SearchText3?: string|null,
+     *     SearchText3Type?: string|null,
+     *     SearchText3Switch?: string|null,
+     *     GetEmailMessageBody?: boolean|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     OrderByNewestFirst?: boolean|null,
+     *     LoadRights?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -276,14 +276,14 @@ class Email extends Request
      * Update een emailbox o.b.v. meegestuurde user Id.
      *
      * @param array{
-     *     Id?: integer,
-     *     Name?: string,
-     *     ParentId?: integer,
-     *     UserCanRead?: boolean,
-     *     UserCanDelete?: boolean,
-     *     SortId?: integer,
-     *     NewMessages?: integer,
-     *     HasEmails?: boolean,
+     *     Id?: integer|null,
+     *     Name?: string|null,
+     *     ParentId?: integer|null,
+     *     UserCanRead?: boolean|null,
+     *     UserCanDelete?: boolean|null,
+     *     SortId?: integer|null,
+     *     NewMessages?: integer|null,
+     *     HasEmails?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -299,22 +299,22 @@ class Email extends Request
 
     /**
      * @param array{
-     *     Id?: integer,
-     *     Subject?: string,
-     *     EmailBody?: string,
-     *     IsHTMLBody?: boolean,
-     *     BoxId?: integer,
-     *     DateTimeSend?: string,
-     *     IsInbound?: boolean,
-     *     IsRead?: boolean,
-     *     IsReplyedOn?: string,
-     *     IsForwardedOn?: string,
-     *     ToEmailAddresses?: array<mixed>,
-     *     CCEmailAddresses?: array<mixed>,
-     *     BCCEmailAddresses?: array<mixed>,
-     *     HasAttachment?: boolean,
-     *     PreviousEmailId?: integer,
-     *     CanDelete?: boolean,
+     *     Id?: integer|null,
+     *     Subject?: string|null,
+     *     EmailBody?: string|null,
+     *     IsHTMLBody?: boolean|null,
+     *     BoxId?: integer|null,
+     *     DateTimeSend?: string|null,
+     *     IsInbound?: boolean|null,
+     *     IsRead?: boolean|null,
+     *     IsReplyedOn?: string|null,
+     *     IsForwardedOn?: string|null,
+     *     ToEmailAddresses?: array<mixed>|null,
+     *     CCEmailAddresses?: array<mixed>|null,
+     *     BCCEmailAddresses?: array<mixed>|null,
+     *     HasAttachment?: boolean|null,
+     *     PreviousEmailId?: integer|null,
+     *     CanDelete?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException

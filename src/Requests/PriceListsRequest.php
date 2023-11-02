@@ -9,15 +9,15 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
 use Webparking\Logic4Client\Responses\ProductPricelistLogic4ResponseList;
 
-class PriceLists extends Request
+class PriceListsRequest extends Request
 {
     /**
      * Verkrijg alle prijslijsten o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     PricelistId?: integer,
-     *     DebtorId?: integer,
-     *     LoadContractPrices?: boolean,
+     *     PricelistId?: integer|null,
+     *     DebtorId?: integer|null,
+     *     LoadContractPrices?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -34,8 +34,8 @@ class PriceLists extends Request
 
     /**
      * @param array{
-     *     PriceListId?: integer,
-     *     ProductStaggeredPrices?: array<mixed>,
+     *     PriceListId?: integer|null,
+     *     ProductStaggeredPrices?: array<mixed>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

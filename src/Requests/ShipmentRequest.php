@@ -10,17 +10,17 @@ use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\OrderShipmentLogic4Response;
 use Webparking\Logic4Client\Responses\OrderShipmentLogic4ResponseList;
 
-class Shipment extends Request
+class ShipmentRequest extends Request
 {
     /**
      * Verzending toevoegen aan een order of factuur. De nieuw aangemaakte verzending wordt teruggegeven als response.
      *
      * @param array{
-     *     DateTimeAdded?: string,
-     *     OrderId?: integer,
-     *     ShipperId?: integer,
-     *     Barcode?: string,
-     *     TrackTraceUrl?: string,
+     *     DateTimeAdded?: string|null,
+     *     OrderId?: integer|null,
+     *     ShipperId?: integer|null,
+     *     Barcode?: string|null,
+     *     TrackTraceUrl?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -41,12 +41,12 @@ class Shipment extends Request
      * voor het verzenden van een email.
      *
      * @param array{
-     *     DateTimeAdded?: string,
-     *     SendEmail?: boolean,
-     *     OrderId?: integer,
-     *     ShipperId?: integer,
-     *     Barcode?: string,
-     *     TrackTraceUrl?: string,
+     *     DateTimeAdded?: string|null,
+     *     SendEmail?: boolean|null,
+     *     OrderId?: integer|null,
+     *     ShipperId?: integer|null,
+     *     Barcode?: string|null,
+     *     TrackTraceUrl?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
