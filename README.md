@@ -40,7 +40,7 @@ $tokenManager->configure($credentials);
 $clientFactory = new \Webparking\Logic4Client\ClientFactory($tokenManager);
 
 # Initialize the request class using the ClientFactory
-$request = new \Webparking\Logic4Client\Requests\Product($clientFactory);
+$request = new \Webparking\Logic4Client\Requests\ProductRequest($clientFactory);
 $request->getProducts([
     'DebtorId' => 1,
 ]);
@@ -70,7 +70,7 @@ This makes it possible to directly use any request class in your application wit
 ### Example request
 
 ```php
-use Webparking\Logic4Client\Requests\Product as ProductRequest;
+use Webparking\Logic4Client\Requests\ProductRequest;
 use Webparking\Logic4Client\Data\Product;
 use Illuminate\Support\Collection;
 
@@ -81,7 +81,7 @@ public function index(ProductRequest $productRequest, int $debtorId): array
         'DebtorId' => $debtorId,
     ]);
     
-    return $products->all()
+    return iterator_to_array($products);
 }
 ```
 
