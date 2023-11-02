@@ -16,8 +16,8 @@ class ProductCodeWithSupplierCode
     public static function make(array $data): self
     {
         return new self(
-            productCode: $data['ProductCode'],
-            supplierCode: $data['SupplierCode'],
+            productCode: $data['ProductCode'] ?? null,
+            supplierCode: $data['SupplierCode'] ?? null,
         );
     }
 }

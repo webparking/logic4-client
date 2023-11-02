@@ -18,10 +18,10 @@ class GetProductImage
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            imageName: $data['ImageName'],
-            imageId: $data['ImageId'],
-            sortId: $data['SortId'],
+            productId: $data['ProductId'] ?? 0,
+            imageName: $data['ImageName'] ?? null,
+            imageId: $data['ImageId'] ?? 0,
+            sortId: $data['SortId'] ?? null,
         );
     }
 }

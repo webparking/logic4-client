@@ -16,8 +16,8 @@ class ProductPickLocationBasedOnSystemSettings
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            defaultPickLocationId: $data['DefaultPickLocationId'],
+            productId: $data['ProductId'] ?? 0,
+            defaultPickLocationId: $data['DefaultPickLocationId'] ?? null,
         );
     }
 }

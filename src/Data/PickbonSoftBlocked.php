@@ -20,10 +20,10 @@ class PickbonSoftBlocked
     public static function make(array $data): self
     {
         return new self(
-            userId: $data['UserId'],
-            softBlockedAt: $data['SoftBlockedAt'] ? Carbon::parse($data['SoftBlockedAt']) : null,
-            username: $data['Username'],
-            orderHeadPickbonId: $data['OrderHeadPickbonId'],
+            userId: $data['UserId'] ?? null,
+            softBlockedAt: isset($data['SoftBlockedAt']) ? Carbon::parse($data['SoftBlockedAt']) : null,
+            username: $data['Username'] ?? null,
+            orderHeadPickbonId: $data['OrderHeadPickbonId'] ?? 0,
         );
     }
 }

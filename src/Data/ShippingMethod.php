@@ -30,17 +30,17 @@ class ShippingMethod
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            description: $data['Description'],
-            shipmentCosts: $data['ShipmentCosts'],
-            deliveryTime: $data['DeliveryTime'],
-            tracing: $data['Tracing'],
-            selectkeyCms: $data['SelectkeyCms'],
-            countryIsoCodes: $data['CountryIsoCodes'],
-            basicAmount: $data['BasicAmount'],
-            freeShippingAboveAmount: $data['FreeShippingAboveAmount'],
-            freeShippingAboveAmountInclusive: $data['FreeShippingAboveAmountInclusive'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            description: $data['Description'] ?? null,
+            shipmentCosts: $data['ShipmentCosts'] ?? 0.0,
+            deliveryTime: $data['DeliveryTime'] ?? null,
+            tracing: $data['Tracing'] ?? false,
+            selectkeyCms: $data['SelectkeyCms'] ?? null,
+            countryIsoCodes: $data['CountryIsoCodes'] ?? null,
+            basicAmount: $data['BasicAmount'] ?? 0.0,
+            freeShippingAboveAmount: $data['FreeShippingAboveAmount'] ?? null,
+            freeShippingAboveAmountInclusive: $data['FreeShippingAboveAmountInclusive'] ?? null,
             websiteDomains: array_map(static fn (array $item) => WebsiteDomain::make($item), $data['WebsiteDomains'] ?? []),
         );
     }

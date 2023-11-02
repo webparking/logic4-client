@@ -17,9 +17,9 @@ class Subscriber
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            emailaddress: $data['Emailaddress'],
-            globalisationId: $data['GlobalisationId'],
+            id: $data['Id'] ?? 0,
+            emailaddress: $data['Emailaddress'] ?? null,
+            globalisationId: $data['GlobalisationId'] ?? 0,
         );
     }
 }

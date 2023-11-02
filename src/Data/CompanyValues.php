@@ -17,9 +17,9 @@ class CompanyValues
     public static function make(array $data): self
     {
         return new self(
-            useMultipleAdministrations: $data['UseMultipleAdministrations'],
-            isMultiChannel: $data['IsMultiChannel'],
-            branchSpecificInventoryAndBuyorderSystem: $data['BranchSpecificInventoryAndBuyorderSystem'],
+            useMultipleAdministrations: $data['UseMultipleAdministrations'] ?? false,
+            isMultiChannel: $data['IsMultiChannel'] ?? false,
+            branchSpecificInventoryAndBuyorderSystem: $data['BranchSpecificInventoryAndBuyorderSystem'] ?? false,
         );
     }
 }

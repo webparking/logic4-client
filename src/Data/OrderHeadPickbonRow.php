@@ -22,14 +22,14 @@ class OrderHeadPickbonRow
     public static function make(array $data): self
     {
         return new self(
-            orderRowId: $data['OrderRowId'],
-            productId: $data['ProductId'],
-            qty: $data['Qty'],
-            warehouseId: $data['WarehouseId'],
-            orderHeadPickbonId: $data['OrderHeadPickbonId'],
-            orderRowSorting: $data['OrderRowSorting'],
-            orderHeadPickbonRowId: $data['OrderHeadPickbonRowId'],
-            productGroupTypeId: $data['ProductGroupTypeId'],
+            orderRowId: $data['OrderRowId'] ?? 0,
+            productId: $data['ProductId'] ?? 0,
+            qty: $data['Qty'] ?? 0.0,
+            warehouseId: $data['WarehouseId'] ?? null,
+            orderHeadPickbonId: $data['OrderHeadPickbonId'] ?? 0,
+            orderRowSorting: $data['OrderRowSorting'] ?? 0,
+            orderHeadPickbonRowId: $data['OrderHeadPickbonRowId'] ?? 0,
+            productGroupTypeId: $data['ProductGroupTypeId'] ?? 0,
         );
     }
 }

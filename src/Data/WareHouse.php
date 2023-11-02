@@ -21,13 +21,13 @@ class WareHouse
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            stockLocationIdWhenBilling: $data['StockLocationIdWhenBilling'],
-            defaultPickStockLocationId: $data['DefaultPickStockLocationId'],
-            defaultPickStockLocationIdForBuyorderDelivery: $data['DefaultPickStockLocationIdForBuyorderDelivery'],
-            warehouseStockControlEmailTemplate: $data['WarehouseStockControlEmailTemplate'],
-            reservationLocationId: $data['ReservationLocationId'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            stockLocationIdWhenBilling: $data['StockLocationIdWhenBilling'] ?? null,
+            defaultPickStockLocationId: $data['DefaultPickStockLocationId'] ?? null,
+            defaultPickStockLocationIdForBuyorderDelivery: $data['DefaultPickStockLocationIdForBuyorderDelivery'] ?? null,
+            warehouseStockControlEmailTemplate: $data['WarehouseStockControlEmailTemplate'] ?? null,
+            reservationLocationId: $data['ReservationLocationId'] ?? null,
         );
     }
 }

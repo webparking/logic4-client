@@ -17,9 +17,9 @@ class OrderShippingMethod
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            exportCode: $data['ExportCode'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            exportCode: $data['ExportCode'] ?? null,
         );
     }
 }

@@ -17,9 +17,9 @@ class CustomerThirdPartyExternalIdentifer
     public static function make(array $data): self
     {
         return new self(
-            debtorId: $data['DebtorId'],
-            typeId: $data['TypeId'],
-            value: $data['Value'],
+            debtorId: $data['DebtorId'] ?? 0,
+            typeId: $data['TypeId'] ?? 0,
+            value: $data['Value'] ?? null,
         );
     }
 }

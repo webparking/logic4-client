@@ -17,7 +17,7 @@ class ProductWithRelatedProducts
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
+            productId: $data['ProductId'] ?? 0,
             relatedProducts: array_map(static fn (array $item) => RelatedProduct::make($item), $data['RelatedProducts'] ?? []),
         );
     }

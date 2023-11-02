@@ -19,11 +19,11 @@ class ProductCompositionItem
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            productCode: $data['ProductCode'],
-            qty: $data['Qty'],
-            sorting: $data['Sorting'],
-            isStockBasedProduct: $data['IsStockBasedProduct'],
+            productId: $data['ProductId'] ?? 0,
+            productCode: $data['ProductCode'] ?? null,
+            qty: $data['Qty'] ?? 0.0,
+            sorting: $data['Sorting'] ?? null,
+            isStockBasedProduct: $data['IsStockBasedProduct'] ?? false,
         );
     }
 }

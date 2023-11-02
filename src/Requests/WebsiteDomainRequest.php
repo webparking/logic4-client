@@ -9,14 +9,14 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\WebsiteDomainLogic4Response;
 use Webparking\Logic4Client\Responses\WebsiteDomainLogic4ResponseList;
 
-class WebsiteDomain extends Request
+class WebsiteDomainRequest extends Request
 {
     /**
      * Verkrijg een websitedomein o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     Url?: string,
-     *     IsStandardDomain?: boolean,
+     *     Url?: string|null,
+     *     IsStandardDomain?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException

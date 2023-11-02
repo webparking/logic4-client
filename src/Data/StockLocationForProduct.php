@@ -18,8 +18,8 @@ class StockLocationForProduct
     public static function make(array $data): self
     {
         return new self(
-            numberOfStockLocations: $data['NumberOfStockLocations'],
-            productId: $data['ProductId'],
+            numberOfStockLocations: $data['NumberOfStockLocations'] ?? 0,
+            productId: $data['ProductId'] ?? 0,
             stockLocations: array_map(static fn (array $item) => StockLocationForProductItem::make($item), $data['StockLocations'] ?? []),
         );
     }

@@ -16,8 +16,8 @@ class WarehouseMinimalStockNumber
     public static function make(array $data): self
     {
         return new self(
-            warehouseId: $data['WarehouseId'],
-            minimalStock: $data['MinimalStock'],
+            warehouseId: $data['WarehouseId'] ?? 0,
+            minimalStock: $data['MinimalStock'] ?? null,
         );
     }
 }

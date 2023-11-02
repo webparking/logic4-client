@@ -70,4 +70,23 @@ final class ClientFactoryTest extends TestCase
 
         static::assertInstanceOf(ServerException::class, $exception->getPrevious());
     }
+
+    public function testPreventStrayRequestsWhenEnabled(): void
+    {
+        ClientFactory::preventStrayRequests();
+
+        $client = (new ClientFactory(\Mockery::mock(AccessTokenManager::class)))
+            ->make();
+
+        try {
+            $client->get('some-url.html');
+
+            static::fail('Expected exception to be thrown.');
+        } catch (\RuntimeException $exception) {
+            static::assertInstanceOf(\RuntimeException::class, $exception);
+            static::assertSame('Attempting to make a request while stray requests are prevented.', $exception->getMessage());
+        } finally {
+            ClientFactory::preventStrayRequests(false);
+        }
+    }
 }

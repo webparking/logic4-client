@@ -19,11 +19,11 @@ class ProductStockWarehouse
     public static function make(array $data): self
     {
         return new self(
-            warehouseId: $data['WarehouseId'],
-            warehouseName: $data['WarehouseName'],
-            minimalStock: $data['MinimalStock'],
-            maxStock: $data['MaxStock'],
-            defaultStockLocationId: $data['DefaultStockLocationId'],
+            warehouseId: $data['WarehouseId'] ?? 0,
+            warehouseName: $data['WarehouseName'] ?? null,
+            minimalStock: $data['MinimalStock'] ?? 0.0,
+            maxStock: $data['MaxStock'] ?? null,
+            defaultStockLocationId: $data['DefaultStockLocationId'] ?? null,
         );
     }
 }

@@ -12,7 +12,6 @@ use Webparking\Logic4Client\Data\ProductStockSuppliers;
 use Webparking\Logic4Client\Data\ProductStockSupplierWithActive;
 use Webparking\Logic4Client\Data\ProductSupplierNextDelivery;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
@@ -26,19 +25,19 @@ use Webparking\Logic4Client\Responses\StockLocationForProductLogic4ResponseList;
 use Webparking\Logic4Client\Responses\WareHouseLogic4ResponseList;
 use Webparking\Logic4Client\Responses\WarehouseStockLocationLogic4ResponseList;
 
-class Stock extends Request
+class StockRequest extends Request
 {
     /**
      * Maak een voorraadmutatie aan.
      *
      * @param array{
-     *     LedgerId?: integer,
-     *     ITS_IssueId?: integer,
-     *     ProductId?: integer,
-     *     Amount?: number,
-     *     Remarks?: string,
-     *     StockLocationId?: integer,
-     *     StockMutationTypeId?: integer,
+     *     LedgerId?: integer|null,
+     *     ITS_IssueId?: integer|null,
+     *     ProductId?: integer|null,
+     *     Amount?: number|null,
+     *     Remarks?: string|null,
+     *     StockLocationId?: integer|null,
+     *     StockMutationTypeId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -71,46 +70,47 @@ class Stock extends Request
      * Ophalen van externe voorraadstanden voor actieve leveranciers.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ProductStockFrom?: integer,
-     *     DateTimeLastUpdateSince?: string,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ProductStockFrom?: integer|null,
+     *     DateTimeLastUpdateSince?: string|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductStockSuppliers>
+     * @return \Generator<array-key, ProductStockSuppliers>
      *
      * @throws Logic4ApiException
      */
-    public function getExternalStockForActiveSuppliers(
-        array $parameters = [],
-    ): PaginatedResponse {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Stock/GetExternalStockForActiveSuppliers', $parameters),
-            ProductStockSuppliers::class,
-        );
+    public function getExternalStockForActiveSuppliers(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1.1/Stock/GetExternalStockForActiveSuppliers', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductStockSuppliers::make($record);
+        }
     }
 
     /**
      * Ophalen van externe voorraadstanden voor actieve en niet-actieve leveranciers.
      *
      * @param array{
-     *     SupplierId?: integer,
-     *     Active?: boolean,
-     *     ProductIds?: array<integer>,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     SupplierId?: integer|null,
+     *     Active?: boolean|null,
+     *     ProductIds?: array<integer>|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductStockSupplierWithActive>
+     * @return \Generator<array-key, ProductStockSupplierWithActive>
      *
      * @throws Logic4ApiException
      */
-    public function getExternalStockForSuppliers(array $parameters = []): PaginatedResponse
+    public function getExternalStockForSuppliers(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1/Stock/GetExternalStockForSuppliers', $parameters),
-            ProductStockSupplierWithActive::class,
-        );
+        $iterator = $this->paginateRecords('/v1/Stock/GetExternalStockForSuppliers', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductStockSupplierWithActive::make($record);
+        }
     }
 
     /**
@@ -131,30 +131,30 @@ class Stock extends Request
      * Verkrijg de eerst volgende leverdata van alle actieve leveranciers, vanaf een specifieke datum.
      *
      * @param array{
-     *     NextDeliveryDate?: string,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     NextDeliveryDate?: string|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductSupplierNextDelivery>
+     * @return \Generator<array-key, ProductSupplierNextDelivery>
      *
      * @throws Logic4ApiException
      */
-    public function getNextDeliveriesDatesForActiveSuppliers(
-        array $parameters = [],
-    ): PaginatedResponse {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Stock/GetNextDeliveriesDatesForActiveSuppliers', $parameters),
-            ProductSupplierNextDelivery::class,
-        );
+    public function getNextDeliveriesDatesForActiveSuppliers(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1.1/Stock/GetNextDeliveriesDatesForActiveSuppliers', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductSupplierNextDelivery::make($record);
+        }
     }
 
     /**
      * Verkrijg de huidige voorraadlocaties van het product op basis van het filter.
      *
      * @param array{
-     *     ProductsWithWarehouse?: array<mixed>,
-     *     ShowNegativeLocations?: boolean,
+     *     ProductsWithWarehouse?: array<mixed>|null,
+     *     ShowNegativeLocations?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -173,27 +173,28 @@ class Stock extends Request
      * Haal voorraadmutaties op. Maximaal 10000 records per keer kunnen worden opgehaald.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     DateFrom?: string,
-     *     DateTo?: string,
-     *     BuyOrderId?: integer,
-     *     StocklocationId?: integer,
-     *     ITSIssueId?: integer,
-     *     ProductCode?: string,
-     *     WareHouseId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     DateFrom?: string|null,
+     *     DateTo?: string|null,
+     *     BuyOrderId?: integer|null,
+     *     StocklocationId?: integer|null,
+     *     ITSIssueId?: integer|null,
+     *     ProductCode?: string|null,
+     *     WareHouseId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductStockMutation>
+     * @return \Generator<array-key, ProductStockMutation>
      *
      * @throws Logic4ApiException
      */
-    public function getProductStockMutations(array $parameters = []): PaginatedResponse
+    public function getProductStockMutations(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Stock/GetProductStockMutations', $parameters),
-            ProductStockMutation::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Stock/GetProductStockMutations', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductStockMutation::make($record);
+        }
     }
 
     /**
@@ -215,7 +216,7 @@ class Stock extends Request
      * notitie en standaard picklocatie op.
      *
      * @param array{
-     *     ProductIds?: array<integer>,
+     *     ProductIds?: array<integer>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -248,55 +249,57 @@ class Stock extends Request
      * Voorraadcontrole heads ophalen op basis van het ProductStockControlHeadFilter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     StockLocationId?: integer,
-     *     UserId?: integer,
-     *     CreatedDateFrom?: string,
-     *     CreatedDateTo?: string,
-     *     IsProcessed?: boolean,
-     *     ProductStockControlHeadId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     StockLocationId?: integer|null,
+     *     UserId?: integer|null,
+     *     CreatedDateFrom?: string|null,
+     *     CreatedDateTo?: string|null,
+     *     IsProcessed?: boolean|null,
+     *     ProductStockControlHeadId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductStockControlHead>
+     * @return \Generator<array-key, ProductStockControlHead>
      *
      * @throws Logic4ApiException
      */
-    public function getStockControlHeads(array $parameters = []): PaginatedResponse
+    public function getStockControlHeads(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Stock/GetStockControlHeads', $parameters),
-            ProductStockControlHead::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Stock/GetStockControlHeads', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductStockControlHead::make($record);
+        }
     }
 
     /**
      * Ophalen van voorraadstanden voor specifieke magazijnen.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     WareHouseId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     WareHouseId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductStock>
+     * @return \Generator<array-key, ProductStock>
      *
      * @throws Logic4ApiException
      */
-    public function getStockForWarehouses(array $parameters = []): PaginatedResponse
+    public function getStockForWarehouses(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Stock/GetStockForWarehouses', $parameters),
-            ProductStock::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Stock/GetStockForWarehouses', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductStock::make($record);
+        }
     }
 
     /**
      * Haal actuele voorraad op voor een artikel.
      *
      * @param array{
-     *     ProductCode?: string,
-     *     WareHouseId?: integer,
+     *     ProductCode?: string|null,
+     *     WareHouseId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -329,21 +332,22 @@ class Stock extends Request
      * Verkrijg de producten die op de locatie aanwezig zouden moeten zijn.
      *
      * @param array{
-     *     LocationId?: integer,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     LocationId?: integer|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductStockControlRow>
+     * @return \Generator<array-key, ProductStockControlRow>
      *
      * @throws Logic4ApiException
      */
-    public function getStockProductsForStockLocation(array $parameters = []): PaginatedResponse
+    public function getStockProductsForStockLocation(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Stock/GetStockProductsForStockLocation', $parameters),
-            ProductStockControlRow::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Stock/GetStockProductsForStockLocation', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductStockControlRow::make($record);
+        }
     }
 
     /**
@@ -379,13 +383,13 @@ class Stock extends Request
      * Return True wanneer gelukt, anders foutmelding.
      *
      * @param array{
-     *     Items?: array<mixed>,
-     *     FromStockLocationId?: integer,
-     *     FromWarehouseId?: integer,
-     *     ToStockLocationId?: integer,
-     *     Notes?: string,
-     *     Name?: string,
-     *     DatabaseAdministrationId?: integer,
+     *     Items?: array<mixed>|null,
+     *     FromStockLocationId?: integer|null,
+     *     FromWarehouseId?: integer|null,
+     *     ToStockLocationId?: integer|null,
+     *     Notes?: string|null,
+     *     Name?: string|null,
+     *     DatabaseAdministrationId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -404,11 +408,11 @@ class Stock extends Request
      * Wijzig externe voorraadstand van een leverancier.
      *
      * @param array{
-     *     ProductId?: integer,
-     *     ProductCode?: string,
-     *     SupplierId?: integer,
-     *     Quantity?: integer,
-     *     ProductNextDelivery?: string,
+     *     ProductId?: integer|null,
+     *     ProductCode?: string|null,
+     *     SupplierId?: integer|null,
+     *     Quantity?: integer|null,
+     *     ProductNextDelivery?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -452,16 +456,16 @@ class Stock extends Request
      * Voeg een nieuwe voorraadcontrole toe of update de meegegeven head met de bijbehorende rijen als het Id van _head is meegegeven.
      *
      * @param array{
-     *     CreatedDate?: string,
-     *     Id?: integer,
-     *     LocationName?: string,
-     *     LocationId?: integer,
-     *     ProcessDate?: string,
-     *     Username?: string,
-     *     UserId?: integer,
-     *     Rows?: array<mixed>,
-     *     EventLog?: string,
-     *     WarehouseStockControlEmailTemplateId?: integer,
+     *     CreatedDate?: string|null,
+     *     Id?: integer|null,
+     *     LocationName?: string|null,
+     *     LocationId?: integer|null,
+     *     ProcessDate?: string|null,
+     *     Username?: string|null,
+     *     UserId?: integer|null,
+     *     Rows?: array<mixed>|null,
+     *     EventLog?: string|null,
+     *     WarehouseStockControlEmailTemplateId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

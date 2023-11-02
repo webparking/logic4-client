@@ -18,10 +18,10 @@ class TypeRoundOrderStatus
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            value: $data['Value'],
-            enablePlanning: $data['EnablePlanning'],
-            customerAgreesToDeliver: $data['CustomerAgreesToDeliver'],
+            id: $data['Id'] ?? 0,
+            value: $data['Value'] ?? null,
+            enablePlanning: $data['EnablePlanning'] ?? false,
+            customerAgreesToDeliver: $data['CustomerAgreesToDeliver'] ?? false,
         );
     }
 }

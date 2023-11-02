@@ -20,12 +20,12 @@ class OrderShipmentFreeValue
     public static function make(array $data): self
     {
         return new self(
-            shipperTypeId: $data['ShipperTypeId'],
-            freevalue1: $data['Freevalue1'],
-            freevalue2: $data['Freevalue2'],
-            freevalue3: $data['Freevalue3'],
-            freevalue4: $data['Freevalue4'],
-            freevalue5: $data['Freevalue5'],
+            shipperTypeId: $data['ShipperTypeId'] ?? 0,
+            freevalue1: $data['Freevalue1'] ?? null,
+            freevalue2: $data['Freevalue2'] ?? null,
+            freevalue3: $data['Freevalue3'] ?? null,
+            freevalue4: $data['Freevalue4'] ?? null,
+            freevalue5: $data['Freevalue5'] ?? null,
         );
     }
 }

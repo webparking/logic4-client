@@ -25,13 +25,13 @@ class SalesOrderDelivery
     public static function make(array $data): self
     {
         return new self(
-            orderId: $data['OrderId'],
-            orderStatusId: $data['OrderStatusId'],
-            deliveryDate: $data['DeliveryDate'] ? Carbon::parse($data['DeliveryDate']) : null,
-            debtorId: $data['DebtorId'],
-            shippingMethodId: $data['ShippingMethodId'],
-            branchId: $data['BranchId'],
-            websiteDomainId: $data['WebsiteDomainId'],
+            orderId: $data['OrderId'] ?? null,
+            orderStatusId: $data['OrderStatusId'] ?? 0,
+            deliveryDate: isset($data['DeliveryDate']) ? Carbon::parse($data['DeliveryDate']) : null,
+            debtorId: $data['DebtorId'] ?? 0,
+            shippingMethodId: $data['ShippingMethodId'] ?? 0,
+            branchId: $data['BranchId'] ?? null,
+            websiteDomainId: $data['WebsiteDomainId'] ?? null,
             details: array_map(static fn (array $item) => SalesOrderDeliveryDetailRow::make($item), $data['Details'] ?? []),
         );
     }

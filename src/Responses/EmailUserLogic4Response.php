@@ -19,8 +19,8 @@ class EmailUserLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'] ? EmailUser::make($data['Value']) : null,
-            validationMessages: $data['ValidationMessages'],
+            value: isset($data['Value']) ? EmailUser::make($data['Value']) : null,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

@@ -18,7 +18,7 @@ class ProductBarcode
     {
         return new self(
             barcodes: array_map(static fn (array $item) => BarcodeWithAmount::make($item), $data['Barcodes'] ?? []),
-            productId: $data['ProductId'],
+            productId: $data['ProductId'] ?? 0,
         );
     }
 }

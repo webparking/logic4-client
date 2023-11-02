@@ -21,13 +21,13 @@ class ProductShiftPrice
     public static function make(array $data): self
     {
         return new self(
-            qty: $data['Qty'],
-            buyPrice: $data['BuyPrice'],
-            margin: $data['Margin'],
-            sellPriceExcl: $data['SellPriceExcl'],
-            sellPriceGrossExcl: $data['SellPriceGrossExcl'],
-            description: $data['Description'],
-            discountType: $data['DiscountType'],
+            qty: $data['Qty'] ?? 0,
+            buyPrice: $data['BuyPrice'] ?? 0.0,
+            margin: $data['Margin'] ?? 0.0,
+            sellPriceExcl: $data['SellPriceExcl'] ?? 0.0,
+            sellPriceGrossExcl: $data['SellPriceGrossExcl'] ?? 0.0,
+            description: $data['Description'] ?? null,
+            discountType: $data['DiscountType'] ?? null,
         );
     }
 }

@@ -16,7 +16,7 @@ class Logic4Response
     public static function make(array $data): self
     {
         return new self(
-            validationMessages: $data['ValidationMessages'],
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

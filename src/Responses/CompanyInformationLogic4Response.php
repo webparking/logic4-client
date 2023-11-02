@@ -19,8 +19,8 @@ class CompanyInformationLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'] ? CompanyInformation::make($data['Value']) : null,
-            validationMessages: $data['ValidationMessages'],
+            value: isset($data['Value']) ? CompanyInformation::make($data['Value']) : null,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

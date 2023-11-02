@@ -18,10 +18,10 @@ class PaymentMethod
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            description: $data['Description'],
-            maxAmount: $data['MaxAmount'],
-            selectKey: $data['SelectKey'],
+            id: $data['Id'] ?? 0,
+            description: $data['Description'] ?? null,
+            maxAmount: $data['MaxAmount'] ?? null,
+            selectKey: $data['SelectKey'] ?? null,
         );
     }
 }

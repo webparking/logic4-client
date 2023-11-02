@@ -19,11 +19,11 @@ class EmailAttachment
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            emailMessageId: $data['EmailMessageId'],
-            name: $data['Name'],
-            contentId: $data['ContentId'],
-            isEmbeddedContent: $data['IsEmbeddedContent'],
+            id: $data['Id'] ?? 0,
+            emailMessageId: $data['EmailMessageId'] ?? 0,
+            name: $data['Name'] ?? null,
+            contentId: $data['ContentId'] ?? null,
+            isEmbeddedContent: $data['IsEmbeddedContent'] ?? false,
         );
     }
 }

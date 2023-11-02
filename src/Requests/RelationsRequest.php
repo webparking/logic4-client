@@ -11,7 +11,6 @@ use Webparking\Logic4Client\Data\CustomerAddress;
 use Webparking\Logic4Client\Data\CustomerContact;
 use Webparking\Logic4Client\Data\Representative;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\AddressTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
@@ -26,20 +25,20 @@ use Webparking\Logic4Client\Responses\SecondTypeContactGroupLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ThirdPartyExternalIdentifierTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\TypeContactGroupLogic4ResponseList;
 
-class Relations extends Request
+class RelationsRequest extends Request
 {
     /**
      * Crediteur discount toevoegen. Retourneert de Id.
      *
      * @param array{
-     *     TypeId?: integer,
-     *     CreditorId?: integer,
-     *     BrandId?: integer,
-     *     DateFrom?: string,
-     *     DateTo?: string,
-     *     Percentage?: number,
-     *     Amount?: number,
-     *     Remarks?: string,
+     *     TypeId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     BrandId?: integer|null,
+     *     DateFrom?: string|null,
+     *     DateTo?: string|null,
+     *     Percentage?: number|null,
+     *     Amount?: number|null,
+     *     Remarks?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -57,44 +56,44 @@ class Relations extends Request
      * Debiteur toevoegen.
      *
      * @param array{
-     *     Id?: integer,
-     *     IsoCode?: string,
-     *     CountryCode?: string,
-     *     CountryId?: integer,
-     *     CompanyName?: string,
-     *     FirstName?: string,
-     *     LastName?: string,
-     *     EmailAddress?: string,
-     *     PaymentMethodId?: integer,
-     *     PricelistIds?: array<integer>,
-     *     TelephoneNumber?: string,
-     *     MobileNumber?: string,
-     *     Faxnumber?: string,
-     *     ChamberOfCommerceCode?: string,
-     *     Website?: string,
-     *     Discount?: number,
-     *     StandardReportIdForPickingList?: integer,
-     *     StandardReportIdForSalesOrderDelivery?: integer,
-     *     City?: string,
-     *     Zipcode?: string,
-     *     Street?: string,
-     *     HouseNumber?: string,
-     *     HouseNumberAddition?: string,
-     *     VatNumber?: string,
-     *     DontPrintPaperInvoiceForDebtor?: boolean,
-     *     ReceiveInvoiceElectronically?: boolean,
-     *     ElectronicInvoiceAttachmentType?: integer,
-     *     StandardInvoiceLayoutReportId?: integer,
-     *     Preposition?: string,
-     *     CreditLimit?: number,
-     *     ShippingMethodId?: integer,
-     *     GlobalisationId?: integer,
-     *     VatCodeId?: integer,
-     *     StatusId?: integer,
-     *     RepresentativeId?: integer,
-     *     RelationTypeId?: integer,
-     *     GenderId?: integer,
-     *     StandardPackagingSlipLayoutReportId?: integer,
+     *     Id?: integer|null,
+     *     IsoCode?: string|null,
+     *     CountryCode?: string|null,
+     *     CountryId?: integer|null,
+     *     CompanyName?: string|null,
+     *     FirstName?: string|null,
+     *     LastName?: string|null,
+     *     EmailAddress?: string|null,
+     *     PaymentMethodId?: integer|null,
+     *     PricelistIds?: array<integer>|null,
+     *     TelephoneNumber?: string|null,
+     *     MobileNumber?: string|null,
+     *     Faxnumber?: string|null,
+     *     ChamberOfCommerceCode?: string|null,
+     *     Website?: string|null,
+     *     Discount?: number|null,
+     *     StandardReportIdForPickingList?: integer|null,
+     *     StandardReportIdForSalesOrderDelivery?: integer|null,
+     *     City?: string|null,
+     *     Zipcode?: string|null,
+     *     Street?: string|null,
+     *     HouseNumber?: string|null,
+     *     HouseNumberAddition?: string|null,
+     *     VatNumber?: string|null,
+     *     DontPrintPaperInvoiceForDebtor?: boolean|null,
+     *     ReceiveInvoiceElectronically?: boolean|null,
+     *     ElectronicInvoiceAttachmentType?: integer|null,
+     *     StandardInvoiceLayoutReportId?: integer|null,
+     *     Preposition?: string|null,
+     *     CreditLimit?: number|null,
+     *     ShippingMethodId?: integer|null,
+     *     GlobalisationId?: integer|null,
+     *     VatCodeId?: integer|null,
+     *     StatusId?: integer|null,
+     *     RepresentativeId?: integer|null,
+     *     RelationTypeId?: integer|null,
+     *     GenderId?: integer|null,
+     *     StandardPackagingSlipLayoutReportId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -112,27 +111,27 @@ class Relations extends Request
      * Adres toevoegen of updaten.
      *
      * @param array{
-     *     Email?: string,
-     *     ContactName?: string,
-     *     CompanyName?: string,
-     *     Address1?: string,
-     *     Address2?: string,
-     *     Id?: integer,
-     *     DebtorId?: integer,
-     *     CreditorId?: integer,
-     *     IsMainContact?: boolean,
-     *     IsHidden?: boolean,
-     *     OwnContactNumber?: string,
-     *     CountryCode?: string,
-     *     IsoCode?: string,
-     *     City?: string,
-     *     Zipcode?: string,
-     *     Street?: string,
-     *     HouseNumber?: string,
-     *     HouseNumberAddition?: string,
-     *     TelephoneNumber?: string,
-     *     CountryId?: integer,
-     *     ZoneId?: integer,
+     *     Email?: string|null,
+     *     ContactName?: string|null,
+     *     CompanyName?: string|null,
+     *     Address1?: string|null,
+     *     Address2?: string|null,
+     *     Id?: integer|null,
+     *     DebtorId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     IsMainContact?: boolean|null,
+     *     IsHidden?: boolean|null,
+     *     OwnContactNumber?: string|null,
+     *     CountryCode?: string|null,
+     *     IsoCode?: string|null,
+     *     City?: string|null,
+     *     Zipcode?: string|null,
+     *     Street?: string|null,
+     *     HouseNumber?: string|null,
+     *     HouseNumberAddition?: string|null,
+     *     TelephoneNumber?: string|null,
+     *     CountryId?: integer|null,
+     *     ZoneId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -150,31 +149,31 @@ class Relations extends Request
      * Contactpersoon toevoegen of updaten.
      *
      * @param array{
-     *     EmailAddress?: string,
-     *     FirstName?: string,
-     *     Function?: string,
-     *     Initials?: string,
-     *     InsertionName?: string,
-     *     LastName?: string,
-     *     MobileNumber?: string,
-     *     CreatedDateTime?: string,
-     *     ChangedDateTime?: string,
-     *     Id?: integer,
-     *     DebtorId?: integer,
-     *     CreditorId?: integer,
-     *     IsMainContact?: boolean,
-     *     IsHidden?: boolean,
-     *     OwnContactNumber?: string,
-     *     CountryCode?: string,
-     *     IsoCode?: string,
-     *     City?: string,
-     *     Zipcode?: string,
-     *     Street?: string,
-     *     HouseNumber?: string,
-     *     HouseNumberAddition?: string,
-     *     TelephoneNumber?: string,
-     *     CountryId?: integer,
-     *     ZoneId?: integer,
+     *     EmailAddress?: string|null,
+     *     FirstName?: string|null,
+     *     Function?: string|null,
+     *     Initials?: string|null,
+     *     InsertionName?: string|null,
+     *     LastName?: string|null,
+     *     MobileNumber?: string|null,
+     *     CreatedDateTime?: string|null,
+     *     ChangedDateTime?: string|null,
+     *     Id?: integer|null,
+     *     DebtorId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     IsMainContact?: boolean|null,
+     *     IsHidden?: boolean|null,
+     *     OwnContactNumber?: string|null,
+     *     CountryCode?: string|null,
+     *     IsoCode?: string|null,
+     *     City?: string|null,
+     *     Zipcode?: string|null,
+     *     Street?: string|null,
+     *     HouseNumber?: string|null,
+     *     HouseNumberAddition?: string|null,
+     *     TelephoneNumber?: string|null,
+     *     CountryId?: integer|null,
+     *     ZoneId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -192,9 +191,9 @@ class Relations extends Request
      * Crediteur externe identifier toevoegen of updaten.
      *
      * @param array{
-     *     CreditorId?: integer,
-     *     TypeId?: integer,
-     *     Value?: string,
+     *     CreditorId?: integer|null,
+     *     TypeId?: integer|null,
+     *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -213,38 +212,38 @@ class Relations extends Request
      * Debiteur toevoegen of updaten.
      *
      * @param array{
-     *     Id?: integer,
-     *     IsoCode?: string,
-     *     CountryCode?: string,
-     *     CountryId?: integer,
-     *     CompanyName?: string,
-     *     FirstName?: string,
-     *     LastName?: string,
-     *     EmailAddress?: string,
-     *     PaymentMethodId?: integer,
-     *     PricelistIds?: array<integer>,
-     *     TelephoneNumber?: string,
-     *     MobileNumber?: string,
-     *     Faxnumber?: string,
-     *     ChamberOfCommerceCode?: string,
-     *     Website?: string,
-     *     Discount?: number,
-     *     StandardReportIdForPickingList?: integer,
-     *     StandardReportIdForSalesOrderDelivery?: integer,
-     *     City?: string,
-     *     Zipcode?: string,
-     *     Street?: string,
-     *     HouseNumber?: string,
-     *     HouseNumberAddition?: string,
-     *     VatNumber?: string,
-     *     DontPrintPaperInvoiceForDebtor?: boolean,
-     *     ReceiveInvoiceElectronically?: boolean,
-     *     ElectronicInvoiceAttachmentType?: integer,
-     *     StandardInvoiceLayoutReportId?: integer,
-     *     Preposition?: string,
-     *     CreditLimit?: number,
-     *     ShippingMethodId?: integer,
-     *     GlobalisationId?: integer,
+     *     Id?: integer|null,
+     *     IsoCode?: string|null,
+     *     CountryCode?: string|null,
+     *     CountryId?: integer|null,
+     *     CompanyName?: string|null,
+     *     FirstName?: string|null,
+     *     LastName?: string|null,
+     *     EmailAddress?: string|null,
+     *     PaymentMethodId?: integer|null,
+     *     PricelistIds?: array<integer>|null,
+     *     TelephoneNumber?: string|null,
+     *     MobileNumber?: string|null,
+     *     Faxnumber?: string|null,
+     *     ChamberOfCommerceCode?: string|null,
+     *     Website?: string|null,
+     *     Discount?: number|null,
+     *     StandardReportIdForPickingList?: integer|null,
+     *     StandardReportIdForSalesOrderDelivery?: integer|null,
+     *     City?: string|null,
+     *     Zipcode?: string|null,
+     *     Street?: string|null,
+     *     HouseNumber?: string|null,
+     *     HouseNumberAddition?: string|null,
+     *     VatNumber?: string|null,
+     *     DontPrintPaperInvoiceForDebtor?: boolean|null,
+     *     ReceiveInvoiceElectronically?: boolean|null,
+     *     ElectronicInvoiceAttachmentType?: integer|null,
+     *     StandardInvoiceLayoutReportId?: integer|null,
+     *     Preposition?: string|null,
+     *     CreditLimit?: number|null,
+     *     ShippingMethodId?: integer|null,
+     *     GlobalisationId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -265,9 +264,9 @@ class Relations extends Request
      * Debiteur externe identifier toevoegen of updaten.
      *
      * @param array{
-     *     DebtorId?: integer,
-     *     TypeId?: integer,
-     *     Value?: string,
+     *     DebtorId?: integer|null,
+     *     TypeId?: integer|null,
+     *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -286,9 +285,9 @@ class Relations extends Request
      * Verwijder een crediteur derde partij externe identifier.
      *
      * @param array{
-     *     CreditorId?: integer,
-     *     TypeId?: integer,
-     *     Value?: string,
+     *     CreditorId?: integer|null,
+     *     TypeId?: integer|null,
+     *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -307,9 +306,9 @@ class Relations extends Request
      * Verwijder een debiteur derde partij externe identifier.
      *
      * @param array{
-     *     DebtorId?: integer,
-     *     TypeId?: integer,
-     *     Value?: string,
+     *     DebtorId?: integer|null,
+     *     TypeId?: integer|null,
+     *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -328,28 +327,29 @@ class Relations extends Request
      * Verkrijg adressen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ChangedAfter?: string,
-     *     Id?: integer,
-     *     AddressTypeId?: integer,
-     *     PhoneNumber?: string,
-     *     DebtorId?: integer,
-     *     CreditorId?: integer,
-     *     ExcludeHiddenContacts?: boolean,
-     *     OwnContactNumber?: string,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ChangedAfter?: string|null,
+     *     Id?: integer|null,
+     *     AddressTypeId?: integer|null,
+     *     PhoneNumber?: string|null,
+     *     DebtorId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     ExcludeHiddenContacts?: boolean|null,
+     *     OwnContactNumber?: string|null,
      * } $parameters
      *
-     * @return PaginatedResponse<CustomerAddress>
+     * @return \Generator<array-key, CustomerAddress>
      *
      * @throws Logic4ApiException
      */
-    public function getAddresses(array $parameters = []): PaginatedResponse
+    public function getAddresses(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Relations/GetAddresses', $parameters),
-            CustomerAddress::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Relations/GetAddresses', $parameters);
+
+        foreach ($iterator as $record) {
+            yield CustomerAddress::make($record);
+        }
     }
 
     /**
@@ -370,49 +370,51 @@ class Relations extends Request
      * Verkrijg contacten o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ChangedAfter?: string,
-     *     Id?: integer,
-     *     AddressTypeId?: integer,
-     *     PhoneNumber?: string,
-     *     DebtorId?: integer,
-     *     CreditorId?: integer,
-     *     ExcludeHiddenContacts?: boolean,
-     *     OwnContactNumber?: string,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ChangedAfter?: string|null,
+     *     Id?: integer|null,
+     *     AddressTypeId?: integer|null,
+     *     PhoneNumber?: string|null,
+     *     DebtorId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     ExcludeHiddenContacts?: boolean|null,
+     *     OwnContactNumber?: string|null,
      * } $parameters
      *
-     * @return PaginatedResponse<CustomerContact>
+     * @return \Generator<array-key, CustomerContact>
      *
      * @throws Logic4ApiException
      */
-    public function getContacts(array $parameters = []): PaginatedResponse
+    public function getContacts(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Relations/GetContacts', $parameters),
-            CustomerContact::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Relations/GetContacts', $parameters);
+
+        foreach ($iterator as $record) {
+            yield CustomerContact::make($record);
+        }
     }
 
     /**
      * Crediteur discounts ophalen (maximaal 1000).
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     Ids?: array<integer>,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     Ids?: array<integer>|null,
      * } $parameters
      *
-     * @return PaginatedResponse<CreditorDiscount>
+     * @return \Generator<array-key, CreditorDiscount>
      *
      * @throws Logic4ApiException
      */
-    public function getCreditorDiscounts(array $parameters = []): PaginatedResponse
+    public function getCreditorDiscounts(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1/Relations/GetCreditorDiscounts', $parameters),
-            CreditorDiscount::class,
-        );
+        $iterator = $this->paginateRecords('/v1/Relations/GetCreditorDiscounts', $parameters);
+
+        foreach ($iterator as $record) {
+            yield CreditorDiscount::make($record);
+        }
     }
 
     /**
@@ -433,35 +435,36 @@ class Relations extends Request
      * Verkrijg crediteuren o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ChangedAfter?: string,
-     *     Id?: integer,
-     *     PhoneNumber?: string,
-     *     WebsiteDomainId?: integer,
-     *     EmailAddress?: string,
-     *     EmailAddressIsExact?: boolean,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ChangedAfter?: string|null,
+     *     Id?: integer|null,
+     *     PhoneNumber?: string|null,
+     *     WebsiteDomainId?: integer|null,
+     *     EmailAddress?: string|null,
+     *     EmailAddressIsExact?: boolean|null,
      * } $parameters
      *
-     * @return PaginatedResponse<Creditor>
+     * @return \Generator<array-key, Creditor>
      *
      * @throws Logic4ApiException
      */
-    public function getCreditors(array $parameters = []): PaginatedResponse
+    public function getCreditors(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Relations/GetCreditors', $parameters),
-            Creditor::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Relations/GetCreditors', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Creditor::make($record);
+        }
     }
 
     /**
      * Verkrijg crediteur externe identifiers o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     CreditorId?: integer,
-     *     TypeId?: integer,
-     *     Value?: string,
+     *     CreditorId?: integer|null,
+     *     TypeId?: integer|null,
+     *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -480,35 +483,36 @@ class Relations extends Request
      * Verkrijg debiteuren o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ChangedAfter?: string,
-     *     Id?: integer,
-     *     PhoneNumber?: string,
-     *     WebsiteDomainId?: integer,
-     *     EmailAddress?: string,
-     *     EmailAddressIsExact?: boolean,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ChangedAfter?: string|null,
+     *     Id?: integer|null,
+     *     PhoneNumber?: string|null,
+     *     WebsiteDomainId?: integer|null,
+     *     EmailAddress?: string|null,
+     *     EmailAddressIsExact?: boolean|null,
      * } $parameters
      *
-     * @return PaginatedResponse<Customer>
+     * @return \Generator<array-key, Customer>
      *
      * @throws Logic4ApiException
      */
-    public function getCustomers(array $parameters = []): PaginatedResponse
+    public function getCustomers(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Relations/GetCustomers', $parameters),
-            Customer::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Relations/GetCustomers', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Customer::make($record);
+        }
     }
 
     /**
      * Verkrijg debiteur externe identifiers o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     DebtorId?: integer,
-     *     TypeId?: integer,
-     *     Value?: string,
+     *     DebtorId?: integer|null,
+     *     TypeId?: integer|null,
+     *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -569,20 +573,21 @@ class Relations extends Request
      * Verkrijg alle vertegenwoordigers.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<Representative>
+     * @return \Generator<array-key, Representative>
      *
      * @throws Logic4ApiException
      */
-    public function getRepresentatives(array $parameters = []): PaginatedResponse
+    public function getRepresentatives(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Relations/GetRepresentatives', $parameters),
-            Representative::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Relations/GetRepresentatives', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Representative::make($record);
+        }
     }
 
     /**
@@ -631,15 +636,15 @@ class Relations extends Request
      * Crediteur discount updaten. Retourneert true indien succesvol.
      *
      * @param array{
-     *     Id?: integer,
-     *     TypeId?: integer,
-     *     CreditorId?: integer,
-     *     BrandId?: integer,
-     *     DateFrom?: string,
-     *     DateTo?: string,
-     *     Percentage?: number,
-     *     Amount?: number,
-     *     Remarks?: string,
+     *     Id?: integer|null,
+     *     TypeId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     BrandId?: integer|null,
+     *     DateFrom?: string|null,
+     *     DateTo?: string|null,
+     *     Percentage?: number|null,
+     *     Amount?: number|null,
+     *     Remarks?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -658,44 +663,44 @@ class Relations extends Request
      * Waarden van een bestaande debiteur updaten.
      *
      * @param array{
-     *     Id?: integer,
-     *     IsoCode?: string,
-     *     CountryCode?: string,
-     *     CountryId?: integer,
-     *     CompanyName?: string,
-     *     FirstName?: string,
-     *     LastName?: string,
-     *     EmailAddress?: string,
-     *     PaymentMethodId?: integer,
-     *     PricelistIds?: array<integer>,
-     *     TelephoneNumber?: string,
-     *     MobileNumber?: string,
-     *     Faxnumber?: string,
-     *     ChamberOfCommerceCode?: string,
-     *     Website?: string,
-     *     Discount?: number,
-     *     StandardReportIdForPickingList?: integer,
-     *     StandardReportIdForSalesOrderDelivery?: integer,
-     *     City?: string,
-     *     Zipcode?: string,
-     *     Street?: string,
-     *     HouseNumber?: string,
-     *     HouseNumberAddition?: string,
-     *     VatNumber?: string,
-     *     DontPrintPaperInvoiceForDebtor?: boolean,
-     *     ReceiveInvoiceElectronically?: boolean,
-     *     ElectronicInvoiceAttachmentType?: integer,
-     *     StandardInvoiceLayoutReportId?: integer,
-     *     Preposition?: string,
-     *     CreditLimit?: number,
-     *     ShippingMethodId?: integer,
-     *     GlobalisationId?: integer,
-     *     VatCodeId?: integer,
-     *     StatusId?: integer,
-     *     RepresentativeId?: integer,
-     *     RelationTypeId?: integer,
-     *     GenderId?: integer,
-     *     StandardPackagingSlipLayoutReportId?: integer,
+     *     Id?: integer|null,
+     *     IsoCode?: string|null,
+     *     CountryCode?: string|null,
+     *     CountryId?: integer|null,
+     *     CompanyName?: string|null,
+     *     FirstName?: string|null,
+     *     LastName?: string|null,
+     *     EmailAddress?: string|null,
+     *     PaymentMethodId?: integer|null,
+     *     PricelistIds?: array<integer>|null,
+     *     TelephoneNumber?: string|null,
+     *     MobileNumber?: string|null,
+     *     Faxnumber?: string|null,
+     *     ChamberOfCommerceCode?: string|null,
+     *     Website?: string|null,
+     *     Discount?: number|null,
+     *     StandardReportIdForPickingList?: integer|null,
+     *     StandardReportIdForSalesOrderDelivery?: integer|null,
+     *     City?: string|null,
+     *     Zipcode?: string|null,
+     *     Street?: string|null,
+     *     HouseNumber?: string|null,
+     *     HouseNumberAddition?: string|null,
+     *     VatNumber?: string|null,
+     *     DontPrintPaperInvoiceForDebtor?: boolean|null,
+     *     ReceiveInvoiceElectronically?: boolean|null,
+     *     ElectronicInvoiceAttachmentType?: integer|null,
+     *     StandardInvoiceLayoutReportId?: integer|null,
+     *     Preposition?: string|null,
+     *     CreditLimit?: number|null,
+     *     ShippingMethodId?: integer|null,
+     *     GlobalisationId?: integer|null,
+     *     VatCodeId?: integer|null,
+     *     StatusId?: integer|null,
+     *     RepresentativeId?: integer|null,
+     *     RelationTypeId?: integer|null,
+     *     GenderId?: integer|null,
+     *     StandardPackagingSlipLayoutReportId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

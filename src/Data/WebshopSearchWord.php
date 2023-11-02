@@ -21,11 +21,11 @@ class WebshopSearchWord
     public static function make(array $data): self
     {
         return new self(
-            dateTimeAdded: $data['DateTimeAdded'] ? Carbon::parse($data['DateTimeAdded']) : null,
-            websiteDomainId: $data['WebsiteDomainId'],
-            searchTerm: $data['SearchTerm'],
-            visitorCode: $data['VisitorCode'],
-            resultCount: $data['ResultCount'],
+            dateTimeAdded: isset($data['DateTimeAdded']) ? Carbon::parse($data['DateTimeAdded']) : null,
+            websiteDomainId: $data['WebsiteDomainId'] ?? null,
+            searchTerm: $data['SearchTerm'] ?? null,
+            visitorCode: $data['VisitorCode'] ?? null,
+            resultCount: $data['ResultCount'] ?? 0,
         );
     }
 }

@@ -10,23 +10,23 @@ use Webparking\Logic4Client\Responses\BuyOrderDeliveryAndOrderMovementLogic4Resp
 use Webparking\Logic4Client\Responses\BuyOrderDeliveryStatusValueLogic4Response;
 use Webparking\Logic4Client\Responses\StringLogic4Response;
 
-class BuyOrderDelivery extends Request
+class BuyOrderDeliveryRequest extends Request
 {
     /**
      * Maak een nieuwe inkooplevering aan of update een bestaande.
      *
      * @param array{
-     *     ProcessMutationButDoNotCreatePickbon?: boolean,
-     *     BuyOrderDeliveryId?: integer,
-     *     SupplierId?: integer,
-     *     BuyOrderId?: integer,
-     *     Remarks?: string,
-     *     Description?: string,
-     *     BranchId?: integer,
-     *     Rows?: array<mixed>,
-     *     Status?: string,
-     *     PickingListNumber?: string,
-     *     OrderId?: integer,
+     *     ProcessMutationButDoNotCreatePickbon?: boolean|null,
+     *     BuyOrderDeliveryId?: integer|null,
+     *     SupplierId?: integer|null,
+     *     BuyOrderId?: integer|null,
+     *     Remarks?: string|null,
+     *     Description?: string|null,
+     *     BranchId?: integer|null,
+     *     Rows?: array<mixed>|null,
+     *     Status?: string|null,
+     *     PickingListNumber?: string|null,
+     *     OrderId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -45,16 +45,16 @@ class BuyOrderDelivery extends Request
      * Maak een nieuwe inkooplevering aan, o.b.v. deze inkooplevering wordt automatisch een uitlevering aangemaakt.
      *
      * @param array{
-     *     BuyOrderDeliveryId?: integer,
-     *     SupplierId?: integer,
-     *     BuyOrderId?: integer,
-     *     Remarks?: string,
-     *     Description?: string,
-     *     BranchId?: integer,
-     *     Rows?: array<mixed>,
-     *     Status?: string,
-     *     PickingListNumber?: string,
-     *     OrderId?: integer,
+     *     BuyOrderDeliveryId?: integer|null,
+     *     SupplierId?: integer|null,
+     *     BuyOrderId?: integer|null,
+     *     Remarks?: string|null,
+     *     Description?: string|null,
+     *     BranchId?: integer|null,
+     *     Rows?: array<mixed>|null,
+     *     Status?: string|null,
+     *     PickingListNumber?: string|null,
+     *     OrderId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

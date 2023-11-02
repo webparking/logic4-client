@@ -17,7 +17,7 @@ class ProductPriceInformation
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
+            productId: $data['ProductId'] ?? 0,
             shiftPrices: array_map(static fn (array $item) => ProductShiftPrice::make($item), $data['ShiftPrices'] ?? []),
         );
     }

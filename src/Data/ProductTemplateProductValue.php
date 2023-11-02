@@ -19,10 +19,10 @@ class ProductTemplateProductValue
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            templatePropertyId: $data['TemplatePropertyId'],
-            values: $data['Values'],
-            templatePropertyName: $data['TemplatePropertyName'],
+            productId: $data['ProductId'] ?? 0,
+            templatePropertyId: $data['TemplatePropertyId'] ?? 0,
+            values: $data['Values'] ?? null,
+            templatePropertyName: $data['TemplatePropertyName'] ?? null,
         );
     }
 }

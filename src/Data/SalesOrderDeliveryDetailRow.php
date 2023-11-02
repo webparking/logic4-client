@@ -24,16 +24,16 @@ class SalesOrderDeliveryDetailRow
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            productCode: $data['ProductCode'],
-            buyPrice: $data['BuyPrice'],
-            sellPrice: $data['SellPrice'],
-            description: $data['Description'],
-            useWarehouseIdForReservation: $data['UseWarehouseIdForReservation'],
-            supplierProductCode: $data['Supplier_ProductCode'],
-            commission: $data['Commission'],
-            rowId: $data['RowId'],
-            amountDelivered: $data['AmountDelivered'],
+            productId: $data['ProductId'] ?? 0,
+            productCode: $data['ProductCode'] ?? null,
+            buyPrice: $data['BuyPrice'] ?? 0.0,
+            sellPrice: $data['SellPrice'] ?? 0.0,
+            description: $data['Description'] ?? null,
+            useWarehouseIdForReservation: $data['UseWarehouseIdForReservation'] ?? null,
+            supplierProductCode: $data['Supplier_ProductCode'] ?? null,
+            commission: $data['Commission'] ?? null,
+            rowId: $data['RowId'] ?? 0,
+            amountDelivered: $data['AmountDelivered'] ?? 0.0,
         );
     }
 }

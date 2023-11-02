@@ -25,15 +25,15 @@ class CreditorDiscount
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            typeId: $data['TypeId'],
-            creditorId: $data['CreditorId'],
-            brandId: $data['BrandId'],
-            dateFrom: $data['DateFrom'] ? Carbon::parse($data['DateFrom']) : null,
-            dateTo: $data['DateTo'] ? Carbon::parse($data['DateTo']) : null,
-            percentage: $data['Percentage'],
-            amount: $data['Amount'],
-            remarks: $data['Remarks'],
+            id: $data['Id'] ?? 0,
+            typeId: $data['TypeId'] ?? 0,
+            creditorId: $data['CreditorId'] ?? 0,
+            brandId: $data['BrandId'] ?? 0,
+            dateFrom: isset($data['DateFrom']) ? Carbon::parse($data['DateFrom']) : null,
+            dateTo: isset($data['DateTo']) ? Carbon::parse($data['DateTo']) : null,
+            percentage: $data['Percentage'] ?? null,
+            amount: $data['Amount'] ?? null,
+            remarks: $data['Remarks'] ?? null,
         );
     }
 }

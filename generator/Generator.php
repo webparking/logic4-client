@@ -90,7 +90,7 @@ class Generator
     {
         $requestGenerator = new RequestClassGenerator(
             namespace: $this->namespace,
-            className: $namespace,
+            className: $namespace.'Request',
             componentClassGenerator: $this->componentClassGenerator,
         );
 

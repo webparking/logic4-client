@@ -27,16 +27,16 @@ class ProductStockControlHead
     public static function make(array $data): self
     {
         return new self(
-            createdDate: $data['CreatedDate'] ? Carbon::parse($data['CreatedDate']) : null,
-            id: $data['Id'],
-            locationName: $data['LocationName'],
-            locationId: $data['LocationId'],
-            processDate: $data['ProcessDate'] ? Carbon::parse($data['ProcessDate']) : null,
-            username: $data['Username'],
-            userId: $data['UserId'],
+            createdDate: isset($data['CreatedDate']) ? Carbon::parse($data['CreatedDate']) : null,
+            id: $data['Id'] ?? null,
+            locationName: $data['LocationName'] ?? null,
+            locationId: $data['LocationId'] ?? 0,
+            processDate: isset($data['ProcessDate']) ? Carbon::parse($data['ProcessDate']) : null,
+            username: $data['Username'] ?? null,
+            userId: $data['UserId'] ?? null,
             rows: array_map(static fn (array $item) => ProductStockControlRow::make($item), $data['Rows'] ?? []),
-            eventLog: $data['EventLog'],
-            warehouseStockControlEmailTemplateId: $data['WarehouseStockControlEmailTemplateId'],
+            eventLog: $data['EventLog'] ?? null,
+            warehouseStockControlEmailTemplateId: $data['WarehouseStockControlEmailTemplateId'] ?? null,
         );
     }
 }

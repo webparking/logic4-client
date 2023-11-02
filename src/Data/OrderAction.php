@@ -23,13 +23,13 @@ class OrderAction
     public static function make(array $data): self
     {
         return new self(
-            orderId: $data['OrderId'],
-            dateTimeCreated: $data['DateTimeCreated'] ? Carbon::parse($data['DateTimeCreated']) : null,
-            description: $data['Description'],
-            userId: $data['UserId'],
-            relatedId: $data['RelatedId'],
-            typeDescription: $data['TypeDescription'],
-            typeId: $data['TypeId'],
+            orderId: $data['OrderId'] ?? 0,
+            dateTimeCreated: isset($data['DateTimeCreated']) ? Carbon::parse($data['DateTimeCreated']) : null,
+            description: $data['Description'] ?? null,
+            userId: $data['UserId'] ?? 0,
+            relatedId: $data['RelatedId'] ?? null,
+            typeDescription: $data['TypeDescription'] ?? null,
+            typeId: $data['TypeId'] ?? 0,
         );
     }
 }

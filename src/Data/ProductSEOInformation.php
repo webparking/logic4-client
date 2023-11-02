@@ -22,14 +22,14 @@ class ProductSEOInformation
     public static function make(array $data): self
     {
         return new self(
-            websiteDomainId: $data['WebsiteDomainId'],
-            globalizationId: $data['GlobalizationId'],
-            productId: $data['ProductId'],
-            title: $data['Title'],
-            description: $data['Description'],
-            USP: $data['USP'],
-            metaName: $data['MetaName'],
-            metaDescription: $data['MetaDescription'],
+            websiteDomainId: $data['WebsiteDomainId'] ?? null,
+            globalizationId: $data['GlobalizationId'] ?? null,
+            productId: $data['ProductId'] ?? 0,
+            title: $data['Title'] ?? null,
+            description: $data['Description'] ?? null,
+            USP: $data['USP'] ?? null,
+            metaName: $data['MetaName'] ?? null,
+            metaDescription: $data['MetaDescription'] ?? null,
         );
     }
 }

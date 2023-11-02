@@ -10,15 +10,15 @@ use Webparking\Logic4Client\Responses\ProductTemplateLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductTemplateProductValueLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductTemplatePropertyLogic4ResponseList;
 
-class ProductTemplate extends Request
+class ProductTemplateRequest extends Request
 {
     /**
      * @param array{
-     *     TemplatePropertyId?: integer,
-     *     TemplateId?: integer,
-     *     Remarks?: string,
-     *     Skip?: integer,
-     *     Take?: integer,
+     *     TemplatePropertyId?: integer|null,
+     *     TemplateId?: integer|null,
+     *     Remarks?: string|null,
+     *     Skip?: integer|null,
+     *     Take?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -37,10 +37,10 @@ class ProductTemplate extends Request
      * Haal meerdere artikel templates op.
      *
      * @param array{
-     *     TemplateId?: integer,
-     *     TemplatePropertyId?: integer,
-     *     Skip?: integer,
-     *     Take?: integer,
+     *     TemplateId?: integer|null,
+     *     TemplatePropertyId?: integer|null,
+     *     Skip?: integer|null,
+     *     Take?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -57,10 +57,10 @@ class ProductTemplate extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<integer>,
-     *     VisibleOnWebsite?: boolean,
-     *     Skip?: integer,
-     *     Take?: integer,
+     *     ProductIds?: array<integer>|null,
+     *     VisibleOnWebsite?: boolean|null,
+     *     Skip?: integer|null,
+     *     Take?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

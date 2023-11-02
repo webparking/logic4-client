@@ -29,19 +29,19 @@ class HRMTimeRegistrationRow
     public static function make(array $data): self
     {
         return new self(
-            userId: $data['UserId'],
-            periodId: $data['PeriodId'],
-            date: $data['Date'] ? Carbon::parse($data['Date']) : null,
-            activityId: $data['ActivityId'],
-            ITSTaskId: $data['ITSTaskId'],
-            CRMProjectId: $data['CRMProjectId'],
-            ITSIssueId: $data['ITSIssueId'],
-            description: $data['Description'],
-            minutes: $data['Minutes'],
-            createPeriod: $data['CreatePeriod'],
-            periodeStatusId: $data['PeriodeStatusId'],
-            rowIsAddedToPeriod: $data['RowIsAddedToPeriod'],
-            exception: $data['Exception'],
+            userId: $data['UserId'] ?? 0,
+            periodId: $data['PeriodId'] ?? null,
+            date: isset($data['Date']) ? Carbon::parse($data['Date']) : null,
+            activityId: $data['ActivityId'] ?? 0,
+            ITSTaskId: $data['ITSTaskId'] ?? null,
+            CRMProjectId: $data['CRMProjectId'] ?? null,
+            ITSIssueId: $data['ITSIssueId'] ?? null,
+            description: $data['Description'] ?? null,
+            minutes: $data['Minutes'] ?? 0,
+            createPeriod: $data['CreatePeriod'] ?? false,
+            periodeStatusId: $data['PeriodeStatusId'] ?? null,
+            rowIsAddedToPeriod: $data['RowIsAddedToPeriod'] ?? false,
+            exception: $data['Exception'] ?? null,
         );
     }
 }

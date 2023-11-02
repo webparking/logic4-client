@@ -22,14 +22,14 @@ class EmailBox
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            parentId: $data['ParentId'],
-            userCanRead: $data['UserCanRead'],
-            userCanDelete: $data['UserCanDelete'],
-            sortId: $data['SortId'],
-            newMessages: $data['NewMessages'],
-            hasEmails: $data['HasEmails'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            parentId: $data['ParentId'] ?? null,
+            userCanRead: $data['UserCanRead'] ?? false,
+            userCanDelete: $data['UserCanDelete'] ?? false,
+            sortId: $data['SortId'] ?? 0,
+            newMessages: $data['NewMessages'] ?? 0,
+            hasEmails: $data['HasEmails'] ?? false,
         );
     }
 }

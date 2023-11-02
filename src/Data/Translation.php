@@ -16,8 +16,8 @@ class Translation
     public static function make(array $data): self
     {
         return new self(
-            globalisationCode: $data['GlobalisationCode'],
-            value: $data['Value'],
+            globalisationCode: $data['GlobalisationCode'] ?? null,
+            value: $data['Value'] ?? null,
         );
     }
 }

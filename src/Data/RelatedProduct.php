@@ -16,8 +16,8 @@ class RelatedProduct
     public static function make(array $data): self
     {
         return new self(
-            relatedProductId: $data['RelatedProductId'],
-            relatedTypeId: $data['RelatedTypeId'],
+            relatedProductId: $data['RelatedProductId'] ?? 0,
+            relatedTypeId: $data['RelatedTypeId'] ?? 0,
         );
     }
 }

@@ -8,10 +8,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Mockery\MockInterface;
 use Webparking\Logic4Client\ClientFactory;
-use Webparking\Logic4Client\Requests\Order;
+use Webparking\Logic4Client\Requests\OrderRequest;
 use Webparking\Logic4Client\Tests\TestCase;
 
-final class OrderTest extends TestCase
+final class OrderRequestTest extends TestCase
 {
     public function testGetOrderStatuses(): void
     {
@@ -37,7 +37,7 @@ final class OrderTest extends TestCase
                 ->andReturn($client);
         });
 
-        $response = (new Order($clientFactory))->getOrderStatuses();
+        $response = (new OrderRequest($clientFactory))->getOrderStatuses();
 
         static::assertSame(192, $response->recordsCounter);
         static::assertSame(['some-message'], $response->validationMessages);
@@ -76,7 +76,7 @@ final class OrderTest extends TestCase
                 ->andReturn($client);
         });
 
-        $response = (new Order($clientFactory))->getReturnOrders([
+        $response = (new OrderRequest($clientFactory))->getReturnOrders([
             'StatusId' => 9,
         ]);
 

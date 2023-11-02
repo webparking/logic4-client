@@ -10,7 +10,6 @@ use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\PhpNamespace;
 use Symfony\Component\Filesystem\Path;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 
 class RequestClassGenerator
@@ -62,8 +61,8 @@ class RequestClassGenerator
         };
 
         if ($paginated && class_exists($returnType)) {
-            $method->setReturnType(PaginatedResponse::class);
-            $method->addComment("\n@return \\".PaginatedResponse::class.'<'.(class_exists($returnType) ? '\\'.$returnType : $returnType).'>');
+            $method->setReturnType(\Generator::class);
+            $method->addComment("\n@return \Generator<array-key, ".(class_exists($returnType) ? '\\'.$returnType : $returnType).'>');
         } else {
             $method->setReturnType($returnType);
             $method->addComment("\n@return ".(class_exists($returnType) ? '\\'.$returnType : $returnType));
@@ -73,10 +72,11 @@ class RequestClassGenerator
             if ($paginated) {
                 $method->setBody(
                     <<<PHP
-                        return new \Webparking\Logic4Client\PaginatedResponse(
-                            \$this->paginateRecords('{$uri}', \$parameters),
-                            \\$returnType::class,
-                        );
+                        \$iterator = \$this->paginateRecords('{$uri}', \$parameters);
+
+                        foreach (\$iterator as \$record) {
+                            yield \\$returnType::make(\$record);
+                        }
                         PHP
                 );
             } else {

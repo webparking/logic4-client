@@ -8,14 +8,14 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 
-class BackOffice extends Request
+class BackOfficeRequest extends Request
 {
     /**
      * Maak een nieuwe taak aan.
      *
      * @param array{
-     *     Type?: string,
-     *     SerializedJson?: string,
+     *     Type?: string|null,
+     *     SerializedJson?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

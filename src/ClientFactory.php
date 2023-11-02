@@ -16,6 +16,8 @@ class ClientFactory
 {
     private HandlerStack $handlerStack;
 
+    private static bool $preventStrayRequests = false;
+
     /** @param array<string, mixed> $options */
     public function __construct(
         private readonly AccessTokenManager $tokenManager,
@@ -25,8 +27,19 @@ class ClientFactory
         $this->setHandlerStack(HandlerStack::create());
     }
 
+    public static function preventStrayRequests(bool $prevent = true): void
+    {
+        self::$preventStrayRequests = true;
+    }
+
     public function make(): Client
     {
+        if (self::$preventStrayRequests) {
+            $this->handlerStack->unshift(Middleware::mapRequest(static function (): void {
+                throw new \RuntimeException('Attempting to make a request while stray requests are prevented.');
+            }));
+        }
+
         return new Client([
             'base_uri' => $this->baseUrl,
             ...$this->options,

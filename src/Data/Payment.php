@@ -24,14 +24,14 @@ class Payment
     public static function make(array $data): self
     {
         return new self(
-            orderId: $data['OrderId'],
-            invoiceId: $data['InvoiceId'],
-            amountIncl: $data['AmountIncl'],
-            description: $data['Description'],
-            bookingId: $data['BookingId'],
-            matchingLedgerId: $data['MatchingLedgerId'],
-            dateTime: $data['DateTime'] ? Carbon::parse($data['DateTime']) : null,
-            ledgerCode: $data['LedgerCode'],
+            orderId: $data['OrderId'] ?? null,
+            invoiceId: $data['InvoiceId'] ?? null,
+            amountIncl: $data['AmountIncl'] ?? 0.0,
+            description: $data['Description'] ?? '',
+            bookingId: $data['BookingId'] ?? 0,
+            matchingLedgerId: $data['MatchingLedgerId'] ?? 0,
+            dateTime: isset($data['DateTime']) ? Carbon::parse($data['DateTime']) : null,
+            ledgerCode: $data['LedgerCode'] ?? null,
         );
     }
 }

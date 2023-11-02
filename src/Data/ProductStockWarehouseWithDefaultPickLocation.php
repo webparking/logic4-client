@@ -20,12 +20,12 @@ class ProductStockWarehouseWithDefaultPickLocation
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            warehouseId: $data['WarehouseId'],
-            minimalStock: $data['MinimalStock'],
-            maximumStock: $data['MaximumStock'],
-            defaultPickLocationId: $data['DefaultPickLocationId'],
-            note: $data['Note'],
+            productId: $data['ProductId'] ?? 0,
+            warehouseId: $data['WarehouseId'] ?? 0,
+            minimalStock: $data['MinimalStock'] ?? 0.0,
+            maximumStock: $data['MaximumStock'] ?? null,
+            defaultPickLocationId: $data['DefaultPickLocationId'] ?? null,
+            note: $data['Note'] ?? null,
         );
     }
 }

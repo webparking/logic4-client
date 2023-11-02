@@ -20,12 +20,12 @@ class ProductStock
     public static function make(array $data): self
     {
         return new self(
-            productCode: $data['ProductCode'],
-            warehouseId: $data['WarehouseId'],
-            qtyReserved: $data['QtyReserved'],
-            freeStock: $data['FreeStock'],
-            productId: $data['ProductId'],
-            qty: $data['Qty'],
+            productCode: $data['ProductCode'] ?? null,
+            warehouseId: $data['WarehouseId'] ?? 0,
+            qtyReserved: $data['QtyReserved'] ?? 0.0,
+            freeStock: $data['FreeStock'] ?? 0.0,
+            productId: $data['ProductId'] ?? 0,
+            qty: $data['Qty'] ?? 0.0,
         );
     }
 }

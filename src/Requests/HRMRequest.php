@@ -8,7 +8,7 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\HRMTimeRegistrationRowListLogic4Response;
 
-class HRM extends Request
+class HRMRequest extends Request
 {
     /**
      * Voeg urenregistraties toe in batch.

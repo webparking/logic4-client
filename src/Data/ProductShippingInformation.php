@@ -24,16 +24,16 @@ class ProductShippingInformation
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            customsTariffnumber: $data['CustomsTariffnumber'],
-            productCode: $data['ProductCode'],
-            packagesDecimal: $data['PackagesDecimal'],
-            piecesOnPallet: $data['PiecesOnPallet'],
-            weight: $data['Weight'],
-            volume: $data['Volume'],
-            width: $data['Width'],
-            height: $data['Height'],
-            depth: $data['Depth'],
+            productId: $data['ProductId'] ?? 0,
+            customsTariffnumber: $data['CustomsTariffnumber'] ?? null,
+            productCode: $data['ProductCode'] ?? null,
+            packagesDecimal: $data['PackagesDecimal'] ?? null,
+            piecesOnPallet: $data['PiecesOnPallet'] ?? null,
+            weight: $data['Weight'] ?? 0.0,
+            volume: $data['Volume'] ?? 0.0,
+            width: $data['Width'] ?? 0.0,
+            height: $data['Height'] ?? 0.0,
+            depth: $data['Depth'] ?? 0.0,
         );
     }
 }

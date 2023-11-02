@@ -34,20 +34,20 @@ class GetRound
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            dateTimeCreated: $data['DateTimeCreated'] ? Carbon::parse($data['DateTimeCreated']) : null,
-            createdByUserId: $data['CreatedByUserId'],
-            itsIds: $data['ItsIds'],
-            orderIds: $data['OrderIds'],
-            typeId: $data['TypeId'],
-            description: $data['Description'],
-            memo: $data['Memo'],
-            dateTimePlanned: $data['DateTimePlanned'] ? Carbon::parse($data['DateTimePlanned']) : null,
-            vehicleId: $data['VehicleId'],
-            driverId: $data['DriverId'],
-            coDriverId: $data['CoDriverId'],
-            statusId: $data['StatusId'],
-            hideInSystem: $data['HideInSystem'],
+            id: $data['Id'] ?? 0,
+            dateTimeCreated: isset($data['DateTimeCreated']) ? Carbon::parse($data['DateTimeCreated']) : null,
+            createdByUserId: $data['CreatedByUserId'] ?? 0,
+            itsIds: $data['ItsIds'] ?? null,
+            orderIds: $data['OrderIds'] ?? null,
+            typeId: $data['TypeId'] ?? 0,
+            description: $data['Description'] ?? null,
+            memo: $data['Memo'] ?? null,
+            dateTimePlanned: isset($data['DateTimePlanned']) ? Carbon::parse($data['DateTimePlanned']) : null,
+            vehicleId: $data['VehicleId'] ?? null,
+            driverId: $data['DriverId'] ?? null,
+            coDriverId: $data['CoDriverId'] ?? null,
+            statusId: $data['StatusId'] ?? 0,
+            hideInSystem: $data['HideInSystem'] ?? false,
         );
     }
 }
