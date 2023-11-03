@@ -50,6 +50,7 @@ class Generator
                 'post' => $pathItem->post,
                 'patch' => $pathItem->patch,
                 'put' => $pathItem->put,
+                'delete' => $pathItem->delete,
             ];
 
             foreach ($methods as $method => $operation) {
