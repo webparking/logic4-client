@@ -39,6 +39,26 @@ class RequestClassGenerator
             ->addMethod(lcfirst($action))
             ->setReturnType($returnType);
 
+        $requestParameters = [];
+        foreach ($operation->parameters as $parameter) {
+            if ('query' !== $parameter->in) {
+                continue;
+            }
+
+            $parameterType = match ($parameter->schema->type) {
+                'integer' => 'int',
+                'number' => 'float',
+                'boolean' => 'bool',
+                default => $parameter->schema->type,
+            };
+
+            $method
+                ->addParameter($parameter->name)
+                ->setType($parameterType);
+
+            $requestParameters['query'][$parameter->name] = sprintf('{$%s}', $parameter->name);
+        }
+
         if ($requestProperties) {
             $method->addParameter('parameters')
                 ->setType('array')
@@ -46,12 +66,16 @@ class RequestClassGenerator
 
             $method
                 ->addComment("@param array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n} \$parameters");
+
+            $parameterType = 'get' === $httpMethod ? 'query' : 'json';
+            $requestParameters[$parameterType] = '{$parameters}';
         }
 
         $method->addComment("\n@throws Logic4ApiException");
 
-        $type = 'get' === $httpMethod ? 'query' : 'json';
-        $parametersPhp = $requestProperties ? ", ['$type' => \$parameters]" : '';
+        $parametersPhp = $requestParameters
+            ? ', '.preg_replace('/\'\{\$(.*)\}\'/', '\$$1', var_export($requestParameters, true))
+            : '';
 
         $returnType = match ($returnType) {
             'integer' => 'int',

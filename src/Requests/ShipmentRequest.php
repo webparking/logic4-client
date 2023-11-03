@@ -66,11 +66,11 @@ class ShipmentRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteShipmentForInvoiceOrOrder(): BooleanLogic4Response
+    public function deleteShipmentForInvoiceOrOrder(int $id): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->delete('/v1/Shipments/DeleteShipmentForInvoiceOrOrder'),
+                $this->getClient()->delete('/v1/Shipments/DeleteShipmentForInvoiceOrOrder', ['query' => ['id' => $id]]),
             )
         );
     }
