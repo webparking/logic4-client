@@ -69,6 +69,34 @@ class RoundRequest extends Request
     }
 
     /**
+     * Verwijder een rit. De response geeft 'true' terug als de actie is geslaagd.
+     *
+     * @throws Logic4ApiException
+     */
+    public function deleteRound(): BooleanLogic4Response
+    {
+        return BooleanLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1/Round/DeleteRound'),
+            )
+        );
+    }
+
+    /**
+     * Verwijder één rit regel. Hierbij wordt ook de status historie van deze regel verwijderd.
+     *
+     * @throws Logic4ApiException
+     */
+    public function deleteRoundOrder(): BooleanLogic4Response
+    {
+        return BooleanLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1/Round/DeleteRoundOrder'),
+            )
+        );
+    }
+
+    /**
      * Haal rit regels op voor een bepaalde rit. Het is verplicht om een rit Id op te geven.
      * Het maximaal aantal regels dat wordt teruggegeven is 1000.
      * Om meer regels op te halen dien je gebruik te maken van de skip/take filtering.

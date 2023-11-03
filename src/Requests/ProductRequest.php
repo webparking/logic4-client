@@ -115,6 +115,18 @@ class ProductRequest extends Request
     }
 
     /**
+     * @throws Logic4ApiException
+     */
+    public function deleteProductImage(): Int32Logic4Response
+    {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1.1/Products/DeleteProductImage'),
+            )
+        );
+    }
+
+    /**
      * Verkrijg barcodes met aantallen o.b.v. een filter met artikel Id's.
      *
      * @throws Logic4ApiException
@@ -531,6 +543,23 @@ class ProductRequest extends Request
         return ProductUnitLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.1/Products/GetUnits'),
+            )
+        );
+    }
+
+    /**
+     * @param array{
+     *     SupplierId?: integer|null,
+     *     ProductId?: integer|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function removeProductSupplier(array $parameters = []): Int32Logic4Response
+    {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1.1/Products/RemoveProductSupplier', ['json' => $parameters]),
             )
         );
     }

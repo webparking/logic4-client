@@ -62,6 +62,20 @@ class ShipmentRequest extends Request
     }
 
     /**
+     * Verzending verwijderen voor een order of factuur, specificeer met het ID van de verzending. De verzending moet bestaan.
+     *
+     * @throws Logic4ApiException
+     */
+    public function deleteShipmentForInvoiceOrOrder(): BooleanLogic4Response
+    {
+        return BooleanLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1/Shipments/DeleteShipmentForInvoiceOrOrder'),
+            )
+        );
+    }
+
+    /**
      * Verzendingen van een order of factuur ophalen voor het opgestuurde nummer.
      *
      * @throws Logic4ApiException
