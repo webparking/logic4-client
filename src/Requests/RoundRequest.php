@@ -73,11 +73,11 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteRound(): BooleanLogic4Response
+    public function deleteRound(int $roundId): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->delete('/v1/Round/DeleteRound'),
+                $this->getClient()->delete('/v1/Round/DeleteRound', ['query' => ['roundId' => $roundId]]),
             )
         );
     }
@@ -87,11 +87,11 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteRoundOrder(): BooleanLogic4Response
+    public function deleteRoundOrder(int $roundOrderId): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->delete('/v1/Round/DeleteRoundOrder'),
+                $this->getClient()->delete('/v1/Round/DeleteRoundOrder', ['query' => ['roundOrderId' => $roundOrderId]]),
             )
         );
     }

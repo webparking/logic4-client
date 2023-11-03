@@ -117,11 +117,13 @@ class ProductRequest extends Request
     /**
      * @throws Logic4ApiException
      */
-    public function deleteProductImage(): Int32Logic4Response
-    {
+    public function deleteProductImage(
+        int $productid,
+        int $imageid,
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
-                $this->getClient()->delete('/v1.1/Products/DeleteProductImage'),
+                $this->getClient()->delete('/v1.1/Products/DeleteProductImage', ['query' => ['productid' => $productid, 'imageid' => $imageid]]),
             )
         );
     }
