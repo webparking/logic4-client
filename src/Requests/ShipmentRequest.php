@@ -80,11 +80,12 @@ class ShipmentRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getShipmentsForInvoiceOrOrder(): OrderShipmentLogic4ResponseList
-    {
+    public function getShipmentsForInvoiceOrOrder(
+        int $value,
+    ): OrderShipmentLogic4ResponseList {
         return OrderShipmentLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Shipments/GetShipmentsForInvoiceOrOrder'),
+                $this->getClient()->post('/v1/Shipments/GetShipmentsForInvoiceOrOrder', ['json' => $value]),
             )
         );
     }

@@ -131,13 +131,16 @@ class ProductRequest extends Request
     /**
      * Verkrijg barcodes met aantallen o.b.v. een filter met artikel Id's.
      *
+     * @param array<integer> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function getBarcodesForProductIds(): ProductBarcodeLogic4ResponseList
-    {
+    public function getBarcodesForProductIds(
+        array $parameters = [],
+    ): ProductBarcodeLogic4ResponseList {
         return ProductBarcodeLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetBarcodesForProductIds'),
+                $this->getClient()->post('/v1.1/Products/GetBarcodesForProductIds', ['json' => $parameters]),
             )
         );
     }
@@ -157,13 +160,16 @@ class ProductRequest extends Request
     /**
      * Verkrijg basisinformatie van artikelen op basis van artikel Id's.
      *
+     * @param array<integer> $parameters
+     *
      * @throws Logic4ApiException
      */
     public function getBasicProductDataForProducts(
+        array $parameters = [],
     ): BasicProductDataLogic4ResponseList {
         return BasicProductDataLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetBasicProductDataForProducts'),
+                $this->getClient()->post('/v1.1/Products/GetBasicProductDataForProducts', ['json' => $parameters]),
             )
         );
     }
@@ -195,10 +201,11 @@ class ProductRequest extends Request
      * @throws Logic4ApiException
      */
     public function getComposedProductComposition(
+        int $value,
     ): ProductCompositionItemLogic4ResponseList {
         return ProductCompositionItemLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetComposedProductComposition'),
+                $this->getClient()->post('/v1.1/Products/GetComposedProductComposition', ['json' => $value]),
             )
         );
     }
@@ -229,10 +236,11 @@ class ProductRequest extends Request
      * @throws Logic4ApiException
      */
     public function getProductAssemblyRecipe(
+        int $value,
     ): ProductAssemblyRecipeItemLogic4ResponseList {
         return ProductAssemblyRecipeItemLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetProductAssemblyRecipe'),
+                $this->getClient()->post('/v1.1/Products/GetProductAssemblyRecipe', ['json' => $value]),
             )
         );
     }
@@ -526,11 +534,12 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getSuppliersForProduct(): ProductSupplierLogic4ResponseList
-    {
+    public function getSuppliersForProduct(
+        int $value,
+    ): ProductSupplierLogic4ResponseList {
         return ProductSupplierLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetSuppliersForProduct'),
+                $this->getClient()->post('/v1.1/Products/GetSuppliersForProduct', ['json' => $value]),
             )
         );
     }

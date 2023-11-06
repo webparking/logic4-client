@@ -13,13 +13,30 @@ class HRMRequest extends Request
     /**
      * Voeg urenregistraties toe in batch.
      *
+     * @param array<array{
+     *     UserId?: integer|null,
+     *     PeriodId?: integer|null,
+     *     Date?: string|null,
+     *     ActivityId?: integer|null,
+     *     ITSTaskId?: integer|null,
+     *     CRMProjectId?: integer|null,
+     *     ITSIssueId?: integer|null,
+     *     Description?: string|null,
+     *     Minutes?: integer|null,
+     *     CreatePeriod?: boolean|null,
+     *     PeriodeStatusId?: integer|null,
+     *     RowIsAddedToPeriod?: boolean|null,
+     *     Exception?: string|null,
+     * }> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function addTimeRegistrations(): HRMTimeRegistrationRowListLogic4Response
-    {
+    public function addTimeRegistrations(
+        array $parameters = [],
+    ): HRMTimeRegistrationRowListLogic4Response {
         return HRMTimeRegistrationRowListLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/HRM/AddTimeRegistrations'),
+                $this->getClient()->post('/v1/HRM/AddTimeRegistrations', ['json' => $parameters]),
             )
         );
     }

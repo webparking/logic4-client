@@ -44,11 +44,11 @@ class UserRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateNotice(): StringLogic4Response
+    public function updateNotice(mixed $value): StringLogic4Response
     {
         return StringLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/User/UpdateNotice'),
+                $this->getClient()->post('/v1/User/UpdateNotice', ['json' => $value]),
             )
         );
     }

@@ -6,6 +6,7 @@ namespace Webparking\Logic4Client\Generator;
 
 use cebe\openapi\spec\Operation;
 use cebe\openapi\spec\Reference;
+use cebe\openapi\spec\Schema;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\PhpNamespace;
@@ -29,10 +30,7 @@ class RequestClassGenerator
     public function addMethod(string $httpMethod, string $uri, Operation $operation, string $returnType = null, bool $paginated = false): Method
     {
         $action = last(explode('/', ltrim($uri, '/')));
-        $requestProperties = $operation->requestBody?->content['application/json']?->schema;
-        $requestProperties = $requestProperties instanceof Reference
-            ? $requestProperties->resolve()?->properties ?? []
-            : $requestProperties?->properties ?? [];
+        $requestSchema = $operation->requestBody?->content['application/json']?->schema;
 
         $method = $this
             ->class
@@ -45,12 +43,7 @@ class RequestClassGenerator
                 continue;
             }
 
-            $parameterType = match ($parameter->schema->type) {
-                'integer' => 'int',
-                'number' => 'float',
-                'boolean' => 'bool',
-                default => $parameter->schema->type,
-            };
+            $parameterType = Helpers::phpType($parameter->schema->type, $parameter->schema->type);
 
             $method
                 ->addParameter($parameter->name)
@@ -59,16 +52,37 @@ class RequestClassGenerator
             $requestParameters['query'][$parameter->name] = sprintf('{$%s}', $parameter->name);
         }
 
-        if ($requestProperties) {
+        if ($requestSchema instanceof Reference
+            || 'array' === $requestSchema?->type
+        ) {
+            if ($requestSchema instanceof Reference) {
+                $requestProperties = $requestSchema->resolve()?->properties ?? [];
+                $parameterDoc = "array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n}";
+            } else {
+                if ($requestSchema->items instanceof Schema) {
+                    $parameterDoc = "array<{$requestSchema->items->type}>";
+                } else {
+                    $requestProperties = $requestSchema->items->resolve()->properties;
+
+                    $parameterDoc = "array<array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n}>";
+                }
+            }
+
             $method->addParameter('parameters')
                 ->setType('array')
                 ->setDefaultValue([]);
 
             $method
-                ->addComment("@param array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n} \$parameters");
+                ->addComment("@param $parameterDoc \$parameters");
 
             $parameterType = 'get' === $httpMethod ? 'query' : 'json';
             $requestParameters[$parameterType] = '{$parameters}';
+        } elseif (null !== $requestSchema?->type) {
+            $method->addParameter('value')
+                ->setType(Helpers::phpType($requestSchema?->type));
+
+            $parameterType = 'get' === $httpMethod ? 'query' : 'json';
+            $requestParameters[$parameterType] = '{$value}';
         }
 
         $method->addComment("\n@throws Logic4ApiException");
@@ -77,12 +91,7 @@ class RequestClassGenerator
             ? ', '.preg_replace('/\'\{\$(.*)\}\'/', '\$$1', var_export($requestParameters, true))
             : '';
 
-        $returnType = match ($returnType) {
-            'integer' => 'int',
-            'number' => 'float',
-            'boolean' => 'bool',
-            default => $returnType ?? 'mixed',
-        };
+        $returnType = Helpers::phpType($returnType, $returnType ?? 'mixed');
 
         if ($paginated && class_exists($returnType)) {
             $method->setReturnType(\Generator::class);

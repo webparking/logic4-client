@@ -229,11 +229,11 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function createAndProcessInvoiceForOrder(): Int32Logic4Response
+    public function createAndProcessInvoiceForOrder(int $value): Int32Logic4Response
     {
         return Int32Logic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Orders/CreateAndProcessInvoiceForOrder'),
+                $this->getClient()->post('/v1/Orders/CreateAndProcessInvoiceForOrder', ['json' => $value]),
             )
         );
     }
@@ -645,13 +645,19 @@ class OrderRequest extends Request
     /**
      * Voorzie orderregels met een afgesproken afleverdatum.
      *
+     * @param array<array{
+     *     RowId?: integer|null,
+     *     AgreedDeliveryDate?: string|null,
+     * }> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function updateAgreedDeliveryDatesForOrderRows(): BooleanLogic4Response
-    {
+    public function updateAgreedDeliveryDatesForOrderRows(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Orders/UpdateAgreedDeliveryDatesForOrderRows'),
+                $this->getClient()->post('/v1/Orders/UpdateAgreedDeliveryDatesForOrderRows', ['json' => $parameters]),
             )
         );
     }

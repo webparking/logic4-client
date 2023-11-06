@@ -86,10 +86,11 @@ class WebshopRequest extends Request
      * @throws Logic4ApiException
      */
     public function deleteWebshopUserProductOnWebshopUserProductList(
+        int $value,
     ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Webshop/DeleteWebshopUserProductOnWebshopUserProductList'),
+                $this->getClient()->post('/v1/Webshop/DeleteWebshopUserProductOnWebshopUserProductList', ['json' => $value]),
             )
         );
     }

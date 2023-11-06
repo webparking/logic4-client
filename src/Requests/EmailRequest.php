@@ -39,13 +39,22 @@ class EmailRequest extends Request
     }
 
     /**
+     * @param array<array{
+     *     Id?: integer|null,
+     *     EmailMessageId?: integer|null,
+     *     Name?: string|null,
+     *     ContentId?: string|null,
+     *     IsEmbeddedContent?: boolean|null,
+     * }> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function addEmailAttachments(): EmailAttachmentLogic4ResponseList
-    {
+    public function addEmailAttachments(
+        array $parameters = [],
+    ): EmailAttachmentLogic4ResponseList {
         return EmailAttachmentLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Email/AddEmailAttachments'),
+                $this->getClient()->post('/v1/Email/AddEmailAttachments', ['json' => $parameters]),
             )
         );
     }
@@ -110,11 +119,11 @@ class EmailRequest extends Request
     /**
      * @throws Logic4ApiException
      */
-    public function deleteEmailAttachment(): BooleanLogic4Response
+    public function deleteEmailAttachment(int $value): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Email/DeleteEmailAttachment'),
+                $this->getClient()->post('/v1/Email/DeleteEmailAttachment', ['json' => $value]),
             )
         );
     }
@@ -124,11 +133,11 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteEmailBox(): BooleanLogic4Response
+    public function deleteEmailBox(int $value): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Email/DeleteEmailBox'),
+                $this->getClient()->post('/v1/Email/DeleteEmailBox', ['json' => $value]),
             )
         );
     }
@@ -136,11 +145,11 @@ class EmailRequest extends Request
     /**
      * @throws Logic4ApiException
      */
-    public function deleteEmailMessage(): BooleanLogic4Response
+    public function deleteEmailMessage(int $value): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Email/DeleteEmailMessage'),
+                $this->getClient()->post('/v1/Email/DeleteEmailMessage', ['json' => $value]),
             )
         );
     }
