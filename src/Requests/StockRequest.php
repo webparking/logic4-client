@@ -55,13 +55,24 @@ class StockRequest extends Request
     /**
      * Alleen wanneer in een magazijn een reserveerlocatie is gedefinieerd kunnen tot maximaal 100 mutaties worden uitgevoerd.
      *
+     * @param array<array{
+     *     PickbonId?: integer|null,
+     *     OrderRowId?: integer|null,
+     *     Amount?: number|null,
+     *     Timestamp?: string|null,
+     *     Remarks?: string|null,
+     *     StockLocationId?: integer|null,
+     *     StockMutationTypeId?: integer|null,
+     * }> $parameters
+     *
      * @throws Logic4ApiException
      */
     public function createProductStockMutationToReservationLocation(
+        array $parameters = [],
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Stock/CreateProductStockMutationToReservationLocation'),
+                $this->getClient()->post('/v1/Stock/CreateProductStockMutationToReservationLocation', ['json' => $parameters]),
             )
         );
     }
@@ -116,13 +127,16 @@ class StockRequest extends Request
     /**
      * Verkrijg minimale voorraad aantallen voor meerdere artikelen.
      *
+     * @param array<integer> $parameters
+     *
      * @throws Logic4ApiException
      */
     public function getMinimalStockNumbersForProducts(
+        array $parameters = [],
     ): ProductMinimalStockNumberLogic4ResponseList {
         return ProductMinimalStockNumberLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Stock/GetMinimalStockNumbersForProducts'),
+                $this->getClient()->post('/v1/Stock/GetMinimalStockNumbersForProducts', ['json' => $parameters]),
             )
         );
     }
@@ -236,11 +250,12 @@ class StockRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getStockControlHead(): ProductStockControlHeadLogic4Response
-    {
+    public function getStockControlHead(
+        int $value,
+    ): ProductStockControlHeadLogic4Response {
         return ProductStockControlHeadLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Stock/GetStockControlHead'),
+                $this->getClient()->post('/v1/Stock/GetStockControlHead', ['json' => $value]),
             )
         );
     }
@@ -320,10 +335,11 @@ class StockRequest extends Request
      * @throws Logic4ApiException
      */
     public function getStockLocationsForProduct(
+        int $value,
     ): ProductStockLocationsLogic4ResponseList {
         return ProductStockLocationsLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Stock/GetStockLocationsForProduct'),
+                $this->getClient()->post('/v1/Stock/GetStockLocationsForProduct', ['json' => $value]),
             )
         );
     }
@@ -355,11 +371,12 @@ class StockRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getWarehousesForAdministration(): WareHouseLogic4ResponseList
-    {
+    public function getWarehousesForAdministration(
+        int $value,
+    ): WareHouseLogic4ResponseList {
         return WareHouseLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Stock/GetWarehousesForAdministration'),
+                $this->getClient()->post('/v1/Stock/GetWarehousesForAdministration', ['json' => $value]),
             )
         );
     }
@@ -370,10 +387,11 @@ class StockRequest extends Request
      * @throws Logic4ApiException
      */
     public function getWarehousesStockLocationsForAdministration(
+        int $value,
     ): WarehouseStockLocationLogic4ResponseList {
         return WarehouseStockLocationLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Stock/GetWarehousesStockLocationsForAdministration'),
+                $this->getClient()->post('/v1/Stock/GetWarehousesStockLocationsForAdministration', ['json' => $value]),
             )
         );
     }
@@ -427,13 +445,20 @@ class StockRequest extends Request
     /**
      * Voeg eerstvolgende leverdata van leveranciers toe voor één of meer artikelen (max 100 per request).
      *
+     * @param array<array{
+     *     ProductId?: integer|null,
+     *     SupplierId?: integer|null,
+     *     DeliveryDate?: string|null,
+     * }> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function setNextDeliveriesDatesForActiveSuppliers(): BooleanLogic4Response
-    {
+    public function setNextDeliveriesDatesForActiveSuppliers(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Stock/SetNextDeliveriesDatesForActiveSuppliers'),
+                $this->getClient()->post('/v1/Stock/SetNextDeliveriesDatesForActiveSuppliers', ['json' => $parameters]),
             )
         );
     }
@@ -441,13 +466,20 @@ class StockRequest extends Request
     /**
      * Verander de standaard picklocatie van artikelen naar een andere voorraad locatie.
      *
+     * @param array<array{
+     *     ProductId?: integer|null,
+     *     WarehouseStockLocationId?: integer|null,
+     *     WarehouseId?: integer|null,
+     * }> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function updateDefaultPickLocations(): BooleanLogic4Response
-    {
+    public function updateDefaultPickLocations(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Stock/UpdateDefaultPickLocations'),
+                $this->getClient()->post('/v1.1/Stock/UpdateDefaultPickLocations', ['json' => $parameters]),
             )
         );
     }

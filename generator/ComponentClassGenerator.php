@@ -44,12 +44,7 @@ class ComponentClassGenerator
                     $type = $this->resolve($parameter->getReference(), 'Data');
                     $typedParameters[$parameterName] = $type;
                 } else {
-                    $type = match ($parameter->type) {
-                        'integer' => 'int',
-                        'number' => 'float',
-                        'boolean' => 'bool',
-                        default => $parameter->type,
-                    };
+                    $type = Helpers::phpType($parameter->type, $parameter->type);
 
                     if ('string' === $parameter->type && 'date-time' === $parameter->format) {
                         $type = Carbon::class;

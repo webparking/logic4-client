@@ -79,4 +79,14 @@ class Helpers
 
         return $parameters;
     }
+
+    public static function phpType(mixed $type, string $default = 'mixed'): string
+    {
+        return match ($type) {
+            'integer' => 'int',
+            'number' => 'float',
+            'boolean' => 'bool',
+            default => $default,
+        };
+    }
 }

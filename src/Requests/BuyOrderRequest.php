@@ -117,11 +117,11 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getBuyOrderRows(): BuyOrderRowLogic4ResponseList
+    public function getBuyOrderRows(int $value): BuyOrderRowLogic4ResponseList
     {
         return BuyOrderRowLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/BuyOrders/GetBuyOrderRows'),
+                $this->getClient()->post('/v1/BuyOrders/GetBuyOrderRows', ['json' => $value]),
             )
         );
     }
