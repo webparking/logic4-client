@@ -16,8 +16,8 @@ class ProductExtraBarcode
     public static function make(array $data): self
     {
         return new self(
-            barcode: $data['Barcode'],
-            qty: $data['Qty'],
+            barcode: $data['Barcode'] ?? null,
+            qty: $data['Qty'] ?? 0,
         );
     }
 }

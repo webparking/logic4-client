@@ -17,9 +17,9 @@ class WebshopOrderlistProduct
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            typeId: $data['TypeId'],
-            qty: $data['Qty'],
+            productId: $data['ProductId'] ?? 0,
+            typeId: $data['TypeId'] ?? null,
+            qty: $data['Qty'] ?? null,
         );
     }
 }

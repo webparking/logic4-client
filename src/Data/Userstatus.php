@@ -26,16 +26,16 @@ class Userstatus
     public static function make(array $data): self
     {
         return new self(
-            userName: $data['UserName'],
-            statusDateTimeSince: $data['StatusDateTimeSince'] ? Carbon::parse($data['StatusDateTimeSince']) : null,
-            statusId: $data['StatusId'],
-            isAutoAwayStatus: $data['IsAutoAwayStatus'],
-            isOfflineStatus: $data['IsOfflineStatus'],
-            isOnlineStatus: $data['IsOnlineStatus'],
-            isOnThePhoneStatus: $data['IsOnThePhoneStatus'],
-            statusName: $data['StatusName'],
-            statusNotes: $data['StatusNotes'],
-            userId: $data['UserId'],
+            userName: $data['UserName'] ?? null,
+            statusDateTimeSince: isset($data['StatusDateTimeSince']) ? Carbon::parse($data['StatusDateTimeSince']) : null,
+            statusId: $data['StatusId'] ?? 0,
+            isAutoAwayStatus: $data['IsAutoAwayStatus'] ?? false,
+            isOfflineStatus: $data['IsOfflineStatus'] ?? false,
+            isOnlineStatus: $data['IsOnlineStatus'] ?? false,
+            isOnThePhoneStatus: $data['IsOnThePhoneStatus'] ?? false,
+            statusName: $data['StatusName'] ?? null,
+            statusNotes: $data['StatusNotes'] ?? null,
+            userId: $data['UserId'] ?? 0,
         );
     }
 }

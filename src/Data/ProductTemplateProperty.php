@@ -20,11 +20,11 @@ class ProductTemplateProperty
     public static function make(array $data): self
     {
         return new self(
-            templatePropertyId: $data['TemplatePropertyId'],
-            name: $data['Name'],
-            unit: $data['Unit'],
-            remark: $data['Remark'],
-            values: $data['Values'],
+            templatePropertyId: $data['TemplatePropertyId'] ?? 0,
+            name: $data['Name'] ?? null,
+            unit: $data['Unit'] ?? null,
+            remark: $data['Remark'] ?? null,
+            values: $data['Values'] ?? null,
         );
     }
 }

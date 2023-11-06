@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\Brand;
+use Webparking\Logic4Client\Data\Product;
 use Webparking\Logic4Client\Data\ProductSEOInformation;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BasicProductDataLogic4ResponseList;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
@@ -29,55 +29,55 @@ use Webparking\Logic4Client\Responses\ProductSupplierLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductUnitLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductWithRelatedProductsLogic4ResponseList;
 
-class Product extends Request
+class ProductRequest extends Request
 {
     /**
      * @param array{
-     *     ProductCode?: string,
-     *     ProductDescription1?: string,
-     *     ProductDescription2?: string,
-     *     BrandId?: integer,
-     *     ProductGroup1?: integer,
-     *     ProductGroup2?: integer,
-     *     ProductGroup3?: integer,
-     *     ProductGroup4?: integer,
-     *     UnitId?: integer,
-     *     Suppliers?: array<mixed>,
-     *     Barcode1?: string,
-     *     Barcode2?: string,
-     *     ExtraBarcodes?: array<mixed>,
-     *     VendorCode?: string,
-     *     StatusId?: integer,
-     *     VisibleOnWebshopFrom?: string,
-     *     ExpirationDateOnWebshop?: string,
-     *     WarrantyMonths?: integer,
-     *     SortId?: integer,
-     *     InternalNote?: string,
-     *     ProductInfo?: string,
-     *     Tags?: string,
-     *     USPDescription?: string,
-     *     MetaDescription?: string,
-     *     SellPriceAdviceEx?: number,
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
-     *     FreeValue4?: string,
-     *     FreeValue5?: string,
-     *     ProductPrices?: array<mixed>,
-     *     WeightSingleProduct?: number,
-     *     HeightSingleProduct?: number,
-     *     WidthSingleProduct?: number,
-     *     DepthSingleProduct?: number,
-     *     WeightInsidePackage?: number,
-     *     HeightInsidePackage?: number,
-     *     WidthInsidePackage?: number,
-     *     DepthInsidePackage?: number,
-     *     WeightOutsidePackage?: number,
-     *     HeightOutsidePackage?: number,
-     *     WidthOutsidePackage?: number,
-     *     DepthOutsidePackage?: number,
-     *     MinStockCount?: integer,
-     *     MaxStockCount?: integer,
+     *     ProductCode?: string|null,
+     *     ProductDescription1?: string|null,
+     *     ProductDescription2?: string|null,
+     *     BrandId?: integer|null,
+     *     ProductGroup1?: integer|null,
+     *     ProductGroup2?: integer|null,
+     *     ProductGroup3?: integer|null,
+     *     ProductGroup4?: integer|null,
+     *     UnitId?: integer|null,
+     *     Suppliers?: array<mixed>|null,
+     *     Barcode1?: string|null,
+     *     Barcode2?: string|null,
+     *     ExtraBarcodes?: array<mixed>|null,
+     *     VendorCode?: string|null,
+     *     StatusId?: integer|null,
+     *     VisibleOnWebshopFrom?: string|null,
+     *     ExpirationDateOnWebshop?: string|null,
+     *     WarrantyMonths?: integer|null,
+     *     SortId?: integer|null,
+     *     InternalNote?: string|null,
+     *     ProductInfo?: string|null,
+     *     Tags?: string|null,
+     *     USPDescription?: string|null,
+     *     MetaDescription?: string|null,
+     *     SellPriceAdviceEx?: number|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     FreeValue4?: string|null,
+     *     FreeValue5?: string|null,
+     *     ProductPrices?: array<mixed>|null,
+     *     WeightSingleProduct?: number|null,
+     *     HeightSingleProduct?: number|null,
+     *     WidthSingleProduct?: number|null,
+     *     DepthSingleProduct?: number|null,
+     *     WeightInsidePackage?: number|null,
+     *     HeightInsidePackage?: number|null,
+     *     WidthInsidePackage?: number|null,
+     *     DepthInsidePackage?: number|null,
+     *     WeightOutsidePackage?: number|null,
+     *     HeightOutsidePackage?: number|null,
+     *     WidthOutsidePackage?: number|null,
+     *     DepthOutsidePackage?: number|null,
+     *     MinStockCount?: integer|null,
+     *     MaxStockCount?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -96,11 +96,11 @@ class Product extends Request
      * - Return waarde is een AfbeeldingId als de opdracht is geslaagd.
      *
      * @param array{
-     *     ImageBase64String?: string,
-     *     ProductId?: integer,
-     *     ImageName?: string,
-     *     ImageId?: integer,
-     *     SortId?: integer,
+     *     ImageBase64String?: string|null,
+     *     ProductId?: integer|null,
+     *     ImageName?: string|null,
+     *     ImageId?: integer|null,
+     *     SortId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -115,15 +115,32 @@ class Product extends Request
     }
 
     /**
+     * @throws Logic4ApiException
+     */
+    public function deleteProductImage(
+        int $productid,
+        int $imageid,
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1.1/Products/DeleteProductImage', ['query' => ['productid' => $productid, 'imageid' => $imageid]]),
+            )
+        );
+    }
+
+    /**
      * Verkrijg barcodes met aantallen o.b.v. een filter met artikel Id's.
+     *
+     * @param array<integer> $parameters
      *
      * @throws Logic4ApiException
      */
-    public function getBarcodesForProductIds(): ProductBarcodeLogic4ResponseList
-    {
+    public function getBarcodesForProductIds(
+        array $parameters = [],
+    ): ProductBarcodeLogic4ResponseList {
         return ProductBarcodeLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetBarcodesForProductIds'),
+                $this->getClient()->post('/v1.1/Products/GetBarcodesForProductIds', ['json' => $parameters]),
             )
         );
     }
@@ -143,13 +160,16 @@ class Product extends Request
     /**
      * Verkrijg basisinformatie van artikelen op basis van artikel Id's.
      *
+     * @param array<integer> $parameters
+     *
      * @throws Logic4ApiException
      */
     public function getBasicProductDataForProducts(
+        array $parameters = [],
     ): BasicProductDataLogic4ResponseList {
         return BasicProductDataLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetBasicProductDataForProducts'),
+                $this->getClient()->post('/v1.1/Products/GetBasicProductDataForProducts', ['json' => $parameters]),
             )
         );
     }
@@ -158,20 +178,21 @@ class Product extends Request
      * Haal merken op o.b.v. het filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<Brand>
+     * @return \Generator<array-key, Brand>
      *
      * @throws Logic4ApiException
      */
-    public function getBrands(array $parameters = []): PaginatedResponse
+    public function getBrands(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.2/Products/GetBrands', $parameters),
-            Brand::class,
-        );
+        $iterator = $this->paginateRecords('/v1.2/Products/GetBrands', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Brand::make($record);
+        }
     }
 
     /**
@@ -180,10 +201,11 @@ class Product extends Request
      * @throws Logic4ApiException
      */
     public function getComposedProductComposition(
+        int $value,
     ): ProductCompositionItemLogic4ResponseList {
         return ProductCompositionItemLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetComposedProductComposition'),
+                $this->getClient()->post('/v1.1/Products/GetComposedProductComposition', ['json' => $value]),
             )
         );
     }
@@ -192,8 +214,8 @@ class Product extends Request
      * Verkrijg actuele prijzen voor een specifieke debiteur.
      *
      * @param array{
-     *     ProductCode?: string,
-     *     DebtorId?: integer,
+     *     ProductCode?: string|null,
+     *     DebtorId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -214,10 +236,11 @@ class Product extends Request
      * @throws Logic4ApiException
      */
     public function getProductAssemblyRecipe(
+        int $value,
     ): ProductAssemblyRecipeItemLogic4ResponseList {
         return ProductAssemblyRecipeItemLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetProductAssemblyRecipe'),
+                $this->getClient()->post('/v1.1/Products/GetProductAssemblyRecipe', ['json' => $value]),
             )
         );
     }
@@ -226,8 +249,8 @@ class Product extends Request
      * Verkrijg productcodes o.b.v. leverancier productcodes (maximaal 10000).
      *
      * @param array{
-     *     SupplierId?: integer,
-     *     SupplierCodes?: array<string>,
+     *     SupplierId?: integer|null,
+     *     SupplierCodes?: array<string>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -246,7 +269,7 @@ class Product extends Request
      * Verkrijg de afmetingen van een product.
      *
      * @param array{
-     *     ProductId?: integer,
+     *     ProductId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -263,7 +286,7 @@ class Product extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<integer>,
+     *     ProductIds?: array<integer>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -282,9 +305,9 @@ class Product extends Request
      * Haal ID's op van voorraadlocaties voor een bepaald product in een bepaald magazijn.
      *
      * @param array{
-     *     ProductIds?: array<integer>,
-     *     WarehouseId?: integer,
-     *     SystemDefaultPickLocation?: boolean,
+     *     ProductIds?: array<integer>|null,
+     *     WarehouseId?: integer|null,
+     *     SystemDefaultPickLocation?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -303,9 +326,9 @@ class Product extends Request
      * Verkrijg geschreven reviews op basis van het opgestuurde filter.
      *
      * @param array{
-     *     WebsiteDomainId?: integer,
-     *     DateTimeCreatedFrom?: string,
-     *     DateTimeCreatedTo?: string,
+     *     WebsiteDomainId?: integer|null,
+     *     DateTimeCreatedFrom?: string|null,
+     *     DateTimeCreatedTo?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -324,63 +347,64 @@ class Product extends Request
      * Verkrijg artikelen o.b.v. het meegestuurde filter. Het aantal op te vragen artikelen is gelimiteerd tot 10000.
      *
      * @param array{
-     *     DateTimeChangedFrom?: string,
-     *     DateTimeChangedTo?: string,
-     *     IsVisibleInLogic4?: boolean,
-     *     IsVisibleOnWebShop?: boolean,
-     *     AllShowOnWebsite?: boolean,
-     *     ProductGroupId?: integer,
-     *     UseChildProductGroups?: boolean,
-     *     ProductCode?: string,
-     *     Barcode?: string,
-     *     Barcodes?: array<string>,
-     *     DebtorId?: integer,
-     *     WebshopUserId?: integer,
-     *     WebshopPriceListId?: integer,
-     *     UseDropShipmentAmountsForWebshopPrices?: boolean,
-     *     ProductIds?: array<integer>,
-     *     ProductFilterListChoice?: string,
-     *     ProductHistoryBasedOnInvoices?: boolean,
-     *     WebshopUserOrderlistProductType?: integer,
-     *     ActiveOffers?: boolean,
-     *     OfferGroupId?: integer,
-     *     FastSearchText?: string,
-     *     GetHighestShiftPrice?: boolean,
-     *     CountryIdForSellPrice?: integer,
-     *     BranchIdForSellPrice?: integer,
-     *     LoadExternalStockActiveSupplier?: boolean,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     LoadProductGroups?: boolean,
-     *     LoadExtraBarcodes?: boolean,
-     *     OnlyShowParentProducts?: boolean,
-     *     GlobalisationId?: integer,
-     *     WebsiteDomainId?: integer,
-     *     WareHouseId?: integer,
-     *     UseECommerceProductGroups?: boolean,
-     *     UseECommerceProductGroupsToLoadProductGroups?: boolean,
-     *     LoadStockForWarehouses?: boolean,
-     *     LoadAllWebshopGroupsLinkedToProduct?: boolean,
-     *     LoadProductTypes?: boolean,
+     *     DateTimeChangedFrom?: string|null,
+     *     DateTimeChangedTo?: string|null,
+     *     IsVisibleInLogic4?: boolean|null,
+     *     IsVisibleOnWebShop?: boolean|null,
+     *     AllShowOnWebsite?: boolean|null,
+     *     ProductGroupId?: integer|null,
+     *     UseChildProductGroups?: boolean|null,
+     *     ProductCode?: string|null,
+     *     Barcode?: string|null,
+     *     Barcodes?: array<string>|null,
+     *     DebtorId?: integer|null,
+     *     WebshopUserId?: integer|null,
+     *     WebshopPriceListId?: integer|null,
+     *     UseDropShipmentAmountsForWebshopPrices?: boolean|null,
+     *     ProductIds?: array<integer>|null,
+     *     ProductFilterListChoice?: string|null,
+     *     ProductHistoryBasedOnInvoices?: boolean|null,
+     *     WebshopUserOrderlistProductType?: integer|null,
+     *     ActiveOffers?: boolean|null,
+     *     OfferGroupId?: integer|null,
+     *     FastSearchText?: string|null,
+     *     GetHighestShiftPrice?: boolean|null,
+     *     CountryIdForSellPrice?: integer|null,
+     *     BranchIdForSellPrice?: integer|null,
+     *     LoadExternalStockActiveSupplier?: boolean|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     LoadProductGroups?: boolean|null,
+     *     LoadExtraBarcodes?: boolean|null,
+     *     OnlyShowParentProducts?: boolean|null,
+     *     GlobalisationId?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     WareHouseId?: integer|null,
+     *     UseECommerceProductGroups?: boolean|null,
+     *     UseECommerceProductGroupsToLoadProductGroups?: boolean|null,
+     *     LoadStockForWarehouses?: boolean|null,
+     *     LoadAllWebshopGroupsLinkedToProduct?: boolean|null,
+     *     LoadProductTypes?: boolean|null,
      * } $parameters
      *
-     * @return PaginatedResponse<\Webparking\Logic4Client\Data\Product>
+     * @return \Generator<array-key, Product>
      *
      * @throws Logic4ApiException
      */
-    public function getProducts(array $parameters = []): PaginatedResponse
+    public function getProducts(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Products/GetProducts', $parameters),
-            \Webparking\Logic4Client\Data\Product::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Products/GetProducts', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Product::make($record);
+        }
     }
 
     /**
      * Verkrijg de verzendinformatie van een product.
      *
      * @param array{
-     *     ProductId?: integer,
+     *     ProductId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -399,42 +423,42 @@ class Product extends Request
      * Verkrijg artikel Id's o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     IsVisibleInLogic4?: boolean,
-     *     IsVisibleOnWebShop?: boolean,
-     *     AllShowOnWebsite?: boolean,
-     *     ProductGroupId?: integer,
-     *     UseChildProductGroups?: boolean,
-     *     ProductCode?: string,
-     *     Barcode?: string,
-     *     Barcodes?: array<string>,
-     *     DebtorId?: integer,
-     *     WebshopUserId?: integer,
-     *     WebshopPriceListId?: integer,
-     *     UseDropShipmentAmountsForWebshopPrices?: boolean,
-     *     ProductIds?: array<integer>,
-     *     ProductFilterListChoice?: string,
-     *     ProductHistoryBasedOnInvoices?: boolean,
-     *     WebshopUserOrderlistProductType?: integer,
-     *     ActiveOffers?: boolean,
-     *     OfferGroupId?: integer,
-     *     FastSearchText?: string,
-     *     GetHighestShiftPrice?: boolean,
-     *     CountryIdForSellPrice?: integer,
-     *     BranchIdForSellPrice?: integer,
-     *     LoadExternalStockActiveSupplier?: boolean,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     LoadProductGroups?: boolean,
-     *     LoadExtraBarcodes?: boolean,
-     *     OnlyShowParentProducts?: boolean,
-     *     GlobalisationId?: integer,
-     *     WebsiteDomainId?: integer,
-     *     WareHouseId?: integer,
-     *     UseECommerceProductGroups?: boolean,
-     *     UseECommerceProductGroupsToLoadProductGroups?: boolean,
-     *     LoadStockForWarehouses?: boolean,
-     *     LoadAllWebshopGroupsLinkedToProduct?: boolean,
-     *     LoadProductTypes?: boolean,
+     *     IsVisibleInLogic4?: boolean|null,
+     *     IsVisibleOnWebShop?: boolean|null,
+     *     AllShowOnWebsite?: boolean|null,
+     *     ProductGroupId?: integer|null,
+     *     UseChildProductGroups?: boolean|null,
+     *     ProductCode?: string|null,
+     *     Barcode?: string|null,
+     *     Barcodes?: array<string>|null,
+     *     DebtorId?: integer|null,
+     *     WebshopUserId?: integer|null,
+     *     WebshopPriceListId?: integer|null,
+     *     UseDropShipmentAmountsForWebshopPrices?: boolean|null,
+     *     ProductIds?: array<integer>|null,
+     *     ProductFilterListChoice?: string|null,
+     *     ProductHistoryBasedOnInvoices?: boolean|null,
+     *     WebshopUserOrderlistProductType?: integer|null,
+     *     ActiveOffers?: boolean|null,
+     *     OfferGroupId?: integer|null,
+     *     FastSearchText?: string|null,
+     *     GetHighestShiftPrice?: boolean|null,
+     *     CountryIdForSellPrice?: integer|null,
+     *     BranchIdForSellPrice?: integer|null,
+     *     LoadExternalStockActiveSupplier?: boolean|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     LoadProductGroups?: boolean|null,
+     *     LoadExtraBarcodes?: boolean|null,
+     *     OnlyShowParentProducts?: boolean|null,
+     *     GlobalisationId?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     WareHouseId?: integer|null,
+     *     UseECommerceProductGroups?: boolean|null,
+     *     UseECommerceProductGroupsToLoadProductGroups?: boolean|null,
+     *     LoadStockForWarehouses?: boolean|null,
+     *     LoadAllWebshopGroupsLinkedToProduct?: boolean|null,
+     *     LoadProductTypes?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -450,32 +474,33 @@ class Product extends Request
 
     /**
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     ProductIds?: array<integer>,
-     *     WebsiteDomainId?: integer,
-     *     GlobalizationId?: integer,
-     *     ProductId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ProductIds?: array<integer>|null,
+     *     WebsiteDomainId?: integer|null,
+     *     GlobalizationId?: integer|null,
+     *     ProductId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ProductSEOInformation>
+     * @return \Generator<array-key, ProductSEOInformation>
      *
      * @throws Logic4ApiException
      */
-    public function getProductsSEOInformation(array $parameters = []): PaginatedResponse
+    public function getProductsSEOInformation(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v2/Products/GetProductsSEOInformation', $parameters),
-            ProductSEOInformation::class,
-        );
+        $iterator = $this->paginateRecords('/v2/Products/GetProductsSEOInformation', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductSEOInformation::make($record);
+        }
     }
 
     /**
      * @param array{
-     *     ProductIds?: array<integer>,
-     *     RelatedTypeId?: integer,
-     *     Skip?: integer,
-     *     Take?: integer,
+     *     ProductIds?: array<integer>|null,
+     *     RelatedTypeId?: integer|null,
+     *     Skip?: integer|null,
+     *     Take?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -509,11 +534,12 @@ class Product extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getSuppliersForProduct(): ProductSupplierLogic4ResponseList
-    {
+    public function getSuppliersForProduct(
+        int $value,
+    ): ProductSupplierLogic4ResponseList {
         return ProductSupplierLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetSuppliersForProduct'),
+                $this->getClient()->post('/v1.1/Products/GetSuppliersForProduct', ['json' => $value]),
             )
         );
     }
@@ -533,11 +559,28 @@ class Product extends Request
     }
 
     /**
+     * @param array{
+     *     SupplierId?: integer|null,
+     *     ProductId?: integer|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function removeProductSupplier(array $parameters = []): Int32Logic4Response
+    {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1.1/Products/RemoveProductSupplier', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     SupplierId?: integer,
-     *     ProductId?: integer,
+     *     SupplierId?: integer|null,
+     *     ProductId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -554,46 +597,46 @@ class Product extends Request
 
     /**
      * @param array{
-     *     ProductId?: integer,
-     *     ProductDescription1?: string,
-     *     ProductDescription2?: string,
-     *     ProductGroup2?: integer,
-     *     ProductGroup3?: integer,
-     *     ProductGroup4?: integer,
-     *     UnitId?: integer,
-     *     Barcode1?: string,
-     *     Barcode2?: string,
-     *     VendorCode?: string,
-     *     StatusId?: integer,
-     *     VisibleOnWebshopFrom?: string,
-     *     ExpirationDateOnWebshop?: string,
-     *     WarrantyMonths?: integer,
-     *     SortId?: integer,
-     *     InternalNote?: string,
-     *     ProductInfo?: string,
-     *     Tags?: string,
-     *     USPDescription?: string,
-     *     MetaDescription?: string,
-     *     SellPriceAdviceEx?: number,
-     *     FreeValue1?: string,
-     *     FreeValue2?: string,
-     *     FreeValue3?: string,
-     *     FreeValue4?: string,
-     *     FreeValue5?: string,
-     *     WeightSingleProduct?: number,
-     *     HeightSingleProduct?: number,
-     *     WidthSingleProduct?: number,
-     *     DepthSingleProduct?: number,
-     *     WeightInsidePackage?: number,
-     *     HeightInsidePackage?: number,
-     *     WidthInsidePackage?: number,
-     *     DepthInsidePackage?: number,
-     *     WeightOutsidePackage?: number,
-     *     HeightOutsidePackage?: number,
-     *     WidthOutsidePackage?: number,
-     *     DepthOutsidePackage?: number,
-     *     MinStockCount?: integer,
-     *     MaxStockCount?: integer,
+     *     ProductId?: integer|null,
+     *     ProductDescription1?: string|null,
+     *     ProductDescription2?: string|null,
+     *     ProductGroup2?: integer|null,
+     *     ProductGroup3?: integer|null,
+     *     ProductGroup4?: integer|null,
+     *     UnitId?: integer|null,
+     *     Barcode1?: string|null,
+     *     Barcode2?: string|null,
+     *     VendorCode?: string|null,
+     *     StatusId?: integer|null,
+     *     VisibleOnWebshopFrom?: string|null,
+     *     ExpirationDateOnWebshop?: string|null,
+     *     WarrantyMonths?: integer|null,
+     *     SortId?: integer|null,
+     *     InternalNote?: string|null,
+     *     ProductInfo?: string|null,
+     *     Tags?: string|null,
+     *     USPDescription?: string|null,
+     *     MetaDescription?: string|null,
+     *     SellPriceAdviceEx?: number|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     FreeValue4?: string|null,
+     *     FreeValue5?: string|null,
+     *     WeightSingleProduct?: number|null,
+     *     HeightSingleProduct?: number|null,
+     *     WidthSingleProduct?: number|null,
+     *     DepthSingleProduct?: number|null,
+     *     WeightInsidePackage?: number|null,
+     *     HeightInsidePackage?: number|null,
+     *     WidthInsidePackage?: number|null,
+     *     DepthInsidePackage?: number|null,
+     *     WeightOutsidePackage?: number|null,
+     *     HeightOutsidePackage?: number|null,
+     *     WidthOutsidePackage?: number|null,
+     *     DepthOutsidePackage?: number|null,
+     *     MinStockCount?: integer|null,
+     *     MaxStockCount?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -609,11 +652,11 @@ class Product extends Request
 
     /**
      * @param array{
-     *     ProductId?: integer,
-     *     TypeId?: integer,
-     *     Barcode?: string,
-     *     Quantity?: integer,
-     *     UnitId?: integer,
+     *     ProductId?: integer|null,
+     *     TypeId?: integer|null,
+     *     Barcode?: string|null,
+     *     Quantity?: integer|null,
+     *     UnitId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -633,11 +676,11 @@ class Product extends Request
      * - Return waarde is een AfbeeldingId als de opdracht is geslaagd.
      *
      * @param array{
-     *     ImageBase64String?: string,
-     *     ProductId?: integer,
-     *     ImageName?: string,
-     *     ImageId?: integer,
-     *     SortId?: integer,
+     *     ImageBase64String?: string|null,
+     *     ProductId?: integer|null,
+     *     ImageName?: string|null,
+     *     ImageId?: integer|null,
+     *     SortId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -655,9 +698,9 @@ class Product extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     ProductGroup1Id?: integer,
-     *     BrandId?: integer,
-     *     ProductId?: integer,
+     *     ProductGroup1Id?: integer|null,
+     *     BrandId?: integer|null,
+     *     ProductId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -676,8 +719,8 @@ class Product extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     ProductPrices?: array<mixed>,
-     *     ProductId?: integer,
+     *     ProductPrices?: array<mixed>|null,
+     *     ProductId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -693,8 +736,8 @@ class Product extends Request
 
     /**
      * @param array{
-     *     ProductId?: integer,
-     *     Barcode?: string,
+     *     ProductId?: integer|null,
+     *     Barcode?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -711,16 +754,16 @@ class Product extends Request
 
     /**
      * @param array{
-     *     Supplier_ProductCode?: string,
-     *     ProductName?: string,
-     *     ProductCountIncrement?: integer,
-     *     ShippingTime?: integer,
-     *     MinOrderQuantity?: integer,
-     *     RepackagingQty?: integer,
-     *     RepackagingUnitId?: integer,
-     *     InternalNote?: string,
-     *     SupplierId?: integer,
-     *     ProductId?: integer,
+     *     Supplier_ProductCode?: string|null,
+     *     ProductName?: string|null,
+     *     ProductCountIncrement?: integer|null,
+     *     ShippingTime?: integer|null,
+     *     MinOrderQuantity?: integer|null,
+     *     RepackagingQty?: integer|null,
+     *     RepackagingUnitId?: integer|null,
+     *     InternalNote?: string|null,
+     *     SupplierId?: integer|null,
+     *     ProductId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -736,9 +779,9 @@ class Product extends Request
 
     /**
      * @param array{
-     *     ProductId?: integer,
-     *     SupplierId?: integer,
-     *     ProductPrices?: array<mixed>,
+     *     ProductId?: integer|null,
+     *     SupplierId?: integer|null,
+     *     ProductPrices?: array<mixed>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

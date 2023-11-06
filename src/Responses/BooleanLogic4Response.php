@@ -17,8 +17,8 @@ class BooleanLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'],
-            validationMessages: $data['ValidationMessages'],
+            value: $data['Value'] ?? false,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

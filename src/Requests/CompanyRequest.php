@@ -13,7 +13,7 @@ use Webparking\Logic4Client\Responses\CompanyValuesLogic4Response;
 use Webparking\Logic4Client\Responses\StringLogic4Response;
 use Webparking\Logic4Client\Responses\UserstatusLogic4ResponseList;
 
-class Company extends Request
+class CompanyRequest extends Request
 {
     /**
      * Verkrijg administraties waar de gebruiker toegang tot heeft.

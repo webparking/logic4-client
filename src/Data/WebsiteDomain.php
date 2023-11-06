@@ -18,10 +18,10 @@ class WebsiteDomain
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            url: $data['Url'],
-            title: $data['Title'],
-            isMainDomain: $data['IsMainDomain'],
+            id: $data['Id'] ?? 0,
+            url: $data['Url'] ?? null,
+            title: $data['Title'] ?? null,
+            isMainDomain: $data['IsMainDomain'] ?? false,
         );
     }
 }

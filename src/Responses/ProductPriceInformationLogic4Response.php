@@ -19,8 +19,8 @@ class ProductPriceInformationLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'] ? ProductPriceInformation::make($data['Value']) : null,
-            validationMessages: $data['ValidationMessages'],
+            value: isset($data['Value']) ? ProductPriceInformation::make($data['Value']) : null,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

@@ -30,20 +30,20 @@ class Appointment
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            debtorId: $data['DebtorId'],
-            creditorId: $data['CreditorId'],
-            contactId: $data['ContactId'],
-            startDateTime: $data['StartDateTime'] ? Carbon::parse($data['StartDateTime']) : null,
-            endDateTime: $data['EndDateTime'] ? Carbon::parse($data['EndDateTime']) : null,
-            allDayEvent: $data['AllDayEvent'],
-            location: $data['Location'],
-            agendaId: $data['AgendaId'],
-            taskForUserId: $data['TaskForUserId'],
-            ITSIssueId: $data['ITS_IssueId'],
-            orderId: $data['OrderId'],
-            CRMProjectId: $data['CRM_ProjectId'],
-            plannedDeliveryId: $data['PlannedDeliveryId'],
+            id: $data['Id'] ?? 0,
+            debtorId: $data['DebtorId'] ?? null,
+            creditorId: $data['CreditorId'] ?? null,
+            contactId: $data['ContactId'] ?? null,
+            startDateTime: isset($data['StartDateTime']) ? Carbon::parse($data['StartDateTime']) : null,
+            endDateTime: isset($data['EndDateTime']) ? Carbon::parse($data['EndDateTime']) : null,
+            allDayEvent: $data['AllDayEvent'] ?? false,
+            location: $data['Location'] ?? null,
+            agendaId: $data['AgendaId'] ?? 0,
+            taskForUserId: $data['TaskForUserId'] ?? null,
+            ITSIssueId: $data['ITS_IssueId'] ?? null,
+            orderId: $data['OrderId'] ?? null,
+            CRMProjectId: $data['CRM_ProjectId'] ?? null,
+            plannedDeliveryId: $data['PlannedDeliveryId'] ?? null,
         );
     }
 }

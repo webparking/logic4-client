@@ -21,13 +21,13 @@ class EmailUserEmailAddress
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            fullAddress: $data['FullAddress'],
-            emailAddress: $data['EmailAddress'],
-            isDefaultEmailAddress: $data['IsDefaultEmailAddress'],
-            emailHtmlSignature: $data['EmailHtmlSignature'],
-            emailTextSignature: $data['EmailTextSignature'],
-            name: $data['Name'],
+            id: $data['Id'] ?? 0,
+            fullAddress: $data['FullAddress'] ?? null,
+            emailAddress: $data['EmailAddress'] ?? null,
+            isDefaultEmailAddress: $data['IsDefaultEmailAddress'] ?? false,
+            emailHtmlSignature: $data['EmailHtmlSignature'] ?? null,
+            emailTextSignature: $data['EmailTextSignature'] ?? null,
+            name: $data['Name'] ?? null,
         );
     }
 }

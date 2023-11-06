@@ -12,13 +12,13 @@ use Webparking\Logic4Client\Responses\OperatingSystemTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductRelationTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProvinceLogic4ResponseList;
 
-class Type extends Request
+class TypeRequest extends Request
 {
     /**
      * Verkrijg alle landen o.b.v het opgestuurde filter.
      *
      * @param array{
-     *     TypeZoneId?: integer,
+     *     TypeZoneId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -76,8 +76,8 @@ class Type extends Request
      * Verkrijg alle provincies o.b.v. het opgestuurde filter.
      *
      * @param array{
-     *     CountryId?: integer,
-     *     ISOcode?: string,
+     *     CountryId?: integer|null,
+     *     ISOcode?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

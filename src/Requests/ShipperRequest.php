@@ -10,15 +10,15 @@ use Webparking\Logic4Client\Responses\DeliveryOptionLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ShipperTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ShippingMethodLogic4ResponseList;
 
-class Shipper extends Request
+class ShipperRequest extends Request
 {
     /**
      * Verkrijg alle afleveropties o.b.v een filter.
      *
      * @param array{
-     *     IsPickupLocation?: boolean,
-     *     ShipperTypeId?: integer,
-     *     ExternalTypeValue?: string,
+     *     IsPickupLocation?: boolean|null,
+     *     ShipperTypeId?: integer|null,
+     *     ExternalTypeValue?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

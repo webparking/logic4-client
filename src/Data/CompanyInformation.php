@@ -26,18 +26,18 @@ class CompanyInformation
     public static function make(array $data): self
     {
         return new self(
-            name: $data['Name'],
-            address: $data['Address'],
-            houseNumber: $data['HouseNumber'],
-            zipcode: $data['Zipcode'],
-            city: $data['City'],
-            province: $data['Province'],
-            country: $data['Country'],
-            email: $data['Email'],
-            telephone: $data['Telephone'],
-            vatnumber: $data['Vatnumber'],
-            kvknumber: $data['Kvknumber'],
-            bankaccount: $data['Bankaccount'],
+            name: $data['Name'] ?? null,
+            address: $data['Address'] ?? null,
+            houseNumber: $data['HouseNumber'] ?? null,
+            zipcode: $data['Zipcode'] ?? null,
+            city: $data['City'] ?? null,
+            province: $data['Province'] ?? null,
+            country: $data['Country'] ?? null,
+            email: $data['Email'] ?? null,
+            telephone: $data['Telephone'] ?? null,
+            vatnumber: $data['Vatnumber'] ?? null,
+            kvknumber: $data['Kvknumber'] ?? null,
+            bankaccount: $data['Bankaccount'] ?? null,
         );
     }
 }

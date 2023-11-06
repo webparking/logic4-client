@@ -19,10 +19,10 @@ class Country
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            zoneId: $data['ZoneId'],
+            id: $data['Id'] ?? 0,
+            zoneId: $data['ZoneId'] ?? 0,
             names: array_map(static fn (array $item) => Translation::make($item), $data['Names'] ?? []),
-            isoCode: $data['IsoCode'],
+            isoCode: $data['IsoCode'] ?? null,
         );
     }
 }

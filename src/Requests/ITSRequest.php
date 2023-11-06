@@ -6,7 +6,6 @@ namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\ITSIssue;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\ITSFreeValueLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ITSIssueGroupLogic4ResponseList;
@@ -16,7 +15,7 @@ use Webparking\Logic4Client\Responses\ITSIssueTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ITSProjectLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ITSTaskPriorityLogic4ResponseList;
 
-class ITS extends Request
+class ITSRequest extends Request
 {
     /**
      * @throws Logic4ApiException
@@ -82,35 +81,36 @@ class ITS extends Request
      * Verkrijg ITS issues o.b.v. het meegestuurde filter en de opgegeven gebruiker.
      *
      * @param array{
-     *     Id?: integer,
-     *     StartDate?: string,
-     *     EndDate?: string,
-     *     LastModifiedSince?: string,
-     *     DebtorId?: integer,
-     *     CreditorId?: integer,
-     *     InvoiceId?: integer,
-     *     StatusId?: integer,
-     *     ResponsibleUserId?: integer,
-     *     IssueMustBeCompletedTo?: string,
-     *     IssueMustBeCompletedFrom?: string,
-     *     TypeId?: integer,
-     *     GroupId?: integer,
-     *     ProjectId?: integer,
-     *     OrderId?: integer,
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
+     *     Id?: integer|null,
+     *     StartDate?: string|null,
+     *     EndDate?: string|null,
+     *     LastModifiedSince?: string|null,
+     *     DebtorId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     InvoiceId?: integer|null,
+     *     StatusId?: integer|null,
+     *     ResponsibleUserId?: integer|null,
+     *     IssueMustBeCompletedTo?: string|null,
+     *     IssueMustBeCompletedFrom?: string|null,
+     *     TypeId?: integer|null,
+     *     GroupId?: integer|null,
+     *     ProjectId?: integer|null,
+     *     OrderId?: integer|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<ITSIssue>
+     * @return \Generator<array-key, ITSIssue>
      *
      * @throws Logic4ApiException
      */
-    public function getIssues(array $parameters = []): PaginatedResponse
+    public function getIssues(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/ITS/GetIssues', $parameters),
-            ITSIssue::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/ITS/GetIssues', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ITSIssue::make($record);
+        }
     }
 
     /**

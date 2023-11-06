@@ -7,7 +7,6 @@ namespace Webparking\Logic4Client\Requests;
 use Webparking\Logic4Client\Data\WebshopOrderlistProduct;
 use Webparking\Logic4Client\Data\WebshopSearchWord;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\DecimalNullableLogic4Response;
@@ -20,25 +19,25 @@ use Webparking\Logic4Client\Responses\WebshopUserProductLogic4ResponseList;
 use Webparking\Logic4Client\Responses\WebshopUserProductTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\WebshopUserTypeLogic4ResponseList;
 
-class Webshop extends Request
+class WebshopRequest extends Request
 {
     /**
      * Voeg een WebshopUserProduct toe aan een WebshopUserProductlijst.
      *
      * @param array{
-     *     Id?: integer,
-     *     DateTimeAdded?: string,
-     *     ProductId?: integer,
-     *     QtyDec?: number,
-     *     Commission?: string,
-     *     ExcludedFromAnnualBudget?: boolean,
-     *     ComposedProductParentId?: integer,
-     *     TypeId?: integer,
-     *     WebshopUserId?: integer,
-     *     DebtorId?: integer,
-     *     VisitorCode?: string,
-     *     WebsiteDomainId?: integer,
-     *     ShoppingCartKey?: string,
+     *     Id?: integer|null,
+     *     DateTimeAdded?: string|null,
+     *     ProductId?: integer|null,
+     *     QtyDec?: number|null,
+     *     Commission?: string|null,
+     *     ExcludedFromAnnualBudget?: boolean|null,
+     *     ComposedProductParentId?: integer|null,
+     *     TypeId?: integer|null,
+     *     WebshopUserId?: integer|null,
+     *     DebtorId?: integer|null,
+     *     VisitorCode?: string|null,
+     *     WebsiteDomainId?: integer|null,
+     *     ShoppingCartKey?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -57,16 +56,16 @@ class Webshop extends Request
      * Verwijder een WebshopUserProductlijst.
      *
      * @param array{
-     *     VisitorCode?: string,
-     *     WebshopUserProductListType?: string,
-     *     WebshopPricelistId?: integer,
-     *     GetHighestShiftPrice?: boolean,
-     *     CountryIdForSellPrice?: integer,
-     *     BranchIdForSellPrice?: integer,
-     *     WebsiteDomainId?: integer,
-     *     DebtorWebshopProductTypeId?: integer,
-     *     DebtorId?: integer,
-     *     WebshopUserId?: integer,
+     *     VisitorCode?: string|null,
+     *     WebshopUserProductListType?: string|null,
+     *     WebshopPricelistId?: integer|null,
+     *     GetHighestShiftPrice?: boolean|null,
+     *     CountryIdForSellPrice?: integer|null,
+     *     BranchIdForSellPrice?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     DebtorWebshopProductTypeId?: integer|null,
+     *     DebtorId?: integer|null,
+     *     WebshopUserId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -87,10 +86,11 @@ class Webshop extends Request
      * @throws Logic4ApiException
      */
     public function deleteWebshopUserProductOnWebshopUserProductList(
+        int $value,
     ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Webshop/DeleteWebshopUserProductOnWebshopUserProductList'),
+                $this->getClient()->post('/v1/Webshop/DeleteWebshopUserProductOnWebshopUserProductList', ['json' => $value]),
             )
         );
     }
@@ -99,11 +99,11 @@ class Webshop extends Request
      * Verkrijg de betaalmethodes van een WebshopUser.
      *
      * @param array{
-     *     DebtorId?: integer,
-     *     ShippingMethodId?: integer,
-     *     ShowOnlySelectedPaymentMethodDebtor?: boolean,
-     *     TotalPrice?: number,
-     *     ShowOnlyAfterPayments?: boolean,
+     *     DebtorId?: integer|null,
+     *     ShippingMethodId?: integer|null,
+     *     ShowOnlySelectedPaymentMethodDebtor?: boolean|null,
+     *     TotalPrice?: number|null,
+     *     ShowOnlyAfterPayments?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -122,17 +122,17 @@ class Webshop extends Request
      * Verkrijg de aflevermethodes van een WebshopUser.
      *
      * @param array{
-     *     IsPureInclShop?: boolean,
-     *     TotalPriceIncl?: number,
-     *     DebtorId?: integer,
-     *     CountryId?: integer,
-     *     Weight?: number,
-     *     TotalPrice?: number,
-     *     Volume?: number,
-     *     ShowOnlySelectedShippingMethodDebtor?: boolean,
-     *     ShowOnlyShippingMethodsWithPaymentCondition?: boolean,
-     *     ShowOnlyShippingMethodsWithPaymentConditionWithAfterPayments?: boolean,
-     *     AddEmptyPackageWeightToWeight?: boolean,
+     *     IsPureInclShop?: boolean|null,
+     *     TotalPriceIncl?: number|null,
+     *     DebtorId?: integer|null,
+     *     CountryId?: integer|null,
+     *     Weight?: number|null,
+     *     TotalPrice?: number|null,
+     *     Volume?: number|null,
+     *     ShowOnlySelectedShippingMethodDebtor?: boolean|null,
+     *     ShowOnlyShippingMethodsWithPaymentCondition?: boolean|null,
+     *     ShowOnlyShippingMethodsWithPaymentConditionWithAfterPayments?: boolean|null,
+     *     AddEmptyPackageWeightToWeight?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -151,10 +151,10 @@ class Webshop extends Request
      * Verkrijg productprijzen o.b.v. webshopprijslijst/debiteur.
      *
      * @param array{
-     *     DebtorId?: integer,
-     *     WebshopPriceListId?: integer,
-     *     ProductId?: integer,
-     *     MinSaleAmount?: integer,
+     *     DebtorId?: integer|null,
+     *     WebshopPriceListId?: integer|null,
+     *     ProductId?: integer|null,
+     *     MinSaleAmount?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -173,33 +173,34 @@ class Webshop extends Request
      * Verkrijg zoekresultaten van een webshop o.b.v. meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     SearchTerm?: string,
-     *     DateFrom?: string,
-     *     DateTo?: string,
-     *     GlobilizationId?: integer,
-     *     DomainId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     SearchTerm?: string|null,
+     *     DateFrom?: string|null,
+     *     DateTo?: string|null,
+     *     GlobilizationId?: integer|null,
+     *     DomainId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<WebshopSearchWord>
+     * @return \Generator<array-key, WebshopSearchWord>
      *
      * @throws Logic4ApiException
      */
-    public function getWebshopSearchWords(array $parameters = []): PaginatedResponse
+    public function getWebshopSearchWords(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Webshop/GetWebshopSearchWords', $parameters),
-            WebshopSearchWord::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Webshop/GetWebshopSearchWords', $parameters);
+
+        foreach ($iterator as $record) {
+            yield WebshopSearchWord::make($record);
+        }
     }
 
     /**
      * Verkrijg webshopgebruiker o.b.v. webshopgebruikersnummer of debiteurnummer.
      *
      * @param array{
-     *     DebtorId?: integer,
-     *     WebshopUserId?: integer,
+     *     DebtorId?: integer|null,
+     *     WebshopUserId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -217,8 +218,8 @@ class Webshop extends Request
      * Verkrijg het nog te besteden bedrag voor een webshopgebruiker van een jaarbudget.
      *
      * @param array{
-     *     WebshopUserId?: integer,
-     *     IgnoreOrderstatusIds?: array<integer>,
+     *     WebshopUserId?: integer|null,
+     *     IgnoreOrderstatusIds?: array<integer>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -237,10 +238,10 @@ class Webshop extends Request
      * Verkrijg webshopgebruiker o.b.v. meegestuurde credentials.
      *
      * @param array{
-     *     UserName?: string,
-     *     Password?: string,
-     *     WebsiteDomainId?: integer,
-     *     IgnorePasswordCheck?: boolean,
+     *     UserName?: string|null,
+     *     Password?: string|null,
+     *     WebsiteDomainId?: integer|null,
+     *     IgnorePasswordCheck?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -259,23 +260,24 @@ class Webshop extends Request
      * Verkrijg een bestellijst o.b.v. webshopgebruikersnummer of debiteurnummer voor de producttypes zie eindpunt /Webshop/GetWebshopUserOrderlistProductTypes.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     WebshopUserProductListType?: integer,
-     *     DebtorId?: integer,
-     *     WebshopUserId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     WebshopUserProductListType?: integer|null,
+     *     DebtorId?: integer|null,
+     *     WebshopUserId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<WebshopOrderlistProduct>
+     * @return \Generator<array-key, WebshopOrderlistProduct>
      *
      * @throws Logic4ApiException
      */
-    public function getWebshopUserOrderlist(array $parameters = []): PaginatedResponse
+    public function getWebshopUserOrderlist(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Webshop/GetWebshopUserOrderlist', $parameters),
-            WebshopOrderlistProduct::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Webshop/GetWebshopUserOrderlist', $parameters);
+
+        foreach ($iterator as $record) {
+            yield WebshopOrderlistProduct::make($record);
+        }
     }
 
     /**
@@ -296,16 +298,16 @@ class Webshop extends Request
      * Verkrijg een WebshopUserProductlijst (Zie eindpunt /Webshop/GetWebshopUserProductListTypes voor de types) o.b.v. webshopgebruikersnummer of debiteurnummer.
      *
      * @param array{
-     *     VisitorCode?: string,
-     *     WebshopUserProductListType?: string,
-     *     WebshopPricelistId?: integer,
-     *     GetHighestShiftPrice?: boolean,
-     *     CountryIdForSellPrice?: integer,
-     *     BranchIdForSellPrice?: integer,
-     *     WebsiteDomainId?: integer,
-     *     DebtorWebshopProductTypeId?: integer,
-     *     DebtorId?: integer,
-     *     WebshopUserId?: integer,
+     *     VisitorCode?: string|null,
+     *     WebshopUserProductListType?: string|null,
+     *     WebshopPricelistId?: integer|null,
+     *     GetHighestShiftPrice?: boolean|null,
+     *     CountryIdForSellPrice?: integer|null,
+     *     BranchIdForSellPrice?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     DebtorWebshopProductTypeId?: integer|null,
+     *     DebtorId?: integer|null,
+     *     WebshopUserId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -352,17 +354,17 @@ class Webshop extends Request
      * Maak van een winkelmandje een order aan.
      *
      * @param array{
-     *     ShippingMethodId?: integer,
-     *     PaymentMethodId?: integer,
-     *     WebshopUserId?: integer,
-     *     DebtorId?: integer,
-     *     OrderDescription?: string,
-     *     OrderReference?: string,
-     *     OrderRemarks?: string,
-     *     StatusId?: integer,
-     *     ShippingCosts?: number,
-     *     PriceListId?: integer,
-     *     ShoppingCartKey?: string,
+     *     ShippingMethodId?: integer|null,
+     *     PaymentMethodId?: integer|null,
+     *     WebshopUserId?: integer|null,
+     *     DebtorId?: integer|null,
+     *     OrderDescription?: string|null,
+     *     OrderReference?: string|null,
+     *     OrderRemarks?: string|null,
+     *     StatusId?: integer|null,
+     *     ShippingCosts?: number|null,
+     *     PriceListId?: integer|null,
+     *     ShoppingCartKey?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -381,8 +383,8 @@ class Webshop extends Request
      * Update het aantal van een WebshopUserProduct op een WebshopUserProductlijst.
      *
      * @param array{
-     *     WebshopUserProductId?: integer,
-     *     Qty?: integer,
+     *     WebshopUserProductId?: integer|null,
+     *     Qty?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

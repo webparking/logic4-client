@@ -6,7 +6,6 @@ namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\OrderHeadPickbon;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
 use Webparking\Logic4Client\Responses\OrderHeadPickbonRowLogic4ResponseList;
@@ -15,12 +14,12 @@ use Webparking\Logic4Client\Responses\PickbonSoftBlockedLogic4ResponseList;
 use Webparking\Logic4Client\Responses\StringLogic4Response;
 use Webparking\Logic4Client\Responses\WarehouseZoneLogic4ResponseList;
 
-class Pickbons extends Request
+class PickbonsRequest extends Request
 {
     /**
      * @param array{
-     *     OrderId?: integer,
-     *     UseNewWorkflow?: boolean,
+     *     OrderId?: integer|null,
+     *     UseNewWorkflow?: boolean|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -40,11 +39,11 @@ class Pickbons extends Request
      *
      * @throws Logic4ApiException
      */
-    public function createPickbonForOrder(): Int32Logic4ResponseList
+    public function createPickbonForOrder(int $value): Int32Logic4ResponseList
     {
         return Int32Logic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Pickbons/CreatePickbonForOrder'),
+                $this->getClient()->post('/v1/Pickbons/CreatePickbonForOrder', ['json' => $value]),
             )
         );
     }
@@ -54,11 +53,12 @@ class Pickbons extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getIsPickbonSoftBlocked(): PickbonSoftBlockedLogic4Response
-    {
+    public function getIsPickbonSoftBlocked(
+        int $value,
+    ): PickbonSoftBlockedLogic4Response {
         return PickbonSoftBlockedLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Pickbons/GetIsPickbonSoftBlocked'),
+                $this->getClient()->post('/v1/Pickbons/GetIsPickbonSoftBlocked', ['json' => $value]),
             )
         );
     }
@@ -68,11 +68,12 @@ class Pickbons extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getOrderHeadPickbonRows(): OrderHeadPickbonRowLogic4ResponseList
-    {
+    public function getOrderHeadPickbonRows(
+        int $value,
+    ): OrderHeadPickbonRowLogic4ResponseList {
         return OrderHeadPickbonRowLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Pickbons/GetOrderHeadPickbonRows'),
+                $this->getClient()->post('/v1/Pickbons/GetOrderHeadPickbonRows', ['json' => $value]),
             )
         );
     }
@@ -80,13 +81,16 @@ class Pickbons extends Request
     /**
      * Verkrijg simpele pickbon rijen op basis van pickbonnen.
      *
+     * @param array<integer> $parameters
+     *
      * @throws Logic4ApiException
      */
     public function getOrderHeadPickbonRowsForMultiplePickbons(
+        array $parameters = [],
     ): OrderHeadPickbonRowLogic4ResponseList {
         return OrderHeadPickbonRowLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Pickbons/GetOrderHeadPickbonRowsForMultiplePickbons'),
+                $this->getClient()->post('/v1/Pickbons/GetOrderHeadPickbonRowsForMultiplePickbons', ['json' => $parameters]),
             )
         );
     }
@@ -95,37 +99,41 @@ class Pickbons extends Request
      * Verkrijg pickbonnen op basis van het meegegeven filter.
      *
      * @param array{
-     *     SkipRecords?: integer,
-     *     TakeRecords?: integer,
-     *     OnlyUnprocessedItems?: boolean,
-     *     OrderCreatedFrom?: string,
-     *     WarehouseZoneId?: integer,
-     *     WarehouseId?: integer,
-     *     PickBonId?: integer,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     OnlyUnprocessedItems?: boolean|null,
+     *     OrderCreatedFrom?: string|null,
+     *     WarehouseZoneId?: integer|null,
+     *     WarehouseId?: integer|null,
+     *     PickBonId?: integer|null,
      * } $parameters
      *
-     * @return PaginatedResponse<OrderHeadPickbon>
+     * @return \Generator<array-key, OrderHeadPickbon>
      *
      * @throws Logic4ApiException
      */
-    public function getOrderHeadPickbons(array $parameters = []): PaginatedResponse
+    public function getOrderHeadPickbons(array $parameters = []): \Generator
     {
-        return new PaginatedResponse(
-            $this->paginateRecords('/v1.1/Pickbons/GetOrderHeadPickbons', $parameters),
-            OrderHeadPickbon::class,
-        );
+        $iterator = $this->paginateRecords('/v1.1/Pickbons/GetOrderHeadPickbons', $parameters);
+
+        foreach ($iterator as $record) {
+            yield OrderHeadPickbon::make($record);
+        }
     }
 
     /**
      * Controleer of de pickbonnen soft-blocked zijn en zo ja, door wie en wanneer?
      *
+     * @param array<integer> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function getPickbonsAreSoftBlocked(): PickbonSoftBlockedLogic4ResponseList
-    {
+    public function getPickbonsAreSoftBlocked(
+        array $parameters = [],
+    ): PickbonSoftBlockedLogic4ResponseList {
         return PickbonSoftBlockedLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Pickbons/GetPickbonsAreSoftBlocked'),
+                $this->getClient()->post('/v1/Pickbons/GetPickbonsAreSoftBlocked', ['json' => $parameters]),
             )
         );
     }
@@ -149,11 +157,11 @@ class Pickbons extends Request
      *
      * @throws Logic4ApiException
      */
-    public function postSoftBlockPickbon(): StringLogic4Response
+    public function postSoftBlockPickbon(int $value): StringLogic4Response
     {
         return StringLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Pickbons/PostSoftBlockPickbon'),
+                $this->getClient()->post('/v1/Pickbons/PostSoftBlockPickbon', ['json' => $value]),
             )
         );
     }
@@ -161,13 +169,16 @@ class Pickbons extends Request
     /**
      * Soft-block meerdere pickbonnen.
      *
+     * @param array<integer> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function postSoftBlockPickbons(): StringLogic4Response
-    {
+    public function postSoftBlockPickbons(
+        array $parameters = [],
+    ): StringLogic4Response {
         return StringLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Pickbons/PostSoftBlockPickbons'),
+                $this->getClient()->post('/v1.1/Pickbons/PostSoftBlockPickbons', ['json' => $parameters]),
             )
         );
     }
@@ -176,11 +187,11 @@ class Pickbons extends Request
      * Verwerk een pickbon.
      *
      * @param array{
-     *     AmountOfColli?: integer,
-     *     Corrections?: array<mixed>,
-     *     Mutations?: array<mixed>,
-     *     OrderHeadPickbonId?: integer,
-     *     Remarks?: string,
+     *     AmountOfColli?: integer|null,
+     *     Corrections?: array<mixed>|null,
+     *     Mutations?: array<mixed>|null,
+     *     OrderHeadPickbonId?: integer|null,
+     *     Remarks?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -197,13 +208,21 @@ class Pickbons extends Request
     /**
      * Verwerk meerdere pickbonnen.
      *
+     * @param array<array{
+     *     AmountOfColli?: integer|null,
+     *     Corrections?: array<mixed>|null,
+     *     Mutations?: array<mixed>|null,
+     *     OrderHeadPickbonId?: integer|null,
+     *     Remarks?: string|null,
+     * }> $parameters
+     *
      * @throws Logic4ApiException
      */
-    public function processPickbons(): StringLogic4Response
+    public function processPickbons(array $parameters = []): StringLogic4Response
     {
         return StringLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1.1/Pickbons/ProcessPickbons'),
+                $this->getClient()->post('/v1.1/Pickbons/ProcessPickbons', ['json' => $parameters]),
             )
         );
     }

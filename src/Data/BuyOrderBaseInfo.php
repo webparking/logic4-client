@@ -29,19 +29,19 @@ class BuyOrderBaseInfo
     public static function make(array $data): self
     {
         return new self(
-            amountOfRows: $data['AmountOfRows'],
-            branchId: $data['BranchId'],
-            buyOrderClosed: $data['BuyOrderClosed'],
-            createdAt: $data['CreatedAt'] ? Carbon::parse($data['CreatedAt']) : null,
-            creditorCompanyName: $data['CreditorCompanyName'],
-            creditorId: $data['CreditorId'],
-            databaseAdministrationId: $data['DatabaseAdministrationId'],
-            id: $data['Id'],
-            orderId: $data['OrderId'],
-            remarks: $data['Remarks'],
-            freeValue1: $data['FreeValue1'],
-            freeValue2: $data['FreeValue2'],
-            freeValue3: $data['FreeValue3'],
+            amountOfRows: $data['AmountOfRows'] ?? 0,
+            branchId: $data['BranchId'] ?? null,
+            buyOrderClosed: $data['BuyOrderClosed'] ?? false,
+            createdAt: isset($data['CreatedAt']) ? Carbon::parse($data['CreatedAt']) : null,
+            creditorCompanyName: $data['CreditorCompanyName'] ?? null,
+            creditorId: $data['CreditorId'] ?? 0,
+            databaseAdministrationId: $data['DatabaseAdministrationId'] ?? 0,
+            id: $data['Id'] ?? 0,
+            orderId: $data['OrderId'] ?? null,
+            remarks: $data['Remarks'] ?? null,
+            freeValue1: $data['FreeValue1'] ?? null,
+            freeValue2: $data['FreeValue2'] ?? null,
+            freeValue3: $data['FreeValue3'] ?? null,
         );
     }
 }

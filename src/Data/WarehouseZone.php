@@ -18,10 +18,10 @@ class WarehouseZone
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            warehouseId: $data['WarehouseId'],
-            warehouseName: $data['WarehouseName'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            warehouseId: $data['WarehouseId'] ?? 0,
+            warehouseName: $data['WarehouseName'] ?? null,
         );
     }
 }

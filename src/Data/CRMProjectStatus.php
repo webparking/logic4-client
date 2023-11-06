@@ -18,10 +18,10 @@ class CRMProjectStatus
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            sorting: $data['Sorting'],
-            isCompleted: $data['IsCompleted'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            sorting: $data['Sorting'] ?? 0,
+            isCompleted: $data['IsCompleted'] ?? false,
         );
     }
 }

@@ -63,16 +63,30 @@ class Helpers
         return $type;
     }
 
-    /** @param Reference[]|Schema[] $properties */
+    /**
+     * @param Reference[]|Schema[] $properties
+     *
+     * @return array<mixed>
+     */
     public static function makePhpDoc(array $properties, string $format): array
     {
         $parameters = [];
         foreach ($properties as $name => $property) {
             if ($property instanceof Schema) {
-                $parameters[] = sprintf($format, sprintf('%s?: %s', $name, self::resolveParameterType($property)));
+                $parameters[] = sprintf($format, sprintf('%s?: %s|null', $name, self::resolveParameterType($property)));
             }
         }
 
         return $parameters;
+    }
+
+    public static function phpType(mixed $type, string $default = 'mixed'): string
+    {
+        return match ($type) {
+            'integer' => 'int',
+            'number' => 'float',
+            'boolean' => 'bool',
+            default => $default,
+        };
     }
 }

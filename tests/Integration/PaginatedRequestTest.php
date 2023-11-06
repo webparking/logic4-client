@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Mockery\MockInterface;
 use Webparking\Logic4Client\ClientFactory;
-use Webparking\Logic4Client\Requests\Product;
+use Webparking\Logic4Client\Requests\ProductRequest;
 use Webparking\Logic4Client\Tests\TestCase;
 
 final class PaginatedRequestTest extends TestCase
@@ -73,12 +73,12 @@ final class PaginatedRequestTest extends TestCase
                 ], \JSON_THROW_ON_ERROR)));
         });
 
-        $request = new Product(\Mockery::mock(ClientFactory::class));
+        $request = new ProductRequest(\Mockery::mock(ClientFactory::class));
 
         $request->setClient($client);
 
-        $response = $request->getProductsSEOInformation(['ProductIds' => [1, 2, 3]]);
-        $data = $response->all();
+        $iterator = $request->getProductsSEOInformation(['ProductIds' => [1, 2, 3]]);
+        $data = iterator_to_array($iterator);
 
         static::assertCount(3, $data);
         static::assertSame(123, $data[0]->productId);
@@ -129,7 +129,7 @@ final class PaginatedRequestTest extends TestCase
                 ], \JSON_THROW_ON_ERROR)));
         });
 
-        $request = new Product(\Mockery::mock(ClientFactory::class));
+        $request = new ProductRequest(\Mockery::mock(ClientFactory::class));
         $request->setClient($client);
 
         $response = $request->getProductsSEOInformation(['ProductIds' => [1, 2, 3]]);

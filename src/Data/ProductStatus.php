@@ -16,8 +16,8 @@ class ProductStatus
     public static function make(array $data): self
     {
         return new self(
-            statusId: $data['StatusId'],
-            description: $data['Description'],
+            statusId: $data['StatusId'] ?? 0,
+            description: $data['Description'] ?? null,
         );
     }
 }

@@ -6,11 +6,11 @@ namespace Webparking\Logic4Client\Generator;
 
 use cebe\openapi\spec\Operation;
 use cebe\openapi\spec\Reference;
+use cebe\openapi\spec\Schema;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\PhpNamespace;
 use Symfony\Component\Filesystem\Path;
-use Webparking\Logic4Client\PaginatedResponse;
 use Webparking\Logic4Client\Request;
 
 class RequestClassGenerator
@@ -30,40 +30,72 @@ class RequestClassGenerator
     public function addMethod(string $httpMethod, string $uri, Operation $operation, string $returnType = null, bool $paginated = false): Method
     {
         $action = last(explode('/', ltrim($uri, '/')));
-        $requestProperties = $operation->requestBody?->content['application/json']?->schema;
-        $requestProperties = $requestProperties instanceof Reference
-            ? $requestProperties->resolve()?->properties ?? []
-            : $requestProperties?->properties ?? [];
+        $requestSchema = $operation->requestBody?->content['application/json']?->schema;
 
         $method = $this
             ->class
             ->addMethod(lcfirst($action))
             ->setReturnType($returnType);
 
-        if ($requestProperties) {
+        $requestParameters = [];
+        foreach ($operation->parameters as $parameter) {
+            if ('query' !== $parameter->in) {
+                continue;
+            }
+
+            $parameterType = Helpers::phpType($parameter->schema->type, $parameter->schema->type);
+
+            $method
+                ->addParameter($parameter->name)
+                ->setType($parameterType);
+
+            $requestParameters['query'][$parameter->name] = sprintf('{$%s}', $parameter->name);
+        }
+
+        if ($requestSchema instanceof Reference
+            || 'array' === $requestSchema?->type
+        ) {
+            if ($requestSchema instanceof Reference) {
+                $requestProperties = $requestSchema->resolve()?->properties ?? [];
+                $parameterDoc = "array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n}";
+            } else {
+                if ($requestSchema->items instanceof Schema) {
+                    $parameterDoc = "array<{$requestSchema->items->type}>";
+                } else {
+                    $requestProperties = $requestSchema->items->resolve()->properties;
+
+                    $parameterDoc = "array<array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n}>";
+                }
+            }
+
             $method->addParameter('parameters')
                 ->setType('array')
                 ->setDefaultValue([]);
 
             $method
-                ->addComment("@param array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n} \$parameters");
+                ->addComment("@param $parameterDoc \$parameters");
+
+            $parameterType = 'get' === $httpMethod ? 'query' : 'json';
+            $requestParameters[$parameterType] = '{$parameters}';
+        } elseif (null !== $requestSchema?->type) {
+            $method->addParameter('value')
+                ->setType(Helpers::phpType($requestSchema?->type));
+
+            $parameterType = 'get' === $httpMethod ? 'query' : 'json';
+            $requestParameters[$parameterType] = '{$value}';
         }
 
         $method->addComment("\n@throws Logic4ApiException");
 
-        $type = 'get' === $httpMethod ? 'query' : 'json';
-        $parametersPhp = $requestProperties ? ", ['$type' => \$parameters]" : '';
+        $parametersPhp = $requestParameters
+            ? ', '.preg_replace('/\'\{\$(.*)\}\'/', '\$$1', var_export($requestParameters, true))
+            : '';
 
-        $returnType = match ($returnType) {
-            'integer' => 'int',
-            'number' => 'float',
-            'boolean' => 'bool',
-            default => $returnType ?? 'mixed',
-        };
+        $returnType = Helpers::phpType($returnType, $returnType ?? 'mixed');
 
         if ($paginated && class_exists($returnType)) {
-            $method->setReturnType(PaginatedResponse::class);
-            $method->addComment("\n@return \\".PaginatedResponse::class.'<'.(class_exists($returnType) ? '\\'.$returnType : $returnType).'>');
+            $method->setReturnType(\Generator::class);
+            $method->addComment("\n@return \Generator<array-key, ".(class_exists($returnType) ? '\\'.$returnType : $returnType).'>');
         } else {
             $method->setReturnType($returnType);
             $method->addComment("\n@return ".(class_exists($returnType) ? '\\'.$returnType : $returnType));
@@ -73,10 +105,11 @@ class RequestClassGenerator
             if ($paginated) {
                 $method->setBody(
                     <<<PHP
-                        return new \Webparking\Logic4Client\PaginatedResponse(
-                            \$this->paginateRecords('{$uri}', \$parameters),
-                            \\$returnType::class,
-                        );
+                        \$iterator = \$this->paginateRecords('{$uri}', \$parameters);
+
+                        foreach (\$iterator as \$record) {
+                            yield \\$returnType::make(\$record);
+                        }
                         PHP
                 );
             } else {

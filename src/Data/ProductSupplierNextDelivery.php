@@ -19,9 +19,9 @@ class ProductSupplierNextDelivery
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'],
-            supplierId: $data['SupplierId'],
-            deliveryDate: $data['DeliveryDate'] ? Carbon::parse($data['DeliveryDate']) : null,
+            productId: $data['ProductId'] ?? 0,
+            supplierId: $data['SupplierId'] ?? 0,
+            deliveryDate: isset($data['DeliveryDate']) ? Carbon::parse($data['DeliveryDate']) : null,
         );
     }
 }

@@ -23,13 +23,13 @@ class Agenda
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            visible: $data['Visible'],
-            sortId: $data['SortId'],
-            syncWithGoogle: $data['SyncWithGoogle'],
-            googleUsername: $data['GoogleUsername'],
-            googleLastSyncDateTime: $data['GoogleLastSyncDateTime'] ? Carbon::parse($data['GoogleLastSyncDateTime']) : null,
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            visible: $data['Visible'] ?? false,
+            sortId: $data['SortId'] ?? 0,
+            syncWithGoogle: $data['SyncWithGoogle'] ?? false,
+            googleUsername: $data['GoogleUsername'] ?? null,
+            googleLastSyncDateTime: isset($data['GoogleLastSyncDateTime']) ? Carbon::parse($data['GoogleLastSyncDateTime']) : null,
         );
     }
 }

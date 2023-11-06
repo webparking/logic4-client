@@ -10,17 +10,17 @@ use Webparking\Logic4Client\Responses\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\OrderShipmentLogic4Response;
 use Webparking\Logic4Client\Responses\OrderShipmentLogic4ResponseList;
 
-class Shipment extends Request
+class ShipmentRequest extends Request
 {
     /**
      * Verzending toevoegen aan een order of factuur. De nieuw aangemaakte verzending wordt teruggegeven als response.
      *
      * @param array{
-     *     DateTimeAdded?: string,
-     *     OrderId?: integer,
-     *     ShipperId?: integer,
-     *     Barcode?: string,
-     *     TrackTraceUrl?: string,
+     *     DateTimeAdded?: string|null,
+     *     OrderId?: integer|null,
+     *     ShipperId?: integer|null,
+     *     Barcode?: string|null,
+     *     TrackTraceUrl?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -41,12 +41,12 @@ class Shipment extends Request
      * voor het verzenden van een email.
      *
      * @param array{
-     *     DateTimeAdded?: string,
-     *     SendEmail?: boolean,
-     *     OrderId?: integer,
-     *     ShipperId?: integer,
-     *     Barcode?: string,
-     *     TrackTraceUrl?: string,
+     *     DateTimeAdded?: string|null,
+     *     SendEmail?: boolean|null,
+     *     OrderId?: integer|null,
+     *     ShipperId?: integer|null,
+     *     Barcode?: string|null,
+     *     TrackTraceUrl?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -62,15 +62,30 @@ class Shipment extends Request
     }
 
     /**
+     * Verzending verwijderen voor een order of factuur, specificeer met het ID van de verzending. De verzending moet bestaan.
+     *
+     * @throws Logic4ApiException
+     */
+    public function deleteShipmentForInvoiceOrOrder(int $id): BooleanLogic4Response
+    {
+        return BooleanLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1/Shipments/DeleteShipmentForInvoiceOrOrder', ['query' => ['id' => $id]]),
+            )
+        );
+    }
+
+    /**
      * Verzendingen van een order of factuur ophalen voor het opgestuurde nummer.
      *
      * @throws Logic4ApiException
      */
-    public function getShipmentsForInvoiceOrOrder(): OrderShipmentLogic4ResponseList
-    {
+    public function getShipmentsForInvoiceOrOrder(
+        int $value,
+    ): OrderShipmentLogic4ResponseList {
         return OrderShipmentLogic4ResponseList::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/Shipments/GetShipmentsForInvoiceOrOrder'),
+                $this->getClient()->post('/v1/Shipments/GetShipmentsForInvoiceOrOrder', ['json' => $value]),
             )
         );
     }

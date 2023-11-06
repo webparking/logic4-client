@@ -16,8 +16,8 @@ class SalesOrderDeliveryRow
     public static function make(array $data): self
     {
         return new self(
-            rowId: $data['RowId'],
-            amountDelivered: $data['AmountDelivered'],
+            rowId: $data['RowId'] ?? 0,
+            amountDelivered: $data['AmountDelivered'] ?? 0.0,
         );
     }
 }

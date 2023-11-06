@@ -9,7 +9,7 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\ApiUserLogic4ResponseList;
 use Webparking\Logic4Client\Responses\StringLogic4Response;
 
-class User extends Request
+class UserRequest extends Request
 {
     /**
      * Haal alle gebruikers op.
@@ -44,11 +44,11 @@ class User extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateNotice(): StringLogic4Response
+    public function updateNotice(mixed $value): StringLogic4Response
     {
         return StringLogic4Response::make(
             $this->buildResponse(
-                $this->getClient()->post('/v1/User/UpdateNotice'),
+                $this->getClient()->post('/v1/User/UpdateNotice', ['json' => $value]),
             )
         );
     }

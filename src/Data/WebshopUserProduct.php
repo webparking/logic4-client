@@ -30,20 +30,20 @@ class WebshopUserProduct
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            dateTimeAdded: $data['DateTimeAdded'] ? Carbon::parse($data['DateTimeAdded']) : null,
-            productId: $data['ProductId'],
-            qtyDec: $data['QtyDec'],
-            commission: $data['Commission'],
-            excludedFromAnnualBudget: $data['ExcludedFromAnnualBudget'],
-            composedProductParentId: $data['ComposedProductParentId'],
-            typeId: $data['TypeId'],
-            webshopUserId: $data['WebshopUserId'],
-            debtorId: $data['DebtorId'],
-            productInformation: $data['ProductInformation'] ? Product::make($data['ProductInformation']) : null,
-            visitorCode: $data['VisitorCode'],
-            websiteDomainId: $data['WebsiteDomainId'],
-            shoppingCartKey: $data['ShoppingCartKey'],
+            id: $data['Id'] ?? 0,
+            dateTimeAdded: isset($data['DateTimeAdded']) ? Carbon::parse($data['DateTimeAdded']) : null,
+            productId: $data['ProductId'] ?? 0,
+            qtyDec: $data['QtyDec'] ?? null,
+            commission: $data['Commission'] ?? null,
+            excludedFromAnnualBudget: $data['ExcludedFromAnnualBudget'] ?? false,
+            composedProductParentId: $data['ComposedProductParentId'] ?? null,
+            typeId: $data['TypeId'] ?? 0,
+            webshopUserId: $data['WebshopUserId'] ?? null,
+            debtorId: $data['DebtorId'] ?? null,
+            productInformation: isset($data['ProductInformation']) ? Product::make($data['ProductInformation']) : null,
+            visitorCode: $data['VisitorCode'] ?? null,
+            websiteDomainId: $data['WebsiteDomainId'] ?? null,
+            shoppingCartKey: $data['ShoppingCartKey'] ?? null,
         );
     }
 }

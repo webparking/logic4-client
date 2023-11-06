@@ -17,9 +17,9 @@ class Top10Item
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            value: $data['Value'],
+            id: $data['Id'] ?? null,
+            name: $data['Name'] ?? null,
+            value: $data['Value'] ?? 0.0,
         );
     }
 }

@@ -16,8 +16,8 @@ class BuyOrderDeliveryAndOrderMovement
     public static function make(array $data): self
     {
         return new self(
-            buyOrderDeliveryId: $data['BuyOrderDeliveryId'],
-            orderMovementId: $data['OrderMovementId'],
+            buyOrderDeliveryId: $data['BuyOrderDeliveryId'] ?? 0,
+            orderMovementId: $data['OrderMovementId'] ?? 0,
         );
     }
 }

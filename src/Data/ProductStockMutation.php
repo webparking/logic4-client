@@ -27,17 +27,17 @@ class ProductStockMutation
     public static function make(array $data): self
     {
         return new self(
-            productCode: $data['ProductCode'],
-            buyOrderId: $data['BuyOrderId'],
-            mutationDateTime: $data['MutationDateTime'] ? Carbon::parse($data['MutationDateTime']) : null,
-            buyPrice: $data['BuyPrice'],
-            stockMutationType: $data['StockMutationType'],
-            ITSIssueId: $data['ITS_IssueId'],
-            productId: $data['ProductId'],
-            amount: $data['Amount'],
-            remarks: $data['Remarks'],
-            stockLocationId: $data['StockLocationId'],
-            stockMutationTypeId: $data['StockMutationTypeId'],
+            productCode: $data['ProductCode'] ?? null,
+            buyOrderId: $data['BuyOrderId'] ?? null,
+            mutationDateTime: isset($data['MutationDateTime']) ? Carbon::parse($data['MutationDateTime']) : null,
+            buyPrice: $data['BuyPrice'] ?? 0.0,
+            stockMutationType: $data['StockMutationType'] ?? null,
+            ITSIssueId: $data['ITS_IssueId'] ?? null,
+            productId: $data['ProductId'] ?? 0,
+            amount: $data['Amount'] ?? 0.0,
+            remarks: $data['Remarks'] ?? null,
+            stockLocationId: $data['StockLocationId'] ?? 0,
+            stockMutationTypeId: $data['StockMutationTypeId'] ?? 0,
         );
     }
 }

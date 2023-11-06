@@ -19,11 +19,11 @@ class FinancialBook
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            financialBookType: $data['FinancialBookType'],
-            name: $data['Name'],
-            ledgerId: $data['LedgerId'],
-            administrationId: $data['AdministrationId'],
+            id: $data['Id'] ?? 0,
+            financialBookType: $data['FinancialBookType'] ?? 0,
+            name: $data['Name'] ?? null,
+            ledgerId: $data['LedgerId'] ?? null,
+            administrationId: $data['AdministrationId'] ?? 0,
         );
     }
 }

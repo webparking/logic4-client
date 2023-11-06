@@ -21,11 +21,11 @@ class OrderOpenPayment
     public static function make(array $data): self
     {
         return new self(
-            amount: $data['Amount'],
-            amountEx: $data['AmountEx'],
-            endDate: $data['EndDate'] ? Carbon::parse($data['EndDate']) : null,
-            periodDescription: $data['PeriodDescription'],
-            totalPayments: $data['TotalPayments'],
+            amount: $data['Amount'] ?? 0.0,
+            amountEx: $data['AmountEx'] ?? 0.0,
+            endDate: isset($data['EndDate']) ? Carbon::parse($data['EndDate']) : null,
+            periodDescription: $data['PeriodDescription'] ?? null,
+            totalPayments: $data['TotalPayments'] ?? null,
         );
     }
 }

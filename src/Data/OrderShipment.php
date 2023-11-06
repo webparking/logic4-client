@@ -22,12 +22,12 @@ class OrderShipment
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            dateTimeAdded: $data['DateTimeAdded'] ? Carbon::parse($data['DateTimeAdded']) : null,
-            orderId: $data['OrderId'],
-            shipperId: $data['ShipperId'],
-            barcode: $data['Barcode'],
-            trackTraceUrl: $data['TrackTraceUrl'],
+            id: $data['Id'] ?? 0,
+            dateTimeAdded: isset($data['DateTimeAdded']) ? Carbon::parse($data['DateTimeAdded']) : null,
+            orderId: $data['OrderId'] ?? 0,
+            shipperId: $data['ShipperId'] ?? 0,
+            barcode: $data['Barcode'] ?? null,
+            trackTraceUrl: $data['TrackTraceUrl'] ?? null,
         );
     }
 }

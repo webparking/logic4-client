@@ -19,8 +19,8 @@ class WebsiteDomainLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'] ? WebsiteDomain::make($data['Value']) : null,
-            validationMessages: $data['ValidationMessages'],
+            value: isset($data['Value']) ? WebsiteDomain::make($data['Value']) : null,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

@@ -26,15 +26,15 @@ class ProductReview
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            productId: $data['ProductId'],
-            username: $data['Username'],
-            emailAddress: $data['EmailAddress'],
-            dateTimeCreated: $data['DateTimeCreated'] ? Carbon::parse($data['DateTimeCreated']) : null,
-            review: $data['Review'],
-            score: $data['Score'],
-            websiteIds: $data['WebsiteIds'],
-            reaction: $data['Reaction'],
+            id: $data['Id'] ?? 0,
+            productId: $data['ProductId'] ?? null,
+            username: $data['Username'] ?? null,
+            emailAddress: $data['EmailAddress'] ?? null,
+            dateTimeCreated: isset($data['DateTimeCreated']) ? Carbon::parse($data['DateTimeCreated']) : null,
+            review: $data['Review'] ?? null,
+            score: $data['Score'] ?? 0,
+            websiteIds: $data['WebsiteIds'] ?? null,
+            reaction: $data['Reaction'] ?? null,
         );
     }
 }

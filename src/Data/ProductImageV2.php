@@ -17,7 +17,7 @@ class ProductImageV2
     public static function make(array $data): self
     {
         return new self(
-            baseUrl: $data['BaseUrl'],
+            baseUrl: $data['BaseUrl'] ?? null,
             productImages: array_map(static fn (array $item) => GetProductImage::make($item), $data['ProductImages'] ?? []),
         );
     }

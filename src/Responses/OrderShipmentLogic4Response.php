@@ -19,8 +19,8 @@ class OrderShipmentLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'] ? OrderShipment::make($data['Value']) : null,
-            validationMessages: $data['ValidationMessages'],
+            value: isset($data['Value']) ? OrderShipment::make($data['Value']) : null,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

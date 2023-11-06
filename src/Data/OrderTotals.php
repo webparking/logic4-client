@@ -21,13 +21,13 @@ class OrderTotals
     public static function make(array $data): self
     {
         return new self(
-            amountEx: $data['AmountEx'],
-            VATPercentage: $data['VATPercentage'],
-            shippingCost: $data['ShippingCost'],
-            shippingCostIncl: $data['ShippingCostIncl'],
-            calcTotalPayed: $data['Calc_TotalPayed'],
-            amountIncl: $data['AmountIncl'],
-            isPaid: $data['IsPaid'],
+            amountEx: $data['AmountEx'] ?? 0.0,
+            VATPercentage: $data['VATPercentage'] ?? 0.0,
+            shippingCost: $data['ShippingCost'] ?? 0.0,
+            shippingCostIncl: $data['ShippingCostIncl'] ?? null,
+            calcTotalPayed: $data['Calc_TotalPayed'] ?? null,
+            amountIncl: $data['AmountIncl'] ?? 0.0,
+            isPaid: $data['IsPaid'] ?? false,
         );
     }
 }

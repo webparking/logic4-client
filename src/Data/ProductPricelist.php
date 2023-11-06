@@ -23,10 +23,10 @@ class ProductPricelist
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            name: $data['Name'],
-            debtorIds: $data['DebtorIds'],
-            fixedDiscount: $data['FixedDiscount'],
+            id: $data['Id'] ?? 0,
+            name: $data['Name'] ?? null,
+            debtorIds: $data['DebtorIds'] ?? null,
+            fixedDiscount: $data['FixedDiscount'] ?? null,
             contractPrices: array_map(static fn (array $item) => ProductPricelistContractPrice::make($item), $data['ContractPrices'] ?? []),
         );
     }

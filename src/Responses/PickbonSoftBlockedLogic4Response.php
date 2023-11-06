@@ -19,8 +19,8 @@ class PickbonSoftBlockedLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'] ? PickbonSoftBlocked::make($data['Value']) : null,
-            validationMessages: $data['ValidationMessages'],
+            value: isset($data['Value']) ? PickbonSoftBlocked::make($data['Value']) : null,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

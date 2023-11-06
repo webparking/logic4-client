@@ -16,8 +16,8 @@ class EmailAddress
     public static function make(array $data): self
     {
         return new self(
-            name: $data['Name'],
-            email: $data['Email'],
+            name: $data['Name'] ?? null,
+            email: $data['Email'] ?? null,
         );
     }
 }

@@ -44,12 +44,7 @@ class ComponentClassGenerator
                     $type = $this->resolve($parameter->getReference(), 'Data');
                     $typedParameters[$parameterName] = $type;
                 } else {
-                    $type = match ($parameter->type) {
-                        'integer' => 'int',
-                        'number' => 'float',
-                        'boolean' => 'bool',
-                        default => $parameter->type,
-                    };
+                    $type = Helpers::phpType($parameter->type, $parameter->type);
 
                     if ('string' === $parameter->type && 'date-time' === $parameter->format) {
                         $type = Carbon::class;
@@ -79,9 +74,22 @@ class ComponentClassGenerator
             }
 
             $makeMethod = "return new self(\n";
-            foreach (array_keys($component->properties) as $property) {
+            foreach ($component->properties as $property => $propertyObject) {
+                $constructorProperty = $constructor->getParameter($this->propertyName($property));
+
+                $default = $constructorProperty->isNullable()
+                    ? ' ?? null'
+                    : match ($constructorProperty->getType()) {
+                        'int' => ' ?? 0',
+                        'float' => ' ?? 0.0',
+                        'bool' => ' ?? false',
+                        'string' => ' ?? \'\'',
+                        'array' => ' ?? []',
+                        default => ' ?? null',
+                    };
+
                 $assignment = null;
-                $assignmentValue = "\$data['$property']";
+                $assignmentValue = "\$data['$property']$default";
                 if ($typedParameter = $typedParameters[$property] ?? null) {
                     $assignment = "\\$typedParameter::make(\$data['$property'])";
                 } elseif ($arrayParameter = $arrayParameters[$property] ?? null) {
@@ -93,7 +101,7 @@ class ComponentClassGenerator
                 if (null === $assignment) {
                     $assignment = $assignmentValue;
                 } else {
-                    $assignment = "\$data['$property'] ? $assignment : null";
+                    $assignment = "isset(\$data['$property']) ? $assignment : null";
                 }
 
                 $makeMethod .= "\t{$this->propertyName($property)}: $assignment,\n";

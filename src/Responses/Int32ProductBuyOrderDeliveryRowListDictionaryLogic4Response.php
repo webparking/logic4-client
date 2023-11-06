@@ -17,8 +17,8 @@ class Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: $data['Value'],
-            validationMessages: $data['ValidationMessages'],
+            value: $data['Value'] ?? null,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

@@ -28,18 +28,18 @@ class CRMProject
     public static function make(array $data): self
     {
         return new self(
-            id: $data['id'],
-            name: $data['Name'],
-            createdOnDateTime: $data['CreatedOnDateTime'] ? Carbon::parse($data['CreatedOnDateTime']) : null,
-            dateTimeStart: $data['DateTimeStart'] ? Carbon::parse($data['DateTimeStart']) : null,
-            dateTimeEnd: $data['DateTimeEnd'] ? Carbon::parse($data['DateTimeEnd']) : null,
-            createdByUserId: $data['CreatedByUserId'],
-            shortDescription: $data['ShortDescription'],
-            status: $data['Status'] ? CRMProjectStatus::make($data['Status']) : null,
-            type: $data['Type'] ? CRMProjectType::make($data['Type']) : null,
-            responsibleByUserId: $data['ResponsibleByUserId'],
-            responsibleByUserName: $data['ResponsibleByUserName'],
-            projectValue: $data['ProjectValue'],
+            id: $data['id'] ?? 0,
+            name: $data['Name'] ?? null,
+            createdOnDateTime: isset($data['CreatedOnDateTime']) ? Carbon::parse($data['CreatedOnDateTime']) : null,
+            dateTimeStart: isset($data['DateTimeStart']) ? Carbon::parse($data['DateTimeStart']) : null,
+            dateTimeEnd: isset($data['DateTimeEnd']) ? Carbon::parse($data['DateTimeEnd']) : null,
+            createdByUserId: $data['CreatedByUserId'] ?? 0,
+            shortDescription: $data['ShortDescription'] ?? null,
+            status: isset($data['Status']) ? CRMProjectStatus::make($data['Status']) : null,
+            type: isset($data['Type']) ? CRMProjectType::make($data['Type']) : null,
+            responsibleByUserId: $data['ResponsibleByUserId'] ?? null,
+            responsibleByUserName: $data['ResponsibleByUserName'] ?? null,
+            projectValue: $data['ProjectValue'] ?? null,
         );
     }
 }

@@ -17,9 +17,9 @@ class VatCode
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            percent: $data['Percent'],
-            name: $data['Name'],
+            id: $data['Id'] ?? 0,
+            percent: $data['Percent'] ?? 0.0,
+            name: $data['Name'] ?? null,
         );
     }
 }

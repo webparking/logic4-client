@@ -50,6 +50,7 @@ class Generator
                 'post' => $pathItem->post,
                 'patch' => $pathItem->patch,
                 'put' => $pathItem->put,
+                'delete' => $pathItem->delete,
             ];
 
             foreach ($methods as $method => $operation) {
@@ -90,7 +91,7 @@ class Generator
     {
         $requestGenerator = new RequestClassGenerator(
             namespace: $this->namespace,
-            className: $namespace,
+            className: $namespace.'Request',
             componentClassGenerator: $this->componentClassGenerator,
         );
 

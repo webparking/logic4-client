@@ -24,8 +24,8 @@ class SalesOrderDeliveryLogic4ResponseList
     {
         return new self(
             records: array_map(static fn (array $item) => SalesOrderDelivery::make($item), $data['Records'] ?? []),
-            recordsCounter: $data['RecordsCounter'],
-            validationMessages: $data['ValidationMessages'],
+            recordsCounter: $data['RecordsCounter'] ?? 0,
+            validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
 }

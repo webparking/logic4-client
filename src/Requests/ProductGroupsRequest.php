@@ -9,20 +9,20 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\ProductGroupLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductGroupTypeLogic4ResponseList;
 
-class ProductGroups extends Request
+class ProductGroupsRequest extends Request
 {
     /**
      * Verkrijg artikelgroepen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     IsTopLevelGroup?: boolean,
-     *     Name?: string,
-     *     IsVisibleOnWebShop?: boolean,
-     *     ParentId?: integer,
-     *     HasProductsVisibleOnWebshop?: boolean,
-     *     ProductGroupTypeId?: integer,
-     *     WebsiteDomainId?: integer,
-     *     GlobalisationId?: integer,
+     *     IsTopLevelGroup?: boolean|null,
+     *     Name?: string|null,
+     *     IsVisibleOnWebShop?: boolean|null,
+     *     ParentId?: integer|null,
+     *     HasProductsVisibleOnWebshop?: boolean|null,
+     *     ProductGroupTypeId?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     GlobalisationId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException

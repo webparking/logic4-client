@@ -16,8 +16,8 @@ class BarcodeWithAmount
     public static function make(array $data): self
     {
         return new self(
-            qty: $data['Qty'],
-            barcode: $data['Barcode'],
+            qty: $data['Qty'] ?? 0,
+            barcode: $data['Barcode'] ?? null,
         );
     }
 }

@@ -17,9 +17,9 @@ class TypeLedgerColumn
     public static function make(array $data): self
     {
         return new self(
-            id: $data['Id'],
-            value: $data['Value'],
-            sortId: $data['SortId'],
+            id: $data['Id'] ?? 0,
+            value: $data['Value'] ?? null,
+            sortId: $data['SortId'] ?? 0,
         );
     }
 }
