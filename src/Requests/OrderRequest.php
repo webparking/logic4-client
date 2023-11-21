@@ -27,7 +27,7 @@ class OrderRequest extends Request
     /**
      * @param array{
      *     SerialNumberTypeId?: integer|null,
-     *     OrderRowSerialNumbers?: array<mixed>|null,
+     *     OrderRowSerialNumbers?: array<array{SerialNumber?: string, OrderRowId?: integer}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -76,7 +76,7 @@ class OrderRequest extends Request
      *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
      *     DebtorId?: integer|null,
      *     Id?: integer|null,
-     *     OrderRows?: array<mixed>|null,
+     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: boolean, UseSystemPricesForProductCompositionProducts?: boolean}, InclPrice?: number, GrossInclPrice?: number, Id?: integer, Description?: string, Description2?: string, ProductId?: integer, Qty?: number, BuyPrice?: number, GrossPrice?: number, NettPrice?: number, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string, ProductBarcode1?: string, VATPercentage?: number, Notes?: string, DebtorId?: integer, OrderId?: integer, WarehouseId?: integer, Commission?: string, DeliveryOptionId?: integer, VatCodeId?: integer, VatCodeIdOverrule?: integer, FreeValue1?: string, FreeValue2?: string, FreeValue3?: string, FreeValue4?: string, FreeValue5?: string, ExpectedNextDelivery?: string, ExternalValue?: array{TypeId?: integer, Value?: string}, AgreedDeliveryDate?: string, Type1Id?: integer, Type2Id?: integer, Type3Id?: integer, Type4Id?: integer, Type5Id?: integer}>|null,
      *     AcceptTermsAndConditions?: boolean|null,
      *     CreationDate?: string|null,
      *     Description?: string|null,
@@ -126,7 +126,7 @@ class OrderRequest extends Request
      *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
      *     DebtorId?: integer|null,
      *     Id?: integer|null,
-     *     OrderRows?: array<mixed>|null,
+     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: boolean, UseSystemPricesForProductCompositionProducts?: boolean}, InclPrice?: number, GrossInclPrice?: number, Id?: integer, Description?: string, Description2?: string, ProductId?: integer, Qty?: number, BuyPrice?: number, GrossPrice?: number, NettPrice?: number, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string, ProductBarcode1?: string, VATPercentage?: number, Notes?: string, DebtorId?: integer, OrderId?: integer, WarehouseId?: integer, Commission?: string, DeliveryOptionId?: integer, VatCodeId?: integer, VatCodeIdOverrule?: integer, FreeValue1?: string, FreeValue2?: string, FreeValue3?: string, FreeValue4?: string, FreeValue5?: string, ExpectedNextDelivery?: string, ExternalValue?: array{TypeId?: integer, Value?: string}, AgreedDeliveryDate?: string, Type1Id?: integer, Type2Id?: integer, Type3Id?: integer, Type4Id?: integer, Type5Id?: integer}>|null,
      *     AcceptTermsAndConditions?: boolean|null,
      *     CreationDate?: string|null,
      *     Description?: string|null,
@@ -630,9 +630,7 @@ class OrderRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getSerialnumberTypes(): OrderLogic4ResponseList
     {
         return OrderLogic4ResponseList::make(

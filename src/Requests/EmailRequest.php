@@ -97,9 +97,9 @@ class EmailRequest extends Request
      *     IsRead?: boolean|null,
      *     IsReplyedOn?: string|null,
      *     IsForwardedOn?: string|null,
-     *     ToEmailAddresses?: array<mixed>|null,
-     *     CCEmailAddresses?: array<mixed>|null,
-     *     BCCEmailAddresses?: array<mixed>|null,
+     *     ToEmailAddresses?: array<array{Name?: string, Email?: string}>|null,
+     *     CCEmailAddresses?: array<array{Name?: string, Email?: string}>|null,
+     *     BCCEmailAddresses?: array<array{Name?: string, Email?: string}>|null,
      *     HasAttachment?: boolean|null,
      *     PreviousEmailId?: integer|null,
      *     CanDelete?: boolean|null,
@@ -116,9 +116,7 @@ class EmailRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function deleteEmailAttachment(int $value): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
@@ -142,9 +140,7 @@ class EmailRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function deleteEmailMessage(int $value): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
@@ -245,9 +241,7 @@ class EmailRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getEmailMessageStatuses(): EmailMessageStatusLogic4Response
     {
         return EmailMessageStatusLogic4Response::make(
@@ -257,9 +251,7 @@ class EmailRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getEmailUser(): EmailUserLogic4Response
     {
         return EmailUserLogic4Response::make(
@@ -269,9 +261,7 @@ class EmailRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getUsedEmailAddresses(): EmailAddressLogic4Response
     {
         return EmailAddressLogic4Response::make(
@@ -318,9 +308,9 @@ class EmailRequest extends Request
      *     IsRead?: boolean|null,
      *     IsReplyedOn?: string|null,
      *     IsForwardedOn?: string|null,
-     *     ToEmailAddresses?: array<mixed>|null,
-     *     CCEmailAddresses?: array<mixed>|null,
-     *     BCCEmailAddresses?: array<mixed>|null,
+     *     ToEmailAddresses?: array<array{Name?: string, Email?: string}>|null,
+     *     CCEmailAddresses?: array<array{Name?: string, Email?: string}>|null,
+     *     BCCEmailAddresses?: array<array{Name?: string, Email?: string}>|null,
      *     HasAttachment?: boolean|null,
      *     PreviousEmailId?: integer|null,
      *     CanDelete?: boolean|null,

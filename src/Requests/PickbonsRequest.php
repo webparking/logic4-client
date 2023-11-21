@@ -188,8 +188,8 @@ class PickbonsRequest extends Request
      *
      * @param array{
      *     AmountOfColli?: integer|null,
-     *     Corrections?: array<mixed>|null,
-     *     Mutations?: array<mixed>|null,
+     *     Corrections?: array<array{OrderRowId?: integer, OrderHeadPickbonId?: integer, Qty?: number}>|null,
+     *     Mutations?: array<array{OrderHeadPickbonRowId?: integer, WarehouseStockLocationId?: integer, MutationAmount?: number}>|null,
      *     OrderHeadPickbonId?: integer|null,
      *     Remarks?: string|null,
      * } $parameters
@@ -210,8 +210,8 @@ class PickbonsRequest extends Request
      *
      * @param array<array{
      *     AmountOfColli?: integer|null,
-     *     Corrections?: array<mixed>|null,
-     *     Mutations?: array<mixed>|null,
+     *     Corrections?: array<array{OrderRowId?: integer, OrderHeadPickbonId?: integer, Qty?: number}>|null,
+     *     Mutations?: array<array{OrderHeadPickbonRowId?: integer, WarehouseStockLocationId?: integer, MutationAmount?: number}>|null,
      *     OrderHeadPickbonId?: integer|null,
      *     Remarks?: string|null,
      * }> $parameters
