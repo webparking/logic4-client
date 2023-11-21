@@ -15,7 +15,7 @@ class DeliveryRequest extends Request
      * Maak een nieuwe uitlevering aan o.b.v. opgestuurde orderregels. Het systeem bepaalt automatisch vanaf welke voorraadlocatie de voorraad afgeboekt wordt.
      *
      * @param array{
-     *     DeliveryRows?: array<mixed>|null,
+     *     DeliveryRows?: array<array{RowId?: integer, AmountToDeliver?: number}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

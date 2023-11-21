@@ -42,10 +42,10 @@ class ProductRequest extends Request
      *     ProductGroup3?: integer|null,
      *     ProductGroup4?: integer|null,
      *     UnitId?: integer|null,
-     *     Suppliers?: array<mixed>|null,
+     *     Suppliers?: array<array{SupplierId?: integer, Supplier_ProductCode?: string, ProductName?: string, ProductCountIncrement?: integer, ShippingTime?: integer, MinOrderQuantity?: integer, RepackagingUnitId?: integer, RepackagingQty?: integer, InternalNote?: string, DiscountGroupId?: integer, ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number, Quantity?: integer, LastSyncDate?: string}>}>|null,
      *     Barcode1?: string|null,
      *     Barcode2?: string|null,
-     *     ExtraBarcodes?: array<mixed>|null,
+     *     ExtraBarcodes?: array<array{Barcode?: string, Quantity?: integer, UnitId?: integer}>|null,
      *     VendorCode?: string|null,
      *     StatusId?: integer|null,
      *     VisibleOnWebshopFrom?: string|null,
@@ -63,7 +63,7 @@ class ProductRequest extends Request
      *     FreeValue3?: string|null,
      *     FreeValue4?: string|null,
      *     FreeValue5?: string|null,
-     *     ProductPrices?: array<mixed>|null,
+     *     ProductPrices?: array<array{Quantity?: integer, BuyPrice?: number, SellPrice?: number}>|null,
      *     WeightSingleProduct?: number|null,
      *     HeightSingleProduct?: number|null,
      *     WidthSingleProduct?: number|null,
@@ -719,7 +719,7 @@ class ProductRequest extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     ProductPrices?: array<mixed>|null,
+     *     ProductPrices?: array<array{Quantity?: integer, BuyPrice?: number, SellPrice?: number}>|null,
      *     ProductId?: integer|null,
      * } $parameters
      *
@@ -781,7 +781,7 @@ class ProductRequest extends Request
      * @param array{
      *     ProductId?: integer|null,
      *     SupplierId?: integer|null,
-     *     ProductPrices?: array<mixed>|null,
+     *     ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number, Quantity?: integer, LastSyncDate?: string}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

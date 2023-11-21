@@ -55,6 +55,6 @@ abstract class Request
             }
 
             $body['SkipRecords'] += $body['TakeRecords'];
-        } while ($response['RecordsCounter'] === $body['TakeRecords']);
+        } while ($response['RecordsCounter'] === $body['TakeRecords'] && $response['RecordsCounter'] > 0);
     }
 }

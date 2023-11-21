@@ -9,6 +9,7 @@ use cebe\openapi\spec\Schema;
 
 class Helpers
 {
+    /** @param string|string[] $keepFiles */
     public static function emptyDirectory(string $path, string|array $keepFiles = null): void
     {
         if (!is_dir($path)) {
@@ -44,6 +45,12 @@ class Helpers
     public static function resolveParameterType(Schema $property): string
     {
         if ('array' === $property->type) {
+            if ($property->items instanceof Reference) {
+                $property = clone $property;
+
+                $property->resolveReferences();
+            }
+
             if ($property->items instanceof Schema) {
                 $type = sprintf('array<%s>', self::resolveParameterType($property->items));
             } else {
