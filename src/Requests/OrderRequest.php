@@ -630,9 +630,7 @@ class OrderRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getSerialnumberTypes(): OrderLogic4ResponseList
     {
         return OrderLogic4ResponseList::make(
