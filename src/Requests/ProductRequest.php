@@ -12,7 +12,6 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BasicProductDataLogic4ResponseList;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
 use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\Logic4Response;
 use Webparking\Logic4Client\Responses\ProductAssemblyRecipeItemLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductBarcodeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductCodeWithSupplierCodeLogic4ResponseList;
@@ -703,8 +702,8 @@ class ProductRequest extends Request
      */
     public function updateProductMainGroupAndBrand(
         array $parameters = [],
-    ): Logic4Response {
-        return Logic4Response::make(
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1.1/Products/UpdateProductMainGroupAndBrand', ['json' => $parameters]),
             )

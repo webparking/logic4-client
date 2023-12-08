@@ -96,6 +96,14 @@ composer install
 ## Contributing
 Please report any issue you find in the issues page. Pull requests are more than welcome.
 
+### Generating endpoints
+
+The endpoints can automatically be generated using the `generate` command. This command will generate a request class for each endpoint and a client class that can be used to instantiate the request classes.
+
+```bash
+make generate
+``` 
+
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Responses;
 
-class Logic4Response
+use Webparking\Logic4Client\Data\DatabaseConfiguration;
+
+class DatabaseConfigurationLogic4Response
 {
     /** @param array<string> $validationMessages */
     public function __construct(
+        public ?DatabaseConfiguration $value,
         public array $validationMessages,
     ) {
     }
@@ -16,6 +19,7 @@ class Logic4Response
     public static function make(array $data): self
     {
         return new self(
+            value: isset($data['Value']) ? DatabaseConfiguration::make($data['Value']) : null,
             validationMessages: $data['ValidationMessages'] ?? [],
         );
     }
