@@ -434,11 +434,10 @@ class StockRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @note This request is manually changed as the Logic4 documentation does not match the actual response.
      */
-    public function setExternalStockForSupplier(array $parameters = []): BooleanLogic4Response
-    {
+    public function setExternalStockForSupplier(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Stock/SetExternalStockForSupplier', ['json' => $parameters]),

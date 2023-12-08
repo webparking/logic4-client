@@ -7,9 +7,24 @@ namespace Webparking\Logic4Client\Requests;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\DatabaseConfigurationLogic4Response;
 
 class BackOfficeRequest extends Request
 {
+    /**
+     * Verkrijg de instellingen in de database configuratie.
+     *
+     * @throws Logic4ApiException
+     */
+    public function getDatabaseConfiguration(): DatabaseConfigurationLogic4Response
+    {
+        return DatabaseConfigurationLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1/Backoffice/GetDatabaseConfiguration'),
+            )
+        );
+    }
+
     /**
      * Maak een nieuwe taak aan.
      *

@@ -226,6 +226,7 @@ class OrderRequest extends Request
 
     /**
      * Maak en verwerk een factuur o.b.v. te factureren regels op een order.
+     * Geef als argument de Id van de order.
      *
      * @throws Logic4ApiException
      */
@@ -636,6 +637,22 @@ class OrderRequest extends Request
         return OrderLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetSerialnumberTypes'),
+            )
+        );
+    }
+
+    /**
+     * Maakt een factuur aan, werkt voorraadmutaties bij, maakt financiële boekingen voor kosten en omzet aan,
+     * zet het bedrag van de order naar de de factuur en zet de factuur op gesloten.
+     * Geef als argument de Id van de factuur.
+     *
+     * @throws Logic4ApiException
+     */
+    public function processInvoice(int $value): Int32Logic4Response
+    {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Orders/ProcessInvoice', ['json' => $value]),
             )
         );
     }
