@@ -1,4 +1,9 @@
-<img src="./assets/webparking_logic4_client.png">
+![Header image](./assets/webparking_logic4_client.png)
+
+![Packagist](https://img.shields.io/packagist/v/webparking/logic4-client.svg?style=flat-round&logo=packagist)
+![License](https://img.shields.io/packagist/l/webparking/logic4-client.svg?style=flat-round)
+![Github stars](https://img.shields.io/github/stars/webparking/logic4-client?style=flat-round&logo=github)
+![Downloads](https://img.shields.io/packagist/dt/webparking/logic4-client.svg?style=flat-round)
 
 # Logic4 client
 Please note that this API client is not created or maintained by Logic4. For questions about Logic4 or it's API please contact Logic4 support. 
