@@ -20,7 +20,7 @@
         "phpstan/phpstan-mockery": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^10.4",
-        "rector/rector": "^0.18.6",
+        "rector/rector": "^0.19.0",
         "rregeer/phpunit-coverage-check": "^0.3.1",
         "symfony/var-dumper": "^6.3"
     },
@@ -50,6 +50,11 @@
             "composer php-cs-fixer",
             "@php vendor/bin/phpunit --coverage-clover=coverage.xml",
             "composer check-coverage"
+        ],
+        "generate-endpoints": [
+            "@php generate.php",
+            "vendor/bin/rector process --no-diffs --ansi --memory-limit=2G",
+            "vendor/bin/php-cs-fixer fix"
         ]
     },
     "config": {
