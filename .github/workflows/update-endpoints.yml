@@ -1,0 +1,62 @@
+name: Generate and create PR
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 9 * * *'
+
+jobs:
+  update_endpoints:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Validate composer.json
+        run: composer validate
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run generator
+        run: composer generate-endpoints
+
+      - name: Get list of changed files
+        id: diff
+        run: |
+          git diff --name-only | grep -v logic4-api.json > changed_files.txt
+          echo "::set-output name=files::$(cat changed_files.txt)"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update endpoints"
+          title: "Update endpoints based on changes in Logic4 documentation"
+          body: |
+            I have found some changes in the Logic4 documentation! This PR updates the generators. Here are the changed files:
+            ```
+            ${{ steps.diff.outputs.files }}
+            ```
+          branch: "feature/update-endpoints"
+          labels: |
+            logic4
+            automated pr
+          reviewers: |
+            rubenwebparking
+            lreijmer
