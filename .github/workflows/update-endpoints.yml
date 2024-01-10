@@ -39,8 +39,7 @@ jobs:
       - name: Get list of changed files
         id: diff
         run: |
-          git diff --name-only | grep -v logic4-api.json > changed_files.txt
-          echo "::set-output name=files::$(cat changed_files.txt)"
+          echo "CHANGED_FILES=$(git diff --name-only)" >> $GITHUB_ENV
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
@@ -51,7 +50,7 @@ jobs:
           body: |
             I have found some changes in the Logic4 documentation! This PR updates the generators. Here are the changed files:
             ```
-            ${{ steps.diff.outputs.files }}
+             ${{ env.CHANGED_FILES }}
             ```
           branch: "feature/update-endpoints"
           labels: |
