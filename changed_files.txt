@@ -1,0 +1,5 @@
+src/Requests/EmailRequest.php
+src/Requests/ITSRequest.php
+src/Requests/OrderRequest.php
+src/Requests/ProductRequest.php
+src/Requests/TypeRequest.php
