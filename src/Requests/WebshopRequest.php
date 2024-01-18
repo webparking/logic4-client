@@ -6,6 +6,7 @@ namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\WebshopOrderlistProduct;
 use Webparking\Logic4Client\Data\WebshopSearchWord;
+use Webparking\Logic4Client\Data\WebshopVisitorBehaviour;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
@@ -93,6 +94,34 @@ class WebshopRequest extends Request
                 $this->getClient()->post('/v1/Webshop/DeleteWebshopUserProductOnWebshopUserProductList', ['json' => $value]),
             )
         );
+    }
+
+    /**
+     * Wanneer het type "LastViewed" is geselecteerd, houd er dan rekening mee dat alleen de laatste 8 bekeken artikelen worden opgeslagen.
+     * Wanneer een samengesteld artikel tot de collectie behoort, wordt alleen dit moederartikel in de aangegeven hoeveelheid getoond;
+     * de aantallen kindartikelen zijn altijd in verhouding tot 1 moederartikel.
+     *
+     * @param array{
+     *     WebshopUserProductListType?: string|null,
+     *     WebsiteDomainId?: integer|null,
+     *     DebtorId?: integer|null,
+     *     FromCreatedDateTime?: string|null,
+     *     FromLastModifiedDateTime?: string|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, WebshopVisitorBehaviour>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getVisitorBehaviorForDebtor(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Webshop/GetVisitorBehaviorForDebtor', $parameters);
+
+        foreach ($iterator as $record) {
+            yield WebshopVisitorBehaviour::make($record);
+        }
     }
 
     /**
