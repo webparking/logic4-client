@@ -113,9 +113,7 @@ class ProductRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function deleteProductImage(
         int $productid,
         int $imageid,
@@ -144,9 +142,7 @@ class ProductRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getBarcodeTypes(): ProductExtraBarcodeTypeLogic4ResponseList
     {
         return ProductExtraBarcodeTypeLogic4ResponseList::make(

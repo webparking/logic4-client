@@ -51,7 +51,7 @@ final class OrderRequestTest extends TestCase
     public function testPostReturnOrders(): void
     {
         $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
-            $orderData = get_class_vars(\Webparking\Logic4Client\Data\Order::class);
+            $orderData = get_class_vars(\Webparking\Logic4Client\Data\ReturnOrderV2::class);
             $orderData = [
                 ...array_combine(array_map(ucfirst(...), array_keys($orderData)), array_values($orderData)),
                 'DebtorId' => 51,
@@ -60,7 +60,13 @@ final class OrderRequestTest extends TestCase
 
             $mock->shouldReceive('post')
                 ->once()
-                ->with('/v1.1/Orders/GetReturnOrders', ['json' => ['StatusId' => 9]])
+                ->with('/v2/Orders/GetReturnOrders', [
+                    'json' => [
+                        'TakeRecords' => 1000,
+                        'SkipRecords' => 0,
+                        'StatusId' => 9,
+                    ],
+                ])
                 ->andReturn(new Response(body: json_encode([
                     'Records' => [
                         $orderData,
@@ -79,11 +85,10 @@ final class OrderRequestTest extends TestCase
         $response = (new OrderRequest($clientFactory))->getReturnOrders([
             'StatusId' => 9,
         ]);
+        $data = iterator_to_array($response);
 
-        static::assertSame(1, $response->recordsCounter);
-        static::assertSame([], $response->validationMessages);
-        static::assertCount(1, $response->records);
-        static::assertSame(51, $response->records[0]->debtorId);
-        static::assertSame(9912, $response->records[0]->id);
+        static::assertCount(1, $data);
+        static::assertSame(51, $data[0]->debtorId);
+        static::assertSame(9912, $data[0]->id);
     }
 }

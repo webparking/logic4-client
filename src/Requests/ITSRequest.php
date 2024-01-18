@@ -17,9 +17,7 @@ use Webparking\Logic4Client\Responses\ITSTaskPriorityLogic4ResponseList;
 
 class ITSRequest extends Request
 {
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getFreeValues1(): ITSFreeValueLogic4ResponseList
     {
         return ITSFreeValueLogic4ResponseList::make(
@@ -29,9 +27,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getFreeValues2(): ITSFreeValueLogic4ResponseList
     {
         return ITSFreeValueLogic4ResponseList::make(
@@ -41,9 +37,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getFreeValues3(): ITSFreeValueLogic4ResponseList
     {
         return ITSFreeValueLogic4ResponseList::make(
@@ -53,9 +47,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueGroups(): ITSIssueGroupLogic4ResponseList
     {
         return ITSIssueGroupLogic4ResponseList::make(
@@ -65,9 +57,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueLevels(): ITSIssueLevelLogic4ResponseList
     {
         return ITSIssueLevelLogic4ResponseList::make(
@@ -113,9 +103,7 @@ class ITSRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueStatusses(): ITSIssueStatusLogic4ResponseList
     {
         return ITSIssueStatusLogic4ResponseList::make(
@@ -125,9 +113,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueTypes(): ITSIssueTypeLogic4ResponseList
     {
         return ITSIssueTypeLogic4ResponseList::make(
@@ -151,9 +137,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getTaskPriorities(): ITSTaskPriorityLogic4ResponseList
     {
         return ITSTaskPriorityLogic4ResponseList::make(

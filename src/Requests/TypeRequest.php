@@ -60,9 +60,7 @@ class TypeRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getProductRelationTypes(): ProductRelationTypeLogic4ResponseList
     {
         return ProductRelationTypeLogic4ResponseList::make(
