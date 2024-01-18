@@ -6,6 +6,7 @@ namespace Webparking\Logic4Client\Requests;
 
 use Webparking\Logic4Client\Data\Order;
 use Webparking\Logic4Client\Data\OrderOpenPayment;
+use Webparking\Logic4Client\Data\ReturnOrderV2;
 use Webparking\Logic4Client\Data\ReturnProblem;
 use Webparking\Logic4Client\Data\ReturnSolution;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
@@ -235,6 +236,62 @@ class OrderRequest extends Request
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/CreateAndProcessInvoiceForOrder', ['json' => $value]),
+            )
+        );
+    }
+
+    /**
+     * Een nieuwe retouropdracht aanmaken, het is alleen mogelijk om een retouropdracht aan te maken voor een bestaande order.
+     * Alle details van de retouropdracht(OriginalOrderId, ProblemId, SolutionId, ReceivedReturnOrderDate) moeten geldig zijn.
+     * Specificeer een negatieve waarde voor Qty in elke orderregel. Bij het succesvol aanmaken bevat de response het nummer van de retourorder.
+     *
+     * @param array{
+     *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
+     *     OriginalOrderId?: integer|null,
+     *     OriginalOrderDate?: string|null,
+     *     OriginalOrderZipCode?: string|null,
+     *     ProblemId?: integer|null,
+     *     SolutionId?: integer|null,
+     *     ReceivedReturnOrderDate?: string|null,
+     *     ApprovedReturnOrderDate?: string|null,
+     *     DebtorId?: integer|null,
+     *     Id?: integer|null,
+     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: boolean, UseSystemPricesForProductCompositionProducts?: boolean}, InclPrice?: number, GrossInclPrice?: number, Id?: integer, Description?: string, Description2?: string, ProductId?: integer, Qty?: number, BuyPrice?: number, GrossPrice?: number, NettPrice?: number, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string, ProductBarcode1?: string, VATPercentage?: number, Notes?: string, DebtorId?: integer, OrderId?: integer, WarehouseId?: integer, Commission?: string, DeliveryOptionId?: integer, VatCodeId?: integer, VatCodeIdOverrule?: integer, FreeValue1?: string, FreeValue2?: string, FreeValue3?: string, FreeValue4?: string, FreeValue5?: string, ExpectedNextDelivery?: string, ExternalValue?: array{TypeId?: integer, Value?: string}, AgreedDeliveryDate?: string, Type1Id?: integer, Type2Id?: integer, Type3Id?: integer, Type4Id?: integer, Type5Id?: integer}>|null,
+     *     AcceptTermsAndConditions?: boolean|null,
+     *     CreationDate?: string|null,
+     *     Description?: string|null,
+     *     Reference?: string|null,
+     *     BranchId?: integer|null,
+     *     UserId?: integer|null,
+     *     WebsiteDomainId?: integer|null,
+     *     DeliveryOptionId?: integer|null,
+     *     DeliveryDate?: string|null,
+     *     Notes?: string|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     FreeValue4?: string|null,
+     *     FreeValue5?: string|null,
+     *     FreeValue6?: string|null,
+     *     FreeValue7?: string|null,
+     *     FreeValue8?: string|null,
+     *     OrderType1Id?: integer|null,
+     *     OrderType2Id?: integer|null,
+     *     OrderType3Id?: integer|null,
+     *     OrderType4Id?: integer|null,
+     *     OrderType5Id?: integer|null,
+     *     OrderType6Id?: integer|null,
+     *     OrderType7Id?: integer|null,
+     *     OrderType8Id?: integer|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function createReturnOrder(array $parameters = []): Int32Logic4Response
+    {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Orders/CreateReturnOrder', ['json' => $parameters]),
             )
         );
     }
@@ -546,6 +603,10 @@ class OrderRequest extends Request
      * Verkrijg retourorders o.b.v. het meegestuurde filter.
      *
      * @param array{
+     *     ReceivedReturnOrderDateFrom?: string|null,
+     *     ReceivedReturnOrderDateTo?: string|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
      *     SolutionId?: integer|null,
      *     ProblemId?: integer|null,
      *     CategoryId?: integer|null,
@@ -578,15 +639,17 @@ class OrderRequest extends Request
      *     Type3Id?: integer|null,
      * } $parameters
      *
+     * @return \Generator<array-key, ReturnOrderV2>
+     *
      * @throws Logic4ApiException
      */
-    public function getReturnOrders(array $parameters = []): OrderLogic4ResponseList
+    public function getReturnOrders(array $parameters = []): \Generator
     {
-        return OrderLogic4ResponseList::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1.1/Orders/GetReturnOrders', ['json' => $parameters]),
-            )
-        );
+        $iterator = $this->paginateRecords('/v2/Orders/GetReturnOrders', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ReturnOrderV2::make($record);
+        }
     }
 
     /**

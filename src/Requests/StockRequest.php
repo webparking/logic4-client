@@ -401,7 +401,7 @@ class StockRequest extends Request
      * Return True wanneer gelukt, anders foutmelding.
      *
      * @param array{
-     *     Items?: array<array{ProductId?: integer, MutationAmount?: number}>|null,
+     *     Items?: array<array{ProductId?: integer, MutationAmount?: number, OrderHeadPickbonId?: integer}>|null,
      *     FromStockLocationId?: integer|null,
      *     FromWarehouseId?: integer|null,
      *     ToStockLocationId?: integer|null,
