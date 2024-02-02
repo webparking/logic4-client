@@ -116,7 +116,9 @@ class EmailRequest extends Request
         );
     }
 
-    /** @throws Logic4ApiException */
+    /**
+     * @throws Logic4ApiException
+     */
     public function deleteEmailAttachment(int $value): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
@@ -140,7 +142,9 @@ class EmailRequest extends Request
         );
     }
 
-    /** @throws Logic4ApiException */
+    /**
+     * @throws Logic4ApiException
+     */
     public function deleteEmailMessage(int $value): BooleanLogic4Response
     {
         return BooleanLogic4Response::make(
@@ -241,7 +245,9 @@ class EmailRequest extends Request
         );
     }
 
-    /** @throws Logic4ApiException */
+    /**
+     * @throws Logic4ApiException
+     */
     public function getEmailMessageStatuses(): EmailMessageStatusLogic4Response
     {
         return EmailMessageStatusLogic4Response::make(
@@ -251,7 +257,9 @@ class EmailRequest extends Request
         );
     }
 
-    /** @throws Logic4ApiException */
+    /**
+     * @throws Logic4ApiException
+     */
     public function getEmailUser(): EmailUserLogic4Response
     {
         return EmailUserLogic4Response::make(
@@ -261,7 +269,9 @@ class EmailRequest extends Request
         );
     }
 
-    /** @throws Logic4ApiException */
+    /**
+     * @throws Logic4ApiException
+     */
     public function getUsedEmailAddresses(): EmailAddressLogic4Response
     {
         return EmailAddressLogic4Response::make(
