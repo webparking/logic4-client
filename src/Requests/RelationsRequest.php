@@ -9,6 +9,7 @@ use Webparking\Logic4Client\Data\CreditorDiscount;
 use Webparking\Logic4Client\Data\Customer;
 use Webparking\Logic4Client\Data\CustomerAddress;
 use Webparking\Logic4Client\Data\CustomerContact;
+use Webparking\Logic4Client\Data\DebtorCharacteristic;
 use Webparking\Logic4Client\Data\Representative;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
@@ -503,6 +504,27 @@ class RelationsRequest extends Request
 
         foreach ($iterator as $record) {
             yield Customer::make($record);
+        }
+    }
+
+    /**
+     * @param array{
+     *     DebtorIds?: array<integer>|null,
+     *     LastCharacteristicChangeDateTime?: string|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, DebtorCharacteristic>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getCustomersCharacteristics(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Relations/GetCustomersCharacteristics', $parameters);
+
+        foreach ($iterator as $record) {
+            yield DebtorCharacteristic::make($record);
         }
     }
 
