@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests;
 
+use Webparking\Logic4Client\Data\ContactCharacteristic;
 use Webparking\Logic4Client\Data\Creditor;
 use Webparking\Logic4Client\Data\CreditorDiscount;
 use Webparking\Logic4Client\Data\Customer;
@@ -15,6 +16,7 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\AddressTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\ContactTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\CreditorDiscountTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\CreditorThirdPartyExternalIdentiferLogic4ResponseList;
 use Webparking\Logic4Client\Responses\CustomerThirdPartyExternalIdentiferLogic4ResponseList;
@@ -394,6 +396,41 @@ class RelationsRequest extends Request
         foreach ($iterator as $record) {
             yield CustomerContact::make($record);
         }
+    }
+
+    /**
+     * @param array{
+     *     ContactIds?: array<integer>|null,
+     *     DebtorId?: integer|null,
+     *     ContactType?: string|null,
+     *     LastCharacteristicChangeDateTime?: string|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, ContactCharacteristic>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getContactsCharacteristics(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Relations/GetContactsCharacteristics', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ContactCharacteristic::make($record);
+        }
+    }
+
+    /**
+     * @throws Logic4ApiException
+     */
+    public function getContactTypes(): ContactTypeLogic4ResponseList
+    {
+        return ContactTypeLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1/Relations/GetContactTypes'),
+            )
+        );
     }
 
     /**
