@@ -26,7 +26,9 @@ use Webparking\Logic4Client\Responses\ProductShippingInformationLogic4Response;
 use Webparking\Logic4Client\Responses\ProductStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductSupplierLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductUnitLogic4ResponseList;
+use Webparking\Logic4Client\Responses\ProductVariantBalkLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductWithRelatedProductsLogic4ResponseList;
+use Webparking\Logic4Client\Responses\VariantBalkCategoryLogic4ResponseList;
 
 class ProductRequest extends Request
 {
@@ -553,6 +555,40 @@ class ProductRequest extends Request
         return ProductUnitLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.1/Products/GetUnits'),
+            )
+        );
+    }
+
+    /**
+     * @param array{
+     *     VariantBalkCategoryIds?: array<integer>|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function getVariantbalkCategories(
+        array $parameters = [],
+    ): VariantBalkCategoryLogic4ResponseList {
+        return VariantBalkCategoryLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Products/GetVariantbalkCategories', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * @param array{
+     *     VariantBalkIds?: array<integer>|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function getVariantbalks(
+        array $parameters = [],
+    ): ProductVariantBalkLogic4ResponseList {
+        return ProductVariantBalkLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Products/GetVariantbalks', ['json' => $parameters]),
             )
         );
     }
