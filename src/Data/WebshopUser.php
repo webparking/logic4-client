@@ -10,7 +10,7 @@ class WebshopUser
 {
     /** @param array<integer> $debtorWebshopUserProductExcludedFromAnnualBudgets */
     public function __construct(
-        public bool $dislplayPricesWithoutPricelistCalculations,
+        public bool $displayPricesWithoutPricelistCalculations,
         public ?int $webshopUserId,
         public int $debtorId,
         public bool $limitedToOrderlist,
@@ -62,7 +62,7 @@ class WebshopUser
     public static function make(array $data): self
     {
         return new self(
-            dislplayPricesWithoutPricelistCalculations: $data['DislplayPricesWithoutPricelistCalculations'] ?? false,
+            displayPricesWithoutPricelistCalculations: $data['DisplayPricesWithoutPricelistCalculations'] ?? false,
             webshopUserId: $data['WebshopUserId'] ?? null,
             debtorId: $data['DebtorId'] ?? 0,
             limitedToOrderlist: $data['LimitedToOrderlist'] ?? false,
