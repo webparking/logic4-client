@@ -42,8 +42,12 @@ class Helpers
         }
     }
 
-    public static function resolveParameterType(Schema $property): string
+    public static function resolveParameterType(Schema|Reference $property): string
     {
+        if ($property instanceof Reference) {
+            $property = $property->resolve();
+        }
+
         if ('array' === $property->type) {
             if ($property->items instanceof Reference) {
                 $property = clone $property;
@@ -79,6 +83,10 @@ class Helpers
     {
         $parameters = [];
         foreach ($properties as $name => $property) {
+            if ($property instanceof Reference) {
+                $property = $property->resolve();
+            }
+
             if ($property instanceof Schema) {
                 $parameters[] = sprintf($format, sprintf('%s?: %s|null', $name, self::resolveParameterType($property)));
             }

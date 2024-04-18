@@ -114,6 +114,8 @@ class RelationsRequest extends Request
      * Adres toevoegen of updaten.
      *
      * @param array{
+     *     Type?: array{Id?: integer, Name?: string}|null,
+     *     Province?: array{Id?: integer, Name?: string}|null,
      *     Email?: string|null,
      *     ContactName?: string|null,
      *     CompanyName?: string|null,
@@ -155,6 +157,7 @@ class RelationsRequest extends Request
      *     EmailAddress?: string|null,
      *     FirstName?: string|null,
      *     Function?: string|null,
+     *     Gender?: array{Id?: integer, Name?: string}|null,
      *     Initials?: string|null,
      *     InsertionName?: string|null,
      *     LastName?: string|null,
@@ -225,12 +228,16 @@ class RelationsRequest extends Request
      *     EmailAddress?: string|null,
      *     PaymentMethodId?: integer|null,
      *     PricelistIds?: array<integer>|null,
+     *     VatCode?: array{Id?: integer, Percent?: number, Name?: string}|null,
      *     TelephoneNumber?: string|null,
      *     MobileNumber?: string|null,
      *     Faxnumber?: string|null,
      *     ChamberOfCommerceCode?: string|null,
      *     Website?: string|null,
+     *     Status?: array{Id?: integer, Description?: string}|null,
      *     Discount?: number|null,
+     *     Representative?: array{Id?: integer, Name?: string}|null,
+     *     Type?: array{Id?: integer, Description?: string}|null,
      *     StandardReportIdForPickingList?: integer|null,
      *     StandardReportIdForSalesOrderDelivery?: integer|null,
      *     City?: string|null,
@@ -243,6 +250,7 @@ class RelationsRequest extends Request
      *     ReceiveInvoiceElectronically?: boolean|null,
      *     ElectronicInvoiceAttachmentType?: integer|null,
      *     StandardInvoiceLayoutReportId?: integer|null,
+     *     Gender?: array{Id?: integer, Name?: string}|null,
      *     Preposition?: string|null,
      *     CreditLimit?: number|null,
      *     ShippingMethodId?: integer|null,
@@ -421,9 +429,7 @@ class RelationsRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getContactTypes(): ContactTypeLogic4ResponseList
     {
         return ContactTypeLogic4ResponseList::make(
