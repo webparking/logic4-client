@@ -11,7 +11,6 @@ use Webparking\Logic4Client\Data\Customer;
 use Webparking\Logic4Client\Data\CustomerAddress;
 use Webparking\Logic4Client\Data\CustomerContact;
 use Webparking\Logic4Client\Data\DebtorCharacteristic;
-use Webparking\Logic4Client\Data\Representative;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\AddressTypeLogic4ResponseList;
@@ -429,7 +428,9 @@ class RelationsRequest extends Request
         }
     }
 
-    /** @throws Logic4ApiException */
+    /**
+     * @throws Logic4ApiException
+     */
     public function getContactTypes(): ContactTypeLogic4ResponseList
     {
         return ContactTypeLogic4ResponseList::make(
@@ -642,7 +643,7 @@ class RelationsRequest extends Request
      *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return \Generator<array-key, Representative>
+     * @return \Generator<array-key, \Webparking\Logic4Client\Data\Representative>
      *
      * @throws Logic4ApiException
      */
@@ -651,7 +652,7 @@ class RelationsRequest extends Request
         $iterator = $this->paginateRecords('/v1.1/Relations/GetRepresentatives', $parameters);
 
         foreach ($iterator as $record) {
-            yield Representative::make($record);
+            yield \Webparking\Logic4Client\Data\Representative::make($record);
         }
     }
 
