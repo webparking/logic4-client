@@ -9,6 +9,7 @@ use cebe\openapi\spec\Operation;
 use cebe\openapi\spec\Reference;
 use cebe\openapi\spec\Schema;
 use Webmozart\Assert\Assert;
+use Webparking\Logic4Client\Enums\PaginateType;
 
 class Generator
 {
@@ -110,25 +111,29 @@ class Generator
                         : [];
 
                     $responseSchema = $this->resolveReference($responseReference->getReference())->properties;
-                    $paginatedResponse = \array_key_exists('Records', $responseSchema)
+
+                    $takeRecords = \array_key_exists('TakeRecords', $requestSchema) && \array_key_exists('SkipRecords', $requestSchema);
+                    $take = \array_key_exists('Take', $requestSchema) && \array_key_exists('Skip', $requestSchema);
+
+                    $paginatedResponse = ($takeRecords || $take)
+                        && \array_key_exists('Records', $responseSchema)
                         && \array_key_exists('RecordsCounter', $responseSchema)
-                        && \array_key_exists('TakeRecords', $requestSchema)
-                        && \array_key_exists('SkipRecords', $requestSchema)
                         && $responseSchema['Records'] instanceof Schema
                         && $responseSchema['Records']->items instanceof Reference;
 
                     if ($paginatedResponse) {
                         $returnType = $this->componentClassGenerator
                             ->resolve($responseSchema['Records']->items->getReference(), 'Data');
+
+                        $paginatedResponse = $take ? PaginateType::Take : PaginateType::TakeRecords;
                     } else {
-                        $paginatedResponse = false;
                         $returnType = $this->componentClassGenerator->resolve(
                             $responseReference->getReference(),
                             'Responses',
                         );
                     }
 
-                    $classMethod = $requestGenerator->addMethod($method, $uri, $operation, returnType: $returnType, paginated: $paginatedResponse);
+                    $classMethod = $requestGenerator->addMethod($method, $uri, $operation, returnType: $returnType, paginated: $paginatedResponse ?: null);
                 }
 
                 if ($operation->description) {

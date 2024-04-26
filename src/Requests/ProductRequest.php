@@ -7,6 +7,7 @@ namespace Webparking\Logic4Client\Requests;
 use Webparking\Logic4Client\Data\Brand;
 use Webparking\Logic4Client\Data\Product;
 use Webparking\Logic4Client\Data\ProductSEOInformation;
+use Webparking\Logic4Client\Data\ProductWithRelatedProducts;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BasicProductDataLogic4ResponseList;
@@ -27,7 +28,6 @@ use Webparking\Logic4Client\Responses\ProductStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductSupplierLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductUnitLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductVariantBalkLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductWithRelatedProductsLogic4ResponseList;
 use Webparking\Logic4Client\Responses\VariantBalkCategoryLogic4ResponseList;
 
 class ProductRequest extends Request
@@ -504,16 +504,17 @@ class ProductRequest extends Request
      *     Take?: integer|null,
      * } $parameters
      *
+     * @return \Generator<array-key, ProductWithRelatedProducts>
+     *
      * @throws Logic4ApiException
      */
-    public function getRelatedProducts(
-        array $parameters = [],
-    ): ProductWithRelatedProductsLogic4ResponseList {
-        return ProductWithRelatedProductsLogic4ResponseList::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1.1/Products/GetRelatedProducts', ['json' => $parameters]),
-            )
-        );
+    public function getRelatedProducts(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1.1/Products/GetRelatedProducts', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield ProductWithRelatedProducts::make($record);
+        }
     }
 
     /**

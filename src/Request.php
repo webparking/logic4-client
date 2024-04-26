@@ -36,11 +36,11 @@ abstract class Request
      *
      * @return \Generator<array<mixed>>
      */
-    protected function paginateRecords(string $uri, array $body): \Generator
+    protected function paginateRecords(string $uri, array $body, string $takeField = 'TakeRecords', string $skipField = 'SkipRecords'): \Generator
     {
         $body = [
-            'TakeRecords' => 1000,
-            'SkipRecords' => 0,
+            $takeField => 1000,
+            $skipField => 0,
             ...$body,
         ];
 
@@ -54,7 +54,7 @@ abstract class Request
                 yield $record;
             }
 
-            $body['SkipRecords'] += $body['TakeRecords'];
-        } while ($response['RecordsCounter'] === $body['TakeRecords'] && $response['RecordsCounter'] > 0);
+            $body[$skipField] += $body[$takeField];
+        } while ($response['RecordsCounter'] === $body[$takeField] && $response['RecordsCounter'] > 0);
     }
 }
