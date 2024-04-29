@@ -11,6 +11,7 @@ use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\PhpNamespace;
 use Symfony\Component\Filesystem\Path;
+use Webparking\Logic4Client\Enums\PaginateType;
 use Webparking\Logic4Client\Request;
 
 class RequestClassGenerator
@@ -27,7 +28,7 @@ class RequestClassGenerator
         $this->class->setExtends(Request::class);
     }
 
-    public function addMethod(string $httpMethod, string $uri, Operation $operation, string $returnType = null, bool $paginated = false): Method
+    public function addMethod(string $httpMethod, string $uri, Operation $operation, string $returnType = null, PaginateType $paginated = null): Method
     {
         $action = last(explode('/', ltrim($uri, '/')));
         $requestSchema = $operation->requestBody?->content['application/json']?->schema;
@@ -103,9 +104,14 @@ class RequestClassGenerator
 
         if (class_exists($returnType)) {
             if ($paginated) {
+                $paginateMethod = match ($paginated) {
+                    PaginateType::TakeRecords => "\$this->paginateRecords('{$uri}', \$parameters);",
+                    PaginateType::Take => "\$this->paginateRecords('{$uri}', \$parameters, 'Take', 'Skip');",
+                };
+
                 $method->setBody(
                     <<<PHP
-                        \$iterator = \$this->paginateRecords('{$uri}', \$parameters);
+                        \$iterator = $paginateMethod
 
                         foreach (\$iterator as \$record) {
                             yield \\$returnType::make(\$record);

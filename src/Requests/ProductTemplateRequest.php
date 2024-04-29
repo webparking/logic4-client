@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests;
 
+use Webparking\Logic4Client\Data\ProductTemplate;
+use Webparking\Logic4Client\Data\ProductTemplateProductValue;
+use Webparking\Logic4Client\Data\ProductTemplateProperty;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\ProductTemplateLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductTemplateProductValueLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductTemplatePropertyLogic4ResponseList;
 
 class ProductTemplateRequest extends Request
 {
@@ -21,16 +21,17 @@ class ProductTemplateRequest extends Request
      *     Take?: integer|null,
      * } $parameters
      *
+     * @return \Generator<array-key, ProductTemplateProperty>
+     *
      * @throws Logic4ApiException
      */
-    public function getProductTemplateProperties(
-        array $parameters = [],
-    ): ProductTemplatePropertyLogic4ResponseList {
-        return ProductTemplatePropertyLogic4ResponseList::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1/ProductTemplates/GetProductTemplateProperties', ['json' => $parameters]),
-            )
-        );
+    public function getProductTemplateProperties(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/ProductTemplates/GetProductTemplateProperties', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield ProductTemplateProperty::make($record);
+        }
     }
 
     /**
@@ -43,16 +44,17 @@ class ProductTemplateRequest extends Request
      *     Take?: integer|null,
      * } $parameters
      *
+     * @return \Generator<array-key, ProductTemplate>
+     *
      * @throws Logic4ApiException
      */
-    public function getProductTemplates(
-        array $parameters = [],
-    ): ProductTemplateLogic4ResponseList {
-        return ProductTemplateLogic4ResponseList::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1/ProductTemplates/GetProductTemplates', ['json' => $parameters]),
-            )
-        );
+    public function getProductTemplates(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/ProductTemplates/GetProductTemplates', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield ProductTemplate::make($record);
+        }
     }
 
     /**
@@ -63,15 +65,16 @@ class ProductTemplateRequest extends Request
      *     Take?: integer|null,
      * } $parameters
      *
+     * @return \Generator<array-key, ProductTemplateProductValue>
+     *
      * @throws Logic4ApiException
      */
-    public function getProductTemplateValuesPerProducts(
-        array $parameters = [],
-    ): ProductTemplateProductValueLogic4ResponseList {
-        return ProductTemplateProductValueLogic4ResponseList::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1/ProductTemplates/GetProductTemplateValuesPerProducts', ['json' => $parameters]),
-            )
-        );
+    public function getProductTemplateValuesPerProducts(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/ProductTemplates/GetProductTemplateValuesPerProducts', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield ProductTemplateProductValue::make($record);
+        }
     }
 }

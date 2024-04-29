@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests;
 
+use Webparking\Logic4Client\Data\SalesOrderDelivery;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\SalesOrderDeliveryLogic4ResponseList;
 use Webparking\Logic4Client\Responses\SalesOrderDeliveryRowLogic4ResponseList;
 
 class DeliveryRequest extends Request
@@ -44,15 +44,16 @@ class DeliveryRequest extends Request
      *     Take?: integer|null,
      * } $parameters
      *
+     * @return \Generator<array-key, SalesOrderDelivery>
+     *
      * @throws Logic4ApiException
      */
-    public function getDeliveries(
-        array $parameters = [],
-    ): SalesOrderDeliveryLogic4ResponseList {
-        return SalesOrderDeliveryLogic4ResponseList::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1/Delivery/GetDeliveries', ['json' => $parameters]),
-            )
-        );
+    public function getDeliveries(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Delivery/GetDeliveries', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield SalesOrderDelivery::make($record);
+        }
     }
 }
