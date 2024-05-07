@@ -89,6 +89,8 @@ class Product
         public ?string $vendorCode,
         public ?int $productTemplateId,
         public ?string $productTemplateName,
+        public bool $hasVariants,
+        public ?int $variantParentProductId,
     ) {
     }
 
@@ -168,6 +170,8 @@ class Product
             vendorCode: $data['VendorCode'] ?? null,
             productTemplateId: $data['ProductTemplateId'] ?? null,
             productTemplateName: $data['ProductTemplateName'] ?? null,
+            hasVariants: $data['HasVariants'] ?? false,
+            variantParentProductId: $data['VariantParentProductId'] ?? null,
         );
     }
 }

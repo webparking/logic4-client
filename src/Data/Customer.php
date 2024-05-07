@@ -13,9 +13,6 @@ class Customer
         public ?int $relationGroupId,
         public ?int $relationGroup2Id,
         public bool $hide,
-        public ?string $freeValue1,
-        public ?string $freeValue2,
-        public ?string $freeValue3,
         public ?VatCode $vatCode,
         public ?Representative $representative,
         public ?RelationType $type,
@@ -55,6 +52,9 @@ class Customer
         public ?int $shippingMethodId,
         public ?int $globalisationId,
         public ?int $standardPackagingSlipLayoutReportId,
+        public ?string $freeValue1,
+        public ?string $freeValue2,
+        public ?string $freeValue3,
     ) {
     }
 
@@ -67,9 +67,6 @@ class Customer
             relationGroupId: $data['RelationGroupId'] ?? null,
             relationGroup2Id: $data['RelationGroup2Id'] ?? null,
             hide: $data['Hide'] ?? false,
-            freeValue1: $data['FreeValue1'] ?? null,
-            freeValue2: $data['FreeValue2'] ?? null,
-            freeValue3: $data['FreeValue3'] ?? null,
             vatCode: isset($data['VatCode']) ? VatCode::make($data['VatCode']) : null,
             representative: isset($data['Representative']) ? Representative::make($data['Representative']) : null,
             type: isset($data['Type']) ? RelationType::make($data['Type']) : null,
@@ -109,6 +106,9 @@ class Customer
             shippingMethodId: $data['ShippingMethodId'] ?? null,
             globalisationId: $data['GlobalisationId'] ?? null,
             standardPackagingSlipLayoutReportId: $data['StandardPackagingSlipLayoutReportId'] ?? null,
+            freeValue1: $data['FreeValue1'] ?? null,
+            freeValue2: $data['FreeValue2'] ?? null,
+            freeValue3: $data['FreeValue3'] ?? null,
         );
     }
 }
