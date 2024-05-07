@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Data;
 
-class ProductVariant
+class ProductTemplateValuesWithTranslationTemplatePropertyValue
 {
     /** @param array<Translation> $translations */
     public function __construct(
-        public ?string $name,
-        public int $id,
-        public int $sort,
-        public ?int $categoryId,
-        public ?string $shortCode,
+        public ?string $value,
         public ?array $translations,
     ) {
     }
@@ -21,11 +17,7 @@ class ProductVariant
     public static function make(array $data): self
     {
         return new self(
-            name: $data['Name'] ?? null,
-            id: $data['Id'] ?? 0,
-            sort: $data['Sort'] ?? 0,
-            categoryId: $data['CategoryId'] ?? null,
-            shortCode: $data['ShortCode'] ?? null,
+            value: $data['Value'] ?? null,
             translations: array_map(static fn (array $item) => Translation::make($item), $data['Translations'] ?? []),
         );
     }

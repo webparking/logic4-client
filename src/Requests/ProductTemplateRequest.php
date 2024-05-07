@@ -7,6 +7,7 @@ namespace Webparking\Logic4Client\Requests;
 use Webparking\Logic4Client\Data\ProductTemplate;
 use Webparking\Logic4Client\Data\ProductTemplateProductValue;
 use Webparking\Logic4Client\Data\ProductTemplateProperty;
+use Webparking\Logic4Client\Data\ProductTemplateValuesWithTranslation;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 
@@ -75,6 +76,27 @@ class ProductTemplateRequest extends Request
 
         foreach ($iterator as $record) {
             yield ProductTemplateProductValue::make($record);
+        }
+    }
+
+    /**
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     *     VisibleOnWebsite?: boolean|null,
+     *     Skip?: integer|null,
+     *     Take?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, ProductTemplateValuesWithTranslation>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getProductTemplateValuesWithTranslations(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/ProductTemplates/GetProductTemplateValuesWithTranslations', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield ProductTemplateValuesWithTranslation::make($record);
         }
     }
 }

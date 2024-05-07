@@ -189,6 +189,7 @@ class StockRequest extends Request
      * @param array{
      *     SkipRecords?: integer|null,
      *     TakeRecords?: integer|null,
+     *     PickbonIds?: array<integer>|null,
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
      *     BuyOrderId?: integer|null,

@@ -96,6 +96,9 @@ class RelationsRequest extends Request
      *     RelationTypeId?: integer|null,
      *     GenderId?: integer|null,
      *     StandardPackagingSlipLayoutReportId?: integer|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -767,6 +770,9 @@ class RelationsRequest extends Request
      *     RelationTypeId?: integer|null,
      *     GenderId?: integer|null,
      *     StandardPackagingSlipLayoutReportId?: integer|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException

@@ -7,6 +7,7 @@ namespace Webparking\Logic4Client\Requests;
 use Webparking\Logic4Client\Data\Brand;
 use Webparking\Logic4Client\Data\Product;
 use Webparking\Logic4Client\Data\ProductSEOInformation;
+use Webparking\Logic4Client\Data\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Data\ProductWithRelatedProducts;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
@@ -493,6 +494,26 @@ class ProductRequest extends Request
 
         foreach ($iterator as $record) {
             yield ProductSEOInformation::make($record);
+        }
+    }
+
+    /**
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     *     Skip?: integer|null,
+     *     Take?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, ProductVariantBalkChildrenGroup>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getProductVariantBalkChildren(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1.1/Products/GetProductVariantBalkChildren', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield ProductVariantBalkChildrenGroup::make($record);
         }
     }
 

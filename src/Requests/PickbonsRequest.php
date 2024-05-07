@@ -191,6 +191,7 @@ class PickbonsRequest extends Request
      *     Corrections?: array<array{OrderRowId?: integer, OrderHeadPickbonId?: integer, Qty?: number}>|null,
      *     Mutations?: array<array{OrderHeadPickbonRowId?: integer, WarehouseStockLocationId?: integer, MutationAmount?: number}>|null,
      *     OrderHeadPickbonId?: integer|null,
+     *     InterimLocationId?: integer|null,
      *     Remarks?: string|null,
      * } $parameters
      *
@@ -213,6 +214,7 @@ class PickbonsRequest extends Request
      *     Corrections?: array<array{OrderRowId?: integer, OrderHeadPickbonId?: integer, Qty?: number}>|null,
      *     Mutations?: array<array{OrderHeadPickbonRowId?: integer, WarehouseStockLocationId?: integer, MutationAmount?: number}>|null,
      *     OrderHeadPickbonId?: integer|null,
+     *     InterimLocationId?: integer|null,
      *     Remarks?: string|null,
      * }> $parameters
      *
