@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Mockery\MockInterface;
 use Webparking\Logic4Client\ClientFactory;
-use Webparking\Logic4Client\Requests\ProductRequest;
+use Webparking\Logic4Client\Requests\V11\ProductRequest;
 use Webparking\Logic4Client\Tests\TestCase;
 
 final class ProductTest extends TestCase

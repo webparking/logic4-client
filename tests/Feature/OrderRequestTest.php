@@ -8,7 +8,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Mockery\MockInterface;
 use Webparking\Logic4Client\ClientFactory;
-use Webparking\Logic4Client\Requests\OrderRequest;
+use Webparking\Logic4Client\Requests\V10\OrderRequest as OrderRequestV10;
+use Webparking\Logic4Client\Requests\V20\OrderRequest;
 use Webparking\Logic4Client\Tests\TestCase;
 
 final class OrderRequestTest extends TestCase
@@ -37,7 +38,7 @@ final class OrderRequestTest extends TestCase
                 ->andReturn($client);
         });
 
-        $response = (new OrderRequest($clientFactory))->getOrderStatuses();
+        $response = (new OrderRequestV10($clientFactory))->getOrderStatuses();
 
         static::assertSame(192, $response->recordsCounter);
         static::assertSame(['some-message'], $response->validationMessages);
@@ -51,13 +52,6 @@ final class OrderRequestTest extends TestCase
     public function testPostReturnOrders(): void
     {
         $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
-            $orderData = get_class_vars(\Webparking\Logic4Client\Data\ReturnOrderV2::class);
-            $orderData = [
-                ...array_combine(array_map(ucfirst(...), array_keys($orderData)), array_values($orderData)),
-                'DebtorId' => 51,
-                'Id' => 9912,
-            ];
-
             $mock->shouldReceive('post')
                 ->once()
                 ->with('/v2/Orders/GetReturnOrders', [
@@ -69,7 +63,10 @@ final class OrderRequestTest extends TestCase
                 ])
                 ->andReturn(new Response(body: json_encode([
                     'Records' => [
-                        $orderData,
+                        [
+                            'DebtorId' => 51,
+                            'Id' => 9912,
+                        ],
                     ],
                     'RecordsCounter' => 1,
                     'ValidationMessages' => [],
@@ -85,6 +82,7 @@ final class OrderRequestTest extends TestCase
         $response = (new OrderRequest($clientFactory))->getReturnOrders([
             'StatusId' => 9,
         ]);
+
         $data = iterator_to_array($response);
 
         static::assertCount(1, $data);

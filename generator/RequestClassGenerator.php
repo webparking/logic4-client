@@ -20,11 +20,11 @@ class RequestClassGenerator
 
     public function __construct(
         public string $namespace,
+        public string $version,
         public string $className,
         public ComponentClassGenerator $componentClassGenerator,
     ) {
-        $this->class = new ClassType($this->className, new PhpNamespace($this->namespace.'\Requests'));
-
+        $this->class = new ClassType($this->className, new PhpNamespace(sprintf('%s\Requests\%s', $this->namespace, $this->version)));
         $this->class->setExtends(Request::class);
     }
 
@@ -144,7 +144,7 @@ class RequestClassGenerator
 
     public function write(string $baseDirectory): void
     {
-        $outputFile = $baseDirectory.'Requests/'.$this->className.'.php';
+        $outputFile = $baseDirectory.'Requests/'.$this->version.'/'.$this->className.'.php';
 
         Helpers::createDirectory(Path::getDirectory($outputFile));
 
@@ -155,7 +155,7 @@ class RequestClassGenerator
 
                 declare(strict_types=1);
 
-                namespace {$this->namespace}\Requests;
+                namespace {$this->namespace}\\Requests\\{$this->version};
 
                 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 

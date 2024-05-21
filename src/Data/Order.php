@@ -16,7 +16,7 @@ class Order
     public function __construct(
         public int $debtorId,
         public int $id,
-        public ?OrderTotals $totals,
+        public ?OrderTotalsRead $totals,
         public ?PaymentMethod $paymentMethod,
         public ?OrderStatus $orderStatus,
         public ?OrderShippingMethod $shippingMethod,
@@ -63,7 +63,7 @@ class Order
         return new self(
             debtorId: $data['DebtorId'] ?? 0,
             id: $data['Id'] ?? 0,
-            totals: isset($data['Totals']) ? OrderTotals::make($data['Totals']) : null,
+            totals: isset($data['Totals']) ? OrderTotalsRead::make($data['Totals']) : null,
             paymentMethod: isset($data['PaymentMethod']) ? PaymentMethod::make($data['PaymentMethod']) : null,
             orderStatus: isset($data['OrderStatus']) ? OrderStatus::make($data['OrderStatus']) : null,
             shippingMethod: isset($data['ShippingMethod']) ? OrderShippingMethod::make($data['ShippingMethod']) : null,
