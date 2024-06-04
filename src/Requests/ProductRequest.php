@@ -14,6 +14,7 @@ use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\BasicProductDataLogic4ResponseList;
 use Webparking\Logic4Client\Responses\Int32Logic4Response;
 use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
+use Webparking\Logic4Client\Responses\PackingMaterialDepositTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductAssemblyRecipeItemLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductBarcodeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\ProductCodeWithSupplierCodeLogic4ResponseList;
@@ -208,6 +209,18 @@ class ProductRequest extends Request
         return ProductCompositionItemLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetComposedProductComposition', ['json' => $value]),
+            )
+        );
+    }
+
+    /**
+     * @throws Logic4ApiException
+     */
+    public function getPackageMaterialDepositTypes(
+    ): PackingMaterialDepositTypeLogic4ResponseList {
+        return PackingMaterialDepositTypeLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1/Products/GetPackageMaterialDepositTypes'),
             )
         );
     }
