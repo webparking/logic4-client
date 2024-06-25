@@ -71,7 +71,7 @@ class BuyOrderDeliveryRequest extends Request
     }
 
     /**
-     * Verkrijg alle beschikbare inkoopleveringen.
+     * Verkrijg alle beschikbare inkoopleveringen, het aantal op te vragen inkoopleveringen is gelimiteerd tot 1000.
      *
      * @param array{
      *     CreationDateFrom?: string|null,

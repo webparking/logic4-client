@@ -13,6 +13,7 @@ use Webparking\Logic4Client\Enums\PaginateType;
 
 class Generator
 {
+    public static string $swaggerUrl = 'https://api.logic4server.nl/swagger/index.html';
     public string $remoteApi = 'https://api.logic4server.nl/swagger/%s/swagger.json';
     public string $localApi = __DIR__.'/../logic4-api-%s.json';
 
@@ -33,6 +34,25 @@ class Generator
 
             $this->setupHasRun = true;
         }
+    }
+
+    /** @return array<string> */
+    public static function resolveVersions(): array
+    {
+        $contents = file_get_contents(self::$swaggerUrl);
+
+        Assert::string($contents, 'Could not fetch API documentation');
+
+        preg_match('/configObject = JSON.parse\(\'(.*)\'\);/', $contents, $matches);
+
+        $versions = json_decode($matches[1], true, 512, \JSON_THROW_ON_ERROR);
+
+        Assert::keyExists($versions, 'urls', 'Could not find API versions');
+
+        return array_diff(
+            array_map(static fn ($version) => explode('/', $version['url'], 2)[0], $versions['urls']),
+            ['latest'],
+        );
     }
 
     public function generate(string $version): void
