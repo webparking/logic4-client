@@ -13,33 +13,60 @@ use Webparking\Logic4Client\Enums\PaginateType;
 
 class Generator
 {
-    public bool $refresh = false;
-
-    public string $remoteApi = 'https://api.logic4server.nl/swagger/latest/swagger.json';
-    public string $localApi = __DIR__.'/../logic4-api.json';
+    public static string $swaggerUrl = 'https://api.logic4server.nl/swagger/index.html';
+    public string $remoteApi = 'https://api.logic4server.nl/swagger/%s/swagger.json';
+    public string $localApi = __DIR__.'/../logic4-api-%s.json';
 
     public string $baseDirectory = __DIR__.'/../src/';
-    public string $namespace = 'Webparking\Logic4Client';
+    public string $baseNamespace = 'Webparking\Logic4Client';
 
     /** @var array<string, Schema> */
     private array $components = [];
     private ComponentClassGenerator $componentClassGenerator;
+    private bool $setupHasRun = false;
+    private bool $refresh = false;
 
-    public function generate(): string
+    public function setup(): void
     {
-        $this->downloadApiDocumentation();
+        if (!$this->setupHasRun) {
+            Helpers::emptyDirectory($this->baseDirectory.'/Responses');
+            Helpers::emptyDirectory($this->baseDirectory.'/Data');
 
-        $openapi = Reader::readFromJsonFile($this->localApi, resolveReferences: false);
+            $this->setupHasRun = true;
+        }
+    }
 
-        Helpers::emptyDirectory($this->baseDirectory.'/Requests');
-        Helpers::emptyDirectory($this->baseDirectory.'/Responses');
-        Helpers::emptyDirectory($this->baseDirectory.'/Data');
-        Helpers::emptyDirectory($this->baseDirectory.'/Components');
+    /** @return array<string> */
+    public static function resolveVersions(): array
+    {
+        $contents = file_get_contents(self::$swaggerUrl);
+
+        Assert::string($contents, 'Could not fetch API documentation');
+
+        preg_match('/configObject = JSON.parse\(\'(.*)\'\);/', $contents, $matches);
+
+        $versions = json_decode($matches[1], true, 512, \JSON_THROW_ON_ERROR);
+
+        Assert::keyExists($versions, 'urls', 'Could not find API versions');
+
+        return array_diff(
+            array_map(static fn ($version) => explode('/', $version['url'], 2)[0], $versions['urls']),
+            ['latest'],
+        );
+    }
+
+    public function generate(string $version): void
+    {
+        $localFile = $this->downloadApiDocumentation($version);
+
+        $openapi = Reader::readFromJsonFile($localFile, resolveReferences: false);
+
+        Helpers::emptyDirectory(sprintf('%s/Requests/%s', $this->baseDirectory, $this->getVersion($version)));
 
         $this->components = $openapi->components->schemas;
 
         $this->componentClassGenerator = new ComponentClassGenerator(
-            $this->namespace,
+            $this->baseNamespace,
             $this->baseDirectory,
             $this->components
         );
@@ -63,35 +90,32 @@ class Generator
         }
 
         foreach ($groupedPaths as $namespace => $uriList) {
-            $this->processNamespace($namespace, $uriList);
-        }
-
-        return 'Generated API classes at '.now()->toDateTimeString();
-    }
-
-    public function downloadApiDocumentation(): void
-    {
-        if ($this->refresh && is_file($this->localApi)) {
-            unlink($this->localApi);
-        }
-
-        if (!is_file($this->localApi)) {
-            file_put_contents($this->localApi, file_get_contents($this->remoteApi));
+            $this->processNamespace($namespace, $uriList, $version);
         }
     }
 
-    public function setRefresh(bool $refresh): self
+    public function downloadApiDocumentation(string $version): string
     {
-        $this->refresh = $refresh;
+        $localFile = sprintf($this->localApi, $this->getVersion($version));
+        $remoteFile = sprintf($this->remoteApi, $version);
 
-        return $this;
+        if ($this->refresh && is_file($localFile)) {
+            unlink($localFile);
+        }
+
+        if (!is_file($localFile)) {
+            file_put_contents($localFile, file_get_contents($remoteFile));
+        }
+
+        return $localFile;
     }
 
     /** @param array<string, array<string, Operation>> $operations */
-    private function processNamespace(string $namespace, array $operations): void
+    private function processNamespace(string $namespace, array $operations, string $version): void
     {
         $requestGenerator = new RequestClassGenerator(
-            namespace: $this->namespace,
+            namespace: $this->baseNamespace,
+            version: $this->getVersion($version),
             className: $namespace.'Request',
             componentClassGenerator: $this->componentClassGenerator,
         );
@@ -159,5 +183,15 @@ class Generator
     public function normalizeRef(string $reference): string
     {
         return str_replace('#/components/schemas/', '', $reference);
+    }
+
+    public function getVersion(string $version): string
+    {
+        return sprintf('V%s', str_replace('.', '', $version));
+    }
+
+    public function setRefresh(bool $refresh): void
+    {
+        $this->refresh = $refresh;
     }
 }

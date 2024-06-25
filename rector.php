@@ -7,9 +7,9 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__.'/src/Data',
-        __DIR__.'/src/Requests',
-        __DIR__.'/src/Responses',
+        __DIR__.'/src/Data/*.php',
+        __DIR__.'/src/Responses/*.php',
+        __DIR__.'/src/Requests/V*/*.php',
     ]);
 
     $rectorConfig->importNames();

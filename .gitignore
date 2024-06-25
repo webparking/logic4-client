@@ -1,6 +1,7 @@
 .phpunit.result.cache
 .php-cs-fixer.cache
 logic4-api.json
+logic4-api-*.json
 composer.lock
 docker-compose.override.yml
 /.idea/
