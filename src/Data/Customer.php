@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data;
 
 class Customer
 {
-    /** @param array<integer> $pricelistIds */
+    /** @param array<int> $pricelistIds */
     public function __construct(
         public int $id,
         public ?string $loginName,

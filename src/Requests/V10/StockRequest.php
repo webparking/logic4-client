@@ -128,7 +128,7 @@ class StockRequest extends Request
     /**
      * Verkrijg minimale voorraad aantallen voor meerdere artikelen.
      *
-     * @param array<integer> $parameters
+     * @param array<int> $parameters
      *
      * @throws Logic4ApiException
      */

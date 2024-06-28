@@ -33,7 +33,7 @@ class ProductRequest extends Request
     /**
      * Verkrijg barcodes met aantallen o.b.v. een filter met artikel Id's.
      *
-     * @param array<integer> $parameters
+     * @param array<int> $parameters
      *
      * @throws Logic4ApiException
      */
@@ -50,7 +50,7 @@ class ProductRequest extends Request
     /**
      * Verkrijg basisinformatie van artikelen op basis van artikel Id's.
      *
-     * @param array<integer> $parameters
+     * @param array<int> $parameters
      *
      * @throws Logic4ApiException
      */

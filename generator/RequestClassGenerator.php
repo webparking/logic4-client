@@ -28,7 +28,7 @@ class RequestClassGenerator
         $this->class->setExtends(Request::class);
     }
 
-    public function addMethod(string $httpMethod, string $uri, Operation $operation, string $returnType = null, PaginateType $paginated = null): Method
+    public function addMethod(string $httpMethod, string $uri, Operation $operation, ?string $returnType = null, ?PaginateType $paginated = null): Method
     {
         $action = last(explode('/', ltrim($uri, '/')));
         $requestSchema = $operation->requestBody?->content['application/json']?->schema;

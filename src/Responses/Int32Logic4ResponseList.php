@@ -7,8 +7,8 @@ namespace Webparking\Logic4Client\Responses;
 class Int32Logic4ResponseList
 {
     /**
-     * @param array<integer> $records
-     * @param array<string>  $validationMessages
+     * @param array<int>    $records
+     * @param array<string> $validationMessages
      */
     public function __construct(
         public array $records,

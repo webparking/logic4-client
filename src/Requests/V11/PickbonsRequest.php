@@ -59,7 +59,7 @@ class PickbonsRequest extends Request
     /**
      * Soft-block meerdere pickbonnen.
      *
-     * @param array<integer> $parameters
+     * @param array<int> $parameters
      *
      * @throws Logic4ApiException
      */
