@@ -77,7 +77,7 @@ class PickbonsRequest extends Request
     /**
      * Verkrijg simpele pickbon rijen op basis van pickbonnen.
      *
-     * @param array<integer> $parameters
+     * @param array<int> $parameters
      *
      * @throws Logic4ApiException
      */
@@ -119,7 +119,7 @@ class PickbonsRequest extends Request
     /**
      * Controleer of de pickbonnen soft-blocked zijn en zo ja, door wie en wanneer?
      *
-     * @param array<integer> $parameters
+     * @param array<int> $parameters
      *
      * @throws Logic4ApiException
      */
@@ -164,7 +164,7 @@ class PickbonsRequest extends Request
     /**
      * Soft-block meerdere pickbonnen.
      *
-     * @param array<integer> $parameters
+     * @param array<int> $parameters
      *
      * @throws Logic4ApiException
      *

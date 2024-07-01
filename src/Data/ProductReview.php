@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class ProductReview
 {
-    /** @param array<integer> $websiteIds */
+    /** @param array<int> $websiteIds */
     public function __construct(
         public int $id,
         public ?int $productId,

@@ -10,7 +10,7 @@ use cebe\openapi\spec\Schema;
 class Helpers
 {
     /** @param string|string[] $keepFiles */
-    public static function emptyDirectory(string $path, string|array $keepFiles = null): void
+    public static function emptyDirectory(string $path, string|array|null $keepFiles = null): void
     {
         if (!is_dir($path)) {
             return;

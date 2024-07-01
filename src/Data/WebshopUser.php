@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class WebshopUser
 {
-    /** @param array<integer> $debtorWebshopUserProductExcludedFromAnnualBudgets */
+    /** @param array<int> $debtorWebshopUserProductExcludedFromAnnualBudgets */
     public function __construct(
         public bool $displayPricesWithoutPricelistCalculations,
         public ?int $webshopUserId,

@@ -7,7 +7,7 @@ namespace Webparking\Logic4Client\Data;
 class ProductPricelist
 {
     /**
-     * @param array<integer>                       $debtorIds
+     * @param array<int>                           $debtorIds
      * @param array<ProductPricelistContractPrice> $contractPrices
      */
     public function __construct(

@@ -9,8 +9,8 @@ use Carbon\Carbon;
 class GetRound
 {
     /**
-     * @param array<integer> $itsIds
-     * @param array<integer> $orderIds
+     * @param array<int> $itsIds
+     * @param array<int> $orderIds
      */
     public function __construct(
         public int $id,
