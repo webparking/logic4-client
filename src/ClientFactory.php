@@ -29,7 +29,7 @@ class ClientFactory
 
     public static function preventStrayRequests(bool $prevent = true): void
     {
-        self::$preventStrayRequests = true;
+        self::$preventStrayRequests = $prevent;
     }
 
     public function make(): Client
