@@ -98,6 +98,23 @@ composer install
 ./vendor/bin/phpunit
 ```
 
+### Preventing stray requests
+If you would like to ensure that all requests sent via the client have been mocked throughout your individual test or complete test suite, you can call the `preventStrayRequests` method on the `\Webparking\Logic4Client\ClientFactory` class. After calling this method, any requests that do not have a corresponding mock will throw an exception rather than making the actual request:
+
+```php
+// turns on stray request prevention
+\Webparking\Logic4Client\ClientFactory::preventStrayRequests();
+
+// an exception is thrown if the request is not mocked
+$request->getProducts(['DebtorId' => 1]);
+
+// turns off stray request prevention
+\Webparking\Logic4Client\ClientFactory::preventStrayRequests(false);
+
+// no exception is thrown and will make the actual request
+$request->getProducts(['DebtorId' => 1]);
+```
+
 ## Contributing
 Please report any issue you find in the issues page. Pull requests are more than welcome.
 
