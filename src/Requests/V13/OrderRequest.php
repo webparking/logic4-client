@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Requests\V13;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V13\Int32Logic4Response;
 
 class OrderRequest extends Request
 {

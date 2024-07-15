@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\Product;
-use Webparking\Logic4Client\Data\ProductVariantBalkChildrenGroup;
-use Webparking\Logic4Client\Data\ProductWithRelatedProducts;
+use Webparking\Logic4Client\Data\V11\Product;
+use Webparking\Logic4Client\Data\V11\ProductVariantBalkChildrenGroup;
+use Webparking\Logic4Client\Data\V11\ProductWithRelatedProducts;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BasicProductDataLogic4ResponseList;
-use Webparking\Logic4Client\Responses\BrandLogic4ResponseList;
-use Webparking\Logic4Client\Responses\GetProductImageLogic4ResponseList;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductAssemblyRecipeItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductBarcodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductCompositionItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductExtraBarcodeTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductPickLocationBasedOnSystemSettingsLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductPriceInformationLogic4Response;
-use Webparking\Logic4Client\Responses\ProductPricelistLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductReviewLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductSEOInformationLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductSupplierLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductUnitLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\BasicProductDataLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\BrandLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\GetProductImageLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V11\Int32Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductAssemblyRecipeItemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductBarcodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductCompositionItemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductExtraBarcodeTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductPickLocationBasedOnSystemSettingsLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductPriceInformationLogic4Response;
+use Webparking\Logic4Client\Responses\V11\ProductPricelistLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductReviewLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductSEOInformationLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductSupplierLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductUnitLogic4ResponseList;
 
 class ProductRequest extends Request
 {
@@ -442,8 +442,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getProductsIds(array $parameters = []): Int32Logic4ResponseList
-    {
+    public function getProductsIds(
+        array $parameters = [],
+    ): Int32Logic4ResponseList {
         return Int32Logic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetProductsIds', ['json' => $parameters]),
@@ -543,8 +544,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function removeProductSupplier(array $parameters = []): Int32Logic4Response
-    {
+    public function removeProductSupplier(
+        array $parameters = [],
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1.1/Products/RemoveProductSupplier', ['json' => $parameters]),
@@ -662,8 +664,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateProductImage(array $parameters = []): Int32Logic4Response
-    {
+    public function updateProductImage(
+        array $parameters = [],
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->put('/v1.1/Products/UpdateProductImage', ['json' => $parameters]),
@@ -702,8 +705,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateProductPrices(array $parameters = []): Int32Logic4Response
-    {
+    public function updateProductPrices(
+        array $parameters = [],
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductPrices', ['json' => $parameters]),
@@ -745,8 +749,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateProductSupplier(array $parameters = []): Int32Logic4Response
-    {
+    public function updateProductSupplier(
+        array $parameters = [],
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductSupplier', ['json' => $parameters]),

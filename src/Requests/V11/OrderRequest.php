@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\OrderOpenPayment;
-use Webparking\Logic4Client\Data\ReturnProblem;
-use Webparking\Logic4Client\Data\ReturnSolution;
+use Webparking\Logic4Client\Data\V11\OrderOpenPayment;
+use Webparking\Logic4Client\Data\V11\ReturnProblem;
+use Webparking\Logic4Client\Data\V11\ReturnSolution;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\OrderLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V11\OrderLogic4ResponseList;
 
 class OrderRequest extends Request
 {
@@ -415,8 +415,9 @@ class OrderRequest extends Request
      *
      * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v2.0. - Retourorders ophalen
      */
-    public function getReturnOrders(array $parameters = []): OrderLogic4ResponseList
-    {
+    public function getReturnOrders(
+        array $parameters = [],
+    ): OrderLogic4ResponseList {
         return OrderLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/GetReturnOrders', ['json' => $parameters]),

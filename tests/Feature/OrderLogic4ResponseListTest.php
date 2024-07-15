@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Tests\Feature;
 
-use Webparking\Logic4Client\Responses\OrderLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderLogic4ResponseList;
 use Webparking\Logic4Client\Tests\TestCase;
 
 final class OrderLogic4ResponseListTest extends TestCase

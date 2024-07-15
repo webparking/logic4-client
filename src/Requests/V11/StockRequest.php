@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\ProductStock;
-use Webparking\Logic4Client\Data\ProductStockControlHead;
-use Webparking\Logic4Client\Data\ProductStockControlRow;
-use Webparking\Logic4Client\Data\ProductStockMutation;
-use Webparking\Logic4Client\Data\ProductStockSuppliers;
-use Webparking\Logic4Client\Data\ProductSupplierNextDelivery;
+use Webparking\Logic4Client\Data\V11\ProductStock;
+use Webparking\Logic4Client\Data\V11\ProductStockControlHead;
+use Webparking\Logic4Client\Data\V11\ProductStockControlRow;
+use Webparking\Logic4Client\Data\V11\ProductStockMutation;
+use Webparking\Logic4Client\Data\V11\ProductStockSuppliers;
+use Webparking\Logic4Client\Data\V11\ProductSupplierNextDelivery;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\ProductStockMutationTypeV11Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V11\ProductStockMutationTypeV11Logic4ResponseList;
 
 class StockRequest extends Request
 {

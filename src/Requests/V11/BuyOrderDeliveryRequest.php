@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Requests\V11;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BuyOrderDeliveryAndOrderMovementLogic4Response;
+use Webparking\Logic4Client\Responses\V11\BuyOrderDeliveryAndOrderMovementLogic4Response;
 
 class BuyOrderDeliveryRequest extends Request
 {

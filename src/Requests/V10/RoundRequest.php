@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\GetRound;
-use Webparking\Logic4Client\Data\GetRoundOrder;
+use Webparking\Logic4Client\Data\V10\GetRound;
+use Webparking\Logic4Client\Data\V10\GetRoundOrder;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\TypeRoundOrderStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\TypeRoundStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\VehicleLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\TypeRoundOrderStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\TypeRoundStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\VehicleLogic4ResponseList;
 
 class RoundRequest extends Request
 {
@@ -127,8 +127,8 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getRoundOrderStatuses(): TypeRoundOrderStatusLogic4ResponseList
-    {
+    public function getRoundOrderStatuses(
+    ): TypeRoundOrderStatusLogic4ResponseList {
         return TypeRoundOrderStatusLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Round/GetRoundOrderStatuses'),
@@ -237,8 +237,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateRoundOrder(array $parameters = []): BooleanLogic4Response
-    {
+    public function updateRoundOrder(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Round/UpdateRoundOrder', ['json' => $parameters]),

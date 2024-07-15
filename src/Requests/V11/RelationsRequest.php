@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\Creditor;
-use Webparking\Logic4Client\Data\Customer;
-use Webparking\Logic4Client\Data\CustomerAddress;
-use Webparking\Logic4Client\Data\CustomerContact;
-use Webparking\Logic4Client\Data\Representative;
+use Webparking\Logic4Client\Data\V11\Creditor;
+use Webparking\Logic4Client\Data\V11\Customer;
+use Webparking\Logic4Client\Data\V11\CustomerAddress;
+use Webparking\Logic4Client\Data\V11\CustomerContact;
+use Webparking\Logic4Client\Data\V11\Representative;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 

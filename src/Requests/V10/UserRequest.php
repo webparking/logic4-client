@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\ApiUserLogic4ResponseList;
-use Webparking\Logic4Client\Responses\StringLogic4Response;
+use Webparking\Logic4Client\Responses\V10\ApiUserLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
 
 class UserRequest extends Request
 {

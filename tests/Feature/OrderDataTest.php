@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Tests\Feature;
 
-use Webparking\Logic4Client\Data\Order;
+use Webparking\Logic4Client\Data\V10\Order;
 use Webparking\Logic4Client\Tests\TestCase;
 
 final class OrderDataTest extends TestCase

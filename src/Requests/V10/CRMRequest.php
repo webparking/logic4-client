@@ -6,12 +6,12 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\CRMActivityLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CRMActivityStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CRMActivityTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CRMProjectLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CRMProjectStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CRMProjectTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CRMActivityLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CRMActivityStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CRMActivityTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CRMProjectLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CRMProjectStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CRMProjectTypeLogic4ResponseList;
 
 class CRMRequest extends Request
 {

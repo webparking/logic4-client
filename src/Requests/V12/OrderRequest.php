@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V12;
 
-use Webparking\Logic4Client\Data\Order;
+use Webparking\Logic4Client\Data\V12\Order;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V12\Int32Logic4Response;
 
 class OrderRequest extends Request
 {

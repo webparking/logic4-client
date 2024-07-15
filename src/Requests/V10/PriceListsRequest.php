@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\ProductPricelistLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\ProductPricelistLogic4ResponseList;
 
 class PriceListsRequest extends Request
 {

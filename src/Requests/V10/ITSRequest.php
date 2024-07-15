@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\ITSIssue;
+use Webparking\Logic4Client\Data\V10\ITSIssue;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\ITSFreeValueLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ITSIssueGroupLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ITSIssueLevelLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ITSIssueStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ITSIssueTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ITSProjectLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ITSTaskPriorityLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ITSFreeValueLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ITSIssueGroupLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ITSIssueLevelLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ITSIssueStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ITSIssueTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ITSProjectLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ITSTaskPriorityLogic4ResponseList;
 
 class ITSRequest extends Request
 {

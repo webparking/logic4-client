@@ -6,10 +6,10 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\BuyOrderBaseInfoLogic4ResponseList;
-use Webparking\Logic4Client\Responses\BuyOrderRowLogic4ResponseList;
-use Webparking\Logic4Client\Responses\Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\BuyOrderBaseInfoLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BuyOrderRowLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response;
 
 class BuyOrderRequest extends Request
 {
@@ -246,8 +246,9 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateBuyOrderRow(array $parameters = []): BooleanLogic4Response
-    {
+    public function updateBuyOrderRow(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1/BuyOrders/UpdateBuyOrderRow', ['json' => $parameters]),

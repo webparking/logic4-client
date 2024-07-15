@@ -6,10 +6,10 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\DecimalLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductSalesInformationLogic4ResponseList;
-use Webparking\Logic4Client\Responses\Top10ItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ValuevsBudgetLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\DecimalLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductSalesInformationLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Top10ItemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ValuevsBudgetLogic4ResponseList;
 
 class ManagementRequest extends Request
 {
@@ -338,8 +338,9 @@ class ManagementRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getTop10Users(array $parameters = []): Top10ItemLogic4ResponseList
-    {
+    public function getTop10Users(
+        array $parameters = [],
+    ): Top10ItemLogic4ResponseList {
         return Top10ItemLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Management/GetTop10Users', ['json' => $parameters]),

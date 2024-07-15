@@ -6,13 +6,13 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderHeadPickbonLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderHeadPickbonRowLogic4ResponseList;
-use Webparking\Logic4Client\Responses\PickbonSoftBlockedLogic4Response;
-use Webparking\Logic4Client\Responses\PickbonSoftBlockedLogic4ResponseList;
-use Webparking\Logic4Client\Responses\StringLogic4Response;
-use Webparking\Logic4Client\Responses\WarehouseZoneLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderHeadPickbonLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderHeadPickbonRowLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\PickbonSoftBlockedLogic4Response;
+use Webparking\Logic4Client\Responses\V10\PickbonSoftBlockedLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
+use Webparking\Logic4Client\Responses\V10\WarehouseZoneLogic4ResponseList;
 
 class PickbonsRequest extends Request
 {
@@ -21,8 +21,9 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function createCompletePickbonForOrder(int $value): Int32Logic4ResponseList
-    {
+    public function createCompletePickbonForOrder(
+        int $value,
+    ): Int32Logic4ResponseList {
         return Int32Logic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/CreateCompletePickbonForOrder', ['json' => $value]),

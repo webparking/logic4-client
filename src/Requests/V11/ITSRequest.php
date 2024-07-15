@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\ITSIssue;
+use Webparking\Logic4Client\Data\V11\ITSIssue;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 

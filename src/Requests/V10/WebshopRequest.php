@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\WebshopVisitorBehaviour;
+use Webparking\Logic4Client\Data\V10\WebshopVisitorBehaviour;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\DecimalNullableLogic4Response;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\PaymentMethodLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductShiftPriceLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ShippingMethodLogic4ResponseList;
-use Webparking\Logic4Client\Responses\WebshopOrderlistProductLogic4ResponseList;
-use Webparking\Logic4Client\Responses\WebshopSearchWordLogic4ResponseList;
-use Webparking\Logic4Client\Responses\WebshopUserLogic4Response;
-use Webparking\Logic4Client\Responses\WebshopUserProductLogic4ResponseList;
-use Webparking\Logic4Client\Responses\WebshopUserProductTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\WebshopUserTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\DecimalNullableLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductShiftPriceLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ShippingMethodLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WebshopOrderlistProductLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WebshopSearchWordLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WebshopUserLogic4Response;
+use Webparking\Logic4Client\Responses\V10\WebshopUserProductLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WebshopUserProductTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WebshopUserTypeLogic4ResponseList;
 
 class WebshopRequest extends Request
 {
@@ -234,8 +234,9 @@ class WebshopRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getWebshopUser(array $parameters = []): WebshopUserLogic4Response
-    {
+    public function getWebshopUser(
+        array $parameters = [],
+    ): WebshopUserLogic4Response {
         return WebshopUserLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopUser', ['json' => $parameters]),

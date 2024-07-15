@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\ProductStockSupplierWithActive;
+use Webparking\Logic4Client\Data\V10\ProductStockSupplierWithActive;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\ProductMinimalStockNumberLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockControlHeadLogic4Response;
-use Webparking\Logic4Client\Responses\ProductStockControlHeadLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockControlRowLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockInformationLogic4Response;
-use Webparking\Logic4Client\Responses\ProductStockLocationsLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockMutationLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockMutationTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockSuppliersLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductStockWarehouseWithDefaultPickLocationLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductSupplierNextDeliveryLogic4ResponseList;
-use Webparking\Logic4Client\Responses\StockLocationForProductLogic4ResponseList;
-use Webparking\Logic4Client\Responses\WareHouseLogic4ResponseList;
-use Webparking\Logic4Client\Responses\WarehouseStockLocationLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\ProductMinimalStockNumberLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockControlHeadLogic4Response;
+use Webparking\Logic4Client\Responses\V10\ProductStockControlHeadLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockControlRowLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockInformationLogic4Response;
+use Webparking\Logic4Client\Responses\V10\ProductStockLocationsLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockMutationLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockMutationTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockSuppliersLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductStockWarehouseWithDefaultPickLocationLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductSupplierNextDeliveryLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\StockLocationForProductLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WareHouseLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WarehouseStockLocationLogic4ResponseList;
 
 class StockRequest extends Request
 {

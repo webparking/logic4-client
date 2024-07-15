@@ -6,9 +6,9 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\OrderShipmentLogic4Response;
-use Webparking\Logic4Client\Responses\OrderShipmentLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\OrderShipmentLogic4Response;
+use Webparking\Logic4Client\Responses\V10\OrderShipmentLogic4ResponseList;
 
 class ShipmentRequest extends Request
 {
@@ -66,8 +66,9 @@ class ShipmentRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteShipmentForInvoiceOrOrder(int $id): BooleanLogic4Response
-    {
+    public function deleteShipmentForInvoiceOrOrder(
+        int $id,
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1/Shipments/DeleteShipmentForInvoiceOrOrder', ['query' => ['id' => $id]]),
