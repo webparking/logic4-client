@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\WebshopOrderlistProduct;
-use Webparking\Logic4Client\Data\WebshopSearchWord;
+use Webparking\Logic4Client\Data\V11\WebshopOrderlistProduct;
+use Webparking\Logic4Client\Data\V11\WebshopSearchWord;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V20;
 
-use Webparking\Logic4Client\Data\ReturnOrderV2;
+use Webparking\Logic4Client\Data\V20\ReturnOrderV2;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 

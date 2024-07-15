@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\DatabaseConfigurationLogic4Response;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\DatabaseConfigurationLogic4Response;
 
 class BackOfficeRequest extends Request
 {
@@ -16,8 +16,8 @@ class BackOfficeRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getDatabaseConfiguration(): DatabaseConfigurationLogic4Response
-    {
+    public function getDatabaseConfiguration(
+    ): DatabaseConfigurationLogic4Response {
         return DatabaseConfigurationLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Backoffice/GetDatabaseConfiguration'),

@@ -6,15 +6,15 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\EmailAddressLogic4Response;
-use Webparking\Logic4Client\Responses\EmailAttachmentLogic4Response;
-use Webparking\Logic4Client\Responses\EmailAttachmentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\EmailBoxLogic4Response;
-use Webparking\Logic4Client\Responses\EmailMessageLogic4Response;
-use Webparking\Logic4Client\Responses\EmailMessageStatusLogic4Response;
-use Webparking\Logic4Client\Responses\EmailUserLogic4Response;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailAddressLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailAttachmentLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailAttachmentLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\EmailBoxLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailMessageLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailMessageStatusLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailUserLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
 
 class EmailRequest extends Request
 {
@@ -29,8 +29,9 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addEmailAttachment(array $parameters = []): Int32Logic4Response
-    {
+    public function addEmailAttachment(
+        array $parameters = [],
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/AddEmailAttachment', ['json' => $parameters]),
@@ -167,8 +168,9 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function emailMessagesAction(array $parameters = []): BooleanLogic4Response
-    {
+    public function emailMessagesAction(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/EmailMessagesAction', ['json' => $parameters]),
@@ -332,8 +334,9 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateEmailMessage(array $parameters = []): Int32Logic4Response
-    {
+    public function updateEmailMessage(
+        array $parameters = [],
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->put('/v1/Email/UpdateEmailMessage', ['json' => $parameters]),

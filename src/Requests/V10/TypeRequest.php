@@ -6,11 +6,11 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\CountryLogic4ResponseList;
-use Webparking\Logic4Client\Responses\GlobalizationTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OperatingSystemTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductRelationTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProvinceLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CountryLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\GlobalizationTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OperatingSystemTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductRelationTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProvinceLogic4ResponseList;
 
 class TypeRequest extends Request
 {
@@ -23,8 +23,9 @@ class TypeRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCountries(array $parameters = []): CountryLogic4ResponseList
-    {
+    public function getCountries(
+        array $parameters = [],
+    ): CountryLogic4ResponseList {
         return CountryLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Types/GetCountries', ['json' => $parameters]),
@@ -51,8 +52,8 @@ class TypeRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getOperatingSystemTypes(): OperatingSystemTypeLogic4ResponseList
-    {
+    public function getOperatingSystemTypes(
+    ): OperatingSystemTypeLogic4ResponseList {
         return OperatingSystemTypeLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Types/GetOperatingSystemTypes'),
@@ -63,8 +64,8 @@ class TypeRequest extends Request
     /**
      * @throws Logic4ApiException
      */
-    public function getProductRelationTypes(): ProductRelationTypeLogic4ResponseList
-    {
+    public function getProductRelationTypes(
+    ): ProductRelationTypeLogic4ResponseList {
         return ProductRelationTypeLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Types/GetProductRelationTypes'),
@@ -82,8 +83,9 @@ class TypeRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getProvinces(array $parameters = []): ProvinceLogic4ResponseList
-    {
+    public function getProvinces(
+        array $parameters = [],
+    ): ProvinceLogic4ResponseList {
         return ProvinceLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Types/GetProvinces', ['json' => $parameters]),

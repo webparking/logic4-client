@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\Agenda;
-use Webparking\Logic4Client\Data\Appointment;
+use Webparking\Logic4Client\Data\V10\Agenda;
+use Webparking\Logic4Client\Data\V10\Appointment;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 

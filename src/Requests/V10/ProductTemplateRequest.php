@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\ProductTemplate;
-use Webparking\Logic4Client\Data\ProductTemplateProductValue;
-use Webparking\Logic4Client\Data\ProductTemplateProperty;
-use Webparking\Logic4Client\Data\ProductTemplateValuesWithTranslation;
+use Webparking\Logic4Client\Data\V10\ProductTemplate;
+use Webparking\Logic4Client\Data\V10\ProductTemplateProductValue;
+use Webparking\Logic4Client\Data\V10\ProductTemplateProperty;
+use Webparking\Logic4Client\Data\V10\ProductTemplateValuesWithTranslation;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 

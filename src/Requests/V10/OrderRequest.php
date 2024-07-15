@@ -6,20 +6,20 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\InvoiceOpenPaymentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderActionLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderActionTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderOpenPaymentLogic4Response;
-use Webparking\Logic4Client\Responses\OrderOpenPaymentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderRowLogic4ResponseList;
-use Webparking\Logic4Client\Responses\OrderStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ReturnCategoryLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ReturnProblemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ReturnSolutionLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\InvoiceOpenPaymentLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderActionLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderActionTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4Response;
+use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderRowLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ReturnCategoryLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ReturnProblemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ReturnSolutionLogic4ResponseList;
 
 class OrderRequest extends Request
 {
@@ -246,8 +246,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function createAndProcessInvoiceForOrder(int $value): Int32Logic4Response
-    {
+    public function createAndProcessInvoiceForOrder(
+        int $value,
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/CreateAndProcessInvoiceForOrder', ['json' => $value]),
@@ -333,8 +334,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getInvoiceRows(array $parameters = []): OrderRowLogic4ResponseList
-    {
+    public function getInvoiceRows(
+        array $parameters = [],
+    ): OrderRowLogic4ResponseList {
         return OrderRowLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetInvoiceRows', ['json' => $parameters]),
@@ -534,8 +536,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getOrderRows(array $parameters = []): OrderRowLogic4ResponseList
-    {
+    public function getOrderRows(
+        array $parameters = [],
+    ): OrderRowLogic4ResponseList {
         return OrderRowLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOrderRows', ['json' => $parameters]),
@@ -656,8 +659,9 @@ class OrderRequest extends Request
      *
      * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Retourorders ophalen
      */
-    public function getReturnOrders(array $parameters = []): OrderLogic4ResponseList
-    {
+    public function getReturnOrders(
+        array $parameters = [],
+    ): OrderLogic4ResponseList {
         return OrderLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetReturnOrders', ['json' => $parameters]),
@@ -824,8 +828,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateOrderStatus(array $parameters = []): BooleanLogic4Response
-    {
+    public function updateOrderStatus(
+        array $parameters = [],
+    ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/UpdateOrderStatus', ['json' => $parameters]),

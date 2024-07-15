@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\OrderHeadPickbon;
+use Webparking\Logic4Client\Data\V11\OrderHeadPickbon;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\StringLogic4Response;
+use Webparking\Logic4Client\Responses\V11\Int32Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\StringLogic4Response;
 
 class PickbonsRequest extends Request
 {

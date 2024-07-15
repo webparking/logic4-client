@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\Product;
-use Webparking\Logic4Client\Data\ProductVariantBalkChildrenGroup;
+use Webparking\Logic4Client\Data\V10\Product;
+use Webparking\Logic4Client\Data\V10\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BasicProductDataLogic4ResponseList;
-use Webparking\Logic4Client\Responses\BrandLogic4ResponseList;
-use Webparking\Logic4Client\Responses\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\PackingMaterialDepositTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductAssemblyRecipeItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductBarcodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductCodeWithSupplierCodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductCompositionItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductDimensionsLogic4Response;
-use Webparking\Logic4Client\Responses\ProductPickLocationBasedOnSystemSettingsLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductPriceInformationLogic4Response;
-use Webparking\Logic4Client\Responses\ProductPricelistLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductReviewLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductShippingInformationLogic4Response;
-use Webparking\Logic4Client\Responses\ProductStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductSupplierLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductUnitLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ProductVariantBalkLogic4ResponseList;
-use Webparking\Logic4Client\Responses\VariantBalkCategoryLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BasicProductDataLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BrandLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\PackingMaterialDepositTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductAssemblyRecipeItemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductBarcodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductCodeWithSupplierCodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductCompositionItemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductDimensionsLogic4Response;
+use Webparking\Logic4Client\Responses\V10\ProductPickLocationBasedOnSystemSettingsLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductPriceInformationLogic4Response;
+use Webparking\Logic4Client\Responses\V10\ProductPricelistLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductReviewLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductShippingInformationLogic4Response;
+use Webparking\Logic4Client\Responses\V10\ProductStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductSupplierLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductUnitLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ProductVariantBalkLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\VariantBalkCategoryLogic4ResponseList;
 
 class ProductRequest extends Request
 {
@@ -368,8 +368,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getProductsIds(array $parameters = []): Int32Logic4ResponseList
-    {
+    public function getProductsIds(
+        array $parameters = [],
+    ): Int32Logic4ResponseList {
         return Int32Logic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductsIds', ['json' => $parameters]),

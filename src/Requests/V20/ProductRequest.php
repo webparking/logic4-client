@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V20;
 
-use Webparking\Logic4Client\Data\ProductSEOInformation;
+use Webparking\Logic4Client\Data\V20\ProductSEOInformation;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\ProductImageV2Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V20\ProductImageV2Logic4ResponseList;
 
 class ProductRequest extends Request
 {

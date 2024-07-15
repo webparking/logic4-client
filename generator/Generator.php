@@ -62,6 +62,7 @@ class Generator
         $openapi = Reader::readFromJsonFile($localFile, resolveReferences: false);
 
         Helpers::emptyDirectory(sprintf('%s/Requests/%s', $this->baseDirectory, $this->getVersion($version)));
+        Helpers::emptyDirectory(sprintf('%s/Data/%s', $this->baseDirectory, $this->getVersion($version)));
 
         $this->components = $openapi->components->schemas;
 
@@ -147,13 +148,14 @@ class Generator
 
                     if ($paginatedResponse) {
                         $returnType = $this->componentClassGenerator
-                            ->resolve($responseSchema['Records']->items->getReference(), 'Data');
+                            ->resolve($responseSchema['Records']->items->getReference(), 'Data', $this->getVersion($version));
 
                         $paginatedResponse = $take ? PaginateType::Take : PaginateType::TakeRecords;
                     } else {
                         $returnType = $this->componentClassGenerator->resolve(
                             $responseReference->getReference(),
                             'Responses',
+                            $this->getVersion($version)
                         );
                     }
 

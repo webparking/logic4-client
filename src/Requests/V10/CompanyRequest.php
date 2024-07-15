@@ -6,12 +6,12 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\AdministrationLogic4ResponseList;
-use Webparking\Logic4Client\Responses\BranchLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CompanyInformationLogic4Response;
-use Webparking\Logic4Client\Responses\CompanyValuesLogic4Response;
-use Webparking\Logic4Client\Responses\StringLogic4Response;
-use Webparking\Logic4Client\Responses\UserstatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\AdministrationLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BranchLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CompanyInformationLogic4Response;
+use Webparking\Logic4Client\Responses\V10\CompanyValuesLogic4Response;
+use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
+use Webparking\Logic4Client\Responses\V10\UserstatusLogic4ResponseList;
 
 class CompanyRequest extends Request
 {

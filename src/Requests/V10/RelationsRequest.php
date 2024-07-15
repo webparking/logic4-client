@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\ContactCharacteristic;
-use Webparking\Logic4Client\Data\Creditor;
-use Webparking\Logic4Client\Data\CreditorDiscount;
-use Webparking\Logic4Client\Data\Customer;
-use Webparking\Logic4Client\Data\CustomerAddress;
-use Webparking\Logic4Client\Data\CustomerContact;
-use Webparking\Logic4Client\Data\DebtorCharacteristic;
+use Webparking\Logic4Client\Data\V10\ContactCharacteristic;
+use Webparking\Logic4Client\Data\V10\Creditor;
+use Webparking\Logic4Client\Data\V10\CreditorDiscount;
+use Webparking\Logic4Client\Data\V10\Customer;
+use Webparking\Logic4Client\Data\V10\CustomerAddress;
+use Webparking\Logic4Client\Data\V10\CustomerContact;
+use Webparking\Logic4Client\Data\V10\DebtorCharacteristic;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\AddressTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\ContactTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CreditorDiscountTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CreditorThirdPartyExternalIdentiferLogic4ResponseList;
-use Webparking\Logic4Client\Responses\CustomerThirdPartyExternalIdentiferLogic4ResponseList;
-use Webparking\Logic4Client\Responses\GenderLogic4ResponseList;
-use Webparking\Logic4Client\Responses\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\RelationStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\RelationTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\RepresentativeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\SecondTypeContactGroupLogic4ResponseList;
-use Webparking\Logic4Client\Responses\ThirdPartyExternalIdentifierTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\TypeContactGroupLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\AddressTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\ContactTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CreditorDiscountTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CreditorThirdPartyExternalIdentiferLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\CustomerThirdPartyExternalIdentiferLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\GenderLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\RelationStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\RelationTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\RepresentativeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\SecondTypeContactGroupLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\ThirdPartyExternalIdentifierTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\TypeContactGroupLogic4ResponseList;
 
 class RelationsRequest extends Request
 {
@@ -46,8 +46,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addCreditorDiscount(array $parameters = []): Int32Logic4Response
-    {
+    public function addCreditorDiscount(
+        array $parameters = [],
+    ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddCreditorDiscount', ['json' => $parameters]),
@@ -473,8 +474,8 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCreditorDiscountTypes(): CreditorDiscountTypeLogic4ResponseList
-    {
+    public function getCreditorDiscountTypes(
+    ): CreditorDiscountTypeLogic4ResponseList {
         return CreditorDiscountTypeLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetCreditorDiscountTypes'),

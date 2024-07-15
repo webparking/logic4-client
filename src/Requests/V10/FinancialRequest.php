@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\FinancialJournal;
+use Webparking\Logic4Client\Data\V10\FinancialJournal;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\FinancialBookLogic4ResponseList;
-use Webparking\Logic4Client\Responses\LedgerLogic4ResponseList;
-use Webparking\Logic4Client\Responses\PaymentMethodLogic4ResponseList;
-use Webparking\Logic4Client\Responses\StringLogic4Response;
-use Webparking\Logic4Client\Responses\TypeCostCenterLogic4ResponseList;
-use Webparking\Logic4Client\Responses\TypeEntityCodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\TypeLedgerColumnLogic4ResponseList;
-use Webparking\Logic4Client\Responses\TypeTransactionCodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\VatCodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\FinancialBookLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\LedgerLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
+use Webparking\Logic4Client\Responses\V10\TypeCostCenterLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\TypeEntityCodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\TypeLedgerColumnLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\TypeTransactionCodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\VatCodeLogic4ResponseList;
 
 class FinancialRequest extends Request
 {
@@ -167,8 +167,8 @@ class FinancialRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getTypeTransactionCodes(): TypeTransactionCodeLogic4ResponseList
-    {
+    public function getTypeTransactionCodes(
+    ): TypeTransactionCodeLogic4ResponseList {
         return TypeTransactionCodeLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Financial/GetTypeTransactionCodes'),
