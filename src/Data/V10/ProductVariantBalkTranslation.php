@@ -8,6 +8,7 @@ class ProductVariantBalkTranslation
 {
     public function __construct(
         public ?string $value,
+        public ?string $globalisationCode,
         public int $globalisationId,
         public ?int $websiteDomainId,
     ) {
@@ -18,6 +19,7 @@ class ProductVariantBalkTranslation
     {
         return new self(
             value: $data['Value'] ?? null,
+            globalisationCode: $data['GlobalisationCode'] ?? null,
             globalisationId: $data['GlobalisationId'] ?? 0,
             websiteDomainId: $data['WebsiteDomainId'] ?? null,
         );
