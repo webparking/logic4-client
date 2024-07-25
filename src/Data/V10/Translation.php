@@ -8,6 +8,7 @@ class Translation
 {
     public function __construct(
         public ?string $globalisationCode,
+        public int $globalisationId,
         public ?string $value,
     ) {
     }
@@ -17,6 +18,7 @@ class Translation
     {
         return new self(
             globalisationCode: $data['GlobalisationCode'] ?? null,
+            globalisationId: $data['GlobalisationId'] ?? 0,
             value: $data['Value'] ?? null,
         );
     }
