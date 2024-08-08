@@ -6,6 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ProductGroup
 {
+    /** @param array<object> $translations */
     public function __construct(
         public int $id,
         public ?string $name,
@@ -18,6 +19,7 @@ class ProductGroup
         public bool $isVisibleOnWebshop,
         public int $depthLevel,
         public bool $showUnitOnWebsite,
+        public ?array $translations,
     ) {
     }
 
@@ -36,6 +38,7 @@ class ProductGroup
             isVisibleOnWebshop: $data['IsVisibleOnWebshop'] ?? false,
             depthLevel: $data['DepthLevel'] ?? 0,
             showUnitOnWebsite: $data['ShowUnitOnWebsite'] ?? false,
+            translations: $data['Translations'] ?? null,
         );
     }
 }

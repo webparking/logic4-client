@@ -26,6 +26,8 @@ class ProductGroupsRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
+     *
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Artikelgroepen
      */
     public function getProductGroups(
         array $parameters = [],
