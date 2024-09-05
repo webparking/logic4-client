@@ -13,7 +13,7 @@ use Webparking\Logic4Client\Enums\PaginateType;
 
 class Generator
 {
-    public static string $swaggerUrl = 'https://api.logic4server.nl/swagger/index.html';
+    public static string $swaggerUrl = 'https://api.logic4server.nl/swagger/index.js';
     public string $remoteApi = 'https://api.logic4server.nl/swagger/%s/swagger.json';
     public string $localApi = __DIR__.'/../logic4-api-%s.json';
 
@@ -61,8 +61,8 @@ class Generator
 
         $openapi = Reader::readFromJsonFile($localFile, resolveReferences: false);
 
-        Helpers::emptyDirectory(sprintf('%s/Requests/%s', $this->baseDirectory, $this->getVersion($version)));
-        Helpers::emptyDirectory(sprintf('%s/Data/%s', $this->baseDirectory, $this->getVersion($version)));
+        Helpers::emptyDirectory(\sprintf('%s/Requests/%s', $this->baseDirectory, $this->getVersion($version)));
+        Helpers::emptyDirectory(\sprintf('%s/Data/%s', $this->baseDirectory, $this->getVersion($version)));
 
         $this->components = $openapi->components->schemas;
 
@@ -97,8 +97,8 @@ class Generator
 
     public function downloadApiDocumentation(string $version): string
     {
-        $localFile = sprintf($this->localApi, $this->getVersion($version));
-        $remoteFile = sprintf($this->remoteApi, $version);
+        $localFile = \sprintf($this->localApi, $this->getVersion($version));
+        $remoteFile = \sprintf($this->remoteApi, $version);
 
         if ($this->refresh && is_file($localFile)) {
             unlink($localFile);
@@ -189,7 +189,7 @@ class Generator
 
     public function getVersion(string $version): string
     {
-        return sprintf('V%s', str_replace('.', '', $version));
+        return \sprintf('V%s', str_replace('.', '', $version));
     }
 
     public function setRefresh(bool $refresh): void
