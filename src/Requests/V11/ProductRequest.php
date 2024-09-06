@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webparking\Logic4Client\Requests\V11;
 
 use Webparking\Logic4Client\Data\V11\Product;
+use Webparking\Logic4Client\Data\V11\ProductSupplier;
 use Webparking\Logic4Client\Data\V11\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Data\V11\ProductWithRelatedProducts;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
@@ -324,6 +325,7 @@ class ProductRequest extends Request
      * @param array{
      *     DateTimeChangedFrom?: string|null,
      *     DateTimeChangedTo?: string|null,
+     *     LoadFreeValuesTypes?: boolean|null,
      *     IsVisibleInLogic4?: boolean|null,
      *     IsVisibleOnWebShop?: boolean|null,
      *     AllShowOnWebsite?: boolean|null,
@@ -520,6 +522,28 @@ class ProductRequest extends Request
                 $this->getClient()->post('/v1.1/Products/GetSuppliersForProduct', ['json' => $value]),
             )
         );
+    }
+
+    /**
+     * Verkrijg alle leveranciers van één of meerdere producten op basis van ProductId's (max. 1000). Of gebruik 'TakeRecords' (max. 10.000).
+     *
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, ProductSupplier>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getSuppliersForProducts(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1.1/Products/GetSuppliersForProducts', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductSupplier::make($record);
+        }
     }
 
     /**

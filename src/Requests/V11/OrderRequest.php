@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Webparking\Logic4Client\Requests\V11;
 
 use Webparking\Logic4Client\Data\V11\OrderOpenPayment;
-use Webparking\Logic4Client\Data\V11\ReturnProblem;
+use Webparking\Logic4Client\Data\V11\ReturnProblemV11;
 use Webparking\Logic4Client\Data\V11\ReturnSolution;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
@@ -134,7 +134,7 @@ class OrderRequest extends Request
 
     /**
      * Voeg een nieuwe orderregel toe of update een bestaande. Om een bestaande te updaten dient het veld 'Id' gevuld te zijn met een bestaand orderregelnummer.
-     * <br />
+     *
      * De optie "OrderRowWithProductComposition": {"AddProductCompositionByParentProductToOrder": true} heeft het volgende gedrag.
      * - Bij een nieuw product worden samenstellingen toegevoegd als het product een samengesteld product is.
      * - Bij een bestaand product worden samenstellingen toegevoegd mits er nog geen samenstellingen aanwezig zijn, anders komt er een foutmelding terug.
@@ -302,7 +302,8 @@ class OrderRequest extends Request
     }
 
     /**
-     * Verkrijg het nog te betalen bedrag van nog niet uitgeleverde orders.<br />
+     * Verkrijg het nog te betalen bedrag van nog niet uitgeleverde orders.
+     *
      * Indien historypoints zijn aangegeven, moet timeframe een van de volgende waarden hebben: ['Day', 'Week', 'Month', 'Quarter', 'Year'].
      *
      * @param array{
@@ -433,7 +434,7 @@ class OrderRequest extends Request
      *     TakeRecords?: integer|null,
      * } $parameters
      *
-     * @return \Generator<array-key, ReturnProblem>
+     * @return \Generator<array-key, ReturnProblemV11>
      *
      * @throws Logic4ApiException
      */
@@ -442,7 +443,7 @@ class OrderRequest extends Request
         $iterator = $this->paginateRecords('/v1.1/Orders/GetReturnProblems', $parameters);
 
         foreach ($iterator as $record) {
-            yield ReturnProblem::make($record);
+            yield ReturnProblemV11::make($record);
         }
     }
 

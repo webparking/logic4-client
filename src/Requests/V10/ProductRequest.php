@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Data\V10\Product;
+use Webparking\Logic4Client\Data\V10\ProductSupplier;
 use Webparking\Logic4Client\Data\V10\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
@@ -425,6 +426,28 @@ class ProductRequest extends Request
                 $this->getClient()->post('/v1/Products/GetSuppliersForProduct', ['json' => $value]),
             )
         );
+    }
+
+    /**
+     * Verkrijg alle leveranciers van één of meerdere producten op basis van ProductId's (max. 1000). Of gebruik 'TakeRecords' (max. 10.000).
+     *
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, ProductSupplier>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getSuppliersForProducts(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Products/GetSuppliersForProducts', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductSupplier::make($record);
+        }
     }
 
     /**
