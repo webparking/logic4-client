@@ -326,6 +326,7 @@ class ProductRequest extends Request
      *     DateTimeChangedFrom?: string|null,
      *     DateTimeChangedTo?: string|null,
      *     LoadFreeValuesTypes?: boolean|null,
+     *     BrandIds?: array<integer>|null,
      *     IsVisibleInLogic4?: boolean|null,
      *     IsVisibleOnWebShop?: boolean|null,
      *     AllShowOnWebsite?: boolean|null,
