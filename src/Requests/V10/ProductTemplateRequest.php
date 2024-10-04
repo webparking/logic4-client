@@ -90,6 +90,8 @@ class ProductTemplateRequest extends Request
      * @return \Generator<array-key, ProductTemplateValuesWithTranslation>
      *
      * @throws Logic4ApiException
+     *
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Artikel template waarden met vertalingen
      */
     public function getProductTemplateValuesWithTranslations(array $parameters = []): \Generator
     {
