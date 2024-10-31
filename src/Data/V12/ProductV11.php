@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Data\V11;
+namespace Webparking\Logic4Client\Data\V12;
 
-class Product
+class ProductV11
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V11\FreeValue>             $freeValues
-     * @param array<\Webparking\Logic4Client\Data\V11\Translation>           $descriptions
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductShiftPrice>     $shiftPrices
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductGroup>          $productGroups
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductExtraBarcode>   $barcodeExtraList
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductStockWarehouse> $wareHouses
+     * @param array<\Webparking\Logic4Client\Data\V12\FreeValue>             $freeValues
+     * @param array<\Webparking\Logic4Client\Data\V12\Translation>           $descriptions
+     * @param array<\Webparking\Logic4Client\Data\V12\ProductShiftPrice>     $shiftPrices
+     * @param array<\Webparking\Logic4Client\Data\V12\ProductGroup>          $productGroups
+     * @param array<\Webparking\Logic4Client\Data\V12\ProductExtraBarcode>   $barcodeExtraList
+     * @param array<\Webparking\Logic4Client\Data\V12\ProductStockWarehouse> $wareHouses
      */
     public function __construct(
-        public int $productId,
         public ?int $subUnitParentId,
+        public int $productId,
         public ?string $productCode,
         public ?string $productName1,
         public ?string $productName2,
@@ -96,8 +96,8 @@ class Product
     public static function make(array $data): self
     {
         return new self(
-            productId: $data['ProductId'] ?? 0,
             subUnitParentId: $data['SubUnit_ParentId'] ?? null,
+            productId: $data['ProductId'] ?? 0,
             productCode: $data['ProductCode'] ?? null,
             productName1: $data['ProductName1'] ?? null,
             productName2: $data['ProductName2'] ?? null,

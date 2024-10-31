@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Data\V11;
+namespace Webparking\Logic4Client\Data\V12;
 
 class ProductGroup
 {
-    /** @param array<object> $translations */
+    /** @param array<\Webparking\Logic4Client\Data\V12\ProductGroupTranslation> $translations */
     public function __construct(
         public int $id,
         public ?string $name,
@@ -38,7 +38,7 @@ class ProductGroup
             isVisibleOnWebshop: $data['IsVisibleOnWebshop'] ?? false,
             depthLevel: $data['DepthLevel'] ?? 0,
             showUnitOnWebsite: $data['ShowUnitOnWebsite'] ?? false,
-            translations: $data['Translations'] ?? null,
+            translations: array_map(static fn (array $item) => ProductGroupTranslation::make($item), $data['Translations'] ?? []),
         );
     }
 }
