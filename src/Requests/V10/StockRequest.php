@@ -340,6 +340,25 @@ class StockRequest extends Request
     }
 
     /**
+     * Haal voorraadlocaties op van meerdere producten.
+     *
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function getStockLocationsForProducts(
+        array $parameters = [],
+    ): ProductStockLocationsLogic4ResponseList {
+        return ProductStockLocationsLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Stock/GetStockLocationsForProducts', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
      * Verkrijg de producten die op de locatie aanwezig zouden moeten zijn.
      *
      * @throws Logic4ApiException

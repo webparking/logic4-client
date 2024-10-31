@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
-use Webparking\Logic4Client\Data\V10\Product;
 use Webparking\Logic4Client\Data\V10\ProductSupplier;
+use Webparking\Logic4Client\Data\V10\ProductV11;
 use Webparking\Logic4Client\Data\V10\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
@@ -291,18 +291,18 @@ class ProductRequest extends Request
      *     LoadProductTypes?: boolean|null,
      * } $parameters
      *
-     * @return \Generator<array-key, Product>
+     * @return \Generator<array-key, ProductV11>
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Artikelen ophalen
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.2. - Artikelen ophalen
      */
     public function getProducts(array $parameters = []): \Generator
     {
         $iterator = $this->paginateRecords('/v1/Products/GetProducts', $parameters);
 
         foreach ($iterator as $record) {
-            yield Product::make($record);
+            yield ProductV11::make($record);
         }
     }
 

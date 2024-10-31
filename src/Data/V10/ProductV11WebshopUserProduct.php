@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Data\V10;
 
-class WebshopUserProduct
+class ProductV11WebshopUserProduct
 {
     public function __construct(
         public int $id,
@@ -17,7 +17,7 @@ class WebshopUserProduct
         public int $typeId,
         public ?int $webshopUserId,
         public ?int $debtorId,
-        public ?Product $productInformation,
+        public ?ProductV11 $productInformation,
         public ?string $visitorCode,
         public ?int $websiteDomainId,
         public ?string $shoppingCartKey,
@@ -38,7 +38,7 @@ class WebshopUserProduct
             typeId: $data['TypeId'] ?? 0,
             webshopUserId: $data['WebshopUserId'] ?? null,
             debtorId: $data['DebtorId'] ?? null,
-            productInformation: isset($data['ProductInformation']) ? Product::make($data['ProductInformation']) : null,
+            productInformation: isset($data['ProductInformation']) ? ProductV11::make($data['ProductInformation']) : null,
             visitorCode: $data['VisitorCode'] ?? null,
             websiteDomainId: $data['WebsiteDomainId'] ?? null,
             shoppingCartKey: $data['ShoppingCartKey'] ?? null,
