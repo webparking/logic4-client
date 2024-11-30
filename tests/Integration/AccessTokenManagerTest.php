@@ -44,12 +44,22 @@ final class AccessTokenManagerTest extends TestCase
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('has')
                 ->once()
-                ->with('logic4:access_token')
+                ->withArgs(function (string $key): bool {
+                    static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2)'), $key);
+
+                    return true;
+                })
                 ->andReturnFalse();
 
             $mock->shouldReceive('set')
                 ->once()
-                ->with('logic4:access_token', 'the-new-access-token', 3600);
+                ->withArgs(function (string $key, string $value, int $ttl): bool {
+                    static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2)'), $key);
+                    static::assertSame('the-new-access-token', $value);
+                    static::assertSame(3600, $ttl);
+
+                    return true;
+                });
         });
 
         $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
@@ -88,12 +98,20 @@ final class AccessTokenManagerTest extends TestCase
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('has')
                 ->once()
-                ->with('logic4:access_token')
+                ->withArgs(function (string $key): bool {
+                    static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2)'), $key);
+
+                    return true;
+                })
                 ->andReturnTrue();
 
             $mock->shouldReceive('get')
                 ->once()
-                ->with('logic4:access_token')
+                ->withArgs(function (string $key): bool {
+                    static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2)'), $key);
+
+                    return true;
+                })
                 ->andReturn('the-access-token');
         });
 
@@ -111,7 +129,11 @@ final class AccessTokenManagerTest extends TestCase
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('has')
                 ->once()
-                ->with('logic4:access_token')
+                ->withArgs(function (string $key): bool {
+                    static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2)'), $key);
+
+                    return true;
+                })
                 ->andReturnFalse();
         });
 
