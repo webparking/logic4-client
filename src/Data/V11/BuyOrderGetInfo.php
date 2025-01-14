@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Data\V11;
 
-class BuyOrderBaseInfo
+class BuyOrderGetInfo
 {
     public function __construct(
+        public ?\Carbon\Carbon $lastChangedAt,
         public int $amountOfRows,
         public ?int $branchId,
         public bool $buyOrderClosed,
@@ -27,6 +28,7 @@ class BuyOrderBaseInfo
     public static function make(array $data): self
     {
         return new self(
+            lastChangedAt: isset($data['LastChangedAt']) ? \Carbon\Carbon::parse($data['LastChangedAt']) : null,
             amountOfRows: $data['AmountOfRows'] ?? 0,
             branchId: $data['BranchId'] ?? null,
             buyOrderClosed: $data['BuyOrderClosed'] ?? false,

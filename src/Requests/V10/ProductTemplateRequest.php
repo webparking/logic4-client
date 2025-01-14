@@ -10,6 +10,7 @@ use Webparking\Logic4Client\Data\V10\ProductTemplateProperty;
 use Webparking\Logic4Client\Data\V10\ProductTemplateValuesWithTranslation;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
 
 class ProductTemplateRequest extends Request
 {
@@ -100,5 +101,23 @@ class ProductTemplateRequest extends Request
         foreach ($iterator as $record) {
             yield ProductTemplateValuesWithTranslation::make($record);
         }
+    }
+
+    /**
+     * @param array{
+     *     TemplatePropertyId?: integer|null,
+     *     PropertyValuesPerProduct?: array<array{ProductId?: integer, Values?: array<string>}>|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function setProductTemplatePropertyValues(
+        array $parameters = [],
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/ProductTemplates/SetProductTemplatePropertyValues', ['json' => $parameters]),
+            )
+        );
     }
 }

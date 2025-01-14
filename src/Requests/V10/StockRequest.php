@@ -313,6 +313,8 @@ class StockRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
+     *
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Haal actuele voorraad op voor een artikel
      */
     public function getStockInformationForProduct(
         array $parameters = [],
