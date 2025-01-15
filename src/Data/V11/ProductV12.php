@@ -13,6 +13,7 @@ class ProductV12
      * @param array<\Webparking\Logic4Client\Data\V11\ProductGroup>          $productGroups
      * @param array<\Webparking\Logic4Client\Data\V11\ProductExtraBarcode>   $barcodeExtraList
      * @param array<\Webparking\Logic4Client\Data\V11\ProductStockWarehouse> $wareHouses
+     * @param array<string>                                                  $tags
      */
     public function __construct(
         public int $productId,
@@ -88,6 +89,7 @@ class ProductV12
         public ?string $productTemplateName,
         public bool $hasVariants,
         public ?int $variantParentProductId,
+        public ?array $tags,
     ) {
     }
 
@@ -168,6 +170,7 @@ class ProductV12
             productTemplateName: $data['ProductTemplateName'] ?? null,
             hasVariants: $data['HasVariants'] ?? false,
             variantParentProductId: $data['VariantParentProductId'] ?? null,
+            tags: $data['Tags'] ?? null,
         );
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V11;
 
-use Webparking\Logic4Client\Data\V11\BuyOrderBaseInfo;
+use Webparking\Logic4Client\Data\V11\BuyOrderGetInfo;
 use Webparking\Logic4Client\Data\V11\BuyOrderRow;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
@@ -46,6 +46,8 @@ class BuyOrderRequest extends Request
      * @param array{
      *     SkipRecords?: integer|null,
      *     TakeRecords?: integer|null,
+     *     DateTimeChangedFrom?: string|null,
+     *     DateTimeChangedTo?: string|null,
      *     BranchId?: integer|null,
      *     BuyOrderIsClosed?: boolean|null,
      *     SupplierId?: integer|null,
@@ -59,7 +61,7 @@ class BuyOrderRequest extends Request
      *     FreeValue3?: string|null,
      * } $parameters
      *
-     * @return \Generator<array-key, BuyOrderBaseInfo>
+     * @return \Generator<array-key, BuyOrderGetInfo>
      *
      * @throws Logic4ApiException
      */
@@ -68,7 +70,7 @@ class BuyOrderRequest extends Request
         $iterator = $this->paginateRecords('/v1.1/BuyOrders/GetBuyOrders', $parameters);
 
         foreach ($iterator as $record) {
-            yield BuyOrderBaseInfo::make($record);
+            yield BuyOrderGetInfo::make($record);
         }
     }
 }

@@ -641,6 +641,7 @@ class ProductRequest extends Request
      *     DepthOutsidePackage?: number|null,
      *     MinStockCount?: integer|null,
      *     MaxStockCount?: integer|null,
+     *     TemplateId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -754,6 +755,35 @@ class ProductRequest extends Request
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductRemoveExtraBarcode', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Als de combinatie van product, taal en webshopdomein nog niet bestaat wordt deze automatisch aangemaakt.
+     * Webshopdomein mag null zijn, dan geldt de gegeven SEO informatie voor alle webhopdomeinen.
+     * Bij het meegeven van 'null' voor informatie velden, wordt bestaande informatie leeg gehaald.
+     * Als een product geen SEO informatie heeft voor een bepaald websitedomein en taal vindt er een fallback plaats op de basis informatie van het artikel.
+     *
+     * @param array{
+     *     WebsiteDomainId?: integer|null,
+     *     GlobalizationId?: integer|null,
+     *     ProductId?: integer|null,
+     *     Title?: string|null,
+     *     Description?: string|null,
+     *     USP?: string|null,
+     *     MetaName?: string|null,
+     *     MetaDescription?: string|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function updateProductSEOInformation(
+        array $parameters = [],
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->patch('/v1.1/Products/UpdateProductSEOInformation', ['json' => $parameters]),
             )
         );
     }

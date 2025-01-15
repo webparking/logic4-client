@@ -10,8 +10,11 @@ use Webparking\Logic4Client\Data\V10\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BasicProductDataLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\V10\BrandLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
 use Webparking\Logic4Client\Responses\V10\Int32Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4Response;
 use Webparking\Logic4Client\Responses\V10\PackingMaterialDepositTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ProductAssemblyRecipeItemLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ProductBarcodeLogic4ResponseList;
@@ -28,9 +31,52 @@ use Webparking\Logic4Client\Responses\V10\ProductSupplierLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ProductUnitLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ProductVariantBalkLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\VariantBalkCategoryLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\WebsiteDomainsForProductLogic4ResponseList;
 
 class ProductRequest extends Request
 {
+    /**
+     * Koppelen van een website aan een product, max 1000 producten per call.
+     * Als een webshopdomein al reeds gekoppeld is, dan wordt deze overgeslagen.
+     *
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     *     WebsiteDomainId?: integer|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function addWebsiteDomainForProducts(
+        array $parameters = [],
+    ): BooleanLogic4Response {
+        return BooleanLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Products/AddWebsiteDomainForProducts', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Verwijder een website dat gekoppeld zit aan een product, max 1000 producten per call.
+     * Enkel gevonden records worden verwijderd, er vindt geen controle plaats op ProductId en/of WebsiteDomainId. Id's die niet gevonden worden, worden overgeslagen.
+     *
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     *     WebsiteDomainId?: integer|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function deleteWebsiteDomainForProducts(
+        array $parameters = [],
+    ): Logic4Response {
+        return Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->delete('/v1/Products/DeleteWebsiteDomainForProducts', ['json' => $parameters]),
+            )
+        );
+    }
+
     /**
      * Verkrijg barcodes met aantallen o.b.v. een filter met artikel Id's.
      *
@@ -494,6 +540,54 @@ class ProductRequest extends Request
         return ProductVariantBalkLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetVariantbalks', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Het ophalen van gekoppelde webshops per product, max. 1000 producten per call.
+     *
+     * @param array{
+     *     ProductIds?: array<integer>|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function getWebsiteDomainsForProducts(
+        array $parameters = [],
+    ): WebsiteDomainsForProductLogic4ResponseList {
+        return WebsiteDomainsForProductLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Products/GetWebsiteDomainsForProducts', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Als de combinatie van product, taal en webshopdomein nog niet bestaat wordt deze automatisch aangemaakt.
+     * Webshopdomein mag null zijn, dan geldt de gegeven SEO informatie voor alle webhopdomeinen.
+     * Bij het meegeven van 'null' voor informatie velden, wordt bestaande informatie leeg gehaald.
+     * Als een product geen SEO informatie heeft voor een bepaald websitedomein en taal vindt er een fallback plaats op de basis informatie van het artikel.
+     *
+     * @param array{
+     *     WebsiteDomainId?: integer|null,
+     *     GlobalizationId?: integer|null,
+     *     ProductId?: integer|null,
+     *     Title?: string|null,
+     *     Description?: string|null,
+     *     USP?: string|null,
+     *     MetaName?: string|null,
+     *     MetaDescription?: string|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function updateProductSEOInformation(
+        array $parameters = [],
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->patch('/v1/Products/UpdateProductSEOInformation', ['json' => $parameters]),
             )
         );
     }

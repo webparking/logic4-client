@@ -16,6 +16,7 @@ use Webparking\Logic4Client\Responses\V10\OrderLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4Response;
 use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\OrderRowLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\OrderRowV11Logic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\OrderStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ReturnCategoryLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ReturnProblemLogic4ResponseList;
@@ -538,8 +539,8 @@ class OrderRequest extends Request
      */
     public function getOrderRows(
         array $parameters = [],
-    ): OrderRowLogic4ResponseList {
-        return OrderRowLogic4ResponseList::make(
+    ): OrderRowV11Logic4ResponseList {
+        return OrderRowV11Logic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOrderRows', ['json' => $parameters]),
             )
