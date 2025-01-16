@@ -25,7 +25,7 @@ class BuyOrderDeliveryRequest extends Request
      *     Remarks?: string|null,
      *     Description?: string|null,
      *     BranchId?: integer|null,
-     *     Rows?: array<array{BuyOrderRowId?: integer, BuyPrice?: number, DebtorName?: string, OrderId?: integer, ProductId?: integer, Qty_Delivered?: number, Remarks?: string, StockLocationId?: integer, AmountOfLabelsToPrint?: integer}>|null,
+     *     Rows?: array<array{BuyOrderRowId?: integer|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: integer|null, ProductId?: integer, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: integer|null, AmountOfLabelsToPrint?: integer|null}>|null,
      *     PickingListNumber?: string|null,
      * } $parameters
      *
@@ -54,7 +54,7 @@ class BuyOrderDeliveryRequest extends Request
      *     Remarks?: string|null,
      *     Description?: string|null,
      *     BranchId?: integer|null,
-     *     Rows?: array<array{BuyOrderRowId?: integer, BuyPrice?: number, DebtorName?: string, OrderId?: integer, ProductId?: integer, Qty_Delivered?: number, Remarks?: string, StockLocationId?: integer, AmountOfLabelsToPrint?: integer}>|null,
+     *     Rows?: array<array{BuyOrderRowId?: integer|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: integer|null, ProductId?: integer, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: integer|null, AmountOfLabelsToPrint?: integer|null}>|null,
      *     PickingListNumber?: string|null,
      * } $parameters
      *

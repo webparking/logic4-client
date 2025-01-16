@@ -63,7 +63,7 @@ class Helpers
         } elseif ('object' === $property->type) {
             $properties = [];
             foreach ($property->properties as $parameterName => $propertyValue) {
-                $properties[] = sprintf('%s?: %s', $parameterName, self::resolveParameterType($propertyValue));
+                $properties[] = sprintf('%s?: %s%s', $parameterName, self::resolveParameterType($propertyValue), $propertyValue->nullable ?? false ? '|null' : '');
             }
 
             $type = sprintf('array{%s}', implode(', ', $properties));

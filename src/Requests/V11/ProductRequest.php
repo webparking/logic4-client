@@ -41,10 +41,10 @@ class ProductRequest extends Request
      *     ProductGroup3?: integer|null,
      *     ProductGroup4?: integer|null,
      *     UnitId?: integer|null,
-     *     Suppliers?: array<array{SupplierId?: integer, Supplier_ProductCode?: string, ProductName?: string, ProductCountIncrement?: integer, ShippingTime?: integer, MinOrderQuantity?: integer, RepackagingUnitId?: integer, RepackagingQty?: integer, InternalNote?: string, DiscountGroupId?: integer, ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number, Quantity?: integer, LastSyncDate?: string}>}>|null,
+     *     Suppliers?: array<array{SupplierId?: integer, Supplier_ProductCode?: string|null, ProductName?: string|null, ProductCountIncrement?: integer|null, ShippingTime?: integer|null, MinOrderQuantity?: integer|null, RepackagingUnitId?: integer|null, RepackagingQty?: integer|null, InternalNote?: string|null, DiscountGroupId?: integer|null, ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number|null, Quantity?: integer, LastSyncDate?: string}>|null}>|null,
      *     Barcode1?: string|null,
      *     Barcode2?: string|null,
-     *     ExtraBarcodes?: array<array{Barcode?: string, Quantity?: integer, UnitId?: integer}>|null,
+     *     ExtraBarcodes?: array<array{Barcode?: string, Quantity?: integer, UnitId?: integer|null}>|null,
      *     VendorCode?: string|null,
      *     StatusId?: integer|null,
      *     VisibleOnWebshopFrom?: string|null,
@@ -818,7 +818,7 @@ class ProductRequest extends Request
      * @param array{
      *     ProductId?: integer|null,
      *     SupplierId?: integer|null,
-     *     ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number, Quantity?: integer, LastSyncDate?: string}>|null,
+     *     ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number|null, Quantity?: integer, LastSyncDate?: string}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

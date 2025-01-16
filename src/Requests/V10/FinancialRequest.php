@@ -31,7 +31,7 @@ class FinancialRequest extends Request
      *     Reference?: string|null,
      *     BookingDateTime?: string|null,
      *     FinancialBookId?: integer|null,
-     *     Mutations?: array<array{BookingDateTime?: string, AmountIncl?: number, DebtorId?: integer, CreditorId?: integer, PaymentMethodId?: integer}>|null,
+     *     Mutations?: array<array{BookingDateTime?: string, AmountIncl?: number, DebtorId?: integer|null, CreditorId?: integer|null, PaymentMethodId?: integer|null}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

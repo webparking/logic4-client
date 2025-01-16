@@ -163,7 +163,7 @@ class StockRequest extends Request
      * Verkrijg de huidige voorraadlocaties van het product op basis van het filter.
      *
      * @param array{
-     *     ProductsWithWarehouse?: array<array{ProductId?: integer, WarehouseId?: integer, StockLocationId?: integer}>|null,
+     *     ProductsWithWarehouse?: array<array{ProductId?: integer, WarehouseId?: integer|null, StockLocationId?: integer|null}>|null,
      *     ShowNegativeLocations?: boolean|null,
      * } $parameters
      *
@@ -412,7 +412,7 @@ class StockRequest extends Request
      * Return True wanneer gelukt, anders foutmelding.
      *
      * @param array{
-     *     Items?: array<array{ProductId?: integer, MutationAmount?: number, OrderHeadPickbonId?: integer}>|null,
+     *     Items?: array<array{ProductId?: integer, MutationAmount?: number, OrderHeadPickbonId?: integer|null}>|null,
      *     FromStockLocationId?: integer|null,
      *     FromWarehouseId?: integer|null,
      *     ToStockLocationId?: integer|null,
@@ -513,7 +513,7 @@ class StockRequest extends Request
      *     ProcessDate?: string|null,
      *     Username?: string|null,
      *     UserId?: integer|null,
-     *     Rows?: array<array{Id?: integer, ProductStockHeadId?: integer, ProductId?: integer, ProductDescription?: string, ProductDescription2?: string, Vendorcode?: string, StockTotal?: number, StockOnCurrentLocation?: number, StockCountedByUser?: number, StockLevelDate?: string, Barcode?: string, ProductCode?: string, Barcode2?: string, SystemBarcode?: string, BarcodeExtraList?: array<array{Barcode?: string, Qty?: integer}>}>|null,
+     *     Rows?: array<array{Id?: integer|null, ProductStockHeadId?: integer|null, ProductId?: integer, ProductDescription?: string|null, ProductDescription2?: string|null, Vendorcode?: string|null, StockTotal?: number, StockOnCurrentLocation?: number, StockCountedByUser?: number|null, StockLevelDate?: string, Barcode?: string|null, ProductCode?: string|null, Barcode2?: string|null, SystemBarcode?: string|null, BarcodeExtraList?: array<array{Barcode?: string|null, Qty?: integer}>|null}>|null,
      *     EventLog?: string|null,
      *     WarehouseStockControlEmailTemplateId?: integer|null,
      * } $parameters
