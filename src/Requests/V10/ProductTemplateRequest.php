@@ -106,7 +106,7 @@ class ProductTemplateRequest extends Request
     /**
      * @param array{
      *     TemplatePropertyId?: integer|null,
-     *     PropertyValuesPerProduct?: array<array{ProductId?: integer, Values?: array<string>}>|null,
+     *     PropertyValuesPerProduct?: array<array{ProductId?: integer, Values?: array<string>|null}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

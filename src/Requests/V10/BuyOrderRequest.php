@@ -89,7 +89,7 @@ class BuyOrderRequest extends Request
      *     CreditorId?: integer|null,
      *     DatabaseAdministrationId?: integer|null,
      *     CreatedAt?: string|null,
-     *     BuyOrderRows?: array<array{BuyOrderRowId?: integer, BuyOrderId?: integer, DebtorName?: string, QtyToDeliver?: number, CreditorProductCode?: string, ProductDesc1?: string, StandardAmountQTY?: number, StandardAmountQTYUnitId?: integer, RepackingQty?: integer, OrderId?: integer, ProductCode?: string, ProductId?: integer, Price?: number, Description?: string, ProductDesc2?: string, ExpectedDeliveryDate?: string, QtyToOrder?: number, OrderedOnDateByDistributor?: string, OrderRowId?: integer, InternalNote?: string}>|null,
+     *     BuyOrderRows?: array<array{BuyOrderRowId?: integer, BuyOrderId?: integer, DebtorName?: string|null, QtyToDeliver?: number, CreditorProductCode?: string|null, ProductDesc1?: string|null, StandardAmountQTY?: number|null, StandardAmountQTYUnitId?: integer|null, RepackingQty?: integer|null, OrderId?: integer|null, ProductCode?: string|null, ProductId?: integer|null, Price?: number, Description?: string|null, ProductDesc2?: string|null, ExpectedDeliveryDate?: string|null, QtyToOrder?: number, OrderedOnDateByDistributor?: string|null, OrderRowId?: integer|null, InternalNote?: string|null}>|null,
      *     Remarks?: string|null,
      *     BranchId?: integer|null,
      *     OrderId?: integer|null,

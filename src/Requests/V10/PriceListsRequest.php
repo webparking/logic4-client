@@ -35,7 +35,7 @@ class PriceListsRequest extends Request
     /**
      * @param array{
      *     PriceListId?: integer|null,
-     *     ProductStaggeredPrices?: array<array{ProductId?: integer, Prices?: array<array{Qty?: integer, PriceEx?: number, DateFrom?: string, DateTo?: string}>}>|null,
+     *     ProductStaggeredPrices?: array<array{ProductId?: integer, Prices?: array<array{Qty?: integer, PriceEx?: number, DateFrom?: string|null, DateTo?: string|null}>|null}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
