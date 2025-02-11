@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ProductPriceInformation
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\ProductShiftPrice> $shiftPrices */
+    /** @param array<ProductShiftPrice> $shiftPrices */
     public function __construct(
         public int $productId,
         public ?array $shiftPrices,

@@ -24,7 +24,7 @@ class RequestClassGenerator
         public string $className,
         public ComponentClassGenerator $componentClassGenerator,
     ) {
-        $this->class = new ClassType($this->className, new PhpNamespace(sprintf('%s\Requests\%s', $this->namespace, $this->version)));
+        $this->class = new ClassType($this->className, new PhpNamespace(\sprintf('%s\Requests\%s', $this->namespace, $this->version)));
         $this->class->setExtends(Request::class);
     }
 
@@ -50,7 +50,7 @@ class RequestClassGenerator
                 ->addParameter($parameter->name)
                 ->setType($parameterType);
 
-            $requestParameters['query'][$parameter->name] = sprintf('{$%s}', $parameter->name);
+            $requestParameters['query'][$parameter->name] = \sprintf('{$%s}', $parameter->name);
         }
 
         if ($requestSchema instanceof Reference

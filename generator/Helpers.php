@@ -37,7 +37,7 @@ class Helpers
     {
         if (!is_dir($path)) {
             if (!mkdir($path, 0o755, true) && !is_dir($path)) {
-                throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
+                throw new \RuntimeException(\sprintf('Directory "%s" was not created', $path));
             }
         }
     }
@@ -56,17 +56,17 @@ class Helpers
             }
 
             if ($property->items instanceof Schema) {
-                $type = sprintf('array<%s>', self::resolveParameterType($property->items));
+                $type = \sprintf('array<%s>', self::resolveParameterType($property->items));
             } else {
                 $type = 'array<mixed>';
             }
         } elseif ('object' === $property->type) {
             $properties = [];
             foreach ($property->properties as $parameterName => $propertyValue) {
-                $properties[] = sprintf('%s?: %s%s', $parameterName, self::resolveParameterType($propertyValue), $propertyValue->nullable ?? false ? '|null' : '');
+                $properties[] = \sprintf('%s?: %s%s', $parameterName, self::resolveParameterType($propertyValue), $propertyValue->nullable ?? false ? '|null' : '');
             }
 
-            $type = sprintf('array{%s}', implode(', ', $properties));
+            $type = \sprintf('array{%s}', implode(', ', $properties));
         } else {
             $type = $property->type;
         }
@@ -88,7 +88,7 @@ class Helpers
             }
 
             if ($property instanceof Schema) {
-                $parameters[] = sprintf($format, sprintf('%s?: %s|null', $name, self::resolveParameterType($property)));
+                $parameters[] = \sprintf($format, \sprintf('%s?: %s|null', $name, self::resolveParameterType($property)));
             }
         }
 

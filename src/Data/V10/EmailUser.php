@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class EmailUser
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\EmailUserEmailAddress> $emailAddresses */
+    /** @param array<EmailUserEmailAddress> $emailAddresses */
     public function __construct(
         public ?array $emailAddresses,
         public ?int $startBoxId,

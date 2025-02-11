@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V12;
 
 class ProductGroup
 {
-    /** @param array<\Webparking\Logic4Client\Data\V12\ProductGroupTranslation> $translations */
+    /** @param array<ProductGroupTranslation> $translations */
     public function __construct(
         public int $id,
         public ?string $name,

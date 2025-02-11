@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class BuyOrderDeliveryRead
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\BuyOrderDeliveryRowRead> $rows */
+    /** @param array<BuyOrderDeliveryRowRead> $rows */
     public function __construct(
         public int $buyOrderDeliveryId,
         public ?\Carbon\Carbon $dateTimeCreated,

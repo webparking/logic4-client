@@ -7,9 +7,9 @@ namespace Webparking\Logic4Client\Data\V10;
 class EmailMessage
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V10\EmailAddress> $toEmailAddresses
-     * @param array<\Webparking\Logic4Client\Data\V10\EmailAddress> $CCEmailAddresses
-     * @param array<\Webparking\Logic4Client\Data\V10\EmailAddress> $BCCEmailAddresses
+     * @param array<EmailAddress> $toEmailAddresses
+     * @param array<EmailAddress> $CCEmailAddresses
+     * @param array<EmailAddress> $BCCEmailAddresses
      */
     public function __construct(
         public int $id,

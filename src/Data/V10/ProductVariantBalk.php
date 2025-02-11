@@ -7,8 +7,8 @@ namespace Webparking\Logic4Client\Data\V10;
 class ProductVariantBalk
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V10\ProductVariant>                $productVariants
-     * @param array<\Webparking\Logic4Client\Data\V10\ProductVariantBalkTranslation> $productVariantBalkTranslations
+     * @param array<ProductVariant>                $productVariants
+     * @param array<ProductVariantBalkTranslation> $productVariantBalkTranslations
      */
     public function __construct(
         public ?string $name,

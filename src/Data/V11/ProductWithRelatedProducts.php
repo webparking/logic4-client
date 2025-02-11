@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V11;
 
 class ProductWithRelatedProducts
 {
-    /** @param array<\Webparking\Logic4Client\Data\V11\RelatedProduct> $relatedProducts */
+    /** @param array<RelatedProduct> $relatedProducts */
     public function __construct(
         public int $productId,
         public ?array $relatedProducts,

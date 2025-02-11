@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V20;
 
 class ProductTemplateValuesWithTranslationTemplateProperty
 {
-    /** @param array<\Webparking\Logic4Client\Data\V20\ProductTemplateValuesWithTranslationTemplatePropertyValue> $values */
+    /** @param array<ProductTemplateValuesWithTranslationTemplatePropertyValue> $values */
     public function __construct(
         public int $templatePropertyId,
         public ?array $values,

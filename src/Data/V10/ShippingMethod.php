@@ -7,8 +7,8 @@ namespace Webparking\Logic4Client\Data\V10;
 class ShippingMethod
 {
     /**
-     * @param array<string>                                          $countryIsoCodes
-     * @param array<\Webparking\Logic4Client\Data\V10\WebsiteDomain> $websiteDomains
+     * @param array<string>        $countryIsoCodes
+     * @param array<WebsiteDomain> $websiteDomains
      */
     public function __construct(
         public int $id,

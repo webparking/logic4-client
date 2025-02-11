@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V11;
 
 class ProductStockControlHead
 {
-    /** @param array<\Webparking\Logic4Client\Data\V11\ProductStockControlRow> $rows */
+    /** @param array<ProductStockControlRow> $rows */
     public function __construct(
         public ?\Carbon\Carbon $createdDate,
         public ?int $id,

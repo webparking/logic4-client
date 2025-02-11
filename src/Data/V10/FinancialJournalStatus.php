@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Data\V10;
 
-class ProductTemplateValuesWithTranslationTemplatePropertyValue
+class FinancialJournalStatus
 {
-    /** @param array<Translation> $translations */
     public function __construct(
+        public int $id,
         public ?string $value,
-        public ?array $translations,
+        public bool $blockPayment,
     ) {
     }
 
@@ -17,8 +17,9 @@ class ProductTemplateValuesWithTranslationTemplatePropertyValue
     public static function make(array $data): self
     {
         return new self(
+            id: $data['Id'] ?? 0,
             value: $data['Value'] ?? null,
-            translations: array_map(static fn (array $item) => Translation::make($item), $data['Translations'] ?? []),
+            blockPayment: $data['BlockPayment'] ?? false,
         );
     }
 }

@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class VariantBalkCategory
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\VariantBalkCategoryTranslation> $translations */
+    /** @param array<VariantBalkCategoryTranslation> $translations */
     public function __construct(
         public int $id,
         public ?string $value,

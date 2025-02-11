@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V11;
 
 class ProductVariantBalkChildrenGroup
 {
-    /** @param array<\Webparking\Logic4Client\Data\V11\ProductVariantBalkChildrenGroupChildren> $children */
+    /** @param array<ProductVariantBalkChildrenGroupChildren> $children */
     public function __construct(
         public int $productId,
         public ?array $children,
