@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ExplodedViewProductGroup
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\Translation> $productGroupNameTranslations */
+    /** @param array<Translation> $productGroupNameTranslations */
     public function __construct(
         public int $productGroupId,
         public ?string $productGroupName,

@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ProductStockInformation
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\ProductStockLocations> $stockLocations */
+    /** @param array<ProductStockLocations> $stockLocations */
     public function __construct(
         public float $totalStock,
         public float $reservedStock,

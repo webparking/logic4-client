@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ProductVariant
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\Translation> $translations */
+    /** @param array<Translation> $translations */
     public function __construct(
         public ?string $name,
         public int $id,

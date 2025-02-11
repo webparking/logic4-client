@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ProductStockControlRow
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\ProductExtraBarcode> $barcodeExtraList */
+    /** @param array<ProductExtraBarcode> $barcodeExtraList */
     public function __construct(
         public ?int $id,
         public ?int $productStockHeadId,

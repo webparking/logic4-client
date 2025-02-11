@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class SalesOrderDelivery
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\SalesOrderDeliveryDetailRow> $details */
+    /** @param array<SalesOrderDeliveryDetailRow> $details */
     public function __construct(
         public ?int $orderId,
         public int $orderStatusId,

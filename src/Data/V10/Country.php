@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class Country
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\Translation> $names */
+    /** @param array<Translation> $names */
     public function __construct(
         public int $id,
         public int $zoneId,

@@ -7,9 +7,9 @@ namespace Webparking\Logic4Client\Data\V10;
 class ExplodedView
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V10\Translation>              $nameTranslations
-     * @param array<\Webparking\Logic4Client\Data\V10\ExplodedViewHighlight>    $highlights
-     * @param array<\Webparking\Logic4Client\Data\V10\ExplodedViewProductGroup> $productGroups
+     * @param array<Translation>              $nameTranslations
+     * @param array<ExplodedViewHighlight>    $highlights
+     * @param array<ExplodedViewProductGroup> $productGroups
      */
     public function __construct(
         public int $id,

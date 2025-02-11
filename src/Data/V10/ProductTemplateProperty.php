@@ -7,10 +7,10 @@ namespace Webparking\Logic4Client\Data\V10;
 class ProductTemplateProperty
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V10\Translation> $nameTranslations
-     * @param array<\Webparking\Logic4Client\Data\V10\Translation> $filterInfomations
-     * @param array<\Webparking\Logic4Client\Data\V10\Translation> $unitTranslations
-     * @param array<string>                                        $values
+     * @param array<Translation> $nameTranslations
+     * @param array<Translation> $filterInfomations
+     * @param array<Translation> $unitTranslations
+     * @param array<string>      $values
      */
     public function __construct(
         public int $templatePropertyId,

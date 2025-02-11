@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V11;
 
 class ProductSupplier
 {
-    /** @param array<\Webparking\Logic4Client\Data\V11\Int32DecimalKeyValuePair> $creditorBuyPrices */
+    /** @param array<Int32DecimalKeyValuePair> $creditorBuyPrices */
     public function __construct(
         public int $productId,
         public ?string $creditorName,

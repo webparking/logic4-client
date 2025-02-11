@@ -9,6 +9,7 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\V10\FinancialBookLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\FinancialJournalStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\LedgerLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
@@ -90,6 +91,20 @@ class FinancialRequest extends Request
         foreach ($iterator as $record) {
             yield FinancialJournal::make($record);
         }
+    }
+
+    /**
+     * Verkrijg alle mogelijke statussen van financiële journalen.
+     *
+     * @throws Logic4ApiException
+     */
+    public function getFinancialJournalStatuses(
+    ): FinancialJournalStatusLogic4ResponseList {
+        return FinancialJournalStatusLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1/Financial/GetFinancialJournalStatuses'),
+            )
+        );
     }
 
     /**

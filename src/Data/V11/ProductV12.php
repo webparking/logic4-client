@@ -7,13 +7,13 @@ namespace Webparking\Logic4Client\Data\V11;
 class ProductV12
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V11\FreeValue>             $freeValues
-     * @param array<\Webparking\Logic4Client\Data\V11\Translation>           $descriptions
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductShiftPrice>     $shiftPrices
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductGroup>          $productGroups
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductExtraBarcode>   $barcodeExtraList
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductStockWarehouse> $wareHouses
-     * @param array<string>                                                  $tags
+     * @param array<FreeValue>             $freeValues
+     * @param array<Translation>           $descriptions
+     * @param array<ProductShiftPrice>     $shiftPrices
+     * @param array<ProductGroup>          $productGroups
+     * @param array<ProductExtraBarcode>   $barcodeExtraList
+     * @param array<ProductStockWarehouse> $wareHouses
+     * @param array<string>                $tags
      */
     public function __construct(
         public int $productId,

@@ -108,7 +108,7 @@ class ComponentClassGenerator
             } elseif ($arrayParameter = $arrayParameters[$property] ?? null) {
                 $assignmentValue = "array_map(static fn (array \$item) => \\$arrayParameter::make(\$item), \$data['$property'] ?? [])";
             } elseif (\in_array($property, $dateParameters, true)) {
-                $assignment = sprintf("\\%s::parse(\$data['%s'])", Carbon::class, $property);
+                $assignment = \sprintf("\\%s::parse(\$data['%s'])", Carbon::class, $property);
             }
 
             if (null === $assignment) {

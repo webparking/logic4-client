@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V20;
 
 class ProductImageV2
 {
-    /** @param array<\Webparking\Logic4Client\Data\V20\GetProductImage> $productImages */
+    /** @param array<GetProductImage> $productImages */
     public function __construct(
         public ?string $baseUrl,
         public ?array $productImages,

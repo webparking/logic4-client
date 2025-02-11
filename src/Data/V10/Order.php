@@ -7,9 +7,9 @@ namespace Webparking\Logic4Client\Data\V10;
 class Order
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V10\OrderShipment> $orderShipments
-     * @param array<\Webparking\Logic4Client\Data\V10\Payment>       $payments
-     * @param array<\Webparking\Logic4Client\Data\V10\OrderRow>      $orderRows
+     * @param array<OrderShipment> $orderShipments
+     * @param array<Payment>       $payments
+     * @param array<OrderRow>      $orderRows
      */
     public function __construct(
         public int $debtorId,

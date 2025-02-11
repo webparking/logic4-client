@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ProductMinimalStockNumber
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\WarehouseMinimalStockNumber> $minimalStockWarehouses */
+    /** @param array<WarehouseMinimalStockNumber> $minimalStockWarehouses */
     public function __construct(
         public int $productId,
         public ?int $minimalStockForAdministrationLevel,

@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V11;
 
 class ProductBarcode
 {
-    /** @param array<\Webparking\Logic4Client\Data\V11\BarcodeWithAmount> $barcodes */
+    /** @param array<BarcodeWithAmount> $barcodes */
     public function __construct(
         public ?array $barcodes,
         public int $productId,

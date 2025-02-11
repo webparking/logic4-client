@@ -7,8 +7,8 @@ namespace Webparking\Logic4Client\Data\V20;
 class ProductStockInformationV2
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V20\ProductStockInformationWarehouseDefaultPickLocation> $warehouseDefaultPickLocations
-     * @param array<\Webparking\Logic4Client\Data\V20\ProductStockInformationWarehouseStock>               $stockInformation
+     * @param array<ProductStockInformationWarehouseDefaultPickLocation> $warehouseDefaultPickLocations
+     * @param array<ProductStockInformationWarehouseStock>               $stockInformation
      */
     public function __construct(
         public int $productId,

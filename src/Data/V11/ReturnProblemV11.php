@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V11;
 
 class ReturnProblemV11
 {
-    /** @param array<\Webparking\Logic4Client\Data\V11\ReturnSolution> $solutions */
+    /** @param array<ReturnSolution> $solutions */
     public function __construct(
         public ?array $solutions,
         public int $id,

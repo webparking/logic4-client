@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ExplodedViewHighlight
 {
-    /** @param array<\Webparking\Logic4Client\Data\V10\ExplodedViewHighlightProduct> $products */
+    /** @param array<ExplodedViewHighlightProduct> $products */
     public function __construct(
         public int $id,
         public ?string $name,
