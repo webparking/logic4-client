@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Responses\V10;
 
-class DecimalLogic4ResponseList
+class DecimalLogic4Response
 {
-    /**
-     * @param array<number> $records
-     * @param array<string> $validationMessages
-     */
+    /** @param array<string> $validationMessages */
     public function __construct(
-        public array $records,
-        public int $recordsCounter,
+        public float $value,
         public array $validationMessages,
     ) {
     }
@@ -21,8 +17,7 @@ class DecimalLogic4ResponseList
     public static function make(array $data): self
     {
         return new self(
-            records: $data['Records'] ?? [],
-            recordsCounter: $data['RecordsCounter'] ?? 0,
+            value: $data['Value'] ?? 0.0,
             validationMessages: $data['ValidationMessages'] ?? [],
         );
     }

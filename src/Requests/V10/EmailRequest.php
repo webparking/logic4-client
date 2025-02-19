@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
+use Webparking\Logic4Client\Data\V10\EmailMessage;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\EmailAddressLogic4Response;
-use Webparking\Logic4Client\Responses\V10\EmailAttachmentLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailAddressLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\EmailAttachmentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\EmailBoxLogic4Response;
-use Webparking\Logic4Client\Responses\V10\EmailMessageLogic4Response;
-use Webparking\Logic4Client\Responses\V10\EmailMessageStatusLogic4Response;
+use Webparking\Logic4Client\Responses\V10\EmailBoxLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\EmailMessageStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\EmailUserLogic4Response;
 use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
 
@@ -187,8 +186,8 @@ class EmailRequest extends Request
      */
     public function getEmailAttachments(
         array $parameters = [],
-    ): EmailAttachmentLogic4Response {
-        return EmailAttachmentLogic4Response::make(
+    ): EmailAttachmentLogic4ResponseList {
+        return EmailAttachmentLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/GetEmailAttachments', ['json' => $parameters]),
             )
@@ -203,9 +202,10 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getEmailBoxes(array $parameters = []): EmailBoxLogic4Response
-    {
-        return EmailBoxLogic4Response::make(
+    public function getEmailBoxes(
+        array $parameters = [],
+    ): EmailBoxLogic4ResponseList {
+        return EmailBoxLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/GetEmailBoxes', ['json' => $parameters]),
             )
@@ -237,24 +237,25 @@ class EmailRequest extends Request
      *     LoadRights?: boolean|null,
      * } $parameters
      *
+     * @return \Generator<array-key, EmailMessage>
+     *
      * @throws Logic4ApiException
      */
-    public function getEmailMessages(
-        array $parameters = [],
-    ): EmailMessageLogic4Response {
-        return EmailMessageLogic4Response::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1/Email/GetEmailMessages', ['json' => $parameters]),
-            )
-        );
+    public function getEmailMessages(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Email/GetEmailMessages', $parameters);
+
+        foreach ($iterator as $record) {
+            yield EmailMessage::make($record);
+        }
     }
 
     /**
      * @throws Logic4ApiException
      */
-    public function getEmailMessageStatuses(): EmailMessageStatusLogic4Response
-    {
-        return EmailMessageStatusLogic4Response::make(
+    public function getEmailMessageStatuses(
+    ): EmailMessageStatusLogic4ResponseList {
+        return EmailMessageStatusLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Email/GetEmailMessageStatuses'),
             )
@@ -276,9 +277,9 @@ class EmailRequest extends Request
     /**
      * @throws Logic4ApiException
      */
-    public function getUsedEmailAddresses(): EmailAddressLogic4Response
+    public function getUsedEmailAddresses(): EmailAddressLogic4ResponseList
     {
-        return EmailAddressLogic4Response::make(
+        return EmailAddressLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Email/GetUsedEmailAddresses'),
             )

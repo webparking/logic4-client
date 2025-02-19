@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Data\V11;
+namespace Webparking\Logic4Client\Data\V12;
 
 class ProductExtraBarcodeType
 {

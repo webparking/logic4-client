@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Responses\V10;
 
-class EmailAttachmentLogic4Response
+class BuyOrderBaseInfoLogic4Response
 {
     /** @param array<string> $validationMessages */
     public function __construct(
-        public ?\Webparking\Logic4Client\Data\V10\EmailAttachment $value,
+        public ?\Webparking\Logic4Client\Data\V10\BuyOrderBaseInfo $value,
         public array $validationMessages,
     ) {
     }
@@ -17,7 +17,7 @@ class EmailAttachmentLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: isset($data['Value']) ? \Webparking\Logic4Client\Data\V10\EmailAttachment::make($data['Value']) : null,
+            value: isset($data['Value']) ? \Webparking\Logic4Client\Data\V10\BuyOrderBaseInfo::make($data['Value']) : null,
             validationMessages: $data['ValidationMessages'] ?? [],
         );
     }

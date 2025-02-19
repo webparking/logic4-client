@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\DecimalLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\DecimalLogic4Response;
 use Webparking\Logic4Client\Responses\V10\ProductSalesInformationLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\Top10ItemLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ValuevsBudgetLogic4ResponseList;
@@ -208,8 +208,8 @@ class ManagementRequest extends Request
      */
     public function getSalesTotalIncludingOrdersAndRepeating(
         array $parameters = [],
-    ): DecimalLogic4ResponseList {
-        return DecimalLogic4ResponseList::make(
+    ): DecimalLogic4Response {
+        return DecimalLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Management/GetSalesTotalIncludingOrdersAndRepeating', ['json' => $parameters]),
             )

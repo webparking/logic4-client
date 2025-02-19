@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Responses\V10;
+namespace Webparking\Logic4Client\Responses\V20;
 
-class BuyOrderDeliveryStatusValueLogic4Response
+class ProductTemplatesWithTranslationLogic4Response
 {
     /** @param array<string> $validationMessages */
     public function __construct(
-        public ?\Webparking\Logic4Client\Data\V10\BuyOrderDeliveryStatusValue $value,
+        public ?\Webparking\Logic4Client\Data\V20\ProductTemplatesWithTranslation $value,
         public array $validationMessages,
     ) {
     }
@@ -17,7 +17,7 @@ class BuyOrderDeliveryStatusValueLogic4Response
     public static function make(array $data): self
     {
         return new self(
-            value: isset($data['Value']) ? \Webparking\Logic4Client\Data\V10\BuyOrderDeliveryStatusValue::make($data['Value']) : null,
+            value: isset($data['Value']) ? \Webparking\Logic4Client\Data\V20\ProductTemplatesWithTranslation::make($data['Value']) : null,
             validationMessages: $data['ValidationMessages'] ?? [],
         );
     }

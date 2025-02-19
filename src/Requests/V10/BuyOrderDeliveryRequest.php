@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
+use Webparking\Logic4Client\Data\V10\BuyOrderDeliveryRead;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BuyOrderDeliveryAndOrderMovementLogic4Response;
-use Webparking\Logic4Client\Responses\V10\BuyOrderDeliveryReadLogic4Response;
-use Webparking\Logic4Client\Responses\V10\BuyOrderDeliveryStatusValueLogic4Response;
-use Webparking\Logic4Client\Responses\V10\BuyOrderDeliveryTypeValueLogic4Response;
+use Webparking\Logic4Client\Responses\V10\BuyOrderDeliveryStatusValueLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\BuyOrderDeliveryTypeValueLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
 
 class BuyOrderDeliveryRequest extends Request
@@ -85,16 +85,17 @@ class BuyOrderDeliveryRequest extends Request
      *     Take?: integer|null,
      * } $parameters
      *
+     * @return \Generator<array-key, BuyOrderDeliveryRead>
+     *
      * @throws Logic4ApiException
      */
-    public function getBuyOrderDeliveries(
-        array $parameters = [],
-    ): BuyOrderDeliveryReadLogic4Response {
-        return BuyOrderDeliveryReadLogic4Response::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1/BuyOrderDeliveries/GetBuyOrderDeliveries', ['json' => $parameters]),
-            )
-        );
+    public function getBuyOrderDeliveries(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/BuyOrderDeliveries/GetBuyOrderDeliveries', $parameters, 'Take', 'Skip');
+
+        foreach ($iterator as $record) {
+            yield BuyOrderDeliveryRead::make($record);
+        }
     }
 
     /**
@@ -103,8 +104,8 @@ class BuyOrderDeliveryRequest extends Request
      * @throws Logic4ApiException
      */
     public function getBuyOrderDeliveryStatusses(
-    ): BuyOrderDeliveryStatusValueLogic4Response {
-        return BuyOrderDeliveryStatusValueLogic4Response::make(
+    ): BuyOrderDeliveryStatusValueLogic4ResponseList {
+        return BuyOrderDeliveryStatusValueLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/BuyOrderDeliveries/GetBuyOrderDeliveryStatusses'),
             )
@@ -117,8 +118,8 @@ class BuyOrderDeliveryRequest extends Request
      * @throws Logic4ApiException
      */
     public function getBuyOrderDeliveryTypes(
-    ): BuyOrderDeliveryTypeValueLogic4Response {
-        return BuyOrderDeliveryTypeValueLogic4Response::make(
+    ): BuyOrderDeliveryTypeValueLogic4ResponseList {
+        return BuyOrderDeliveryTypeValueLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/BuyOrderDeliveries/GetBuyOrderDeliveryTypes'),
             )
