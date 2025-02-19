@@ -8,9 +8,22 @@ use Webparking\Logic4Client\Data\V12\Brand;
 use Webparking\Logic4Client\Data\V12\ProductV11;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
+use Webparking\Logic4Client\Responses\V12\ProductExtraBarcodeTypeLogic4ResponseList;
 
 class ProductRequest extends Request
 {
+    /**
+     * @throws Logic4ApiException
+     */
+    public function getBarcodeTypes(): ProductExtraBarcodeTypeLogic4ResponseList
+    {
+        return ProductExtraBarcodeTypeLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1.2/Products/GetBarcodeTypes'),
+            )
+        );
+    }
+
     /**
      * Haal merken op o.b.v. het filter.
      *

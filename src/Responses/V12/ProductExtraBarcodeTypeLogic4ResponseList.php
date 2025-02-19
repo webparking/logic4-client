@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Responses\V11;
+namespace Webparking\Logic4Client\Responses\V12;
 
 class ProductExtraBarcodeTypeLogic4ResponseList
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V11\ProductExtraBarcodeType> $records
+     * @param array<\Webparking\Logic4Client\Data\V12\ProductExtraBarcodeType> $records
      * @param array<string>                                                    $validationMessages
      */
     public function __construct(
@@ -21,7 +21,7 @@ class ProductExtraBarcodeTypeLogic4ResponseList
     public static function make(array $data): self
     {
         return new self(
-            records: array_map(static fn (array $item) => \Webparking\Logic4Client\Data\V11\ProductExtraBarcodeType::make($item), $data['Records'] ?? []),
+            records: array_map(static fn (array $item) => \Webparking\Logic4Client\Data\V12\ProductExtraBarcodeType::make($item), $data['Records'] ?? []),
             recordsCounter: $data['RecordsCounter'] ?? 0,
             validationMessages: $data['ValidationMessages'] ?? [],
         );

@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Requests\V20;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V20\ProductTemplatesWithTranslation;
+use Webparking\Logic4Client\Responses\V20\ProductTemplatesWithTranslationLogic4Response;
 
 class ProductTemplateRequest extends Request
 {
@@ -22,8 +22,8 @@ class ProductTemplateRequest extends Request
      */
     public function getProductTemplateValuesWithTranslations(
         array $parameters = [],
-    ): ProductTemplatesWithTranslation {
-        return ProductTemplatesWithTranslation::make(
+    ): ProductTemplatesWithTranslationLogic4Response {
+        return ProductTemplatesWithTranslationLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v2/ProductTemplates/GetProductTemplateValuesWithTranslations', ['json' => $parameters]),
             )

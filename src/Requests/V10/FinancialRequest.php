@@ -25,14 +25,14 @@ class FinancialRequest extends Request
      * Maak een financiele dagboekboeking met mutaties aan.
      *
      * @param array{
+     *     Reference?: string|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
      *     Description?: string|null,
-     *     Reference?: string|null,
      *     BookingDateTime?: string|null,
      *     FinancialBookId?: integer|null,
-     *     Mutations?: array<array{BookingDateTime?: string, AmountIncl?: number, DebtorId?: integer|null, CreditorId?: integer|null, PaymentMethodId?: integer|null}>|null,
+     *     Mutations?: array<array{CreditorId?: integer|null, DebtorId?: integer|null, BookingDateTime?: string, PaymentMethodId?: integer|null, AmountIncl?: number}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

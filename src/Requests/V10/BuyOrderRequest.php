@@ -7,6 +7,7 @@ namespace Webparking\Logic4Client\Requests\V10;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
+use Webparking\Logic4Client\Responses\V10\BuyOrderBaseInfoLogic4Response;
 use Webparking\Logic4Client\Responses\V10\BuyOrderBaseInfoLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\BuyOrderRowLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response;
@@ -102,8 +103,8 @@ class BuyOrderRequest extends Request
      */
     public function createBuyOrder(
         array $parameters = [],
-    ): BuyOrderBaseInfoLogic4ResponseList {
-        return BuyOrderBaseInfoLogic4ResponseList::make(
+    ): BuyOrderBaseInfoLogic4Response {
+        return BuyOrderBaseInfoLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/CreateBuyOrder', ['json' => $parameters]),
             )
@@ -218,8 +219,8 @@ class BuyOrderRequest extends Request
      */
     public function updateBuyOrder(
         array $parameters = [],
-    ): BuyOrderBaseInfoLogic4ResponseList {
-        return BuyOrderBaseInfoLogic4ResponseList::make(
+    ): BuyOrderBaseInfoLogic4Response {
+        return BuyOrderBaseInfoLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/UpdateBuyOrder', ['json' => $parameters]),
             )
