@@ -45,7 +45,7 @@ class AccessTokenManager
 
     public function getAccessToken(): string
     {
-        $cacheKey = 'logic4:access_token:'.base64_encode($this->makeClientId());
+        $cacheKey = 'logic4:access_token:'.base64_encode($this->makeClientId().':'.$this->makeScope());
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
