@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
+use Webparking\Logic4Client\Data\V10\FinancialBookBooking;
 use Webparking\Logic4Client\Data\V10\FinancialJournal;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\V10\FinancialBookLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\FinancialJournalStatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
 use Webparking\Logic4Client\Responses\V10\LedgerLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
@@ -25,17 +27,21 @@ class FinancialRequest extends Request
      * Maak een financiele dagboekboeking met mutaties aan.
      *
      * @param array{
-     *     Reference?: string|null,
+     *     Description?: string|null,
+     *     FinancialCostCenterId?: integer|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Description?: string|null,
+     *     Reference?: string|null,
      *     BookingDateTime?: string|null,
      *     FinancialBookId?: integer|null,
-     *     Mutations?: array<array{CreditorId?: integer|null, DebtorId?: integer|null, BookingDateTime?: string, PaymentMethodId?: integer|null, AmountIncl?: number}>|null,
+     *     JournalStatusId?: integer|null,
+     *     Mutations?: array<array{CreditorId?: integer|null, DebtorId?: integer|null, BookingDateTime?: string, PaymentMethodId?: integer|null, FinancialCostCenterId?: integer|null, AmountIncl?: number}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
+     *
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik een nieuwere versie. - Financiële dagboekboeking met mutaties aanmaken
      */
     public function addFinancialBookingWithMutations(
         array $parameters = [],
@@ -45,6 +51,68 @@ class FinancialRequest extends Request
                 $this->getClient()->post('/v1/Financial/AddFinancialBookingWithMutations', ['json' => $parameters]),
             )
         );
+    }
+
+    /**
+     * Maak een financiele memoriaal dagboekboeking met mutaties aan.
+     *
+     * @param array{
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     Reference?: string|null,
+     *     BookingDateTime?: string|null,
+     *     FinancialBookId?: integer|null,
+     *     JournalStatusId?: integer|null,
+     *     Mutations?: array<array{VatCode?: integer, LedgerId?: integer, Description?: string|null, AmountIncl?: number}>|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function addFinancialGeneralBookingWithMutations(
+        array $parameters = [],
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1/Financial/AddFinancialGeneralBookingWithMutations', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Financieel dagboekboeking met mutaties verkrijgen o.b.v. het aangeleverde filter.
+     * Levert alleen boekingen uit verkoop, inkoop of memoriale dagboeken.
+     *
+     * @param array{
+     *     BookingId?: integer|null,
+     *     FinancialBookId?: integer|null,
+     *     BookingDateTimeFrom?: string|null,
+     *     BookingDateTimeTo?: string|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     Reference?: string|null,
+     *     UserId?: integer|null,
+     *     BookingNumberByUser?: integer|null,
+     *     Description?: string|null,
+     *     DebtorId?: integer|null,
+     *     CreditorId?: integer|null,
+     *     StatusId?: integer|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, FinancialBookBooking>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getFinancialBookingsWithMutations(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Financial/GetFinancialBookingsWithMutations', $parameters);
+
+        foreach ($iterator as $record) {
+            yield FinancialBookBooking::make($record);
+        }
     }
 
     /**
