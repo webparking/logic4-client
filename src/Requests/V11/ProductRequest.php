@@ -144,8 +144,6 @@ class ProductRequest extends Request
     }
 
     /**
-     * @return array<array-key, array{Id: int, Description: string}>
-     *
      * @throws Logic4ApiException
      *
      * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.2. - Haal artikel barcode types op.

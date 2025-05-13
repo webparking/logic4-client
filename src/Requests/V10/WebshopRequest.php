@@ -309,6 +309,8 @@ class WebshopRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
+     *
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Verkrijg een WebshopUserProductlijst
      */
     public function getWebshopUserProductList(
         array $parameters = [],
