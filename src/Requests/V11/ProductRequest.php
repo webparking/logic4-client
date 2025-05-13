@@ -18,6 +18,7 @@ use Webparking\Logic4Client\Responses\V11\Int32Logic4ResponseList;
 use Webparking\Logic4Client\Responses\V11\ProductAssemblyRecipeItemLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V11\ProductBarcodeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V11\ProductCompositionItemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\ProductExtraBarcodeType;
 use Webparking\Logic4Client\Responses\V11\ProductPickLocationBasedOnSystemSettingsLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V11\ProductPriceInformationLogic4Response;
 use Webparking\Logic4Client\Responses\V11\ProductPricelistLogic4ResponseList;
@@ -144,6 +145,8 @@ class ProductRequest extends Request
     }
 
     /**
+     * @return array<array-key, ProductExtraBarcodeType>
+     *
      * @throws Logic4ApiException
      *
      * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.2. - Haal artikel barcode types op.
@@ -151,8 +154,11 @@ class ProductRequest extends Request
      */
     public function getBarcodeTypes(): array
     {
-        return $this->buildResponse(
-            $this->getClient()->get('/v1.1/Products/GetBarcodeTypes'),
+        return array_map(
+            static fn (array $data) => ProductExtraBarcodeType::make($data),
+            $this->buildResponse(
+                $this->getClient()->get('/v1.1/Products/GetBarcodeTypes'),
+            ),
         );
     }
 

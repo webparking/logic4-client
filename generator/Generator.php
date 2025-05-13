@@ -128,7 +128,18 @@ class Generator
                 $responseReference = $operation->responses['200']->content['application/json']->schema ?? null;
 
                 if ($responseReference instanceof Schema) {
-                    $classMethod = $requestGenerator->addMethod($method, $uri, $operation, returnType: $responseReference->type);
+                    $returnType = $responseReference->type;
+
+                    $arrayType = null;
+                    if ('array' === $returnType) {
+                        $arrayType = $this->componentClassGenerator->resolve(
+                            $responseReference->items->getReference(),
+                            'Responses',
+                            $this->getVersion($version)
+                        );
+                    }
+
+                    $classMethod = $requestGenerator->addMethod($method, $uri, $operation, $returnType, arrayType: $arrayType);
                 } else {
                     Assert::isInstanceOf($responseReference, Reference::class);
 
