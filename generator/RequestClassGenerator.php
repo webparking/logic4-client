@@ -28,7 +28,7 @@ class RequestClassGenerator
         $this->class->setExtends(Request::class);
     }
 
-    public function addMethod(string $httpMethod, string $uri, Operation $operation, ?string $returnType = null, ?PaginateType $paginated = null): Method
+    public function addMethod(string $httpMethod, string $uri, Operation $operation, ?string $returnType = null, ?PaginateType $paginated = null, ?string $arrayType = null): Method
     {
         $action = last(explode('/', ltrim($uri, '/')));
         $requestSchema = $operation->requestBody?->content['application/json']?->schema;
@@ -102,7 +102,20 @@ class RequestClassGenerator
             $method->addComment("\n@return ".(class_exists($returnType) ? '\\'.$returnType : $returnType));
         }
 
-        if (class_exists($returnType)) {
+        if ('array' === $returnType && $arrayType && class_exists($arrayType)) {
+            $method->addComment("\n@return array<array-key, \\$arrayType>");
+            $method->setBody(
+                <<<PHP
+                    return array_map(
+                        static fn (array \$data) => \\$arrayType::make(\$data),
+                        \$this->buildResponse(
+                            \$this->getClient()->{$httpMethod}('{$uri}'{$parametersPhp}),
+                        ),
+                    );
+                    PHP
+            );
+
+        } elseif (class_exists($returnType)) {
             if ($paginated) {
                 $paginateMethod = match ($paginated) {
                     PaginateType::TakeRecords => "\$this->paginateRecords('{$uri}', \$parameters);",
