@@ -331,6 +331,8 @@ class OrderRequest extends Request
      *     BrandName?: string|null,
      *     LoadNextDeliveryDate?: boolean|null,
      *     ChangedAfter?: string|null,
+     *     TakeRecords?: integer|null,
+     *     FromId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -533,6 +535,8 @@ class OrderRequest extends Request
      *     BrandName?: string|null,
      *     LoadNextDeliveryDate?: boolean|null,
      *     ChangedAfter?: string|null,
+     *     TakeRecords?: integer|null,
+     *     FromId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
