@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V10;
 
+use Webparking\Logic4Client\Data\V10\AssemblyAction;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
@@ -324,6 +325,45 @@ class OrderRequest extends Request
     }
 
     /**
+     * Verkrijg acties die hebben plaatsgevonden i.m.v. het assembleren van artikelen.
+     *
+     * @param array{
+     *     StartDateTime?: string|null,
+     *     EndDateTime?: string|null,
+     *     OrderId?: integer|null,
+     *     TypeId?: integer|null,
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, AssemblyAction>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getAssemblyActions(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1/Orders/GetAssemblyActions', $parameters);
+
+        foreach ($iterator as $record) {
+            yield AssemblyAction::make($record);
+        }
+    }
+
+    /**
+     * Verkrijg alle assemblage actietypes.
+     *
+     * @throws Logic4ApiException
+     */
+    public function getAssemblyActionsTypes(): OrderActionTypeLogic4ResponseList
+    {
+        return OrderActionTypeLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1/Orders/GetAssemblyActionsTypes'),
+            )
+        );
+    }
+
+    /**
      * Verkrijg factuurregels o.b.v. het meegestuurde filter.
      *
      * @param array{
@@ -331,6 +371,8 @@ class OrderRequest extends Request
      *     BrandName?: string|null,
      *     LoadNextDeliveryDate?: boolean|null,
      *     ChangedAfter?: string|null,
+     *     TakeRecords?: integer|null,
+     *     FromId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -533,6 +575,8 @@ class OrderRequest extends Request
      *     BrandName?: string|null,
      *     LoadNextDeliveryDate?: boolean|null,
      *     ChangedAfter?: string|null,
+     *     TakeRecords?: integer|null,
+     *     FromId?: integer|null,
      * } $parameters
      *
      * @throws Logic4ApiException
