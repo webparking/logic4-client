@@ -42,14 +42,14 @@ final class AccessTokenManagerTest extends TestCase
     public function testGetFromLogic4WhenNotInCache(): void
     {
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
-            $mock->shouldReceive('has')
+            $mock->shouldReceive('get')
                 ->once()
                 ->withArgs(function (string $key): bool {
                     static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
 
                     return true;
                 })
-                ->andReturnFalse();
+                ->andReturnNull();
 
             $mock->shouldReceive('set')
                 ->once()
@@ -96,15 +96,6 @@ final class AccessTokenManagerTest extends TestCase
     public function testGetFromCache(): void
     {
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
-            $mock->shouldReceive('has')
-                ->once()
-                ->withArgs(function (string $key): bool {
-                    static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
-
-                    return true;
-                })
-                ->andReturnTrue();
-
             $mock->shouldReceive('get')
                 ->once()
                 ->withArgs(function (string $key): bool {
@@ -127,14 +118,14 @@ final class AccessTokenManagerTest extends TestCase
     public function testExceptionThrownWhenFailedToFetchAccessToken(): void
     {
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
-            $mock->shouldReceive('has')
+            $mock->shouldReceive('get')
                 ->once()
                 ->withArgs(function (string $key): bool {
                     static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
 
                     return true;
                 })
-                ->andReturnFalse();
+                ->andReturnNull();
         });
 
         $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
