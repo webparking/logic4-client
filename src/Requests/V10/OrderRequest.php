@@ -332,6 +332,8 @@ class OrderRequest extends Request
      *     EndDateTime?: string|null,
      *     OrderId?: integer|null,
      *     TypeId?: integer|null,
+     *     UserId?: integer|null,
+     *     Description?: string|null,
      *     SkipRecords?: integer|null,
      *     TakeRecords?: integer|null,
      * } $parameters
@@ -417,6 +419,7 @@ class OrderRequest extends Request
      *     Type1Id?: integer|null,
      *     Type2Id?: integer|null,
      *     Type3Id?: integer|null,
+     *     WebsiteDomainIds?: array<integer>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -621,11 +624,12 @@ class OrderRequest extends Request
      *     Type1Id?: integer|null,
      *     Type2Id?: integer|null,
      *     Type3Id?: integer|null,
+     *     WebsiteDomainIds?: array<integer>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.2. - Orders ophalen
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.3. - Orders ophalen
      */
     public function getOrders(array $parameters = []): OrderLogic4ResponseList
     {
@@ -698,6 +702,7 @@ class OrderRequest extends Request
      *     Type1Id?: integer|null,
      *     Type2Id?: integer|null,
      *     Type3Id?: integer|null,
+     *     WebsiteDomainIds?: array<integer>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

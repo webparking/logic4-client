@@ -341,7 +341,7 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.2. - Artikelen ophalen
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.3. - Artikelen ophalen
      */
     public function getProducts(array $parameters = []): \Generator
     {

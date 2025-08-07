@@ -48,6 +48,7 @@ class OrderRequest extends Request
      *     Type1Id?: integer|null,
      *     Type2Id?: integer|null,
      *     Type3Id?: integer|null,
+     *     WebsiteDomainIds?: array<integer>|null,
      * } $parameters
      *
      * @return \Generator<array-key, ReturnOrderV2>

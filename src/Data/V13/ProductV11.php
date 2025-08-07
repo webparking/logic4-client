@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Data\V11;
+namespace Webparking\Logic4Client\Data\V13;
 
-class ProductV12
+class ProductV11
 {
     /**
      * @param array<FreeValue>             $freeValues
@@ -16,6 +16,7 @@ class ProductV12
      * @param array<string>                $tags
      */
     public function __construct(
+        public ?int $subUnitParentId,
         public int $productId,
         public ?string $productCode,
         public ?string $productName1,
@@ -99,6 +100,7 @@ class ProductV12
     public static function make(array $data): self
     {
         return new self(
+            subUnitParentId: $data['SubUnit_ParentId'] ?? null,
             productId: $data['ProductId'] ?? 0,
             productCode: $data['ProductCode'] ?? null,
             productName1: $data['ProductName1'] ?? null,
