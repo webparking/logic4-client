@@ -2,52 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Requests\V12;
+namespace Webparking\Logic4Client\Requests\V13;
 
-use Webparking\Logic4Client\Data\V12\Brand;
-use Webparking\Logic4Client\Data\V12\ProductSupplier;
-use Webparking\Logic4Client\Data\V12\ProductV11;
+use Webparking\Logic4Client\Data\V13\ProductV11;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V12\ProductExtraBarcodeTypeLogic4ResponseList;
 
 class ProductRequest extends Request
 {
     /**
-     * @throws Logic4ApiException
-     */
-    public function getBarcodeTypes(): ProductExtraBarcodeTypeLogic4ResponseList
-    {
-        return ProductExtraBarcodeTypeLogic4ResponseList::make(
-            $this->buildResponse(
-                $this->getClient()->get('/v1.2/Products/GetBarcodeTypes'),
-            )
-        );
-    }
-
-    /**
-     * Haal merken op o.b.v. het filter.
-     *
-     * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     * } $parameters
-     *
-     * @return \Generator<array-key, Brand>
-     *
-     * @throws Logic4ApiException
-     */
-    public function getBrands(array $parameters = []): \Generator
-    {
-        $iterator = $this->paginateRecords('/v1.2/Products/GetBrands', $parameters);
-
-        foreach ($iterator as $record) {
-            yield Brand::make($record);
-        }
-    }
-
-    /**
      * Verkrijg artikelen o.b.v. het meegestuurde filter. Het aantal op te vragen artikelen is gelimiteerd tot 10000.
+     * Vanaf v1.3 worden velden met de waarde null niet teruggegeven.
      *
      * @param array{
      *     DateTimeChangedFrom?: string|null,
@@ -98,33 +63,10 @@ class ProductRequest extends Request
      */
     public function getProducts(array $parameters = []): \Generator
     {
-        $iterator = $this->paginateRecords('/v1.2/Products/GetProducts', $parameters);
+        $iterator = $this->paginateRecords('/v1.3/Products/GetProducts', $parameters);
 
         foreach ($iterator as $record) {
             yield ProductV11::make($record);
-        }
-    }
-
-    /**
-     * Verkrijg alle leveranciers van één of meerdere producten op basis van ProductId's (max. 1000). Of gebruik 'TakeRecords' (max. 10.000).
-     * Vanaf v1.2 worden velden met de waarde null niet teruggegeven.
-     *
-     * @param array{
-     *     ProductIds?: array<integer>|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     * } $parameters
-     *
-     * @return \Generator<array-key, ProductSupplier>
-     *
-     * @throws Logic4ApiException
-     */
-    public function getSuppliersForProducts(array $parameters = []): \Generator
-    {
-        $iterator = $this->paginateRecords('/v1.2/Products/GetSuppliersForProducts', $parameters);
-
-        foreach ($iterator as $record) {
-            yield ProductSupplier::make($record);
         }
     }
 }

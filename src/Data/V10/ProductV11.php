@@ -91,6 +91,8 @@ class ProductV11
         public bool $hasVariants,
         public ?int $variantParentProductId,
         public ?array $tags,
+        public ?int $defaultPickLocation,
+        public ?int $defaultBulkLocation,
     ) {
     }
 
@@ -173,6 +175,8 @@ class ProductV11
             hasVariants: $data['HasVariants'] ?? false,
             variantParentProductId: $data['VariantParentProductId'] ?? null,
             tags: $data['Tags'] ?? null,
+            defaultPickLocation: $data['DefaultPickLocation'] ?? null,
+            defaultBulkLocation: $data['DefaultBulkLocation'] ?? null,
         );
     }
 }

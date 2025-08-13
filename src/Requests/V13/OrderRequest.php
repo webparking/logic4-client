@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webparking\Logic4Client\Requests\V13;
 
+use Webparking\Logic4Client\Data\V13\Order;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V13\Int32Logic4Response;
@@ -124,5 +125,55 @@ class OrderRequest extends Request
                 $this->getClient()->post('/v1.3/Orders/AddUpdateOrder', ['json' => $parameters]),
             )
         );
+    }
+
+    /**
+     * Verkrijg orders o.b.v. het meegestuurde filter.
+     * Vanaf 1.3 worden velden met de waarde null niet teruggegeven.
+     *
+     * @param array{
+     *     SkipRecords?: integer|null,
+     *     TakeRecords?: integer|null,
+     *     ChangedAfter?: string|null,
+     *     Id?: integer|null,
+     *     DebtorId?: integer|null,
+     *     CreationDateFrom?: string|null,
+     *     CreationDateTo?: string|null,
+     *     Barcode1?: string|null,
+     *     ProductCode?: string|null,
+     *     Delivery_Address?: string|null,
+     *     Delivery_PostalCode?: string|null,
+     *     Delivery_City?: string|null,
+     *     Delivery_ContactName?: string|null,
+     *     Delivery_CompanyName?: string|null,
+     *     Delivery_Email?: string|null,
+     *     Invoice_Address?: string|null,
+     *     Invoice_PostalCode?: string|null,
+     *     Invoice_City?: string|null,
+     *     Invoice_ContactName?: string|null,
+     *     Invoice_CompanyName?: string|null,
+     *     Invoice_Email?: string|null,
+     *     LastActionFrom?: string|null,
+     *     LastActionTo?: string|null,
+     *     Reference?: string|null,
+     *     LoadPayments?: boolean|null,
+     *     StatusId?: integer|null,
+     *     Type1Id?: integer|null,
+     *     Type2Id?: integer|null,
+     *     Type3Id?: integer|null,
+     *     WebsiteDomainIds?: array<integer>|null,
+     * } $parameters
+     *
+     * @return \Generator<array-key, Order>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getOrders(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1.3/Orders/GetOrders', $parameters);
+
+        foreach ($iterator as $record) {
+            yield Order::make($record);
+        }
     }
 }
