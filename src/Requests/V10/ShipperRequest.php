@@ -16,8 +16,8 @@ class ShipperRequest extends Request
      * Verkrijg alle afleveropties o.b.v een filter.
      *
      * @param array{
-     *     IsPickupLocation?: boolean|null,
-     *     ShipperTypeId?: integer|null,
+     *     IsPickupLocation?: bool|null,
+     *     ShipperTypeId?: int|null,
      *     ExternalTypeValue?: string|null,
      * } $parameters
      *

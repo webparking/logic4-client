@@ -20,27 +20,27 @@ class OrderRequest extends Request
      * Bij het succesvol aanmaken/updaten wordt het (nieuwe) factuurnummer in de response gevuld.
      *
      * @param array{
-     *     Totals?: array{AmountEx?: number, VATPercentage?: number, Calc_TotalPayed?: number|null, AmountIncl?: number, IsPaid?: boolean, ShippingCost?: number, ShippingCostIncl?: number|null}|null,
-     *     DebtorId?: integer|null,
-     *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: integer|null, TypeId?: integer|null, Value?: string|null}|null,
-     *     Id?: integer|null,
-     *     PaymentMethod?: array{Id?: integer, Description?: string|null, MaxAmount?: number|null, SelectKey?: string|null}|null,
-     *     ShippingMethod?: array{Id?: integer, Name?: string|null, ExportCode?: string|null}|null,
-     *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
-     *     OrderStatus?: array{Id?: integer, Value?: string|null}|null,
-     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: boolean, UseSystemPricesForProductCompositionProducts?: boolean}, InclPrice?: number|null, GrossInclPrice?: number|null, Id?: integer|null, Description?: string|null, Description2?: string|null, ProductId?: integer|null, Qty?: number, BuyPrice?: number|null, GrossPrice?: number|null, NettPrice?: number|null, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string|null, ProductBarcode1?: string|null, VATPercentage?: number|null, Notes?: string|null, DebtorId?: integer, OrderId?: integer|null, WarehouseId?: integer|null, Commission?: string|null, DeliveryOptionId?: integer|null, VatCodeId?: integer|null, VatCodeIdOverrule?: integer|null, FreeValue1?: string|null, FreeValue2?: string|null, FreeValue3?: string|null, FreeValue4?: string|null, FreeValue5?: string|null, ExpectedNextDelivery?: string|null, ExternalValue?: array{TypeId?: integer, Value?: string|null}, AgreedDeliveryDate?: string|null, Type1Id?: integer|null, Type2Id?: integer|null, Type3Id?: integer|null, Type4Id?: integer|null, Type5Id?: integer|null}>|null,
-     *     AcceptTermsAndConditions?: boolean|null,
-     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
-     *     InvoiceAddress?: array{Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     Totals?: array{AmountEx?: number, VATPercentage?: number, Calc_TotalPayed?: number|null, AmountIncl?: number, IsPaid?: bool, ShippingCost?: number, ShippingCostIncl?: number|null}|null,
+     *     DebtorId?: int|null,
+     *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: int|null, TypeId?: int|null, Value?: string|null}|null,
+     *     Id?: int|null,
+     *     PaymentMethod?: array{Id?: int, Description?: string|null, MaxAmount?: number|null, SelectKey?: string|null}|null,
+     *     ShippingMethod?: array{Id?: int, Name?: string|null, ExportCode?: string|null}|null,
+     *     CheckForOrderCostAndPaymentRegulation?: bool|null,
+     *     OrderStatus?: array{Id?: int, Value?: string|null}|null,
+     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: bool, UseSystemPricesForProductCompositionProducts?: bool}, InclPrice?: number|null, GrossInclPrice?: number|null, Id?: int|null, Description?: string|null, Description2?: string|null, ProductId?: int|null, Qty?: number, BuyPrice?: number|null, GrossPrice?: number|null, NettPrice?: number|null, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string|null, ProductBarcode1?: string|null, VATPercentage?: number|null, Notes?: string|null, DebtorId?: int, OrderId?: int|null, WarehouseId?: int|null, Commission?: string|null, DeliveryOptionId?: int|null, VatCodeId?: int|null, VatCodeIdOverrule?: int|null, FreeValue1?: string|null, FreeValue2?: string|null, FreeValue3?: string|null, FreeValue4?: string|null, FreeValue5?: string|null, ExpectedNextDelivery?: string|null, ExternalValue?: array{TypeId?: int, Value?: string|null}, AgreedDeliveryDate?: string|null, Type1Id?: int|null, Type2Id?: int|null, Type3Id?: int|null, Type4Id?: int|null, Type5Id?: int|null}>|null,
+     *     AcceptTermsAndConditions?: bool|null,
+     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     InvoiceAddress?: array{Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
      *     CreationDate?: string|null,
      *     Description?: string|null,
      *     Reference?: string|null,
-     *     BranchId?: integer|null,
-     *     UserId?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     DeliveryOptionId?: integer|null,
+     *     BranchId?: int|null,
+     *     UserId?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     DeliveryOptionId?: int|null,
      *     DeliveryDate?: string|null,
-     *     OrderShipmentFreeValues?: array{ShipperTypeId?: integer, Freevalue1?: string|null, Freevalue2?: string|null, Freevalue3?: string|null, Freevalue4?: string|null, Freevalue5?: string|null}|null,
+     *     OrderShipmentFreeValues?: array{ShipperTypeId?: int, Freevalue1?: string|null, Freevalue2?: string|null, Freevalue3?: string|null, Freevalue4?: string|null, Freevalue5?: string|null}|null,
      *     Notes?: string|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
@@ -50,14 +50,14 @@ class OrderRequest extends Request
      *     FreeValue6?: string|null,
      *     FreeValue7?: string|null,
      *     FreeValue8?: string|null,
-     *     OrderType1Id?: integer|null,
-     *     OrderType2Id?: integer|null,
-     *     OrderType3Id?: integer|null,
-     *     OrderType4Id?: integer|null,
-     *     OrderType5Id?: integer|null,
-     *     OrderType6Id?: integer|null,
-     *     OrderType7Id?: integer|null,
-     *     OrderType8Id?: integer|null,
+     *     OrderType1Id?: int|null,
+     *     OrderType2Id?: int|null,
+     *     OrderType3Id?: int|null,
+     *     OrderType4Id?: int|null,
+     *     OrderType5Id?: int|null,
+     *     OrderType6Id?: int|null,
+     *     OrderType7Id?: int|null,
+     *     OrderType8Id?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -79,27 +79,27 @@ class OrderRequest extends Request
      * Bij het succesvol aanmaken/updaten wordt het (nieuwe) ordernummer in de response gevuld.
      *
      * @param array{
-     *     Totals?: array{AmountEx?: number, VATPercentage?: number, Calc_TotalPayed?: number|null, AmountIncl?: number, IsPaid?: boolean, ShippingCost?: number, ShippingCostIncl?: number|null}|null,
-     *     DebtorId?: integer|null,
-     *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: integer|null, TypeId?: integer|null, Value?: string|null}|null,
-     *     Id?: integer|null,
-     *     PaymentMethod?: array{Id?: integer, Description?: string|null, MaxAmount?: number|null, SelectKey?: string|null}|null,
-     *     ShippingMethod?: array{Id?: integer, Name?: string|null, ExportCode?: string|null}|null,
-     *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
-     *     OrderStatus?: array{Id?: integer, Value?: string|null}|null,
-     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: boolean, UseSystemPricesForProductCompositionProducts?: boolean}, InclPrice?: number|null, GrossInclPrice?: number|null, Id?: integer|null, Description?: string|null, Description2?: string|null, ProductId?: integer|null, Qty?: number, BuyPrice?: number|null, GrossPrice?: number|null, NettPrice?: number|null, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string|null, ProductBarcode1?: string|null, VATPercentage?: number|null, Notes?: string|null, DebtorId?: integer, OrderId?: integer|null, WarehouseId?: integer|null, Commission?: string|null, DeliveryOptionId?: integer|null, VatCodeId?: integer|null, VatCodeIdOverrule?: integer|null, FreeValue1?: string|null, FreeValue2?: string|null, FreeValue3?: string|null, FreeValue4?: string|null, FreeValue5?: string|null, ExpectedNextDelivery?: string|null, ExternalValue?: array{TypeId?: integer, Value?: string|null}, AgreedDeliveryDate?: string|null, Type1Id?: integer|null, Type2Id?: integer|null, Type3Id?: integer|null, Type4Id?: integer|null, Type5Id?: integer|null}>|null,
-     *     AcceptTermsAndConditions?: boolean|null,
-     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
-     *     InvoiceAddress?: array{Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     Totals?: array{AmountEx?: number, VATPercentage?: number, Calc_TotalPayed?: number|null, AmountIncl?: number, IsPaid?: bool, ShippingCost?: number, ShippingCostIncl?: number|null}|null,
+     *     DebtorId?: int|null,
+     *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: int|null, TypeId?: int|null, Value?: string|null}|null,
+     *     Id?: int|null,
+     *     PaymentMethod?: array{Id?: int, Description?: string|null, MaxAmount?: number|null, SelectKey?: string|null}|null,
+     *     ShippingMethod?: array{Id?: int, Name?: string|null, ExportCode?: string|null}|null,
+     *     CheckForOrderCostAndPaymentRegulation?: bool|null,
+     *     OrderStatus?: array{Id?: int, Value?: string|null}|null,
+     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: bool, UseSystemPricesForProductCompositionProducts?: bool}, InclPrice?: number|null, GrossInclPrice?: number|null, Id?: int|null, Description?: string|null, Description2?: string|null, ProductId?: int|null, Qty?: number, BuyPrice?: number|null, GrossPrice?: number|null, NettPrice?: number|null, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string|null, ProductBarcode1?: string|null, VATPercentage?: number|null, Notes?: string|null, DebtorId?: int, OrderId?: int|null, WarehouseId?: int|null, Commission?: string|null, DeliveryOptionId?: int|null, VatCodeId?: int|null, VatCodeIdOverrule?: int|null, FreeValue1?: string|null, FreeValue2?: string|null, FreeValue3?: string|null, FreeValue4?: string|null, FreeValue5?: string|null, ExpectedNextDelivery?: string|null, ExternalValue?: array{TypeId?: int, Value?: string|null}, AgreedDeliveryDate?: string|null, Type1Id?: int|null, Type2Id?: int|null, Type3Id?: int|null, Type4Id?: int|null, Type5Id?: int|null}>|null,
+     *     AcceptTermsAndConditions?: bool|null,
+     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     InvoiceAddress?: array{Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
      *     CreationDate?: string|null,
      *     Description?: string|null,
      *     Reference?: string|null,
-     *     BranchId?: integer|null,
-     *     UserId?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     DeliveryOptionId?: integer|null,
+     *     BranchId?: int|null,
+     *     UserId?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     DeliveryOptionId?: int|null,
      *     DeliveryDate?: string|null,
-     *     OrderShipmentFreeValues?: array{ShipperTypeId?: integer, Freevalue1?: string|null, Freevalue2?: string|null, Freevalue3?: string|null, Freevalue4?: string|null, Freevalue5?: string|null}|null,
+     *     OrderShipmentFreeValues?: array{ShipperTypeId?: int, Freevalue1?: string|null, Freevalue2?: string|null, Freevalue3?: string|null, Freevalue4?: string|null, Freevalue5?: string|null}|null,
      *     Notes?: string|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
@@ -109,14 +109,14 @@ class OrderRequest extends Request
      *     FreeValue6?: string|null,
      *     FreeValue7?: string|null,
      *     FreeValue8?: string|null,
-     *     OrderType1Id?: integer|null,
-     *     OrderType2Id?: integer|null,
-     *     OrderType3Id?: integer|null,
-     *     OrderType4Id?: integer|null,
-     *     OrderType5Id?: integer|null,
-     *     OrderType6Id?: integer|null,
-     *     OrderType7Id?: integer|null,
-     *     OrderType8Id?: integer|null,
+     *     OrderType1Id?: int|null,
+     *     OrderType2Id?: int|null,
+     *     OrderType3Id?: int|null,
+     *     OrderType4Id?: int|null,
+     *     OrderType5Id?: int|null,
+     *     OrderType6Id?: int|null,
+     *     OrderType7Id?: int|null,
+     *     OrderType8Id?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -142,13 +142,13 @@ class OrderRequest extends Request
      * De optie "ForceAddProductComposition" zorgt ervoor dat samenstellingen <strong>altijd</strong> worden toegevoegd, ongeacht of er reeds samenstellingen bestaan voor deze orderregel.
      *
      * @param array{
-     *     OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: boolean, ForceAddProductComposition?: boolean, UseSystemPricesForProductCompositionProducts?: boolean}|null,
+     *     OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: bool, ForceAddProductComposition?: bool, UseSystemPricesForProductCompositionProducts?: bool}|null,
      *     InclPrice?: number|null,
      *     GrossInclPrice?: number|null,
-     *     Id?: integer|null,
+     *     Id?: int|null,
      *     Description?: string|null,
      *     Description2?: string|null,
-     *     ProductId?: integer|null,
+     *     ProductId?: int|null,
      *     Qty?: number|null,
      *     BuyPrice?: number|null,
      *     GrossPrice?: number|null,
@@ -159,26 +159,26 @@ class OrderRequest extends Request
      *     ProductBarcode1?: string|null,
      *     VATPercentage?: number|null,
      *     Notes?: string|null,
-     *     DebtorId?: integer|null,
-     *     OrderId?: integer|null,
-     *     WarehouseId?: integer|null,
+     *     DebtorId?: int|null,
+     *     OrderId?: int|null,
+     *     WarehouseId?: int|null,
      *     Commission?: string|null,
-     *     DeliveryOptionId?: integer|null,
-     *     VatCodeId?: integer|null,
-     *     VatCodeIdOverrule?: integer|null,
+     *     DeliveryOptionId?: int|null,
+     *     VatCodeId?: int|null,
+     *     VatCodeIdOverrule?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
      *     FreeValue4?: string|null,
      *     FreeValue5?: string|null,
      *     ExpectedNextDelivery?: string|null,
-     *     ExternalValue?: array{TypeId?: integer, Value?: string|null}|null,
+     *     ExternalValue?: array{TypeId?: int, Value?: string|null}|null,
      *     AgreedDeliveryDate?: string|null,
-     *     Type1Id?: integer|null,
-     *     Type2Id?: integer|null,
-     *     Type3Id?: integer|null,
-     *     Type4Id?: integer|null,
-     *     Type5Id?: integer|null,
+     *     Type1Id?: int|null,
+     *     Type2Id?: int|null,
+     *     Type3Id?: int|null,
+     *     Type4Id?: int|null,
+     *     Type5Id?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -199,33 +199,33 @@ class OrderRequest extends Request
      *
      * @param array{
      *     Totals?: array{ShippingCost?: number, ShippingCostIncl?: number|null}|null,
-     *     OriginalOrderId?: integer|null,
+     *     OriginalOrderId?: int|null,
      *     OriginalOrderDate?: string|null,
      *     OriginalOrderZipCode?: string|null,
-     *     ProblemId?: integer|null,
-     *     SolutionId?: integer|null,
+     *     ProblemId?: int|null,
+     *     SolutionId?: int|null,
      *     ReceivedReturnOrderDate?: string|null,
      *     ApprovedReturnOrderDate?: string|null,
-     *     DebtorId?: integer|null,
-     *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: integer|null, TypeId?: integer|null, Value?: string|null}|null,
-     *     Id?: integer|null,
-     *     PaymentMethod?: array{Id?: integer, Description?: string|null, MaxAmount?: number|null, SelectKey?: string|null}|null,
-     *     ShippingMethod?: array{Id?: integer, Name?: string|null, ExportCode?: string|null}|null,
-     *     CheckForOrderCostAndPaymentRegulation?: boolean|null,
-     *     OrderStatus?: array{Id?: integer, Value?: string|null}|null,
-     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: boolean, UseSystemPricesForProductCompositionProducts?: boolean}, InclPrice?: number|null, GrossInclPrice?: number|null, Id?: integer|null, Description?: string|null, Description2?: string|null, ProductId?: integer|null, Qty?: number, BuyPrice?: number|null, GrossPrice?: number|null, NettPrice?: number|null, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string|null, ProductBarcode1?: string|null, VATPercentage?: number|null, Notes?: string|null, DebtorId?: integer, OrderId?: integer|null, WarehouseId?: integer|null, Commission?: string|null, DeliveryOptionId?: integer|null, VatCodeId?: integer|null, VatCodeIdOverrule?: integer|null, FreeValue1?: string|null, FreeValue2?: string|null, FreeValue3?: string|null, FreeValue4?: string|null, FreeValue5?: string|null, ExpectedNextDelivery?: string|null, ExternalValue?: array{TypeId?: integer, Value?: string|null}, AgreedDeliveryDate?: string|null, Type1Id?: integer|null, Type2Id?: integer|null, Type3Id?: integer|null, Type4Id?: integer|null, Type5Id?: integer|null}>|null,
-     *     AcceptTermsAndConditions?: boolean|null,
-     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
-     *     InvoiceAddress?: array{Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     DebtorId?: int|null,
+     *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: int|null, TypeId?: int|null, Value?: string|null}|null,
+     *     Id?: int|null,
+     *     PaymentMethod?: array{Id?: int, Description?: string|null, MaxAmount?: number|null, SelectKey?: string|null}|null,
+     *     ShippingMethod?: array{Id?: int, Name?: string|null, ExportCode?: string|null}|null,
+     *     CheckForOrderCostAndPaymentRegulation?: bool|null,
+     *     OrderStatus?: array{Id?: int, Value?: string|null}|null,
+     *     OrderRows?: array<array{OrderRowWithProductComposition?: array{AddProductCompositionByParentProductToOrder?: bool, UseSystemPricesForProductCompositionProducts?: bool}, InclPrice?: number|null, GrossInclPrice?: number|null, Id?: int|null, Description?: string|null, Description2?: string|null, ProductId?: int|null, Qty?: number, BuyPrice?: number|null, GrossPrice?: number|null, NettPrice?: number|null, QtyDeliverd?: number, QtyDeliverd_NotInvoiced?: number, ProductCode?: string|null, ProductBarcode1?: string|null, VATPercentage?: number|null, Notes?: string|null, DebtorId?: int, OrderId?: int|null, WarehouseId?: int|null, Commission?: string|null, DeliveryOptionId?: int|null, VatCodeId?: int|null, VatCodeIdOverrule?: int|null, FreeValue1?: string|null, FreeValue2?: string|null, FreeValue3?: string|null, FreeValue4?: string|null, FreeValue5?: string|null, ExpectedNextDelivery?: string|null, ExternalValue?: array{TypeId?: int, Value?: string|null}, AgreedDeliveryDate?: string|null, Type1Id?: int|null, Type2Id?: int|null, Type3Id?: int|null, Type4Id?: int|null, Type5Id?: int|null}>|null,
+     *     AcceptTermsAndConditions?: bool|null,
+     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     InvoiceAddress?: array{Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
      *     CreationDate?: string|null,
      *     Description?: string|null,
      *     Reference?: string|null,
-     *     BranchId?: integer|null,
-     *     UserId?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     DeliveryOptionId?: integer|null,
+     *     BranchId?: int|null,
+     *     UserId?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     DeliveryOptionId?: int|null,
      *     DeliveryDate?: string|null,
-     *     OrderShipmentFreeValues?: array{ShipperTypeId?: integer, Freevalue1?: string|null, Freevalue2?: string|null, Freevalue3?: string|null, Freevalue4?: string|null, Freevalue5?: string|null}|null,
+     *     OrderShipmentFreeValues?: array{ShipperTypeId?: int, Freevalue1?: string|null, Freevalue2?: string|null, Freevalue3?: string|null, Freevalue4?: string|null, Freevalue5?: string|null}|null,
      *     Notes?: string|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
@@ -235,14 +235,14 @@ class OrderRequest extends Request
      *     FreeValue6?: string|null,
      *     FreeValue7?: string|null,
      *     FreeValue8?: string|null,
-     *     OrderType1Id?: integer|null,
-     *     OrderType2Id?: integer|null,
-     *     OrderType3Id?: integer|null,
-     *     OrderType4Id?: integer|null,
-     *     OrderType5Id?: integer|null,
-     *     OrderType6Id?: integer|null,
-     *     OrderType7Id?: integer|null,
-     *     OrderType8Id?: integer|null,
+     *     OrderType1Id?: int|null,
+     *     OrderType2Id?: int|null,
+     *     OrderType3Id?: int|null,
+     *     OrderType4Id?: int|null,
+     *     OrderType5Id?: int|null,
+     *     OrderType6Id?: int|null,
+     *     OrderType7Id?: int|null,
+     *     OrderType8Id?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -260,8 +260,8 @@ class OrderRequest extends Request
      * Verkrijg facturen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     Id?: integer|null,
-     *     DebtorId?: integer|null,
+     *     Id?: int|null,
+     *     DebtorId?: int|null,
      *     CreationDateFrom?: string|null,
      *     CreationDateTo?: string|null,
      *     Barcode1?: string|null,
@@ -281,12 +281,12 @@ class OrderRequest extends Request
      *     LastActionFrom?: string|null,
      *     LastActionTo?: string|null,
      *     Reference?: string|null,
-     *     LoadPayments?: boolean|null,
-     *     StatusId?: integer|null,
-     *     Type1Id?: integer|null,
-     *     Type2Id?: integer|null,
-     *     Type3Id?: integer|null,
-     *     WebsiteDomainIds?: array<integer>|null,
+     *     LoadPayments?: bool|null,
+     *     StatusId?: int|null,
+     *     Type1Id?: int|null,
+     *     Type2Id?: int|null,
+     *     Type3Id?: int|null,
+     *     WebsiteDomainIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -308,15 +308,15 @@ class OrderRequest extends Request
      * Indien historypoints zijn aangegeven, moet timeframe een van de volgende waarden hebben: ['Day', 'Week', 'Month', 'Quarter', 'Year'].
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      *     TimeFrame?: string|null,
-     *     HistoryPoints?: integer|null,
-     *     OrderstatusIds?: array<integer>|null,
-     *     WebsiteDomainIds?: array<integer>|null,
-     *     NotLinkedToWebsiteDomain?: boolean|null,
-     *     EmployeeIds?: array<integer>|null,
-     *     BranchIds?: array<integer>|null,
+     *     HistoryPoints?: int|null,
+     *     OrderstatusIds?: array<int>|null,
+     *     WebsiteDomainIds?: array<int>|null,
+     *     NotLinkedToWebsiteDomain?: bool|null,
+     *     EmployeeIds?: array<int>|null,
+     *     BranchIds?: array<int>|null,
      * } $parameters
      *
      * @return \Generator<array-key, OrderOpenPayment>
@@ -336,8 +336,8 @@ class OrderRequest extends Request
      * Verkrijg orders o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     Id?: integer|null,
-     *     DebtorId?: integer|null,
+     *     Id?: int|null,
+     *     DebtorId?: int|null,
      *     CreationDateFrom?: string|null,
      *     CreationDateTo?: string|null,
      *     Barcode1?: string|null,
@@ -357,12 +357,12 @@ class OrderRequest extends Request
      *     LastActionFrom?: string|null,
      *     LastActionTo?: string|null,
      *     Reference?: string|null,
-     *     LoadPayments?: boolean|null,
-     *     StatusId?: integer|null,
-     *     Type1Id?: integer|null,
-     *     Type2Id?: integer|null,
-     *     Type3Id?: integer|null,
-     *     WebsiteDomainIds?: array<integer>|null,
+     *     LoadPayments?: bool|null,
+     *     StatusId?: int|null,
+     *     Type1Id?: int|null,
+     *     Type2Id?: int|null,
+     *     Type3Id?: int|null,
+     *     WebsiteDomainIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -382,12 +382,12 @@ class OrderRequest extends Request
      * Verkrijg retourorders o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SolutionId?: integer|null,
-     *     ProblemId?: integer|null,
-     *     CategoryId?: integer|null,
-     *     BelongsToOrderId?: integer|null,
-     *     Id?: integer|null,
-     *     DebtorId?: integer|null,
+     *     SolutionId?: int|null,
+     *     ProblemId?: int|null,
+     *     CategoryId?: int|null,
+     *     BelongsToOrderId?: int|null,
+     *     Id?: int|null,
+     *     DebtorId?: int|null,
      *     CreationDateFrom?: string|null,
      *     CreationDateTo?: string|null,
      *     Barcode1?: string|null,
@@ -407,12 +407,12 @@ class OrderRequest extends Request
      *     LastActionFrom?: string|null,
      *     LastActionTo?: string|null,
      *     Reference?: string|null,
-     *     LoadPayments?: boolean|null,
-     *     StatusId?: integer|null,
-     *     Type1Id?: integer|null,
-     *     Type2Id?: integer|null,
-     *     Type3Id?: integer|null,
-     *     WebsiteDomainIds?: array<integer>|null,
+     *     LoadPayments?: bool|null,
+     *     StatusId?: int|null,
+     *     Type1Id?: int|null,
+     *     Type2Id?: int|null,
+     *     Type3Id?: int|null,
+     *     WebsiteDomainIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -433,8 +433,8 @@ class OrderRequest extends Request
      * Verkrijg retourproblemen o.b.v. het filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ReturnProblemV11>
@@ -454,8 +454,8 @@ class OrderRequest extends Request
      * Verkrijg order retouroplossingen o.b.v. het filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ReturnSolution>
@@ -475,9 +475,9 @@ class OrderRequest extends Request
      * Wijzig het contactadres van een order of factuur o.b.v. de meegestuurde gegevens.
      *
      * @param array{
-     *     OrderId?: integer|null,
-     *     InvoiceId?: integer|null,
-     *     ContactAddress?: array{Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     OrderId?: int|null,
+     *     InvoiceId?: int|null,
+     *     ContactAddress?: array{Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -496,9 +496,9 @@ class OrderRequest extends Request
      * Wijzig het afleveradres van een order of factuur o.b.v. de meegestuurde gegevens.
      *
      * @param array{
-     *     OrderId?: integer|null,
-     *     InvoiceId?: integer|null,
-     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     OrderId?: int|null,
+     *     InvoiceId?: int|null,
+     *     DeliveryAddress?: array{TelephoneNumber?: string|null, Email?: string|null, Street2?: string|null, HouseNumber2?: string|null, HouseNumberAddition2?: string|null, Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -517,9 +517,9 @@ class OrderRequest extends Request
      * Wijzig het factuuradres van een order of factuur o.b.v. de meegestuurde gegevens.
      *
      * @param array{
-     *     OrderId?: integer|null,
-     *     InvoiceId?: integer|null,
-     *     InvoiceAddress?: array{Id?: integer|null, ProvinceId?: integer|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
+     *     OrderId?: int|null,
+     *     InvoiceId?: int|null,
+     *     InvoiceAddress?: array{Id?: int|null, ProvinceId?: int|null, ContactName?: string|null, CompanyName?: string|null, PostalCode?: string|null, City?: string|null, CountryCode?: string|null, Street?: string|null, HouseNumber?: string|null, HouseNumberAddition?: string|null}|null,
      * } $parameters
      *
      * @throws Logic4ApiException

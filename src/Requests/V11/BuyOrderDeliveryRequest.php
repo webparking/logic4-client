@@ -15,15 +15,15 @@ class BuyOrderDeliveryRequest extends Request
      * Let op: de verkooporder kan enkel uitgeleverd worden als de betreffende inkooporderregel een OrderRowId heeft.
      *
      * @param array{
-     *     OrderId?: integer|null,
-     *     ProcessMutationButDoNotCreatePickbon?: boolean|null,
+     *     OrderId?: int|null,
+     *     ProcessMutationButDoNotCreatePickbon?: bool|null,
      *     Status?: string|null,
-     *     SupplierId?: integer|null,
-     *     BuyOrderId?: integer|null,
+     *     SupplierId?: int|null,
+     *     BuyOrderId?: int|null,
      *     Remarks?: string|null,
      *     Description?: string|null,
-     *     BranchId?: integer|null,
-     *     Rows?: array<array{BuyOrderRowId?: integer|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: integer|null, ProductId?: integer, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: integer|null, AmountOfLabelsToPrint?: integer|null}>|null,
+     *     BranchId?: int|null,
+     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>|null,
      *     PickingListNumber?: string|null,
      * } $parameters
      *

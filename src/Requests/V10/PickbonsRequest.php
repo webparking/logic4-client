@@ -96,11 +96,11 @@ class PickbonsRequest extends Request
      * Verkrijg pickbonnen op basis van het meegegeven filter.
      *
      * @param array{
-     *     OnlyUnprocessedItems?: boolean|null,
+     *     OnlyUnprocessedItems?: bool|null,
      *     OrderCreatedFrom?: string|null,
-     *     WarehouseZoneId?: integer|null,
-     *     WarehouseId?: integer|null,
-     *     PickBonId?: integer|null,
+     *     WarehouseZoneId?: int|null,
+     *     WarehouseId?: int|null,
+     *     PickBonId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -185,11 +185,11 @@ class PickbonsRequest extends Request
      * Verwerk een pickbon.
      *
      * @param array{
-     *     AmountOfColli?: integer|null,
-     *     Corrections?: array<array{OrderRowId?: integer, OrderHeadPickbonId?: integer, Qty?: number}>|null,
-     *     Mutations?: array<array{OrderHeadPickbonRowId?: integer, WarehouseStockLocationId?: integer, MutationAmount?: number}>|null,
-     *     OrderHeadPickbonId?: integer|null,
-     *     InterimLocationId?: integer|null,
+     *     AmountOfColli?: int|null,
+     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>|null,
+     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>|null,
+     *     OrderHeadPickbonId?: int|null,
+     *     InterimLocationId?: int|null,
      *     Remarks?: string|null,
      * } $parameters
      *
@@ -208,11 +208,11 @@ class PickbonsRequest extends Request
      * Verwerk meerdere pickbonnen.
      *
      * @param array<array{
-     *     AmountOfColli?: integer|null,
-     *     Corrections?: array<array{OrderRowId?: integer, OrderHeadPickbonId?: integer, Qty?: number}>|null,
-     *     Mutations?: array<array{OrderHeadPickbonRowId?: integer, WarehouseStockLocationId?: integer, MutationAmount?: number}>|null,
-     *     OrderHeadPickbonId?: integer|null,
-     *     InterimLocationId?: integer|null,
+     *     AmountOfColli?: int|null,
+     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>|null,
+     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>|null,
+     *     OrderHeadPickbonId?: int|null,
+     *     InterimLocationId?: int|null,
      *     Remarks?: string|null,
      * }> $parameters
      *

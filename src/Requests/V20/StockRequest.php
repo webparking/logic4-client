@@ -15,13 +15,13 @@ class StockRequest extends Request
      * Maak een voorraadmutatie aan.
      *
      * @param array{
-     *     LedgerId?: integer|null,
-     *     ITS_IssueId?: integer|null,
-     *     ProductId?: integer|null,
+     *     LedgerId?: int|null,
+     *     ITS_IssueId?: int|null,
+     *     ProductId?: int|null,
      *     Amount?: number|null,
      *     Remarks?: string|null,
-     *     StockLocationId?: integer|null,
-     *     StockMutationTypeId?: integer|null,
+     *     StockLocationId?: int|null,
+     *     StockMutationTypeId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -41,7 +41,7 @@ class StockRequest extends Request
      *
      * @param array{
      *     ProductCode?: string|null,
-     *     ProductIds?: array<integer>|null,
+     *     ProductIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

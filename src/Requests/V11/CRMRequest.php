@@ -16,24 +16,24 @@ class CRMRequest extends Request
      * TakeRecords wordt gelimiteerd op 10.000.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     CrmProjectId?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     CrmProjectId?: int|null,
      *     CreatedDateFrom?: string|null,
      *     CreatedDateTo?: string|null,
-     *     StatusIds?: array<integer>|null,
-     *     CreatedByUserIds?: array<integer>|null,
-     *     CarriedOutByUserId?: integer|null,
+     *     StatusIds?: array<int>|null,
+     *     CreatedByUserIds?: array<int>|null,
+     *     CarriedOutByUserId?: int|null,
      *     StartDateFrom?: string|null,
      *     StartDateTo?: string|null,
      *     Name?: string|null,
-     *     TypeId?: integer|null,
-     *     CrmProjectStatusId?: integer|null,
-     *     CrmProjectTypeId?: integer|null,
+     *     TypeId?: int|null,
+     *     CrmProjectStatusId?: int|null,
+     *     CrmProjectTypeId?: int|null,
      *     CrmProjectName?: string|null,
-     *     ShowOnlyOpenActivities?: boolean|null,
-     *     UserIdForRights?: integer|null,
-     *     CarriedOutByUserIds?: array<integer>|null,
+     *     ShowOnlyOpenActivities?: bool|null,
+     *     UserIdForRights?: int|null,
+     *     CarriedOutByUserIds?: array<int>|null,
      * } $parameters
      *
      * @return \Generator<array-key, CRMActivity>

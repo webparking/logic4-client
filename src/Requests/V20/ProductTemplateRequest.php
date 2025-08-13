@@ -12,10 +12,10 @@ class ProductTemplateRequest extends Request
 {
     /**
      * @param array{
-     *     ProductIds?: array<integer>|null,
-     *     VisibleOnWebsite?: boolean|null,
-     *     Skip?: integer|null,
-     *     Take?: integer|null,
+     *     ProductIds?: array<int>|null,
+     *     VisibleOnWebsite?: bool|null,
+     *     Skip?: int|null,
+     *     Take?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException

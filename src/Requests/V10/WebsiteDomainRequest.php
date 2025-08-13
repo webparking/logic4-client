@@ -16,7 +16,7 @@ class WebsiteDomainRequest extends Request
      *
      * @param array{
      *     Url?: string|null,
-     *     IsStandardDomain?: boolean|null,
+     *     IsStandardDomain?: bool|null,
      * } $parameters
      *
      * @throws Logic4ApiException
