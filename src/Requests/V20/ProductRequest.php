@@ -13,7 +13,7 @@ class ProductRequest extends Request
 {
     /**
      * @param array{
-     *     ProductIds?: array<integer>|null,
+     *     ProductIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -30,12 +30,12 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     ProductIds?: array<integer>|null,
-     *     WebsiteDomainId?: integer|null,
-     *     GlobalizationId?: integer|null,
-     *     ProductId?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     ProductIds?: array<int>|null,
+     *     WebsiteDomainId?: int|null,
+     *     GlobalizationId?: int|null,
+     *     ProductId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductSEOInformation>

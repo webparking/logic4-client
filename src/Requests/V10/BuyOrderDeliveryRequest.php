@@ -18,14 +18,14 @@ class BuyOrderDeliveryRequest extends Request
      * Maak een nieuwe inkooplevering aan of update een bestaande.
      *
      * @param array{
-     *     ProcessMutationButDoNotCreatePickbon?: boolean|null,
+     *     ProcessMutationButDoNotCreatePickbon?: bool|null,
      *     Status?: string|null,
-     *     SupplierId?: integer|null,
-     *     BuyOrderId?: integer|null,
+     *     SupplierId?: int|null,
+     *     BuyOrderId?: int|null,
      *     Remarks?: string|null,
      *     Description?: string|null,
-     *     BranchId?: integer|null,
-     *     Rows?: array<array{BuyOrderRowId?: integer|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: integer|null, ProductId?: integer, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: integer|null, AmountOfLabelsToPrint?: integer|null}>|null,
+     *     BranchId?: int|null,
+     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>|null,
      *     PickingListNumber?: string|null,
      * } $parameters
      *
@@ -46,15 +46,15 @@ class BuyOrderDeliveryRequest extends Request
      * Let op: de uitlevering kan enkel uitgevoerd worden als alle inkooporderregels zijn voorzien van OrderRowId.
      *
      * @param array{
-     *     OrderId?: integer|null,
-     *     ProcessMutationButDoNotCreatePickbon?: boolean|null,
+     *     OrderId?: int|null,
+     *     ProcessMutationButDoNotCreatePickbon?: bool|null,
      *     Status?: string|null,
-     *     SupplierId?: integer|null,
-     *     BuyOrderId?: integer|null,
+     *     SupplierId?: int|null,
+     *     BuyOrderId?: int|null,
      *     Remarks?: string|null,
      *     Description?: string|null,
-     *     BranchId?: integer|null,
-     *     Rows?: array<array{BuyOrderRowId?: integer|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: integer|null, ProductId?: integer, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: integer|null, AmountOfLabelsToPrint?: integer|null}>|null,
+     *     BranchId?: int|null,
+     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>|null,
      *     PickingListNumber?: string|null,
      * } $parameters
      *
@@ -75,14 +75,14 @@ class BuyOrderDeliveryRequest extends Request
      *
      * @param array{
      *     CreationDateFrom?: string|null,
-     *     BuyOrderDeliveryId?: integer|null,
-     *     BuyOrderId?: integer|null,
-     *     BranchId?: integer|null,
-     *     SupplierId?: integer|null,
-     *     StatusId?: integer|null,
-     *     TypeId?: integer|null,
-     *     Skip?: integer|null,
-     *     Take?: integer|null,
+     *     BuyOrderDeliveryId?: int|null,
+     *     BuyOrderId?: int|null,
+     *     BranchId?: int|null,
+     *     SupplierId?: int|null,
+     *     StatusId?: int|null,
+     *     TypeId?: int|null,
+     *     Skip?: int|null,
+     *     Take?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, BuyOrderDeliveryRead>
