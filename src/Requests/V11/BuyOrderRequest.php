@@ -16,14 +16,14 @@ class BuyOrderRequest extends Request
      * <strong>Let op:</strong> het kan zijn dat niet alle inkoopregels van een bepaalde order worden opgehaald, doordat de uitvoer wordt gelimiteerd via de Skip- en TakeRecords.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     ProductId?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     ProductId?: int|null,
      *     ProductCode?: string|null,
-     *     BuyOrderStatusId?: integer|null,
-     *     IsDropShipment?: boolean|null,
-     *     OrderId?: integer|null,
-     *     BuyOrderId?: integer|null,
+     *     BuyOrderStatusId?: int|null,
+     *     IsDropShipment?: bool|null,
+     *     OrderId?: int|null,
+     *     BuyOrderId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, BuyOrderRow>
@@ -44,15 +44,15 @@ class BuyOrderRequest extends Request
      * TakeRecords wordt gelimiteerd op 10.000.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      *     DateTimeChangedFrom?: string|null,
      *     DateTimeChangedTo?: string|null,
-     *     BranchId?: integer|null,
-     *     BuyOrderIsClosed?: boolean|null,
-     *     SupplierId?: integer|null,
-     *     BuyOrderId?: integer|null,
-     *     BuyOrderIdFrom?: integer|null,
+     *     BranchId?: int|null,
+     *     BuyOrderIsClosed?: bool|null,
+     *     SupplierId?: int|null,
+     *     BuyOrderId?: int|null,
+     *     BuyOrderIdFrom?: int|null,
      *     Remarks?: string|null,
      *     BuyOrderDateFrom?: string|null,
      *     BuyOrderDateTo?: string|null,

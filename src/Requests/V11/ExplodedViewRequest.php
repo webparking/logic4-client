@@ -15,13 +15,13 @@ class ExplodedViewRequest extends Request
      * Vanaf v1.1 worden velden met de waarde null niet teruggegeven.
      *
      * @param array{
-     *     ExplodedViewIds?: array<integer>|null,
-     *     ProductGroupIds?: array<integer>|null,
-     *     ProductIds?: array<integer>|null,
-     *     GlobalisationIds?: array<integer>|null,
-     *     WebsiteDomainId?: integer|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     ExplodedViewIds?: array<int>|null,
+     *     ProductGroupIds?: array<int>|null,
+     *     ProductIds?: array<int>|null,
+     *     GlobalisationIds?: array<int>|null,
+     *     WebsiteDomainId?: int|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ExplodedView>

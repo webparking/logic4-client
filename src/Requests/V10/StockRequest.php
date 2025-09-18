@@ -31,13 +31,13 @@ class StockRequest extends Request
      * Maak een voorraadmutatie aan.
      *
      * @param array{
-     *     TypeId?: integer|null,
-     *     LedgerId?: integer|null,
-     *     ProductId?: integer|null,
+     *     TypeId?: int|null,
+     *     LedgerId?: int|null,
+     *     ProductId?: int|null,
      *     Amount?: number|null,
      *     Remarks?: string|null,
-     *     StockLocationId?: integer|null,
-     *     StockMutationTypeId?: integer|null,
+     *     StockLocationId?: int|null,
+     *     StockMutationTypeId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -58,13 +58,13 @@ class StockRequest extends Request
      * Alleen wanneer in een magazijn een reserveerlocatie is gedefinieerd kunnen tot maximaal 100 mutaties worden uitgevoerd.
      *
      * @param array<array{
-     *     PickbonId?: integer|null,
-     *     OrderRowId?: integer|null,
+     *     PickbonId?: int|null,
+     *     OrderRowId?: int|null,
      *     Amount?: number|null,
      *     Timestamp?: string|null,
      *     Remarks?: string|null,
-     *     StockLocationId?: integer|null,
-     *     StockMutationTypeId?: integer|null,
+     *     StockLocationId?: int|null,
+     *     StockMutationTypeId?: int|null,
      * }> $parameters
      *
      * @throws Logic4ApiException
@@ -83,7 +83,7 @@ class StockRequest extends Request
      * Ophalen van externe voorraadstanden voor actieve leveranciers.
      *
      * @param array{
-     *     ProductStockFrom?: integer|null,
+     *     ProductStockFrom?: int|null,
      *     DateTimeLastUpdateSince?: string|null,
      * } $parameters
      *
@@ -105,11 +105,11 @@ class StockRequest extends Request
      * Ophalen van externe voorraadstanden voor actieve en niet-actieve leveranciers.
      *
      * @param array{
-     *     SupplierId?: integer|null,
-     *     Active?: boolean|null,
-     *     ProductIds?: array<integer>|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SupplierId?: int|null,
+     *     Active?: bool|null,
+     *     ProductIds?: array<int>|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductStockSupplierWithActive>
@@ -163,8 +163,8 @@ class StockRequest extends Request
      * Verkrijg de huidige voorraadlocaties van het product op basis van het filter.
      *
      * @param array{
-     *     ProductsWithWarehouse?: array<array{ProductId?: integer, WarehouseId?: integer|null, StockLocationId?: integer|null}>|null,
-     *     ShowNegativeLocations?: boolean|null,
+     *     ProductsWithWarehouse?: array<array{ProductId?: int, WarehouseId?: int|null, StockLocationId?: int|null}>|null,
+     *     ShowNegativeLocations?: bool|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -185,11 +185,11 @@ class StockRequest extends Request
      * @param array{
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
-     *     BuyOrderId?: integer|null,
-     *     StocklocationId?: integer|null,
-     *     ITSIssueId?: integer|null,
+     *     BuyOrderId?: int|null,
+     *     StocklocationId?: int|null,
+     *     ITSIssueId?: int|null,
      *     ProductCode?: string|null,
-     *     WareHouseId?: integer|null,
+     *     WareHouseId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -227,7 +227,7 @@ class StockRequest extends Request
      * notitie en standaard picklocatie op.
      *
      * @param array{
-     *     ProductIds?: array<integer>|null,
+     *     ProductIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -261,12 +261,12 @@ class StockRequest extends Request
      * Voorraadcontrole heads ophalen op basis van het ProductStockControlHeadFilter.
      *
      * @param array{
-     *     StockLocationId?: integer|null,
-     *     UserId?: integer|null,
+     *     StockLocationId?: int|null,
+     *     UserId?: int|null,
      *     CreatedDateFrom?: string|null,
      *     CreatedDateTo?: string|null,
-     *     IsProcessed?: boolean|null,
-     *     ProductStockControlHeadId?: integer|null,
+     *     IsProcessed?: bool|null,
+     *     ProductStockControlHeadId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -287,7 +287,7 @@ class StockRequest extends Request
      * Ophalen van voorraadstanden voor specifieke magazijnen.
      *
      * @param array{
-     *     WareHouseId?: integer|null,
+     *     WareHouseId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -309,7 +309,7 @@ class StockRequest extends Request
      *
      * @param array{
      *     ProductCode?: string|null,
-     *     WareHouseId?: integer|null,
+     *     WareHouseId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -345,7 +345,7 @@ class StockRequest extends Request
      * Haal voorraadlocaties op van meerdere producten.
      *
      * @param array{
-     *     ProductIds?: array<integer>|null,
+     *     ProductIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -412,13 +412,13 @@ class StockRequest extends Request
      * Return True wanneer gelukt, anders foutmelding.
      *
      * @param array{
-     *     Items?: array<array{ProductId?: integer, MutationAmount?: number, OrderHeadPickbonId?: integer|null}>|null,
-     *     FromStockLocationId?: integer|null,
-     *     FromWarehouseId?: integer|null,
-     *     ToStockLocationId?: integer|null,
+     *     Items?: array<array{ProductId?: int, MutationAmount?: number, OrderHeadPickbonId?: int|null}>|null,
+     *     FromStockLocationId?: int|null,
+     *     FromWarehouseId?: int|null,
+     *     ToStockLocationId?: int|null,
      *     Notes?: string|null,
      *     Name?: string|null,
-     *     DatabaseAdministrationId?: integer|null,
+     *     DatabaseAdministrationId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -439,10 +439,10 @@ class StockRequest extends Request
      * Wijzig externe voorraadstand van een leverancier.
      *
      * @param array{
-     *     ProductId?: integer|null,
+     *     ProductId?: int|null,
      *     ProductCode?: string|null,
-     *     SupplierId?: integer|null,
-     *     Quantity?: integer|null,
+     *     SupplierId?: int|null,
+     *     Quantity?: int|null,
      *     ProductNextDelivery?: string|null,
      * } $parameters
      *
@@ -462,8 +462,8 @@ class StockRequest extends Request
      * Voeg eerstvolgende leverdata van leveranciers toe voor één of meer artikelen (max 100 per request).
      *
      * @param array<array{
-     *     ProductId?: integer|null,
-     *     SupplierId?: integer|null,
+     *     ProductId?: int|null,
+     *     SupplierId?: int|null,
      *     DeliveryDate?: string|null,
      * }> $parameters
      *
@@ -483,9 +483,9 @@ class StockRequest extends Request
      * Verander de standaard picklocatie van artikelen naar een andere voorraad locatie.
      *
      * @param array<array{
-     *     ProductId?: integer|null,
-     *     WarehouseStockLocationId?: integer|null,
-     *     WarehouseId?: integer|null,
+     *     ProductId?: int|null,
+     *     WarehouseStockLocationId?: int|null,
+     *     WarehouseId?: int|null,
      * }> $parameters
      *
      * @throws Logic4ApiException
@@ -507,15 +507,15 @@ class StockRequest extends Request
      *
      * @param array{
      *     CreatedDate?: string|null,
-     *     Id?: integer|null,
+     *     Id?: int|null,
      *     LocationName?: string|null,
-     *     LocationId?: integer|null,
+     *     LocationId?: int|null,
      *     ProcessDate?: string|null,
      *     Username?: string|null,
-     *     UserId?: integer|null,
-     *     Rows?: array<array{Id?: integer|null, ProductStockHeadId?: integer|null, ProductId?: integer, ProductDescription?: string|null, ProductDescription2?: string|null, Vendorcode?: string|null, StockTotal?: number, StockOnCurrentLocation?: number, StockCountedByUser?: number|null, StockLevelDate?: string, Barcode?: string|null, ProductCode?: string|null, Barcode2?: string|null, SystemBarcode?: string|null, BarcodeExtraList?: array<array{Barcode?: string|null, Qty?: integer}>|null}>|null,
+     *     UserId?: int|null,
+     *     Rows?: array<array{Id?: int|null, ProductStockHeadId?: int|null, ProductId?: int, ProductDescription?: string|null, ProductDescription2?: string|null, Vendorcode?: string|null, StockTotal?: number, StockOnCurrentLocation?: number, StockCountedByUser?: number|null, StockLevelDate?: string, Barcode?: string|null, ProductCode?: string|null, Barcode2?: string|null, SystemBarcode?: string|null, BarcodeExtraList?: array<array{Barcode?: string|null, Qty?: int}>|null}>|null,
      *     EventLog?: string|null,
-     *     WarehouseStockControlEmailTemplateId?: integer|null,
+     *     WarehouseStockControlEmailTemplateId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException

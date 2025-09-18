@@ -16,11 +16,11 @@ class ProductTemplateRequest extends Request
 {
     /**
      * @param array{
-     *     TemplatePropertyId?: integer|null,
-     *     TemplateId?: integer|null,
+     *     TemplatePropertyId?: int|null,
+     *     TemplateId?: int|null,
      *     Remarks?: string|null,
-     *     Skip?: integer|null,
-     *     Take?: integer|null,
+     *     Skip?: int|null,
+     *     Take?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductTemplateProperty>
@@ -40,10 +40,10 @@ class ProductTemplateRequest extends Request
      * Haal meerdere artikel templates op.
      *
      * @param array{
-     *     TemplateId?: integer|null,
-     *     TemplatePropertyId?: integer|null,
-     *     Skip?: integer|null,
-     *     Take?: integer|null,
+     *     TemplateId?: int|null,
+     *     TemplatePropertyId?: int|null,
+     *     Skip?: int|null,
+     *     Take?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductTemplate>
@@ -61,10 +61,10 @@ class ProductTemplateRequest extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<integer>|null,
-     *     VisibleOnWebsite?: boolean|null,
-     *     Skip?: integer|null,
-     *     Take?: integer|null,
+     *     ProductIds?: array<int>|null,
+     *     VisibleOnWebsite?: bool|null,
+     *     Skip?: int|null,
+     *     Take?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductTemplateProductValue>
@@ -82,10 +82,10 @@ class ProductTemplateRequest extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<integer>|null,
-     *     VisibleOnWebsite?: boolean|null,
-     *     Skip?: integer|null,
-     *     Take?: integer|null,
+     *     ProductIds?: array<int>|null,
+     *     VisibleOnWebsite?: bool|null,
+     *     Skip?: int|null,
+     *     Take?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductTemplateValuesWithTranslation>
@@ -105,8 +105,8 @@ class ProductTemplateRequest extends Request
 
     /**
      * @param array{
-     *     TemplatePropertyId?: integer|null,
-     *     PropertyValuesPerProduct?: array<array{ProductId?: integer, Values?: array<string>|null}>|null,
+     *     TemplatePropertyId?: int|null,
+     *     PropertyValuesPerProduct?: array<array{ProductId?: int, Values?: array<string>|null}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

@@ -18,11 +18,11 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     HistoryPoints?: integer|null,
+     *     HistoryPoints?: int|null,
      *     ProductCodes?: array<string>|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     ExcludeDebtorIds?: array<integer>|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     ExcludeDebtorIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -42,22 +42,22 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     HistoryPoints?: integer|null,
-     *     IncludeOffers?: boolean|null,
-     *     IncludeOpenOrders?: boolean|null,
-     *     IncludeOrders?: boolean|null,
-     *     IncludeSubscriptions?: boolean|null,
-     *     IncludeInvoices?: boolean|null,
-     *     Year?: integer|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
-     *     TypeContactGroupsIds?: array<integer>|null,
-     *     ExcludingDebtors?: array<integer>|null,
-     *     OnlyForExcludingDebtors?: boolean|null,
-     *     NotLinkedToWebsiteDomain?: boolean|null,
-     *     EmployeeIds?: array<integer>|null,
-     *     BranchIds?: array<integer>|null,
-     *     ProductGroupsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     HistoryPoints?: int|null,
+     *     IncludeOffers?: bool|null,
+     *     IncludeOpenOrders?: bool|null,
+     *     IncludeOrders?: bool|null,
+     *     IncludeSubscriptions?: bool|null,
+     *     IncludeInvoices?: bool|null,
+     *     Year?: int|null,
+     *     WebSiteDomainsIds?: array<int>|null,
+     *     TypeContactGroupsIds?: array<int>|null,
+     *     ExcludingDebtors?: array<int>|null,
+     *     OnlyForExcludingDebtors?: bool|null,
+     *     NotLinkedToWebsiteDomain?: bool|null,
+     *     EmployeeIds?: array<int>|null,
+     *     BranchIds?: array<int>|null,
+     *     ProductGroupsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -77,22 +77,22 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     HistoryPoints?: integer|null,
-     *     IncludeOffers?: boolean|null,
-     *     IncludeOpenOrders?: boolean|null,
-     *     IncludeOrders?: boolean|null,
-     *     IncludeSubscriptions?: boolean|null,
-     *     IncludeInvoices?: boolean|null,
-     *     Year?: integer|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
-     *     TypeContactGroupsIds?: array<integer>|null,
-     *     ExcludingDebtors?: array<integer>|null,
-     *     OnlyForExcludingDebtors?: boolean|null,
-     *     NotLinkedToWebsiteDomain?: boolean|null,
-     *     EmployeeIds?: array<integer>|null,
-     *     BranchIds?: array<integer>|null,
-     *     ProductGroupsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     HistoryPoints?: int|null,
+     *     IncludeOffers?: bool|null,
+     *     IncludeOpenOrders?: bool|null,
+     *     IncludeOrders?: bool|null,
+     *     IncludeSubscriptions?: bool|null,
+     *     IncludeInvoices?: bool|null,
+     *     Year?: int|null,
+     *     WebSiteDomainsIds?: array<int>|null,
+     *     TypeContactGroupsIds?: array<int>|null,
+     *     ExcludingDebtors?: array<int>|null,
+     *     OnlyForExcludingDebtors?: bool|null,
+     *     NotLinkedToWebsiteDomain?: bool|null,
+     *     EmployeeIds?: array<int>|null,
+     *     BranchIds?: array<int>|null,
+     *     ProductGroupsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -112,22 +112,22 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     HistoryPoints?: integer|null,
-     *     IncludeOffers?: boolean|null,
-     *     IncludeOpenOrders?: boolean|null,
-     *     IncludeOrders?: boolean|null,
-     *     IncludeSubscriptions?: boolean|null,
-     *     IncludeInvoices?: boolean|null,
-     *     Year?: integer|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
-     *     TypeContactGroupsIds?: array<integer>|null,
-     *     ExcludingDebtors?: array<integer>|null,
-     *     OnlyForExcludingDebtors?: boolean|null,
-     *     NotLinkedToWebsiteDomain?: boolean|null,
-     *     EmployeeIds?: array<integer>|null,
-     *     BranchIds?: array<integer>|null,
-     *     ProductGroupsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     HistoryPoints?: int|null,
+     *     IncludeOffers?: bool|null,
+     *     IncludeOpenOrders?: bool|null,
+     *     IncludeOrders?: bool|null,
+     *     IncludeSubscriptions?: bool|null,
+     *     IncludeInvoices?: bool|null,
+     *     Year?: int|null,
+     *     WebSiteDomainsIds?: array<int>|null,
+     *     TypeContactGroupsIds?: array<int>|null,
+     *     ExcludingDebtors?: array<int>|null,
+     *     OnlyForExcludingDebtors?: bool|null,
+     *     NotLinkedToWebsiteDomain?: bool|null,
+     *     EmployeeIds?: array<int>|null,
+     *     BranchIds?: array<int>|null,
+     *     ProductGroupsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -146,27 +146,27 @@ class ManagementRequest extends Request
      * Grootboek omzet en budgetten.
      *
      * @param array{
-     *     LedgerCodes?: array<integer>|null,
-     *     GetOnlyMutationTotal?: boolean|null,
-     *     CreditCorrection?: boolean|null,
-     *     LedgerColumnTypeIds?: array<integer>|null,
+     *     LedgerCodes?: array<int>|null,
+     *     GetOnlyMutationTotal?: bool|null,
+     *     CreditCorrection?: bool|null,
+     *     LedgerColumnTypeIds?: array<int>|null,
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     HistoryPoints?: integer|null,
-     *     IncludeOffers?: boolean|null,
-     *     IncludeOpenOrders?: boolean|null,
-     *     IncludeOrders?: boolean|null,
-     *     IncludeSubscriptions?: boolean|null,
-     *     IncludeInvoices?: boolean|null,
-     *     Year?: integer|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
-     *     TypeContactGroupsIds?: array<integer>|null,
-     *     ExcludingDebtors?: array<integer>|null,
-     *     OnlyForExcludingDebtors?: boolean|null,
-     *     NotLinkedToWebsiteDomain?: boolean|null,
-     *     EmployeeIds?: array<integer>|null,
-     *     BranchIds?: array<integer>|null,
-     *     ProductGroupsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     HistoryPoints?: int|null,
+     *     IncludeOffers?: bool|null,
+     *     IncludeOpenOrders?: bool|null,
+     *     IncludeOrders?: bool|null,
+     *     IncludeSubscriptions?: bool|null,
+     *     IncludeInvoices?: bool|null,
+     *     Year?: int|null,
+     *     WebSiteDomainsIds?: array<int>|null,
+     *     TypeContactGroupsIds?: array<int>|null,
+     *     ExcludingDebtors?: array<int>|null,
+     *     OnlyForExcludingDebtors?: bool|null,
+     *     NotLinkedToWebsiteDomain?: bool|null,
+     *     EmployeeIds?: array<int>|null,
+     *     BranchIds?: array<int>|null,
+     *     ProductGroupsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -186,22 +186,22 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     HistoryPoints?: integer|null,
-     *     IncludeOffers?: boolean|null,
-     *     IncludeOpenOrders?: boolean|null,
-     *     IncludeOrders?: boolean|null,
-     *     IncludeSubscriptions?: boolean|null,
-     *     IncludeInvoices?: boolean|null,
-     *     Year?: integer|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
-     *     TypeContactGroupsIds?: array<integer>|null,
-     *     ExcludingDebtors?: array<integer>|null,
-     *     OnlyForExcludingDebtors?: boolean|null,
-     *     NotLinkedToWebsiteDomain?: boolean|null,
-     *     EmployeeIds?: array<integer>|null,
-     *     BranchIds?: array<integer>|null,
-     *     ProductGroupsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     HistoryPoints?: int|null,
+     *     IncludeOffers?: bool|null,
+     *     IncludeOpenOrders?: bool|null,
+     *     IncludeOrders?: bool|null,
+     *     IncludeSubscriptions?: bool|null,
+     *     IncludeInvoices?: bool|null,
+     *     Year?: int|null,
+     *     WebSiteDomainsIds?: array<int>|null,
+     *     TypeContactGroupsIds?: array<int>|null,
+     *     ExcludingDebtors?: array<int>|null,
+     *     OnlyForExcludingDebtors?: bool|null,
+     *     NotLinkedToWebsiteDomain?: bool|null,
+     *     EmployeeIds?: array<int>|null,
+     *     BranchIds?: array<int>|null,
+     *     ProductGroupsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -221,9 +221,9 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     ExcludeDebtorIds?: array<integer>|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     ExcludeDebtorIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -243,9 +243,9 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     ExcludeDebtorIds?: array<integer>|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     ExcludeDebtorIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -265,9 +265,9 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     ExcludeDebtorIds?: array<integer>|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     ExcludeDebtorIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -287,9 +287,9 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     ExcludeDebtorIds?: array<integer>|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     ExcludeDebtorIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -309,9 +309,9 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     ExcludeDebtorIds?: array<integer>|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     ExcludeDebtorIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -331,9 +331,9 @@ class ManagementRequest extends Request
      *
      * @param array{
      *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: boolean|null,
-     *     ExcludeDebtorIds?: array<integer>|null,
-     *     WebSiteDomainsIds?: array<integer>|null,
+     *     IncludingCurrentPeriod?: bool|null,
+     *     ExcludeDebtorIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
