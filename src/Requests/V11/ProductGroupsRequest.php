@@ -14,16 +14,16 @@ class ProductGroupsRequest extends Request
      * Verkrijg artikelgroepen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     IsTopLevelGroup?: boolean|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     IsTopLevelGroup?: bool|null,
      *     Name?: string|null,
-     *     IsVisibleOnWebShop?: boolean|null,
-     *     ParentId?: integer|null,
-     *     HasProductsVisibleOnWebshop?: boolean|null,
-     *     ProductGroupTypeId?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     GlobalisationId?: integer|null,
+     *     IsVisibleOnWebShop?: bool|null,
+     *     ParentId?: int|null,
+     *     HasProductsVisibleOnWebshop?: bool|null,
+     *     ProductGroupTypeId?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     GlobalisationId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductGroup>

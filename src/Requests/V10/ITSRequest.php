@@ -81,23 +81,23 @@ class ITSRequest extends Request
      * Verkrijg ITS issues o.b.v. het meegestuurde filter en de opgegeven gebruiker.
      *
      * @param array{
-     *     Id?: integer|null,
+     *     Id?: int|null,
      *     StartDate?: string|null,
      *     EndDate?: string|null,
      *     LastModifiedSince?: string|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     InvoiceId?: integer|null,
-     *     StatusId?: integer|null,
-     *     ResponsibleUserId?: integer|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     InvoiceId?: int|null,
+     *     StatusId?: int|null,
+     *     ResponsibleUserId?: int|null,
      *     IssueMustBeCompletedTo?: string|null,
      *     IssueMustBeCompletedFrom?: string|null,
-     *     TypeId?: integer|null,
-     *     GroupId?: integer|null,
-     *     ProjectId?: integer|null,
-     *     OrderId?: integer|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     TypeId?: int|null,
+     *     GroupId?: int|null,
+     *     ProjectId?: int|null,
+     *     OrderId?: int|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ITSIssue>

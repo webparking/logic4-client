@@ -15,15 +15,15 @@ class FinancialRequest extends Request
      *
      * @param array{
      *     Description?: string|null,
-     *     FinancialCostCenterId?: integer|null,
+     *     FinancialCostCenterId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
      *     Reference?: string|null,
      *     BookingDateTime?: string|null,
-     *     FinancialBookId?: integer|null,
-     *     JournalStatusId?: integer|null,
-     *     Mutations?: array<array{CreditorId?: integer, BookingDateTime?: string, PaymentMethodId?: integer|null, FinancialCostCenterId?: integer|null, AmountIncl?: number}>|null,
+     *     FinancialBookId?: int|null,
+     *     JournalStatusId?: int|null,
+     *     Mutations?: array<array{CreditorId?: int, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -43,15 +43,15 @@ class FinancialRequest extends Request
      *
      * @param array{
      *     Description?: string|null,
-     *     FinancialCostCenterId?: integer|null,
+     *     FinancialCostCenterId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
      *     Reference?: string|null,
      *     BookingDateTime?: string|null,
-     *     FinancialBookId?: integer|null,
-     *     JournalStatusId?: integer|null,
-     *     Mutations?: array<array{DebtorId?: integer, BookingDateTime?: string, PaymentMethodId?: integer|null, FinancialCostCenterId?: integer|null, AmountIncl?: number}>|null,
+     *     FinancialBookId?: int|null,
+     *     JournalStatusId?: int|null,
+     *     Mutations?: array<array{DebtorId?: int, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

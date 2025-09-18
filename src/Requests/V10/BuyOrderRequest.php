@@ -18,17 +18,17 @@ class BuyOrderRequest extends Request
      * Voeg een nieuwe inkooporderregel aan een bestaande inkooporder.
      *
      * @param array{
-     *     BuyOrderId?: integer|null,
-     *     OrderId?: integer|null,
+     *     BuyOrderId?: int|null,
+     *     OrderId?: int|null,
      *     ProductCode?: string|null,
-     *     ProductId?: integer|null,
+     *     ProductId?: int|null,
      *     Price?: number|null,
      *     Description?: string|null,
      *     ProductDesc2?: string|null,
      *     ExpectedDeliveryDate?: string|null,
      *     QtyToOrder?: number|null,
      *     OrderedOnDateByDistributor?: string|null,
-     *     OrderRowId?: integer|null,
+     *     OrderRowId?: int|null,
      *     InternalNote?: string|null,
      * } $parameters
      *
@@ -47,25 +47,25 @@ class BuyOrderRequest extends Request
      * Voeg een nieuwe inkooporderregel toe of update een bestaande regel.
      *
      * @param array{
-     *     BuyOrderRowId?: integer|null,
-     *     BuyOrderId?: integer|null,
+     *     BuyOrderRowId?: int|null,
+     *     BuyOrderId?: int|null,
      *     DebtorName?: string|null,
      *     QtyToDeliver?: number|null,
      *     CreditorProductCode?: string|null,
      *     ProductDesc1?: string|null,
      *     StandardAmountQTY?: number|null,
-     *     StandardAmountQTYUnitId?: integer|null,
-     *     RepackingQty?: integer|null,
-     *     OrderId?: integer|null,
+     *     StandardAmountQTYUnitId?: int|null,
+     *     RepackingQty?: int|null,
+     *     OrderId?: int|null,
      *     ProductCode?: string|null,
-     *     ProductId?: integer|null,
+     *     ProductId?: int|null,
      *     Price?: number|null,
      *     Description?: string|null,
      *     ProductDesc2?: string|null,
      *     ExpectedDeliveryDate?: string|null,
      *     QtyToOrder?: number|null,
      *     OrderedOnDateByDistributor?: string|null,
-     *     OrderRowId?: integer|null,
+     *     OrderRowId?: int|null,
      *     InternalNote?: string|null,
      * } $parameters
      *
@@ -87,13 +87,13 @@ class BuyOrderRequest extends Request
      * Maak een nieuwe inkooporder.
      *
      * @param array{
-     *     CreditorId?: integer|null,
-     *     DatabaseAdministrationId?: integer|null,
+     *     CreditorId?: int|null,
+     *     DatabaseAdministrationId?: int|null,
      *     CreatedAt?: string|null,
-     *     BuyOrderRows?: array<array{BuyOrderRowId?: integer, BuyOrderId?: integer, DebtorName?: string|null, QtyToDeliver?: number, CreditorProductCode?: string|null, ProductDesc1?: string|null, StandardAmountQTY?: number|null, StandardAmountQTYUnitId?: integer|null, RepackingQty?: integer|null, OrderId?: integer|null, ProductCode?: string|null, ProductId?: integer|null, Price?: number, Description?: string|null, ProductDesc2?: string|null, ExpectedDeliveryDate?: string|null, QtyToOrder?: number, OrderedOnDateByDistributor?: string|null, OrderRowId?: integer|null, InternalNote?: string|null}>|null,
+     *     BuyOrderRows?: array<array{BuyOrderRowId?: int, BuyOrderId?: int, DebtorName?: string|null, QtyToDeliver?: number, CreditorProductCode?: string|null, ProductDesc1?: string|null, StandardAmountQTY?: number|null, StandardAmountQTYUnitId?: int|null, RepackingQty?: int|null, OrderId?: int|null, ProductCode?: string|null, ProductId?: int|null, Price?: number, Description?: string|null, ProductDesc2?: string|null, ExpectedDeliveryDate?: string|null, QtyToOrder?: number, OrderedOnDateByDistributor?: string|null, OrderRowId?: int|null, InternalNote?: string|null}>|null,
      *     Remarks?: string|null,
-     *     BranchId?: integer|null,
-     *     OrderId?: integer|null,
+     *     BranchId?: int|null,
+     *     OrderId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
@@ -129,12 +129,12 @@ class BuyOrderRequest extends Request
      * Haal inkoopordersregels op o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     ProductId?: integer|null,
+     *     ProductId?: int|null,
      *     ProductCode?: string|null,
-     *     BuyOrderStatusId?: integer|null,
-     *     IsDropShipment?: boolean|null,
-     *     OrderId?: integer|null,
-     *     BuyOrderId?: integer|null,
+     *     BuyOrderStatusId?: int|null,
+     *     IsDropShipment?: bool|null,
+     *     OrderId?: int|null,
+     *     BuyOrderId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -155,8 +155,8 @@ class BuyOrderRequest extends Request
      * Haal per artikel openstaande inkoopordersregels op o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     ProductIds?: array<integer>|null,
-     *     Dropshipment?: boolean|null,
+     *     ProductIds?: array<int>|null,
+     *     Dropshipment?: bool|null,
      *     MinimumDeliveryDate?: string|null,
      * } $parameters
      *
@@ -176,11 +176,11 @@ class BuyOrderRequest extends Request
      * Haal inkooporders op o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     BranchId?: integer|null,
-     *     BuyOrderIsClosed?: boolean|null,
-     *     SupplierId?: integer|null,
-     *     BuyOrderId?: integer|null,
-     *     BuyOrderIdFrom?: integer|null,
+     *     BranchId?: int|null,
+     *     BuyOrderIsClosed?: bool|null,
+     *     SupplierId?: int|null,
+     *     BuyOrderId?: int|null,
+     *     BuyOrderIdFrom?: int|null,
      *     Remarks?: string|null,
      *     BuyOrderDateFrom?: string|null,
      *     BuyOrderDateTo?: string|null,
@@ -207,11 +207,11 @@ class BuyOrderRequest extends Request
      * Wijzig een bestaande inkooporder.
      *
      * @param array{
-     *     Id?: integer|null,
-     *     CreditorId?: integer|null,
+     *     Id?: int|null,
+     *     CreditorId?: int|null,
      *     Remarks?: string|null,
-     *     BranchId?: integer|null,
-     *     BuyOrderClosed?: boolean|null,
+     *     BranchId?: int|null,
+     *     BuyOrderClosed?: bool|null,
      *     CreatedAt?: string|null,
      * } $parameters
      *
@@ -231,17 +231,17 @@ class BuyOrderRequest extends Request
      * Update een bestaande inkooporderregel.
      *
      * @param array{
-     *     BuyOrderRowId?: integer|null,
-     *     OrderId?: integer|null,
+     *     BuyOrderRowId?: int|null,
+     *     OrderId?: int|null,
      *     ProductCode?: string|null,
-     *     ProductId?: integer|null,
+     *     ProductId?: int|null,
      *     Price?: number|null,
      *     Description?: string|null,
      *     ProductDesc2?: string|null,
      *     ExpectedDeliveryDate?: string|null,
      *     QtyToOrder?: number|null,
      *     OrderedOnDateByDistributor?: string|null,
-     *     OrderRowId?: integer|null,
+     *     OrderRowId?: int|null,
      *     InternalNote?: string|null,
      * } $parameters
      *

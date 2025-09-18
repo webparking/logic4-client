@@ -14,14 +14,14 @@ class WebshopRequest extends Request
      * Voeg een WebshopUserProduct toe aan een WebshopUserProductlijst.
      *
      * @param array{
-     *     ProductId?: integer|null,
+     *     ProductId?: int|null,
      *     QtyDec?: number|null,
      *     Commission?: string|null,
-     *     ExcludedFromAnnualBudget?: boolean|null,
-     *     TypeId?: integer|null,
-     *     DebtorId?: integer|null,
+     *     ExcludedFromAnnualBudget?: bool|null,
+     *     TypeId?: int|null,
+     *     DebtorId?: int|null,
      *     VisitorCode?: string|null,
-     *     WebsiteDomainId?: integer|null,
+     *     WebsiteDomainId?: int|null,
      *     ShoppingCartKey?: string|null,
      * } $parameters
      *

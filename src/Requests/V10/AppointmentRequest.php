@@ -13,8 +13,8 @@ class AppointmentRequest extends Request
 {
     /**
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, Agenda>
@@ -32,18 +32,19 @@ class AppointmentRequest extends Request
 
     /**
      * @param array{
-     *     AppointmentIds?: array<integer>|null,
-     *     HasITS?: boolean|null,
-     *     ITS_Id?: integer|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     ContactId?: integer|null,
-     *     AgendaId?: integer|null,
-     *     TaskForUserId?: integer|null,
+     *     Subject?: string|null,
+     *     AppointmentIds?: array<int>|null,
+     *     HasITS?: bool|null,
+     *     ITS_Id?: int|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     ContactId?: int|null,
+     *     AgendaId?: int|null,
+     *     TaskForUserId?: int|null,
      *     StartDateTimeFrom?: string|null,
      *     StartDateTimeUntil?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, Appointment>

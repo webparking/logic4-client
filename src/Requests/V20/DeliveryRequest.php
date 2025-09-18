@@ -14,14 +14,15 @@ class DeliveryRequest extends Request
      * @param array{
      *     DateTimeFrom?: string|null,
      *     DateTimeTo?: string|null,
-     *     OrderId?: integer|null,
-     *     DebtorId?: integer|null,
-     *     ShippingMethodId?: integer|null,
-     *     OrderStatusId?: integer|null,
-     *     BranchId?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     OrderId?: int|null,
+     *     DebtorId?: int|null,
+     *     ShippingMethodId?: int|null,
+     *     OrderStatusId?: int|null,
+     *     BranchId?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     ShowAPIMovements?: bool|null,
      * } $parameters
      *
      * @return \Generator<array-key, SalesOrderDelivery>

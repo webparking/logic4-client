@@ -28,15 +28,15 @@ class FinancialRequest extends Request
      *
      * @param array{
      *     Description?: string|null,
-     *     FinancialCostCenterId?: integer|null,
+     *     FinancialCostCenterId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
      *     Reference?: string|null,
      *     BookingDateTime?: string|null,
-     *     FinancialBookId?: integer|null,
-     *     JournalStatusId?: integer|null,
-     *     Mutations?: array<array{CreditorId?: integer|null, DebtorId?: integer|null, BookingDateTime?: string, PaymentMethodId?: integer|null, FinancialCostCenterId?: integer|null, AmountIncl?: number}>|null,
+     *     FinancialBookId?: int|null,
+     *     JournalStatusId?: int|null,
+     *     Mutations?: array<array{CreditorId?: int|null, DebtorId?: int|null, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -62,9 +62,9 @@ class FinancialRequest extends Request
      *     FreeValue3?: string|null,
      *     Reference?: string|null,
      *     BookingDateTime?: string|null,
-     *     FinancialBookId?: integer|null,
-     *     JournalStatusId?: integer|null,
-     *     Mutations?: array<array{VatCode?: integer, LedgerId?: integer, Description?: string|null, AmountIncl?: number}>|null,
+     *     FinancialBookId?: int|null,
+     *     JournalStatusId?: int|null,
+     *     Mutations?: array<array{VatCode?: int, LedgerId?: int, Description?: string|null, AmountIncl?: number}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -84,19 +84,19 @@ class FinancialRequest extends Request
      * Levert alleen boekingen uit verkoop, inkoop of memoriale dagboeken.
      *
      * @param array{
-     *     BookingId?: integer|null,
-     *     FinancialBookId?: integer|null,
+     *     BookingId?: int|null,
+     *     FinancialBookId?: int|null,
      *     BookingDateTimeFrom?: string|null,
      *     BookingDateTimeTo?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      *     Reference?: string|null,
-     *     UserId?: integer|null,
-     *     BookingNumberByUser?: integer|null,
+     *     UserId?: int|null,
+     *     BookingNumberByUser?: int|null,
      *     Description?: string|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     StatusId?: integer|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     StatusId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
@@ -119,8 +119,8 @@ class FinancialRequest extends Request
      * Verkrijg de beschikbare financiële dagboeken o.b.v. het aangeleverde filter.
      *
      * @param array{
-     *     LedgerId?: integer|null,
-     *     FinancialBookType?: integer|null,
+     *     LedgerId?: int|null,
+     *     FinancialBookType?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -141,11 +141,11 @@ class FinancialRequest extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     LedgerCode?: integer|null,
+     *     LedgerCode?: int|null,
      *     DateTimeFrom?: string|null,
      *     DateTimeTo?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, FinancialJournal>
@@ -278,9 +278,9 @@ class FinancialRequest extends Request
      *
      * @param array{
      *     Xml?: string|null,
-     *     BookId?: integer|null,
-     *     StatusId?: integer|null,
-     *     UserId?: integer|null,
+     *     BookId?: int|null,
+     *     StatusId?: int|null,
+     *     UserId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException

@@ -15,9 +15,9 @@ class PriceListsRequest extends Request
      * Verkrijg alle prijslijsten o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     PricelistId?: integer|null,
-     *     DebtorId?: integer|null,
-     *     LoadContractPrices?: boolean|null,
+     *     PricelistId?: int|null,
+     *     DebtorId?: int|null,
+     *     LoadContractPrices?: bool|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -34,8 +34,8 @@ class PriceListsRequest extends Request
 
     /**
      * @param array{
-     *     PriceListId?: integer|null,
-     *     ProductStaggeredPrices?: array<array{ProductId?: integer, Prices?: array<array{Qty?: integer, PriceEx?: number, DateFrom?: string|null, DateTo?: string|null}>|null}>|null,
+     *     PriceListId?: int|null,
+     *     ProductStaggeredPrices?: array<array{ProductId?: int, Prices?: array<array{Qty?: int, PriceEx?: number, DateFrom?: string|null, DateTo?: string|null}>|null}>|null,
      * } $parameters
      *
      * @throws Logic4ApiException

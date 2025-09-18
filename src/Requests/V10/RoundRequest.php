@@ -20,15 +20,15 @@ class RoundRequest extends Request
      * Voeg een rit toe aan de database. Het ID van de zojuist aangemaakte rit wordt als response teruggegeven.
      *
      * @param array{
-     *     TypeId?: integer|null,
+     *     TypeId?: int|null,
      *     Description?: string|null,
      *     Memo?: string|null,
      *     DateTimePlanned?: string|null,
-     *     VehicleId?: integer|null,
-     *     DriverId?: integer|null,
-     *     CoDriverId?: integer|null,
-     *     StatusId?: integer|null,
-     *     HideInSystem?: boolean|null,
+     *     VehicleId?: int|null,
+     *     DriverId?: int|null,
+     *     CoDriverId?: int|null,
+     *     StatusId?: int|null,
+     *     HideInSystem?: bool|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -48,12 +48,12 @@ class RoundRequest extends Request
      * Het voertuig bepaalt of je Orders, of ITS of beide mag toevoegen.
      *
      * @param array{
-     *     OrderId?: integer|null,
-     *     ITSIssueId?: integer|null,
-     *     RoundId?: integer|null,
+     *     OrderId?: int|null,
+     *     ITSIssueId?: int|null,
+     *     RoundId?: int|null,
      *     Remarks?: string|null,
-     *     StatusId?: integer|null,
-     *     Sorting?: integer|null,
+     *     StatusId?: int|null,
+     *     Sorting?: int|null,
      *     EstimatedArrivalDateTime?: string|null,
      * } $parameters
      *
@@ -102,10 +102,10 @@ class RoundRequest extends Request
      * Om meer regels op te halen dien je gebruik te maken van de skip/take filtering.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     RoundId?: integer|null,
-     *     StatusId?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     RoundId?: int|null,
+     *     StatusId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, GetRoundOrder>
@@ -140,15 +140,15 @@ class RoundRequest extends Request
      * Verkrijg een collectie van ritten (maximaal 1000 records).
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      *     DateTimeCreatedFrom?: string|null,
      *     DateTimeCreatedTo?: string|null,
-     *     TypeId?: integer|null,
-     *     StatusId?: integer|null,
-     *     VehicleId?: integer|null,
-     *     ItsIds?: array<integer>|null,
-     *     OrderIds?: array<integer>|null,
+     *     TypeId?: int|null,
+     *     StatusId?: int|null,
+     *     VehicleId?: int|null,
+     *     ItsIds?: array<int>|null,
+     *     OrderIds?: array<int>|null,
      * } $parameters
      *
      * @return \Generator<array-key, GetRound>
@@ -199,16 +199,16 @@ class RoundRequest extends Request
      * Let op, je moet het gehele object vullen. Lege waardes worden ook overgenomen.
      *
      * @param array{
-     *     Id?: integer|null,
-     *     TypeId?: integer|null,
+     *     Id?: int|null,
+     *     TypeId?: int|null,
      *     Description?: string|null,
      *     Memo?: string|null,
      *     DateTimePlanned?: string|null,
-     *     VehicleId?: integer|null,
-     *     DriverId?: integer|null,
-     *     CoDriverId?: integer|null,
-     *     StatusId?: integer|null,
-     *     HideInSystem?: boolean|null,
+     *     VehicleId?: int|null,
+     *     DriverId?: int|null,
+     *     CoDriverId?: int|null,
+     *     StatusId?: int|null,
+     *     HideInSystem?: bool|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -228,10 +228,10 @@ class RoundRequest extends Request
      * Let op, je moet het gehele object vullen. Lege waardes worden ook overgenomen.
      *
      * @param array{
-     *     Id?: integer|null,
+     *     Id?: int|null,
      *     Remarks?: string|null,
-     *     StatusId?: integer|null,
-     *     Sorting?: integer|null,
+     *     StatusId?: int|null,
+     *     Sorting?: int|null,
      *     EstimatedArrivalDateTime?: string|null,
      * } $parameters
      *
