@@ -52,8 +52,10 @@ class ClientFactory
     {
         $this->handlerStack = $handlerStack;
 
-        $this->handlerStack->push(Middleware::mapRequest(function ($request) {
-            $accessToken = $this->tokenManager->getAccessToken();
+        $tokenManager = $this->tokenManager;
+
+        $this->handlerStack->push(Middleware::mapRequest(static function ($request) use ($tokenManager) {
+            $accessToken = $tokenManager->getAccessToken();
 
             return $request->withHeader('Authorization', "Bearer {$accessToken}");
         }));
