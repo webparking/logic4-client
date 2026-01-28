@@ -16,7 +16,6 @@ use Webparking\Logic4Client\Responses\V10\OrderActionTypeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\OrderLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4Response;
 use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderRowLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\OrderRowV11Logic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\OrderStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ReturnCategoryLogic4ResponseList;
@@ -368,6 +367,8 @@ class OrderRequest extends Request
     /**
      * Verkrijg factuurregels o.b.v. het meegestuurde filter.
      *
+     * Levert maximaal 10.000 regels.
+     *
      * @param array{
      *     OrderId?: int|null,
      *     BrandName?: string|null,
@@ -381,8 +382,8 @@ class OrderRequest extends Request
      */
     public function getInvoiceRows(
         array $parameters = [],
-    ): OrderRowLogic4ResponseList {
-        return OrderRowLogic4ResponseList::make(
+    ): OrderRowV11Logic4ResponseList {
+        return OrderRowV11Logic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetInvoiceRows', ['json' => $parameters]),
             )
@@ -572,6 +573,8 @@ class OrderRequest extends Request
 
     /**
      * Verkrijg ordersregels o.b.v. het meegestuurde filter.
+     *
+     * Levert maximaal 10.000 regels.
      *
      * @param array{
      *     OrderId?: int|null,

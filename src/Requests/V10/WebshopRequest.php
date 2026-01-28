@@ -9,7 +9,6 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
 use Webparking\Logic4Client\Responses\V10\DecimalNullableLogic4Response;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
 use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ProductShiftPriceLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\ProductV11WebshopUserProductLogic4ResponseList;
@@ -346,35 +345,6 @@ class WebshopRequest extends Request
         return WebshopUserTypeLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Webshop/GetWebShopUserTypes'),
-            )
-        );
-    }
-
-    /**
-     * Maak van een winkelmandje een order aan.
-     *
-     * @param array{
-     *     ShippingMethodId?: int|null,
-     *     PaymentMethodId?: int|null,
-     *     WebshopUserId?: int|null,
-     *     DebtorId?: int|null,
-     *     OrderDescription?: string|null,
-     *     OrderReference?: string|null,
-     *     OrderRemarks?: string|null,
-     *     StatusId?: int|null,
-     *     ShippingCosts?: number|null,
-     *     PriceListId?: int|null,
-     *     ShoppingCartKey?: string|null,
-     * } $parameters
-     *
-     * @throws Logic4ApiException
-     */
-    public function processShoppingCartToOrder(
-        array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
-            $this->buildResponse(
-                $this->getClient()->post('/v1/Webshop/ProcessShoppingCartToOrder', ['json' => $parameters]),
             )
         );
     }

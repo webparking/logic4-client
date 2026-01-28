@@ -766,10 +766,18 @@ class ProductRequest extends Request
     }
 
     /**
-     * Als de combinatie van product, taal en webshopdomein nog niet bestaat wordt deze automatisch aangemaakt.
-     * Webshopdomein mag null zijn, dan geldt de gegeven SEO informatie voor alle webhopdomeinen.
-     * Bij het meegeven van 'null' voor informatie velden, wordt bestaande informatie leeg gehaald.
-     * Als een product geen SEO informatie heeft voor een bepaald websitedomein en taal vindt er een fallback plaats op de basis informatie van het artikel.
+     * Een SEO informatie record word op basis van een combinatie van ProductId, GlobalizationId en WebsiteDomainId geselecteerd.
+     * WebsiteDomainId mag null zijn, dan geldt de gegeven SEO informatie voor alle webhopdomeinen.
+     *
+     * Als een record niet bestaat wordt deze aangemaakt. Lege records worden automatisch verwijdert.
+     * Niet-lege records moeten ten minste een Title of Description hebben.
+     *
+     *
+     * Bij het meegeven van een lege string of 'null' voor informatie velden, wordt bestaande informatie leeg gehaald.
+     * Velden die niet in de request staan worden niet gewijzigd.
+     *
+     *
+     * Als een product geen SEO informatie heeft voor een bepaalde taal en webshopdomein vindt er een fallback plaats op de basis informatie van het artikel.
      *
      * @param array{
      *     WebsiteDomainId?: int|null,

@@ -203,6 +203,30 @@ class StockRequest extends Request
     }
 
     /**
+     * Wijzig externe voorraadstand van een leverancier.
+     *
+     * @param array{
+     *     SupplierProductCode?: string|null,
+     *     ProductId?: int|null,
+     *     ProductCode?: string|null,
+     *     SupplierId?: int|null,
+     *     Quantity?: int|null,
+     *     ProductNextDelivery?: string|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function setExternalStockForSupplier(
+        array $parameters = [],
+    ): BooleanLogic4Response {
+        return BooleanLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1.1/Stock/SetExternalStockForSupplier', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
      * Verander de standaard picklocatie van artikelen naar een andere voorraad locatie.
      *
      * @param array<array{
