@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Data\V10;
+namespace Webparking\Logic4Client\Data\V14;
 
-class ProductV11
+class ProductV14
 {
     /**
+     * @param array<ProductShiftPriceV14>  $shiftPrices
      * @param array<FreeValue>             $freeValues
      * @param array<Translation>           $descriptions
-     * @param array<ProductShiftPrice>     $shiftPrices
      * @param array<ProductGroup>          $productGroups
      * @param array<ProductExtraBarcode>   $barcodeExtraList
      * @param array<ProductStockWarehouse> $wareHouses
      * @param array<string>                $tags
      */
     public function __construct(
-        public ?int $subUnitParentId,
+        public float $costPrice,
+        public ?array $shiftPrices,
         public int $productId,
         public ?string $productCode,
         public ?string $productName1,
@@ -72,7 +73,6 @@ class ProductV11
         public ?int $sorting,
         public ?\Carbon\Carbon $nextDelivery,
         public ?array $descriptions,
-        public ?array $shiftPrices,
         public ?array $productGroups,
         public ?string $barcode2,
         public ?array $barcodeExtraList,
@@ -103,7 +103,8 @@ class ProductV11
     public static function make(array $data): self
     {
         return new self(
-            subUnitParentId: $data['SubUnit_ParentId'] ?? null,
+            costPrice: $data['CostPrice'] ?? 0.0,
+            shiftPrices: array_map(static fn (array $item) => ProductShiftPriceV14::make($item), $data['ShiftPrices'] ?? []),
             productId: $data['ProductId'] ?? 0,
             productCode: $data['ProductCode'] ?? null,
             productName1: $data['ProductName1'] ?? null,
@@ -159,7 +160,6 @@ class ProductV11
             sorting: $data['Sorting'] ?? null,
             nextDelivery: isset($data['NextDelivery']) ? \Carbon\Carbon::parse($data['NextDelivery']) : null,
             descriptions: array_map(static fn (array $item) => Translation::make($item), $data['Descriptions'] ?? []),
-            shiftPrices: array_map(static fn (array $item) => ProductShiftPrice::make($item), $data['ShiftPrices'] ?? []),
             productGroups: array_map(static fn (array $item) => ProductGroup::make($item), $data['ProductGroups'] ?? []),
             barcode2: $data['Barcode2'] ?? null,
             barcodeExtraList: array_map(static fn (array $item) => ProductExtraBarcode::make($item), $data['BarcodeExtraList'] ?? []),

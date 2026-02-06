@@ -17,6 +17,7 @@ use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
 use Webparking\Logic4Client\Responses\V10\TypeCostCenterLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\TypeEntityCodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\TypeFinancialBookingStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\TypeLedgerColumnLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\TypeTransactionCodeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\VatCodeLogic4ResponseList;
@@ -75,6 +76,20 @@ class FinancialRequest extends Request
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Financial/AddFinancialGeneralBookingWithMutations', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Voor deze aanroep zijn extra rechten vereist.
+     *
+     * @throws Logic4ApiException
+     */
+    public function getBookingStatusTypes(
+    ): TypeFinancialBookingStatusLogic4ResponseList {
+        return TypeFinancialBookingStatusLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1/Financial/GetBookingStatusTypes'),
             )
         );
     }
@@ -274,13 +289,25 @@ class FinancialRequest extends Request
     }
 
     /**
-     * Plaats een UBL document in het inkoopboek. Deze worden opgeslagen als voorstellen, en moeten nog worden gecontroleerd voordat ze kunnen worden verwerkt.
+     * Importeer UBL factuur naar het inkoopboek.
+     * <para />.
+     *
+     * Indien het veld CreditorID wordt meegegeven in de request, wordt de betreffende crediteur direct gekoppeld aan de nieuwe inkoopboeking.
+     * Wanneer het veld CreditorID leeg wordt gelaten, probeert het systeem automatisch een crediteur te matchen. Dit gebeurt op basis van een aantal regels.
+     * <para />
+     *
+     * Eerst worden er crediteuren gematched op basis van het KvK-nummer en het btw-nummer.
+     * Alléén als dit geen resultaat levert, probeert het systeem te matchen op bedrijfsnaam, postcode en stadsnaam (alleen velden die in de UBL gevult zijn worden gebruikt.)
+     * Nadat er gematched is wordt er een crediteur gekozen of gecreëert afhankelijk van het volgende:
+     *
+     * <ul><list type="bullet"><li><item><description>Als er één unieke match wordt gevonden, wordt deze crediteur gekoppeld aan de inkoopboeking.</description></item></li><li><item><description>Als er geen match wordt gevonden, wordt automatisch een nieuwe crediteur aangemaakt.</description></item></li><li><item><description>Als er meerdere crediteuren zijn gematched, wordt er ook een nieuwe crediteur aangemaakt in plaats van dat er een bestaande gebruikt wordt.</description></item></li></list></ul>
      *
      * @param array{
      *     Xml?: string|null,
      *     BookId?: int|null,
      *     StatusId?: int|null,
      *     UserId?: int|null,
+     *     CreditorId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -291,6 +318,26 @@ class FinancialRequest extends Request
         return StringLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Financial/PostUblInvoiceToBuyBooking', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Voor deze aanroep zijn extra rechten vereist.
+     *
+     * @param array{
+     *     BookingId?: int|null,
+     *     StatusId?: int|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function updateFinancialBookingStatus(
+        array $parameters = [],
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->patch('/v1/Financial/UpdateFinancialBookingStatus', ['json' => $parameters]),
             )
         );
     }

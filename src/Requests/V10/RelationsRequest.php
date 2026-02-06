@@ -61,6 +61,7 @@ class RelationsRequest extends Request
      *
      * @param array{
      *     Id?: int|null,
+     *     ValidateVat?: bool|null,
      *     IsoCode?: string|null,
      *     CountryCode?: string|null,
      *     CountryId?: int|null,
