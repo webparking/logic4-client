@@ -20,6 +20,8 @@ class PickbonsRequest extends Request
      * Maak nieuwe pickbon(nen) aan voor een gehele order op het moment dat de 'nog te leveren' regels volledig gepickt kunnen worden.
      *
      * @throws Logic4ApiException
+     *
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Maak nieuwe pickbon(nen) aan wanneer de 'nog te leveren' regels volledig gepickt kunnen worden
      */
     public function createCompletePickbonForOrder(
         int $value,
@@ -105,7 +107,7 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Verkrijg pickbonnen op basis van het meegegeven filter
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Verkrijg pickbonnen op basis van het meegegeven filter
      */
     public function getOrderHeadPickbons(
         array $parameters = [],
@@ -169,7 +171,7 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Soft-block meerdere pickbonnen
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Soft-block meerdere pickbonnen
      */
     public function postSoftBlockPickbons(
         array $parameters = [],
@@ -218,7 +220,7 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Verwerk meerdere pickbonnen
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Verwerk meerdere pickbonnen
      */
     public function processPickbons(array $parameters = []): StringLogic4Response
     {
