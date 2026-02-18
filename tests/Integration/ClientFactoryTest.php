@@ -46,7 +46,7 @@ final class ClientFactoryTest extends TestCase
 
     public function testFailedRequestResultsInException(): void
     {
-        $accessTokenManager = \Mockery::mock(AccessTokenManager::class, function (MockInterface $mock): void {
+        $accessTokenManager = \Mockery::mock(AccessTokenManager::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('getAccessToken')->once();
         });
 
