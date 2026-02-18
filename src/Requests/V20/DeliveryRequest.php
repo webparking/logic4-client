@@ -20,9 +20,9 @@ class DeliveryRequest extends Request
      *     OrderStatusId?: int|null,
      *     BranchId?: int|null,
      *     WebsiteDomainId?: int|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
-     *     ShowAPIMovements?: bool|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     ShowAPIMovements?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, SalesOrderDelivery>

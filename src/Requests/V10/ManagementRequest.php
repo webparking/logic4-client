@@ -17,12 +17,12 @@ class ManagementRequest extends Request
      * Verkrijg van één of meerdere artikelen verkoop gegevens zoals verkoopaantallen, over een bepaalde periode (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     HistoryPoints?: int|null,
-     *     ProductCodes?: array<string>|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     ExcludeDebtorIds?: array<int>|null,
-     *     WebSiteDomainsIds?: array<int>|null,
+     *     TimeFrame?: string,
+     *     HistoryPoints?: int,
+     *     ProductCodes?: array<string>,
+     *     IncludingCurrentPeriod?: bool,
+     *     ExcludeDebtorIds?: array<int>,
+     *     WebSiteDomainsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -41,23 +41,23 @@ class ManagementRequest extends Request
      * Omzet van een bepaalde periode (Facturen/open orders/abonnementen).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     HistoryPoints?: int|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     HistoryPoints?: int,
      *     IncludeOffers?: bool|null,
      *     IncludeOpenOrders?: bool|null,
      *     IncludeOrders?: bool|null,
      *     IncludeSubscriptions?: bool|null,
      *     IncludeInvoices?: bool|null,
      *     Year?: int|null,
-     *     WebSiteDomainsIds?: array<int>|null,
-     *     TypeContactGroupsIds?: array<int>|null,
-     *     ExcludingDebtors?: array<int>|null,
-     *     OnlyForExcludingDebtors?: bool|null,
-     *     NotLinkedToWebsiteDomain?: bool|null,
-     *     EmployeeIds?: array<int>|null,
-     *     BranchIds?: array<int>|null,
-     *     ProductGroupsIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>,
+     *     TypeContactGroupsIds?: array<int>,
+     *     ExcludingDebtors?: array<int>,
+     *     OnlyForExcludingDebtors?: bool,
+     *     NotLinkedToWebsiteDomain?: bool,
+     *     EmployeeIds?: array<int>,
+     *     BranchIds?: array<int>,
+     *     ProductGroupsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -76,23 +76,23 @@ class ManagementRequest extends Request
      * Omzet o.b.v. order/factuur regels voor een bepaalde periode.
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     HistoryPoints?: int|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     HistoryPoints?: int,
      *     IncludeOffers?: bool|null,
      *     IncludeOpenOrders?: bool|null,
      *     IncludeOrders?: bool|null,
      *     IncludeSubscriptions?: bool|null,
      *     IncludeInvoices?: bool|null,
      *     Year?: int|null,
-     *     WebSiteDomainsIds?: array<int>|null,
-     *     TypeContactGroupsIds?: array<int>|null,
-     *     ExcludingDebtors?: array<int>|null,
-     *     OnlyForExcludingDebtors?: bool|null,
-     *     NotLinkedToWebsiteDomain?: bool|null,
-     *     EmployeeIds?: array<int>|null,
-     *     BranchIds?: array<int>|null,
-     *     ProductGroupsIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>,
+     *     TypeContactGroupsIds?: array<int>,
+     *     ExcludingDebtors?: array<int>,
+     *     OnlyForExcludingDebtors?: bool,
+     *     NotLinkedToWebsiteDomain?: bool,
+     *     EmployeeIds?: array<int>,
+     *     BranchIds?: array<int>,
+     *     ProductGroupsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -111,23 +111,23 @@ class ManagementRequest extends Request
      * Omzet van een bepaalde periode per type contact groep (Facturen/open orders/abonnementen).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     HistoryPoints?: int|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     HistoryPoints?: int,
      *     IncludeOffers?: bool|null,
      *     IncludeOpenOrders?: bool|null,
      *     IncludeOrders?: bool|null,
      *     IncludeSubscriptions?: bool|null,
      *     IncludeInvoices?: bool|null,
      *     Year?: int|null,
-     *     WebSiteDomainsIds?: array<int>|null,
-     *     TypeContactGroupsIds?: array<int>|null,
-     *     ExcludingDebtors?: array<int>|null,
-     *     OnlyForExcludingDebtors?: bool|null,
-     *     NotLinkedToWebsiteDomain?: bool|null,
-     *     EmployeeIds?: array<int>|null,
-     *     BranchIds?: array<int>|null,
-     *     ProductGroupsIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>,
+     *     TypeContactGroupsIds?: array<int>,
+     *     ExcludingDebtors?: array<int>,
+     *     OnlyForExcludingDebtors?: bool,
+     *     NotLinkedToWebsiteDomain?: bool,
+     *     EmployeeIds?: array<int>,
+     *     BranchIds?: array<int>,
+     *     ProductGroupsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -146,27 +146,27 @@ class ManagementRequest extends Request
      * Grootboek omzet en budgetten.
      *
      * @param array{
-     *     LedgerCodes?: array<int>|null,
-     *     GetOnlyMutationTotal?: bool|null,
-     *     CreditCorrection?: bool|null,
-     *     LedgerColumnTypeIds?: array<int>|null,
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     HistoryPoints?: int|null,
+     *     LedgerCodes?: array<int>,
+     *     GetOnlyMutationTotal?: bool,
+     *     CreditCorrection?: bool,
+     *     LedgerColumnTypeIds?: array<int>,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     HistoryPoints?: int,
      *     IncludeOffers?: bool|null,
      *     IncludeOpenOrders?: bool|null,
      *     IncludeOrders?: bool|null,
      *     IncludeSubscriptions?: bool|null,
      *     IncludeInvoices?: bool|null,
      *     Year?: int|null,
-     *     WebSiteDomainsIds?: array<int>|null,
-     *     TypeContactGroupsIds?: array<int>|null,
-     *     ExcludingDebtors?: array<int>|null,
-     *     OnlyForExcludingDebtors?: bool|null,
-     *     NotLinkedToWebsiteDomain?: bool|null,
-     *     EmployeeIds?: array<int>|null,
-     *     BranchIds?: array<int>|null,
-     *     ProductGroupsIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>,
+     *     TypeContactGroupsIds?: array<int>,
+     *     ExcludingDebtors?: array<int>,
+     *     OnlyForExcludingDebtors?: bool,
+     *     NotLinkedToWebsiteDomain?: bool,
+     *     EmployeeIds?: array<int>,
+     *     BranchIds?: array<int>,
+     *     ProductGroupsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -185,23 +185,23 @@ class ManagementRequest extends Request
      * Omzet van huidige jaar o.b.v. facturen (Let op! er wordt geen rekening gehouden met de geschiedenispunten).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     HistoryPoints?: int|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     HistoryPoints?: int,
      *     IncludeOffers?: bool|null,
      *     IncludeOpenOrders?: bool|null,
      *     IncludeOrders?: bool|null,
      *     IncludeSubscriptions?: bool|null,
      *     IncludeInvoices?: bool|null,
      *     Year?: int|null,
-     *     WebSiteDomainsIds?: array<int>|null,
-     *     TypeContactGroupsIds?: array<int>|null,
-     *     ExcludingDebtors?: array<int>|null,
-     *     OnlyForExcludingDebtors?: bool|null,
-     *     NotLinkedToWebsiteDomain?: bool|null,
-     *     EmployeeIds?: array<int>|null,
-     *     BranchIds?: array<int>|null,
-     *     ProductGroupsIds?: array<int>|null,
+     *     WebSiteDomainsIds?: array<int>,
+     *     TypeContactGroupsIds?: array<int>,
+     *     ExcludingDebtors?: array<int>,
+     *     OnlyForExcludingDebtors?: bool,
+     *     NotLinkedToWebsiteDomain?: bool,
+     *     EmployeeIds?: array<int>,
+     *     BranchIds?: array<int>,
+     *     ProductGroupsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -220,10 +220,10 @@ class ManagementRequest extends Request
      * Top 10 filialen (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     ExcludeDebtorIds?: array<int>|null,
-     *     WebSiteDomainsIds?: array<int>|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     ExcludeDebtorIds?: array<int>,
+     *     WebSiteDomainsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -242,10 +242,10 @@ class ManagementRequest extends Request
      * Top 10 klanten (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     ExcludeDebtorIds?: array<int>|null,
-     *     WebSiteDomainsIds?: array<int>|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     ExcludeDebtorIds?: array<int>,
+     *     WebSiteDomainsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -264,10 +264,10 @@ class ManagementRequest extends Request
      * Top 10 productgroepen (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     ExcludeDebtorIds?: array<int>|null,
-     *     WebSiteDomainsIds?: array<int>|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     ExcludeDebtorIds?: array<int>,
+     *     WebSiteDomainsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -286,10 +286,10 @@ class ManagementRequest extends Request
      * Top 10 artikelen (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     ExcludeDebtorIds?: array<int>|null,
-     *     WebSiteDomainsIds?: array<int>|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     ExcludeDebtorIds?: array<int>,
+     *     WebSiteDomainsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -308,10 +308,10 @@ class ManagementRequest extends Request
      * Top 10 provincies (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     ExcludeDebtorIds?: array<int>|null,
-     *     WebSiteDomainsIds?: array<int>|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     ExcludeDebtorIds?: array<int>,
+     *     WebSiteDomainsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -330,10 +330,10 @@ class ManagementRequest extends Request
      * Top 10 medewerkers (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string|null,
-     *     IncludingCurrentPeriod?: bool|null,
-     *     ExcludeDebtorIds?: array<int>|null,
-     *     WebSiteDomainsIds?: array<int>|null,
+     *     TimeFrame?: string,
+     *     IncludingCurrentPeriod?: bool,
+     *     ExcludeDebtorIds?: array<int>,
+     *     WebSiteDomainsIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException

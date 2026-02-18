@@ -40,8 +40,8 @@ class ProductRequest extends Request
      * Als een webshopdomein al reeds gekoppeld is, dan wordt deze overgeslagen.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
-     *     WebsiteDomainId?: int|null,
+     *     ProductIds?: array<int>,
+     *     WebsiteDomainId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -61,8 +61,8 @@ class ProductRequest extends Request
      * Enkel gevonden records worden verwijderd, er vindt geen controle plaats op ProductId en/of WebsiteDomainId. Id's die niet gevonden worden, worden overgeslagen.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
-     *     WebsiteDomainId?: int|null,
+     *     ProductIds?: array<int>,
+     *     WebsiteDomainId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -180,7 +180,7 @@ class ProductRequest extends Request
      * @param array{
      *     PricelistId?: int|null,
      *     DebtorId?: int|null,
-     *     LoadContractPrices?: bool|null,
+     *     LoadContractPrices?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -216,8 +216,8 @@ class ProductRequest extends Request
      * Verkrijg productcodes o.b.v. leverancier productcodes (maximaal 10000).
      *
      * @param array{
-     *     SupplierId?: int|null,
-     *     SupplierCodes?: array<string>|null,
+     *     SupplierId?: int,
+     *     SupplierCodes?: array<string>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -236,7 +236,7 @@ class ProductRequest extends Request
      * Verkrijg de afmetingen van een artikel.
      *
      * @param array{
-     *     ProductId?: int|null,
+     *     ProductId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -257,9 +257,9 @@ class ProductRequest extends Request
      * Haal ID's op van voorraadlocaties voor een bepaald product in een bepaald magazijn.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     WarehouseId?: int|null,
-     *     SystemDefaultPickLocation?: bool|null,
+     *     SystemDefaultPickLocation?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -308,12 +308,12 @@ class ProductRequest extends Request
      *     UseChildProductGroups?: bool|null,
      *     ProductCode?: string|null,
      *     Barcode?: string|null,
-     *     Barcodes?: array<string>|null,
+     *     Barcodes?: array<string>,
      *     DebtorId?: int|null,
      *     WebshopUserId?: int|null,
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     ProductFilterListChoice?: string|null,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
@@ -327,16 +327,16 @@ class ProductRequest extends Request
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
      *     LoadProductGroups?: bool|null,
-     *     LoadExtraBarcodes?: bool|null,
+     *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,
      *     GlobalisationId?: int|null,
      *     WebsiteDomainId?: int|null,
      *     WareHouseId?: int|null,
-     *     UseECommerceProductGroups?: bool|null,
-     *     UseECommerceProductGroupsToLoadProductGroups?: bool|null,
-     *     LoadStockForWarehouses?: bool|null,
-     *     LoadAllWebshopGroupsLinkedToProduct?: bool|null,
-     *     LoadProductTypes?: bool|null,
+     *     UseECommerceProductGroups?: bool,
+     *     UseECommerceProductGroupsToLoadProductGroups?: bool,
+     *     LoadStockForWarehouses?: bool,
+     *     LoadAllWebshopGroupsLinkedToProduct?: bool,
+     *     LoadProductTypes?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, ProductV11>
@@ -358,7 +358,7 @@ class ProductRequest extends Request
      * Verkrijg de verzendinformatie van een product.
      *
      * @param array{
-     *     ProductId?: int|null,
+     *     ProductId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -384,12 +384,12 @@ class ProductRequest extends Request
      *     UseChildProductGroups?: bool|null,
      *     ProductCode?: string|null,
      *     Barcode?: string|null,
-     *     Barcodes?: array<string>|null,
+     *     Barcodes?: array<string>,
      *     DebtorId?: int|null,
      *     WebshopUserId?: int|null,
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     ProductFilterListChoice?: string|null,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
@@ -403,16 +403,16 @@ class ProductRequest extends Request
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
      *     LoadProductGroups?: bool|null,
-     *     LoadExtraBarcodes?: bool|null,
+     *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,
      *     GlobalisationId?: int|null,
      *     WebsiteDomainId?: int|null,
      *     WareHouseId?: int|null,
-     *     UseECommerceProductGroups?: bool|null,
-     *     UseECommerceProductGroupsToLoadProductGroups?: bool|null,
-     *     LoadStockForWarehouses?: bool|null,
-     *     LoadAllWebshopGroupsLinkedToProduct?: bool|null,
-     *     LoadProductTypes?: bool|null,
+     *     UseECommerceProductGroups?: bool,
+     *     UseECommerceProductGroupsToLoadProductGroups?: bool,
+     *     LoadStockForWarehouses?: bool,
+     *     LoadAllWebshopGroupsLinkedToProduct?: bool,
+     *     LoadProductTypes?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -429,7 +429,7 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     Skip?: int|null,
      *     Take?: int|null,
      * } $parameters
@@ -480,9 +480,9 @@ class ProductRequest extends Request
      * Verkrijg alle leveranciers van één of meerdere producten op basis van ProductId's (max. 1000). Of gebruik 'TakeRecords' (max. 10.000).
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     ProductIds?: array<int>,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ProductSupplier>
@@ -514,7 +514,7 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     VariantBalkCategoryIds?: array<int>|null,
+     *     VariantBalkCategoryIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -531,7 +531,7 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     VariantBalkIds?: array<int>|null,
+     *     VariantBalkIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -550,7 +550,7 @@ class ProductRequest extends Request
      * Het ophalen van gekoppelde webshops per product, max. 1000 producten per call.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -581,8 +581,8 @@ class ProductRequest extends Request
      *
      * @param array{
      *     WebsiteDomainId?: int|null,
-     *     GlobalizationId?: int|null,
-     *     ProductId?: int|null,
+     *     GlobalizationId?: int,
+     *     ProductId?: int,
      *     Title?: string|null,
      *     Description?: string|null,
      *     USP?: string|null,

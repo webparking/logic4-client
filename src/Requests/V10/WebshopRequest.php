@@ -26,7 +26,7 @@ class WebshopRequest extends Request
      *
      * @param array{
      *     VisitorCode?: string|null,
-     *     WebshopUserProductListType?: string|null,
+     *     WebshopUserProductListType?: string,
      *     WebshopPricelistId?: int|null,
      *     GetHighestShiftPrice?: bool|null,
      *     CountryIdForSellPrice?: int|null,
@@ -70,13 +70,13 @@ class WebshopRequest extends Request
      * de aantallen kindartikelen zijn altijd in verhouding tot 1 moederartikel.
      *
      * @param array{
-     *     WebshopUserProductListType?: string|null,
+     *     WebshopUserProductListType?: string,
      *     WebsiteDomainId?: int|null,
      *     DebtorId?: int|null,
      *     FromCreatedDateTime?: string|null,
      *     FromLastModifiedDateTime?: string|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, WebshopVisitorBehaviour>
@@ -96,10 +96,10 @@ class WebshopRequest extends Request
      * Verkrijg de betaalmethodes van een WebshopUser.
      *
      * @param array{
-     *     DebtorId?: int|null,
-     *     ShippingMethodId?: int|null,
+     *     DebtorId?: int,
+     *     ShippingMethodId?: int,
      *     ShowOnlySelectedPaymentMethodDebtor?: bool|null,
-     *     TotalPrice?: number|null,
+     *     TotalPrice?: number,
      *     ShowOnlyAfterPayments?: bool|null,
      * } $parameters
      *
@@ -119,14 +119,14 @@ class WebshopRequest extends Request
      * Verkrijg de aflevermethodes van een WebshopUser.
      *
      * @param array{
-     *     IsPureInclShop?: bool|null,
+     *     IsPureInclShop?: bool,
      *     TotalPriceIncl?: number|null,
-     *     DebtorId?: int|null,
-     *     CountryId?: int|null,
+     *     DebtorId?: int,
+     *     CountryId?: int,
      *     PostalCode?: string|null,
-     *     Weight?: number|null,
-     *     TotalPrice?: number|null,
-     *     Volume?: number|null,
+     *     Weight?: number,
+     *     TotalPrice?: number,
+     *     Volume?: number,
      *     ShowOnlySelectedShippingMethodDebtor?: bool|null,
      *     ShowOnlyShippingMethodsWithPaymentCondition?: bool|null,
      *     ShowOnlyShippingMethodsWithPaymentConditionWithAfterPayments?: bool|null,
@@ -149,9 +149,9 @@ class WebshopRequest extends Request
      * Verkrijg productprijzen o.b.v. webshopprijslijst/debiteur.
      *
      * @param array{
-     *     DebtorId?: int|null,
+     *     DebtorId?: int,
      *     WebshopPriceListId?: int|null,
-     *     ProductId?: int|null,
+     *     ProductId?: int,
      *     MinSaleAmount?: int|null,
      * } $parameters
      *
@@ -216,8 +216,8 @@ class WebshopRequest extends Request
      * Verkrijg het nog te besteden bedrag voor een webshopgebruiker van een jaarbudget.
      *
      * @param array{
-     *     WebshopUserId?: int|null,
-     *     IgnoreOrderstatusIds?: array<int>|null,
+     *     WebshopUserId?: int,
+     *     IgnoreOrderstatusIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -236,10 +236,10 @@ class WebshopRequest extends Request
      * Verkrijg webshopgebruiker o.b.v. meegestuurde credentials.
      *
      * @param array{
-     *     UserName?: string|null,
-     *     Password?: string|null,
+     *     UserName?: string,
+     *     Password?: string,
      *     WebsiteDomainId?: int|null,
-     *     IgnorePasswordCheck?: bool|null,
+     *     IgnorePasswordCheck?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -296,7 +296,7 @@ class WebshopRequest extends Request
      *
      * @param array{
      *     VisitorCode?: string|null,
-     *     WebshopUserProductListType?: string|null,
+     *     WebshopUserProductListType?: string,
      *     WebshopPricelistId?: int|null,
      *     GetHighestShiftPrice?: bool|null,
      *     CountryIdForSellPrice?: int|null,
@@ -353,7 +353,7 @@ class WebshopRequest extends Request
      * Update het aantal van een WebshopUserProduct op een WebshopUserProductlijst.
      *
      * @param array{
-     *     WebshopUserProductId?: int|null,
+     *     WebshopUserProductId?: int,
      *     Qty?: int|null,
      * } $parameters
      *

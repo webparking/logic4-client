@@ -21,8 +21,8 @@ class StockRequest extends Request
      * Ophalen van externe voorraadstanden voor actieve leveranciers.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     ProductStockFrom?: int|null,
      *     DateTimeLastUpdateSince?: string|null,
      * } $parameters
@@ -44,9 +44,9 @@ class StockRequest extends Request
      * Verkrijg de eerst volgende leverdata van alle actieve leveranciers, vanaf een specifieke datum.
      *
      * @param array{
-     *     NextDeliveryDate?: string|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     NextDeliveryDate?: string,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ProductSupplierNextDelivery>
@@ -66,9 +66,9 @@ class StockRequest extends Request
      * Haal voorraadmutaties op. Maximaal 10000 records per keer kunnen worden opgehaald.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
-     *     PickbonIds?: array<int>|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     PickbonIds?: array<int>,
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
      *     BuyOrderId?: int|null,
@@ -109,8 +109,8 @@ class StockRequest extends Request
      * Voorraadcontrole heads ophalen op basis van het ProductStockControlHeadFilter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     StockLocationId?: int|null,
      *     UserId?: int|null,
      *     CreatedDateFrom?: string|null,
@@ -136,8 +136,8 @@ class StockRequest extends Request
      * Ophalen van voorraadstanden voor specifieke magazijnen.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     WareHouseId?: int|null,
      * } $parameters
      *
@@ -158,9 +158,9 @@ class StockRequest extends Request
      * Verkrijg de producten die op de locatie aanwezig zouden moeten zijn.
      *
      * @param array{
-     *     LocationId?: int|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     LocationId?: int,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ProductStockControlRow>
@@ -181,13 +181,13 @@ class StockRequest extends Request
      * Return True wanneer gelukt, anders foutmelding.
      *
      * @param array{
-     *     Items?: array<array{ProductId?: int, MutationAmount?: number, OrderHeadPickbonId?: int|null}>|null,
+     *     Items?: array<array{ProductId?: int, MutationAmount?: number, OrderHeadPickbonId?: int|null}>,
      *     FromStockLocationId?: int|null,
      *     FromWarehouseId?: int|null,
-     *     ToStockLocationId?: int|null,
+     *     ToStockLocationId?: int,
      *     Notes?: string|null,
      *     Name?: string|null,
-     *     DatabaseAdministrationId?: int|null,
+     *     DatabaseAdministrationId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -230,8 +230,8 @@ class StockRequest extends Request
      * Verander de standaard picklocatie van artikelen naar een andere voorraad locatie.
      *
      * @param array<array{
-     *     ProductId?: int|null,
-     *     WarehouseStockLocationId?: int|null,
+     *     ProductId?: int,
+     *     WarehouseStockLocationId?: int,
      *     WarehouseId?: int|null,
      * }> $parameters
      *

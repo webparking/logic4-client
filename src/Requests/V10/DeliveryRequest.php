@@ -15,7 +15,7 @@ class DeliveryRequest extends Request
      * Maak een nieuwe uitlevering aan o.b.v. opgestuurde orderregels. Het systeem bepaalt automatisch vanaf welke voorraadlocatie de voorraad afgeboekt wordt.
      *
      * @param array{
-     *     DeliveryRows?: array<array{RowId?: int, AmountToDeliver?: number}>|null,
+     *     DeliveryRows?: array<array{RowId?: int, AmountToDeliver?: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -40,8 +40,8 @@ class DeliveryRequest extends Request
      *     OrderStatusId?: int|null,
      *     BranchId?: int|null,
      *     WebsiteDomainId?: int|null,
-     *     Skip?: int|null,
-     *     Take?: int|null,
+     *     Skip?: int,
+     *     Take?: int,
      * } $parameters
      *
      * @return \Generator<array-key, SalesOrderDelivery>

@@ -17,7 +17,7 @@ class PriceListsRequest extends Request
      * @param array{
      *     PricelistId?: int|null,
      *     DebtorId?: int|null,
-     *     LoadContractPrices?: bool|null,
+     *     LoadContractPrices?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -34,8 +34,8 @@ class PriceListsRequest extends Request
 
     /**
      * @param array{
-     *     PriceListId?: int|null,
-     *     ProductStaggeredPrices?: array<array{ProductId?: int, Prices?: array<array{Qty?: int, PriceEx?: number, DateFrom?: string|null, DateTo?: string|null}>|null}>|null,
+     *     PriceListId?: int,
+     *     ProductStaggeredPrices?: array<array{ProductId?: int, Prices?: array<array{Qty?: int, PriceEx?: number, DateFrom?: string|null, DateTo?: string|null}>}>,
      * } $parameters
      *
      * @throws Logic4ApiException

@@ -18,14 +18,14 @@ class BuyOrderDeliveryRequest extends Request
      * Maak een nieuwe inkooplevering aan of update een bestaande.
      *
      * @param array{
-     *     ProcessMutationButDoNotCreatePickbon?: bool|null,
-     *     Status?: string|null,
+     *     ProcessMutationButDoNotCreatePickbon?: bool,
+     *     Status?: string,
      *     SupplierId?: int|null,
      *     BuyOrderId?: int|null,
      *     Remarks?: string|null,
      *     Description?: string|null,
      *     BranchId?: int|null,
-     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>|null,
+     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>,
      *     PickingListNumber?: string|null,
      * } $parameters
      *
@@ -47,14 +47,14 @@ class BuyOrderDeliveryRequest extends Request
      *
      * @param array{
      *     OrderId?: int|null,
-     *     ProcessMutationButDoNotCreatePickbon?: bool|null,
-     *     Status?: string|null,
+     *     ProcessMutationButDoNotCreatePickbon?: bool,
+     *     Status?: string,
      *     SupplierId?: int|null,
      *     BuyOrderId?: int|null,
      *     Remarks?: string|null,
      *     Description?: string|null,
      *     BranchId?: int|null,
-     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>|null,
+     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>,
      *     PickingListNumber?: string|null,
      * } $parameters
      *

@@ -31,13 +31,13 @@ class StockRequest extends Request
      * Maak een voorraadmutatie aan.
      *
      * @param array{
-     *     TypeId?: int|null,
+     *     TypeId?: int,
      *     LedgerId?: int|null,
-     *     ProductId?: int|null,
-     *     Amount?: number|null,
+     *     ProductId?: int,
+     *     Amount?: number,
      *     Remarks?: string|null,
-     *     StockLocationId?: int|null,
-     *     StockMutationTypeId?: int|null,
+     *     StockLocationId?: int,
+     *     StockMutationTypeId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -58,13 +58,13 @@ class StockRequest extends Request
      * Alleen wanneer in een magazijn een reserveerlocatie is gedefinieerd kunnen tot maximaal 100 mutaties worden uitgevoerd.
      *
      * @param array<array{
-     *     PickbonId?: int|null,
-     *     OrderRowId?: int|null,
-     *     Amount?: number|null,
-     *     Timestamp?: string|null,
+     *     PickbonId?: int,
+     *     OrderRowId?: int,
+     *     Amount?: number,
+     *     Timestamp?: string,
      *     Remarks?: string|null,
-     *     StockLocationId?: int|null,
-     *     StockMutationTypeId?: int|null,
+     *     StockLocationId?: int,
+     *     StockMutationTypeId?: int,
      * }> $parameters
      *
      * @throws Logic4ApiException
@@ -107,9 +107,9 @@ class StockRequest extends Request
      * @param array{
      *     SupplierId?: int|null,
      *     Active?: bool|null,
-     *     ProductIds?: array<int>|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     ProductIds?: array<int>,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ProductStockSupplierWithActive>
@@ -163,8 +163,8 @@ class StockRequest extends Request
      * Verkrijg de huidige voorraadlocaties van het product op basis van het filter.
      *
      * @param array{
-     *     ProductsWithWarehouse?: array<array{ProductId?: int, WarehouseId?: int|null, StockLocationId?: int|null}>|null,
-     *     ShowNegativeLocations?: bool|null,
+     *     ProductsWithWarehouse?: array<array{ProductId?: int, WarehouseId?: int|null, StockLocationId?: int|null}>,
+     *     ShowNegativeLocations?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -227,7 +227,7 @@ class StockRequest extends Request
      * notitie en standaard picklocatie op.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -345,7 +345,7 @@ class StockRequest extends Request
      * Haal voorraadlocaties op van meerdere producten.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -412,13 +412,13 @@ class StockRequest extends Request
      * Return True wanneer gelukt, anders foutmelding.
      *
      * @param array{
-     *     Items?: array<array{ProductId?: int, MutationAmount?: number, OrderHeadPickbonId?: int|null}>|null,
+     *     Items?: array<array{ProductId?: int, MutationAmount?: number, OrderHeadPickbonId?: int|null}>,
      *     FromStockLocationId?: int|null,
      *     FromWarehouseId?: int|null,
-     *     ToStockLocationId?: int|null,
+     *     ToStockLocationId?: int,
      *     Notes?: string|null,
      *     Name?: string|null,
-     *     DatabaseAdministrationId?: int|null,
+     *     DatabaseAdministrationId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -462,9 +462,9 @@ class StockRequest extends Request
      * Voeg eerstvolgende leverdata van leveranciers toe voor één of meer artikelen (max 100 per request).
      *
      * @param array<array{
-     *     ProductId?: int|null,
-     *     SupplierId?: int|null,
-     *     DeliveryDate?: string|null,
+     *     ProductId?: int,
+     *     SupplierId?: int,
+     *     DeliveryDate?: string,
      * }> $parameters
      *
      * @throws Logic4ApiException
@@ -483,8 +483,8 @@ class StockRequest extends Request
      * Verander de standaard picklocatie van artikelen naar een andere voorraad locatie.
      *
      * @param array<array{
-     *     ProductId?: int|null,
-     *     WarehouseStockLocationId?: int|null,
+     *     ProductId?: int,
+     *     WarehouseStockLocationId?: int,
      *     WarehouseId?: int|null,
      * }> $parameters
      *
@@ -506,14 +506,14 @@ class StockRequest extends Request
      * Voeg een nieuwe voorraadcontrole toe of update de meegegeven head met de bijbehorende rijen als het Id van _head is meegegeven.
      *
      * @param array{
-     *     CreatedDate?: string|null,
+     *     CreatedDate?: string,
      *     Id?: int|null,
      *     LocationName?: string|null,
-     *     LocationId?: int|null,
+     *     LocationId?: int,
      *     ProcessDate?: string|null,
      *     Username?: string|null,
      *     UserId?: int|null,
-     *     Rows?: array<array{Id?: int|null, ProductStockHeadId?: int|null, ProductId?: int, ProductDescription?: string|null, ProductDescription2?: string|null, Vendorcode?: string|null, StockTotal?: number, StockOnCurrentLocation?: number, StockCountedByUser?: number|null, StockLevelDate?: string, Barcode?: string|null, ProductCode?: string|null, Barcode2?: string|null, SystemBarcode?: string|null, BarcodeExtraList?: array<array{Barcode?: string|null, Qty?: int}>|null}>|null,
+     *     Rows?: array<array{Id?: int|null, ProductStockHeadId?: int|null, ProductId?: int, ProductDescription?: string|null, ProductDescription2?: string|null, Vendorcode?: string|null, StockTotal?: number, StockOnCurrentLocation?: number, StockCountedByUser?: number|null, StockLevelDate?: string, Barcode?: string|null, ProductCode?: string|null, Barcode2?: string|null, SystemBarcode?: string|null, BarcodeExtraList?: array<array{Barcode?: string|null, Qty?: int}>}>,
      *     EventLog?: string|null,
      *     WarehouseStockControlEmailTemplateId?: int|null,
      * } $parameters
