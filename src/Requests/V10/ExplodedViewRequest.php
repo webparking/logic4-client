@@ -14,13 +14,13 @@ class ExplodedViewRequest extends Request
      * Verkrijg exploded view o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     ExplodedViewIds?: array<int>|null,
-     *     ProductGroupIds?: array<int>|null,
-     *     ProductIds?: array<int>|null,
-     *     GlobalisationIds?: array<int>|null,
+     *     ExplodedViewIds?: array<int>,
+     *     ProductGroupIds?: array<int>,
+     *     ProductIds?: array<int>,
+     *     GlobalisationIds?: array<int>,
      *     WebsiteDomainId?: int|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ExplodedView>

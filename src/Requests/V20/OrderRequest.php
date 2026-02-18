@@ -16,8 +16,8 @@ class OrderRequest extends Request
      * @param array{
      *     ReceivedReturnOrderDateFrom?: string|null,
      *     ReceivedReturnOrderDateTo?: string|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     SolutionId?: int|null,
      *     ProblemId?: int|null,
      *     CategoryId?: int|null,
@@ -43,12 +43,12 @@ class OrderRequest extends Request
      *     LastActionFrom?: string|null,
      *     LastActionTo?: string|null,
      *     Reference?: string|null,
-     *     LoadPayments?: bool|null,
+     *     LoadPayments?: bool,
      *     StatusId?: int|null,
      *     Type1Id?: int|null,
      *     Type2Id?: int|null,
      *     Type3Id?: int|null,
-     *     WebsiteDomainIds?: array<int>|null,
+     *     WebsiteDomainIds?: array<int>,
      * } $parameters
      *
      * @return \Generator<array-key, ReturnOrderV2>

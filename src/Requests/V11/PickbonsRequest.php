@@ -14,8 +14,8 @@ class PickbonsRequest extends Request
 {
     /**
      * @param array{
-     *     OrderId?: int|null,
-     *     UseNewWorkflow?: bool|null,
+     *     OrderId?: int,
+     *     UseNewWorkflow?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -34,9 +34,9 @@ class PickbonsRequest extends Request
      * Verkrijg pickbonnen op basis van het meegegeven filter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
-     *     OnlyUnprocessedItems?: bool|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     OnlyUnprocessedItems?: bool,
      *     OrderCreatedFrom?: string|null,
      *     WarehouseZoneId?: int|null,
      *     WarehouseId?: int|null,
@@ -77,10 +77,10 @@ class PickbonsRequest extends Request
      * Verwerk meerdere pickbonnen.
      *
      * @param array<array{
-     *     AmountOfColli?: int|null,
-     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>|null,
-     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>|null,
-     *     OrderHeadPickbonId?: int|null,
+     *     AmountOfColli?: int,
+     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>,
+     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>,
+     *     OrderHeadPickbonId?: int,
      *     InterimLocationId?: int|null,
      *     Remarks?: string|null,
      * }> $parameters

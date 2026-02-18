@@ -29,7 +29,7 @@ class BackOfficeRequest extends Request
      * Maak een nieuwe taak aan.
      *
      * @param array{
-     *     Type?: string|null,
+     *     Type?: string,
      *     SerializedJson?: string|null,
      * } $parameters
      *

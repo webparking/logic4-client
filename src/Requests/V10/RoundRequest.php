@@ -20,15 +20,15 @@ class RoundRequest extends Request
      * Voeg een rit toe aan de database. Het ID van de zojuist aangemaakte rit wordt als response teruggegeven.
      *
      * @param array{
-     *     TypeId?: int|null,
+     *     TypeId?: int,
      *     Description?: string|null,
      *     Memo?: string|null,
      *     DateTimePlanned?: string|null,
      *     VehicleId?: int|null,
      *     DriverId?: int|null,
      *     CoDriverId?: int|null,
-     *     StatusId?: int|null,
-     *     HideInSystem?: bool|null,
+     *     StatusId?: int,
+     *     HideInSystem?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -50,10 +50,10 @@ class RoundRequest extends Request
      * @param array{
      *     OrderId?: int|null,
      *     ITSIssueId?: int|null,
-     *     RoundId?: int|null,
+     *     RoundId?: int,
      *     Remarks?: string|null,
-     *     StatusId?: int|null,
-     *     Sorting?: int|null,
+     *     StatusId?: int,
+     *     Sorting?: int,
      *     EstimatedArrivalDateTime?: string|null,
      * } $parameters
      *
@@ -104,7 +104,7 @@ class RoundRequest extends Request
      * @param array{
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
-     *     RoundId?: int|null,
+     *     RoundId?: int,
      *     StatusId?: int|null,
      * } $parameters
      *
@@ -147,8 +147,8 @@ class RoundRequest extends Request
      *     TypeId?: int|null,
      *     StatusId?: int|null,
      *     VehicleId?: int|null,
-     *     ItsIds?: array<int>|null,
-     *     OrderIds?: array<int>|null,
+     *     ItsIds?: array<int>,
+     *     OrderIds?: array<int>,
      * } $parameters
      *
      * @return \Generator<array-key, GetRound>
@@ -199,16 +199,16 @@ class RoundRequest extends Request
      * Let op, je moet het gehele object vullen. Lege waardes worden ook overgenomen.
      *
      * @param array{
-     *     Id?: int|null,
-     *     TypeId?: int|null,
+     *     Id?: int,
+     *     TypeId?: int,
      *     Description?: string|null,
      *     Memo?: string|null,
      *     DateTimePlanned?: string|null,
      *     VehicleId?: int|null,
      *     DriverId?: int|null,
      *     CoDriverId?: int|null,
-     *     StatusId?: int|null,
-     *     HideInSystem?: bool|null,
+     *     StatusId?: int,
+     *     HideInSystem?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -228,10 +228,10 @@ class RoundRequest extends Request
      * Let op, je moet het gehele object vullen. Lege waardes worden ook overgenomen.
      *
      * @param array{
-     *     Id?: int|null,
+     *     Id?: int,
      *     Remarks?: string|null,
-     *     StatusId?: int|null,
-     *     Sorting?: int|null,
+     *     StatusId?: int,
+     *     Sorting?: int,
      *     EstimatedArrivalDateTime?: string|null,
      * } $parameters
      *

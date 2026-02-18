@@ -12,7 +12,7 @@ class ProductTemplateRequest extends Request
 {
     /**
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     VisibleOnWebsite?: bool|null,
      *     Skip?: int|null,
      *     Take?: int|null,
