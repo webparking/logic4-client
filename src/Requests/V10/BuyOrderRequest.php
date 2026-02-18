@@ -139,7 +139,7 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Inkoopordersregels ophalen o.b.v. filter
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Inkoopordersregels ophalen o.b.v. filter
      */
     public function getBuyOrderRowsByFilter(
         array $parameters = [],
@@ -191,7 +191,7 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Inkooporders ophalen o.b.v. filter.
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Inkooporders ophalen o.b.v. filter.
      */
     public function getBuyOrders(
         array $parameters = [],

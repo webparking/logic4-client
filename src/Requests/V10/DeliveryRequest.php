@@ -48,7 +48,7 @@ class DeliveryRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Zoeken op verkooporder uitleveringen.
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Zoeken op verkooporder uitleveringen.
      */
     public function getDeliveries(array $parameters = []): \Generator
     {
