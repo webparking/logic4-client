@@ -29,8 +29,8 @@ class ProductRequest extends Request
      * Haal merken op o.b.v. het filter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, Brand>
@@ -52,8 +52,8 @@ class ProductRequest extends Request
      * @param array{
      *     DateTimeChangedFrom?: string|null,
      *     DateTimeChangedTo?: string|null,
-     *     LoadFreeValuesTypes?: bool|null,
-     *     BrandIds?: array<int>|null,
+     *     LoadFreeValuesTypes?: bool,
+     *     BrandIds?: array<int>,
      *     IsVisibleInLogic4?: bool|null,
      *     IsVisibleOnWebShop?: bool|null,
      *     AllShowOnWebsite?: bool|null,
@@ -61,12 +61,12 @@ class ProductRequest extends Request
      *     UseChildProductGroups?: bool|null,
      *     ProductCode?: string|null,
      *     Barcode?: string|null,
-     *     Barcodes?: array<string>|null,
+     *     Barcodes?: array<string>,
      *     DebtorId?: int|null,
      *     WebshopUserId?: int|null,
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     ProductFilterListChoice?: string|null,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
@@ -80,16 +80,16 @@ class ProductRequest extends Request
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
      *     LoadProductGroups?: bool|null,
-     *     LoadExtraBarcodes?: bool|null,
+     *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,
      *     GlobalisationId?: int|null,
      *     WebsiteDomainId?: int|null,
      *     WareHouseId?: int|null,
-     *     UseECommerceProductGroups?: bool|null,
-     *     UseECommerceProductGroupsToLoadProductGroups?: bool|null,
-     *     LoadStockForWarehouses?: bool|null,
-     *     LoadAllWebshopGroupsLinkedToProduct?: bool|null,
-     *     LoadProductTypes?: bool|null,
+     *     UseECommerceProductGroups?: bool,
+     *     UseECommerceProductGroupsToLoadProductGroups?: bool,
+     *     LoadStockForWarehouses?: bool,
+     *     LoadAllWebshopGroupsLinkedToProduct?: bool,
+     *     LoadProductTypes?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, ProductV11>
@@ -110,9 +110,9 @@ class ProductRequest extends Request
      * Vanaf v1.2 worden velden met de waarde null niet teruggegeven.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     ProductIds?: array<int>,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ProductSupplier>

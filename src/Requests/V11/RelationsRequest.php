@@ -18,15 +18,15 @@ class RelationsRequest extends Request
      * Verkrijg adressen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     ChangedAfter?: string|null,
      *     Id?: int|null,
      *     AddressTypeId?: int|null,
      *     PhoneNumber?: string|null,
      *     DebtorId?: int|null,
      *     CreditorId?: int|null,
-     *     ExcludeHiddenContacts?: bool|null,
+     *     ExcludeHiddenContacts?: bool,
      *     OwnContactNumber?: string|null,
      * } $parameters
      *
@@ -47,15 +47,15 @@ class RelationsRequest extends Request
      * Verkrijg contacten o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     ChangedAfter?: string|null,
      *     Id?: int|null,
      *     AddressTypeId?: int|null,
      *     PhoneNumber?: string|null,
      *     DebtorId?: int|null,
      *     CreditorId?: int|null,
-     *     ExcludeHiddenContacts?: bool|null,
+     *     ExcludeHiddenContacts?: bool,
      *     OwnContactNumber?: string|null,
      * } $parameters
      *
@@ -76,14 +76,14 @@ class RelationsRequest extends Request
      * Verkrijg crediteuren o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     ChangedAfter?: string|null,
      *     Id?: int|null,
      *     PhoneNumber?: string|null,
      *     WebsiteDomainId?: int|null,
      *     EmailAddress?: string|null,
-     *     EmailAddressIsExact?: bool|null,
+     *     EmailAddressIsExact?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, Creditor>
@@ -103,14 +103,14 @@ class RelationsRequest extends Request
      * Verkrijg debiteuren o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     ChangedAfter?: string|null,
      *     Id?: int|null,
      *     PhoneNumber?: string|null,
      *     WebsiteDomainId?: int|null,
      *     EmailAddress?: string|null,
-     *     EmailAddressIsExact?: bool|null,
+     *     EmailAddressIsExact?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, Customer>
@@ -130,8 +130,8 @@ class RelationsRequest extends Request
      * Verkrijg alle vertegenwoordigers.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, Representative>

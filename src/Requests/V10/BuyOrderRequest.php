@@ -18,15 +18,15 @@ class BuyOrderRequest extends Request
      * Voeg een nieuwe inkooporderregel aan een bestaande inkooporder.
      *
      * @param array{
-     *     BuyOrderId?: int|null,
+     *     BuyOrderId?: int,
      *     OrderId?: int|null,
      *     ProductCode?: string|null,
      *     ProductId?: int|null,
-     *     Price?: number|null,
+     *     Price?: number,
      *     Description?: string|null,
      *     ProductDesc2?: string|null,
      *     ExpectedDeliveryDate?: string|null,
-     *     QtyToOrder?: number|null,
+     *     QtyToOrder?: number,
      *     OrderedOnDateByDistributor?: string|null,
      *     OrderRowId?: int|null,
      *     InternalNote?: string|null,
@@ -47,10 +47,10 @@ class BuyOrderRequest extends Request
      * Voeg een nieuwe inkooporderregel toe of update een bestaande regel.
      *
      * @param array{
-     *     BuyOrderRowId?: int|null,
-     *     BuyOrderId?: int|null,
+     *     BuyOrderRowId?: int,
+     *     BuyOrderId?: int,
      *     DebtorName?: string|null,
-     *     QtyToDeliver?: number|null,
+     *     QtyToDeliver?: number,
      *     CreditorProductCode?: string|null,
      *     ProductDesc1?: string|null,
      *     StandardAmountQTY?: number|null,
@@ -59,11 +59,11 @@ class BuyOrderRequest extends Request
      *     OrderId?: int|null,
      *     ProductCode?: string|null,
      *     ProductId?: int|null,
-     *     Price?: number|null,
+     *     Price?: number,
      *     Description?: string|null,
      *     ProductDesc2?: string|null,
      *     ExpectedDeliveryDate?: string|null,
-     *     QtyToOrder?: number|null,
+     *     QtyToOrder?: number,
      *     OrderedOnDateByDistributor?: string|null,
      *     OrderRowId?: int|null,
      *     InternalNote?: string|null,
@@ -87,10 +87,10 @@ class BuyOrderRequest extends Request
      * Maak een nieuwe inkooporder.
      *
      * @param array{
-     *     CreditorId?: int|null,
-     *     DatabaseAdministrationId?: int|null,
-     *     CreatedAt?: string|null,
-     *     BuyOrderRows?: array<array{BuyOrderRowId?: int, BuyOrderId?: int, DebtorName?: string|null, QtyToDeliver?: number, CreditorProductCode?: string|null, ProductDesc1?: string|null, StandardAmountQTY?: number|null, StandardAmountQTYUnitId?: int|null, RepackingQty?: int|null, OrderId?: int|null, ProductCode?: string|null, ProductId?: int|null, Price?: number, Description?: string|null, ProductDesc2?: string|null, ExpectedDeliveryDate?: string|null, QtyToOrder?: number, OrderedOnDateByDistributor?: string|null, OrderRowId?: int|null, InternalNote?: string|null}>|null,
+     *     CreditorId?: int,
+     *     DatabaseAdministrationId?: int,
+     *     CreatedAt?: string,
+     *     BuyOrderRows?: array<array{BuyOrderRowId?: int, BuyOrderId?: int, DebtorName?: string|null, QtyToDeliver?: number, CreditorProductCode?: string|null, ProductDesc1?: string|null, StandardAmountQTY?: number|null, StandardAmountQTYUnitId?: int|null, RepackingQty?: int|null, OrderId?: int|null, ProductCode?: string|null, ProductId?: int|null, Price?: number, Description?: string|null, ProductDesc2?: string|null, ExpectedDeliveryDate?: string|null, QtyToOrder?: number, OrderedOnDateByDistributor?: string|null, OrderRowId?: int|null, InternalNote?: string|null}>,
      *     Remarks?: string|null,
      *     BranchId?: int|null,
      *     OrderId?: int|null,
@@ -139,7 +139,7 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Inkoopordersregels ophalen o.b.v. filter
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Inkoopordersregels ophalen o.b.v. filter
      */
     public function getBuyOrderRowsByFilter(
         array $parameters = [],
@@ -155,7 +155,7 @@ class BuyOrderRequest extends Request
      * Haal per artikel openstaande inkoopordersregels op o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     Dropshipment?: bool|null,
      *     MinimumDeliveryDate?: string|null,
      * } $parameters
@@ -191,7 +191,7 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Inkooporders ophalen o.b.v. filter.
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Inkooporders ophalen o.b.v. filter.
      */
     public function getBuyOrders(
         array $parameters = [],
@@ -207,12 +207,12 @@ class BuyOrderRequest extends Request
      * Wijzig een bestaande inkooporder.
      *
      * @param array{
-     *     Id?: int|null,
-     *     CreditorId?: int|null,
+     *     Id?: int,
+     *     CreditorId?: int,
      *     Remarks?: string|null,
      *     BranchId?: int|null,
-     *     BuyOrderClosed?: bool|null,
-     *     CreatedAt?: string|null,
+     *     BuyOrderClosed?: bool,
+     *     CreatedAt?: string,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -231,15 +231,15 @@ class BuyOrderRequest extends Request
      * Update een bestaande inkooporderregel.
      *
      * @param array{
-     *     BuyOrderRowId?: int|null,
+     *     BuyOrderRowId?: int,
      *     OrderId?: int|null,
      *     ProductCode?: string|null,
      *     ProductId?: int|null,
-     *     Price?: number|null,
+     *     Price?: number,
      *     Description?: string|null,
      *     ProductDesc2?: string|null,
      *     ExpectedDeliveryDate?: string|null,
-     *     QtyToOrder?: number|null,
+     *     QtyToOrder?: number,
      *     OrderedOnDateByDistributor?: string|null,
      *     OrderRowId?: int|null,
      *     InternalNote?: string|null,

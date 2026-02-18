@@ -63,12 +63,12 @@ class Helpers
         } elseif ('object' === $property->type) {
             $properties = [];
             foreach ($property->properties as $parameterName => $propertyValue) {
-                $properties[] = \sprintf('%s?: %s%s', $parameterName, self::resolveParameterType($propertyValue), $propertyValue->nullable ?? false ? '|null' : '');
+                $properties[] = \sprintf('%s?: %s', $parameterName, self::resolveParameterType($propertyValue));
             }
 
             $type = \sprintf('array{%s}', implode(', ', $properties));
         } else {
-            $type = $property->type;
+            $type = $property->type.($property->nullable ? '|null' : '');
         }
 
         return $type;
@@ -88,7 +88,7 @@ class Helpers
             }
 
             if ($property instanceof Schema) {
-                $parameters[] = \sprintf($format, \sprintf('%s?: %s|null', $name, self::resolveParameterType($property)));
+                $parameters[] = \sprintf($format, \sprintf('%s?: %s', $name, self::resolveParameterType($property)));
             }
         }
 

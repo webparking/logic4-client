@@ -17,8 +17,8 @@ class ShipmentRequest extends Request
      *
      * @param array{
      *     DateTimeAdded?: string|null,
-     *     OrderId?: int|null,
-     *     ShipperId?: int|null,
+     *     OrderId?: int,
+     *     ShipperId?: int,
      *     Barcode?: string|null,
      *     TrackTraceUrl?: string|null,
      * } $parameters
@@ -42,9 +42,9 @@ class ShipmentRequest extends Request
      *
      * @param array{
      *     DateTimeAdded?: string|null,
-     *     SendEmail?: bool|null,
-     *     OrderId?: int|null,
-     *     ShipperId?: int|null,
+     *     SendEmail?: bool,
+     *     OrderId?: int,
+     *     ShipperId?: int,
      *     Barcode?: string|null,
      *     TrackTraceUrl?: string|null,
      * } $parameters

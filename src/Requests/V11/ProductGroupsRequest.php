@@ -14,8 +14,8 @@ class ProductGroupsRequest extends Request
      * Verkrijg artikelgroepen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     IsTopLevelGroup?: bool|null,
      *     Name?: string|null,
      *     IsVisibleOnWebShop?: bool|null,

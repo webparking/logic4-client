@@ -17,11 +17,11 @@ class StockRequest extends Request
      * @param array{
      *     LedgerId?: int|null,
      *     ITS_IssueId?: int|null,
-     *     ProductId?: int|null,
-     *     Amount?: number|null,
+     *     ProductId?: int,
+     *     Amount?: number,
      *     Remarks?: string|null,
-     *     StockLocationId?: int|null,
-     *     StockMutationTypeId?: int|null,
+     *     StockLocationId?: int,
+     *     StockMutationTypeId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -41,7 +41,7 @@ class StockRequest extends Request
      *
      * @param array{
      *     ProductCode?: string|null,
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException

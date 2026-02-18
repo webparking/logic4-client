@@ -14,11 +14,11 @@ class WebshopRequest extends Request
      * Voeg een WebshopUserProduct toe aan een WebshopUserProductlijst.
      *
      * @param array{
-     *     ProductId?: int|null,
+     *     ProductId?: int,
      *     QtyDec?: number|null,
      *     Commission?: string|null,
-     *     ExcludedFromAnnualBudget?: bool|null,
-     *     TypeId?: int|null,
+     *     ExcludedFromAnnualBudget?: bool,
+     *     TypeId?: int,
      *     DebtorId?: int|null,
      *     VisitorCode?: string|null,
      *     WebsiteDomainId?: int|null,
