@@ -67,7 +67,7 @@ class ClientFactory
 
     private function makeRequestExceptionMiddleware(): \Closure
     {
-        return static fn (callable $handler): callable => static fn (RequestInterface $request, array $options) => $handler($request, $options)->then(function (ResponseInterface $response) use ($request): ResponseInterface {
+        return static fn (callable $handler): callable => static fn (RequestInterface $request, array $options) => $handler($request, $options)->then(static function (ResponseInterface $response) use ($request): ResponseInterface {
             if ($response->getStatusCode() >= 400) {
                 $previous = RequestException::create($request, $response);
 
