@@ -39,7 +39,7 @@ class CRMRequest extends Request
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - CRM activiteiten o.b.v. filter
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - CRM activiteiten o.b.v. filter
      */
     public function getCRMActivities(
         array $parameters = [],
