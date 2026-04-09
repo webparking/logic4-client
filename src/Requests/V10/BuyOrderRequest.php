@@ -87,7 +87,7 @@ class BuyOrderRequest extends Request
      * Maak een nieuwe inkooporder.
      *
      * @param array{
-     *     CreditorId?: int,
+     *     CreditorId: int,
      *     DatabaseAdministrationId?: int,
      *     CreatedAt?: string,
      *     BuyOrderRows?: array<array{BuyOrderRowId?: int, BuyOrderId?: int, DebtorName?: string|null, QtyToDeliver?: number, CreditorProductCode?: string|null, ProductDesc1?: string|null, StandardAmountQTY?: number|null, StandardAmountQTYUnitId?: int|null, RepackingQty?: int|null, OrderId?: int|null, ProductCode?: string|null, ProductId?: int|null, Price?: number, Description?: string|null, ProductDesc2?: string|null, ExpectedDeliveryDate?: string|null, QtyToOrder?: number, OrderedOnDateByDistributor?: string|null, OrderRowId?: int|null, InternalNote?: string|null}>,
@@ -102,7 +102,7 @@ class BuyOrderRequest extends Request
      * @throws Logic4ApiException
      */
     public function createBuyOrder(
-        array $parameters = [],
+        array $parameters,
     ): BuyOrderBaseInfoLogic4Response {
         return BuyOrderBaseInfoLogic4Response::make(
             $this->buildResponse(
@@ -155,7 +155,7 @@ class BuyOrderRequest extends Request
      * Haal per artikel openstaande inkoopordersregels op o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     ProductIds?: array<int>,
+     *     ProductIds: array<int>,
      *     Dropshipment?: bool|null,
      *     MinimumDeliveryDate?: string|null,
      * } $parameters
@@ -163,7 +163,7 @@ class BuyOrderRequest extends Request
      * @throws Logic4ApiException
      */
     public function getBuyOrderRowsPerProduct(
-        array $parameters = [],
+        array $parameters,
     ): Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response {
         return Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response::make(
             $this->buildResponse(
@@ -207,8 +207,8 @@ class BuyOrderRequest extends Request
      * Wijzig een bestaande inkooporder.
      *
      * @param array{
-     *     Id?: int,
-     *     CreditorId?: int,
+     *     Id: int,
+     *     CreditorId: int,
      *     Remarks?: string|null,
      *     BranchId?: int|null,
      *     BuyOrderClosed?: bool,
@@ -218,7 +218,7 @@ class BuyOrderRequest extends Request
      * @throws Logic4ApiException
      */
     public function updateBuyOrder(
-        array $parameters = [],
+        array $parameters,
     ): BuyOrderBaseInfoLogic4Response {
         return BuyOrderBaseInfoLogic4Response::make(
             $this->buildResponse(

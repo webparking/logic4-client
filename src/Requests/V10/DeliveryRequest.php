@@ -15,13 +15,13 @@ class DeliveryRequest extends Request
      * Maak een nieuwe uitlevering aan o.b.v. opgestuurde orderregels. Het systeem bepaalt automatisch vanaf welke voorraadlocatie de voorraad afgeboekt wordt.
      *
      * @param array{
-     *     DeliveryRows?: array<array{RowId?: int, AmountToDeliver?: number}>,
+     *     DeliveryRows: array<array{RowId?: int, AmountToDeliver: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function createDeliveryForOrderRows(
-        array $parameters = [],
+        array $parameters,
     ): SalesOrderDeliveryRowLogic4ResponseList {
         return SalesOrderDeliveryRowLogic4ResponseList::make(
             $this->buildResponse(
@@ -40,8 +40,8 @@ class DeliveryRequest extends Request
      *     OrderStatusId?: int|null,
      *     BranchId?: int|null,
      *     WebsiteDomainId?: int|null,
-     *     Skip?: int,
-     *     Take?: int,
+     *     Skip: int,
+     *     Take: int,
      * } $parameters
      *
      * @return \Generator<array-key, SalesOrderDelivery>
@@ -50,7 +50,7 @@ class DeliveryRequest extends Request
      *
      * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Zoeken op verkooporder uitleveringen.
      */
-    public function getDeliveries(array $parameters = []): \Generator
+    public function getDeliveries(array $parameters): \Generator
     {
         $iterator = $this->paginateRecords('/v1/Delivery/GetDeliveries', $parameters, 'Take', 'Skip');
 

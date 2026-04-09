@@ -25,9 +25,9 @@ class Payment
             orderId: $data['OrderId'] ?? null,
             invoiceId: $data['InvoiceId'] ?? null,
             amountIncl: $data['AmountIncl'] ?? 0.0,
-            description: $data['Description'] ?? '',
-            bookingId: $data['BookingId'] ?? 0,
-            matchingLedgerId: $data['MatchingLedgerId'] ?? 0,
+            description: $data['Description'],
+            bookingId: $data['BookingId'],
+            matchingLedgerId: $data['MatchingLedgerId'],
             dateTime: isset($data['DateTime']) ? \Carbon\Carbon::parse($data['DateTime']) : null,
             ledgerCode: $data['LedgerCode'] ?? null,
         );

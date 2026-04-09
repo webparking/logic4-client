@@ -37,7 +37,7 @@ class BuyOrderDeliveryRead
             remarks: $data['Remarks'] ?? null,
             description: $data['Description'] ?? null,
             branchId: $data['BranchId'] ?? null,
-            rows: array_map(static fn (array $item) => BuyOrderDeliveryRowRead::make($item), $data['Rows'] ?? []),
+            rows: array_map(static fn (array $item) => BuyOrderDeliveryRowRead::make($item), $data['Rows']),
             pickingListNumber: $data['PickingListNumber'] ?? null,
         );
     }

@@ -20,14 +20,14 @@ class StockRequest extends Request
      *     ProductId?: int,
      *     Amount?: number,
      *     Remarks?: string|null,
-     *     StockLocationId?: int,
+     *     StockLocationId: int,
      *     StockMutationTypeId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function createProductStockMutation(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(

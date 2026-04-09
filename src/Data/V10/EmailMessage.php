@@ -48,7 +48,7 @@ class EmailMessage
             isReplyedOn: isset($data['IsReplyedOn']) ? \Carbon\Carbon::parse($data['IsReplyedOn']) : null,
             isForwardedOn: isset($data['IsForwardedOn']) ? \Carbon\Carbon::parse($data['IsForwardedOn']) : null,
             status: isset($data['Status']) ? EmailMessageStatus::make($data['Status']) : null,
-            toEmailAddresses: array_map(static fn (array $item) => EmailAddress::make($item), $data['ToEmailAddresses'] ?? []),
+            toEmailAddresses: array_map(static fn (array $item) => EmailAddress::make($item), $data['ToEmailAddresses']),
             fromEmailAddress: isset($data['FromEmailAddress']) ? EmailAddress::make($data['FromEmailAddress']) : null,
             CCEmailAddresses: array_map(static fn (array $item) => EmailAddress::make($item), $data['CCEmailAddresses'] ?? []),
             BCCEmailAddresses: array_map(static fn (array $item) => EmailAddress::make($item), $data['BCCEmailAddresses'] ?? []),

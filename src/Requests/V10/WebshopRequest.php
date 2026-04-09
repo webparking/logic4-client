@@ -96,8 +96,8 @@ class WebshopRequest extends Request
      * Verkrijg de betaalmethodes van een WebshopUser.
      *
      * @param array{
-     *     DebtorId?: int,
-     *     ShippingMethodId?: int,
+     *     DebtorId: int,
+     *     ShippingMethodId: int,
      *     ShowOnlySelectedPaymentMethodDebtor?: bool|null,
      *     TotalPrice?: number,
      *     ShowOnlyAfterPayments?: bool|null,
@@ -106,7 +106,7 @@ class WebshopRequest extends Request
      * @throws Logic4ApiException
      */
     public function getWebshopCheckOutPaymentMethods(
-        array $parameters = [],
+        array $parameters,
     ): PaymentMethodLogic4ResponseList {
         return PaymentMethodLogic4ResponseList::make(
             $this->buildResponse(
@@ -216,14 +216,14 @@ class WebshopRequest extends Request
      * Verkrijg het nog te besteden bedrag voor een webshopgebruiker van een jaarbudget.
      *
      * @param array{
-     *     WebshopUserId?: int,
+     *     WebshopUserId: int,
      *     IgnoreOrderstatusIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function getWebshopUserAvailableBudget(
-        array $parameters = [],
+        array $parameters,
     ): DecimalNullableLogic4Response {
         return DecimalNullableLogic4Response::make(
             $this->buildResponse(
@@ -236,8 +236,8 @@ class WebshopRequest extends Request
      * Verkrijg webshopgebruiker o.b.v. meegestuurde credentials.
      *
      * @param array{
-     *     UserName?: string,
-     *     Password?: string,
+     *     UserName: string,
+     *     Password: string,
      *     WebsiteDomainId?: int|null,
      *     IgnorePasswordCheck?: bool,
      * } $parameters
@@ -245,7 +245,7 @@ class WebshopRequest extends Request
      * @throws Logic4ApiException
      */
     public function getWebshopUserByLogin(
-        array $parameters = [],
+        array $parameters,
     ): WebshopUserLogic4Response {
         return WebshopUserLogic4Response::make(
             $this->buildResponse(

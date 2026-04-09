@@ -34,14 +34,14 @@ class PriceListsRequest extends Request
 
     /**
      * @param array{
-     *     PriceListId?: int,
+     *     PriceListId: int,
      *     ProductStaggeredPrices?: array<array{ProductId?: int, Prices?: array<array{Qty?: int, PriceEx?: number, DateFrom?: string|null, DateTo?: string|null}>}>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function updatePriceListForProducts(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(

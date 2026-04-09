@@ -53,25 +53,35 @@ class RequestClassGenerator
             $requestParameters['query'][$parameter->name] = \sprintf('{$%s}', $parameter->name);
         }
 
+        $hasRequiredProps = false;
+
         if ($requestSchema instanceof Reference
             || 'array' === $requestSchema?->type
         ) {
             if ($requestSchema instanceof Reference) {
-                $requestProperties = $requestSchema->resolve()?->properties ?? [];
-                $parameterDoc = "array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n}";
+                $resolvedSchema = $requestSchema->resolve();
+                $requestProperties = $resolvedSchema?->properties ?? [];
+                $requiredProps = $resolvedSchema?->required ?? [];
+                $hasRequiredProps = !empty($requiredProps);
+                $parameterDoc = "array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,', $requiredProps))."\n}";
             } else {
                 if ($requestSchema->items instanceof Schema) {
                     $parameterDoc = "array<{$requestSchema->items->type}>";
                 } else {
-                    $requestProperties = $requestSchema->items->resolve()->properties;
+                    $resolvedItems = $requestSchema->items->resolve();
+                    $requestProperties = $resolvedItems->properties;
+                    $requiredProps = $resolvedItems->required ?? [];
 
-                    $parameterDoc = "array<array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n}>";
+                    $parameterDoc = "array<array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,', $requiredProps))."\n}>";
                 }
             }
 
-            $method->addParameter('parameters')
-                ->setType('array')
-                ->setDefaultValue([]);
+            $parameterProp = $method->addParameter('parameters')
+                ->setType('array');
+
+            if (!$hasRequiredProps) {
+                $parameterProp->setDefaultValue([]);
+            }
 
             $method
                 ->addComment("@param $parameterDoc \$parameters");
