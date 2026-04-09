@@ -51,6 +51,7 @@ class ComponentClassGenerator
         $typedParameters = [];
         $arrayParameters = [];
         $dateParameters = [];
+        $requiredProperties = $component->required ?? [];
 
         foreach ($component->properties as $parameterName => $parameter) {
             if ($parameter instanceof Reference) {
@@ -78,7 +79,9 @@ class ComponentClassGenerator
                 }
             }
 
-            $nullable = !\in_array($parameterName, ['Records', 'ValidationMessages'], true) && (($parameter->nullable ?? false) || class_exists($type));
+            $isRequired = \in_array($parameterName, $requiredProperties, true);
+            $nullable = !\in_array($parameterName, ['Records', 'ValidationMessages'], true)
+                && (($parameter->nullable ?? false) || (class_exists($type) && !$isRequired));
 
             $constructor
                 ->addPromotedParameter($this->propertyName($parameterName))
@@ -90,30 +93,34 @@ class ComponentClassGenerator
         foreach ($component->properties as $property => $propertyObject) {
             $constructorProperty = $constructor->getParameter($this->propertyName($property));
 
+            $isPropertyRequired = \in_array($property, $requiredProperties, true);
             $default = $constructorProperty->isNullable()
                 ? ' ?? null'
-                : match ($constructorProperty->getType()) {
-                    'int' => ' ?? 0',
-                    'float' => ' ?? 0.0',
-                    'bool' => ' ?? false',
-                    'string' => ' ?? \'\'',
-                    'array' => ' ?? []',
-                    default => ' ?? null',
-                };
+                : ($isPropertyRequired
+                    ? ''
+                    : match ($constructorProperty->getType()) {
+                        'int' => ' ?? 0',
+                        'float' => ' ?? 0.0',
+                        'bool' => ' ?? false',
+                        'string' => ' ?? \'\'',
+                        'array' => ' ?? []',
+                        default => ' ?? null',
+                    });
 
             $assignment = null;
             $assignmentValue = "\$data['$property']$default";
             if ($typedParameter = $typedParameters[$property] ?? null) {
                 $assignment = "\\$typedParameter::make(\$data['$property'])";
             } elseif ($arrayParameter = $arrayParameters[$property] ?? null) {
-                $assignmentValue = "array_map(static fn (array \$item) => \\$arrayParameter::make(\$item), \$data['$property'] ?? [])";
+                $arrayDefault = $isPropertyRequired ? '' : ' ?? []';
+                $assignmentValue = "array_map(static fn (array \$item) => \\$arrayParameter::make(\$item), \$data['$property']$arrayDefault)";
             } elseif (\in_array($property, $dateParameters, true)) {
                 $assignment = \sprintf("\\%s::parse(\$data['%s'])", Carbon::class, $property);
             }
 
             if (null === $assignment) {
                 $assignment = $assignmentValue;
-            } else {
+            } elseif ($constructorProperty->isNullable()) {
                 $assignment = "isset(\$data['$property']) ? $assignment : null";
             }
 

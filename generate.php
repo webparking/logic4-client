@@ -14,14 +14,12 @@ $versions = Webparking\Logic4Client\Generator\Generator::resolveVersions();
 
 $refresh = in_array('--refresh', $argv ?? [], true);
 
-$setupHasRun = false;
-
-foreach ($versions as $version) {
+foreach ($versions as $version => $url) {
     echo "Generating API namespace $version...\n";
 
     $generator = new Webparking\Logic4Client\Generator\Generator();
     $generator->setRefresh($refresh);
-    $generator->generate($version);
+    $generator->generate($version, $url);
 }
 
 echo 'API classes generated at '.now()->toDateTimeString()."...\n";

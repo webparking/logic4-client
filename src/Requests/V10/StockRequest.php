@@ -31,12 +31,12 @@ class StockRequest extends Request
      * Maak een voorraadmutatie aan.
      *
      * @param array{
-     *     TypeId?: int,
+     *     TypeId: int,
      *     LedgerId?: int|null,
      *     ProductId?: int,
      *     Amount?: number,
      *     Remarks?: string|null,
-     *     StockLocationId?: int,
+     *     StockLocationId: int,
      *     StockMutationTypeId?: int,
      * } $parameters
      *
@@ -45,7 +45,7 @@ class StockRequest extends Request
      * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Voorraadmutatie aanmaken
      */
     public function createProductStockMutation(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -63,7 +63,7 @@ class StockRequest extends Request
      *     Amount?: number,
      *     Timestamp?: string,
      *     Remarks?: string|null,
-     *     StockLocationId?: int,
+     *     StockLocationId: int,
      *     StockMutationTypeId?: int,
      * }> $parameters
      *

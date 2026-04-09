@@ -9,7 +9,7 @@ class HRMTimeRegistrationRow
     public function __construct(
         public int $userId,
         public ?int $periodId,
-        public ?\Carbon\Carbon $date,
+        public \Carbon\Carbon $date,
         public int $activityId,
         public ?int $ITSTaskId,
         public ?int $CRMProjectId,
@@ -27,15 +27,15 @@ class HRMTimeRegistrationRow
     public static function make(array $data): self
     {
         return new self(
-            userId: $data['UserId'] ?? 0,
+            userId: $data['UserId'],
             periodId: $data['PeriodId'] ?? null,
-            date: isset($data['Date']) ? \Carbon\Carbon::parse($data['Date']) : null,
-            activityId: $data['ActivityId'] ?? 0,
+            date: \Carbon\Carbon::parse($data['Date']),
+            activityId: $data['ActivityId'],
             ITSTaskId: $data['ITSTaskId'] ?? null,
             CRMProjectId: $data['CRMProjectId'] ?? null,
             ITSIssueId: $data['ITSIssueId'] ?? null,
             description: $data['Description'] ?? null,
-            minutes: $data['Minutes'] ?? 0,
+            minutes: $data['Minutes'],
             createPeriod: $data['CreatePeriod'] ?? false,
             periodeStatusId: $data['PeriodeStatusId'] ?? null,
             rowIsAddedToPeriod: $data['RowIsAddedToPeriod'] ?? false,

@@ -20,7 +20,7 @@ class EmailRequest extends Request
     /**
      * @param array{
      *     Id?: int,
-     *     EmailMessageId?: int,
+     *     EmailMessageId: int,
      *     Name?: string|null,
      *     ContentId?: string|null,
      *     IsEmbeddedContent?: bool,
@@ -28,9 +28,8 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addEmailAttachment(
-        array $parameters = [],
-    ): Int32Logic4Response {
+    public function addEmailAttachment(array $parameters): Int32Logic4Response
+    {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/AddEmailAttachment', ['json' => $parameters]),
@@ -41,7 +40,7 @@ class EmailRequest extends Request
     /**
      * @param array<array{
      *     Id?: int,
-     *     EmailMessageId?: int,
+     *     EmailMessageId: int,
      *     Name?: string|null,
      *     ContentId?: string|null,
      *     IsEmbeddedContent?: bool,
@@ -98,7 +97,7 @@ class EmailRequest extends Request
      *     IsReplyedOn?: string|null,
      *     IsForwardedOn?: string|null,
      *     Status?: array{Id?: int, Name?: string|null, Color?: int},
-     *     ToEmailAddresses?: array<array{Name?: string|null, Email?: string|null}>,
+     *     ToEmailAddresses: array<array{Name?: string|null, Email?: string|null}>,
      *     FromEmailAddress?: array{Name?: string|null, Email?: string|null},
      *     CCEmailAddresses?: array<array{Name?: string|null, Email?: string|null}>,
      *     BCCEmailAddresses?: array<array{Name?: string|null, Email?: string|null}>,
@@ -109,7 +108,7 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addEmailMessage(array $parameters = []): Int32Logic4Response
+    public function addEmailMessage(array $parameters): Int32Logic4Response
     {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -158,18 +157,17 @@ class EmailRequest extends Request
 
     /**
      * @param array{
-     *     EmailIds?: array<int>,
+     *     EmailIds: array<int>,
      *     EmailBoxId?: int|null,
      *     EmailStatusId?: int|null,
      *     IsRead?: bool|null,
-     *     Action?: string,
+     *     Action: string,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
-    public function emailMessagesAction(
-        array $parameters = [],
-    ): BooleanLogic4Response {
+    public function emailMessagesAction(array $parameters): BooleanLogic4Response
+    {
         return BooleanLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/EmailMessagesAction', ['json' => $parameters]),
@@ -179,13 +177,13 @@ class EmailRequest extends Request
 
     /**
      * @param array{
-     *     EmailMessageId?: int,
+     *     EmailMessageId: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function getEmailAttachments(
-        array $parameters = [],
+        array $parameters,
     ): EmailAttachmentLogic4ResponseList {
         return EmailAttachmentLogic4ResponseList::make(
             $this->buildResponse(
@@ -324,7 +322,7 @@ class EmailRequest extends Request
      *     IsReplyedOn?: string|null,
      *     IsForwardedOn?: string|null,
      *     Status?: array{Id?: int, Name?: string|null, Color?: int},
-     *     ToEmailAddresses?: array<array{Name?: string|null, Email?: string|null}>,
+     *     ToEmailAddresses: array<array{Name?: string|null, Email?: string|null}>,
      *     FromEmailAddress?: array{Name?: string|null, Email?: string|null},
      *     CCEmailAddresses?: array<array{Name?: string|null, Email?: string|null}>,
      *     BCCEmailAddresses?: array<array{Name?: string|null, Email?: string|null}>,
@@ -335,9 +333,8 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateEmailMessage(
-        array $parameters = [],
-    ): Int32Logic4Response {
+    public function updateEmailMessage(array $parameters): Int32Logic4Response
+    {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->put('/v1/Email/UpdateEmailMessage', ['json' => $parameters]),

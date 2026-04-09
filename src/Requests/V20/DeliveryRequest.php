@@ -20,8 +20,8 @@ class DeliveryRequest extends Request
      *     OrderStatusId?: int|null,
      *     BranchId?: int|null,
      *     WebsiteDomainId?: int|null,
-     *     SkipRecords?: int,
-     *     TakeRecords?: int,
+     *     SkipRecords: int,
+     *     TakeRecords: int,
      *     ShowAPIMovements?: bool,
      * } $parameters
      *
@@ -29,7 +29,7 @@ class DeliveryRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getDeliveries(array $parameters = []): \Generator
+    public function getDeliveries(array $parameters): \Generator
     {
         $iterator = $this->paginateRecords('/v2/Delivery/GetDeliveries', $parameters);
 

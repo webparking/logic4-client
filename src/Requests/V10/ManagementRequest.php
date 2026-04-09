@@ -17,9 +17,9 @@ class ManagementRequest extends Request
      * Verkrijg van één of meerdere artikelen verkoop gegevens zoals verkoopaantallen, over een bepaalde periode (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string,
+     *     TimeFrame: string,
      *     HistoryPoints?: int,
-     *     ProductCodes?: array<string>,
+     *     ProductCodes: array<string>,
      *     IncludingCurrentPeriod?: bool,
      *     ExcludeDebtorIds?: array<int>,
      *     WebSiteDomainsIds?: array<int>,
@@ -28,7 +28,7 @@ class ManagementRequest extends Request
      * @throws Logic4ApiException
      */
     public function getProductCollectionSalesInformation(
-        array $parameters = [],
+        array $parameters,
     ): ProductSalesInformationLogic4ResponseList {
         return ProductSalesInformationLogic4ResponseList::make(
             $this->buildResponse(
@@ -220,7 +220,7 @@ class ManagementRequest extends Request
      * Top 10 filialen (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string,
+     *     TimeFrame: string,
      *     IncludingCurrentPeriod?: bool,
      *     ExcludeDebtorIds?: array<int>,
      *     WebSiteDomainsIds?: array<int>,
@@ -229,7 +229,7 @@ class ManagementRequest extends Request
      * @throws Logic4ApiException
      */
     public function getTop10Branches(
-        array $parameters = [],
+        array $parameters,
     ): Top10ItemLogic4ResponseList {
         return Top10ItemLogic4ResponseList::make(
             $this->buildResponse(
@@ -242,7 +242,7 @@ class ManagementRequest extends Request
      * Top 10 klanten (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string,
+     *     TimeFrame: string,
      *     IncludingCurrentPeriod?: bool,
      *     ExcludeDebtorIds?: array<int>,
      *     WebSiteDomainsIds?: array<int>,
@@ -251,7 +251,7 @@ class ManagementRequest extends Request
      * @throws Logic4ApiException
      */
     public function getTop10Debtors(
-        array $parameters = [],
+        array $parameters,
     ): Top10ItemLogic4ResponseList {
         return Top10ItemLogic4ResponseList::make(
             $this->buildResponse(
@@ -264,7 +264,7 @@ class ManagementRequest extends Request
      * Top 10 productgroepen (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string,
+     *     TimeFrame: string,
      *     IncludingCurrentPeriod?: bool,
      *     ExcludeDebtorIds?: array<int>,
      *     WebSiteDomainsIds?: array<int>,
@@ -273,7 +273,7 @@ class ManagementRequest extends Request
      * @throws Logic4ApiException
      */
     public function getTop10Productgroups(
-        array $parameters = [],
+        array $parameters,
     ): Top10ItemLogic4ResponseList {
         return Top10ItemLogic4ResponseList::make(
             $this->buildResponse(
@@ -286,7 +286,7 @@ class ManagementRequest extends Request
      * Top 10 artikelen (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string,
+     *     TimeFrame: string,
      *     IncludingCurrentPeriod?: bool,
      *     ExcludeDebtorIds?: array<int>,
      *     WebSiteDomainsIds?: array<int>,
@@ -295,7 +295,7 @@ class ManagementRequest extends Request
      * @throws Logic4ApiException
      */
     public function getTop10Products(
-        array $parameters = [],
+        array $parameters,
     ): Top10ItemLogic4ResponseList {
         return Top10ItemLogic4ResponseList::make(
             $this->buildResponse(
@@ -308,7 +308,7 @@ class ManagementRequest extends Request
      * Top 10 provincies (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string,
+     *     TimeFrame: string,
      *     IncludingCurrentPeriod?: bool,
      *     ExcludeDebtorIds?: array<int>,
      *     WebSiteDomainsIds?: array<int>,
@@ -317,7 +317,7 @@ class ManagementRequest extends Request
      * @throws Logic4ApiException
      */
     public function getTop10Provinces(
-        array $parameters = [],
+        array $parameters,
     ): Top10ItemLogic4ResponseList {
         return Top10ItemLogic4ResponseList::make(
             $this->buildResponse(
@@ -330,7 +330,7 @@ class ManagementRequest extends Request
      * Top 10 medewerkers (dag/week/maand/kwartaal/jaar).
      *
      * @param array{
-     *     TimeFrame?: string,
+     *     TimeFrame: string,
      *     IncludingCurrentPeriod?: bool,
      *     ExcludeDebtorIds?: array<int>,
      *     WebSiteDomainsIds?: array<int>,
@@ -338,9 +338,8 @@ class ManagementRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getTop10Users(
-        array $parameters = [],
-    ): Top10ItemLogic4ResponseList {
+    public function getTop10Users(array $parameters): Top10ItemLogic4ResponseList
+    {
         return Top10ItemLogic4ResponseList::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Management/GetTop10Users', ['json' => $parameters]),

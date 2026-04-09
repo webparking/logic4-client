@@ -14,11 +14,14 @@ final class OrderDataTest extends TestCase
         $order = Order::make([
             'Id' => 12,
             'DebtorId' => 55,
+            'CreationDate' => '2024-01-15T10:00:00',
+            'OrderRows' => [],
         ]);
 
         static::assertSame(12, $order->id);
         static::assertSame(55, $order->debtorId);
         static::assertSame([], $order->orderRows);
         static::assertNull($order->totals);
+        static::assertSame('2024-01-15 10:00:00', $order->creationDate->toDateTimeString());
     }
 }

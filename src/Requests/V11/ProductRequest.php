@@ -32,8 +32,8 @@ class ProductRequest extends Request
 {
     /**
      * @param array{
-     *     ProductCode?: string,
-     *     ProductDescription1?: string,
+     *     ProductCode: string,
+     *     ProductDescription1: string,
      *     ProductDescription2?: string|null,
      *     BrandId?: int,
      *     ProductGroup1?: int,
@@ -44,7 +44,7 @@ class ProductRequest extends Request
      *     Suppliers?: array<array{SupplierId?: int, Supplier_ProductCode?: string|null, ProductName?: string|null, ProductCountIncrement?: int|null, ShippingTime?: int|null, MinOrderQuantity?: int|null, RepackagingUnitId?: int|null, RepackagingQty?: int|null, InternalNote?: string|null, DiscountGroupId?: int|null, ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number|null, Quantity?: int, LastSyncDate?: string}>}>,
      *     Barcode1?: string|null,
      *     Barcode2?: string|null,
-     *     ExtraBarcodes?: array<array{Barcode?: string, Quantity?: int, UnitId?: int|null}>,
+     *     ExtraBarcodes?: array<array{Barcode: string, Quantity?: int, UnitId?: int|null}>,
      *     VendorCode?: string|null,
      *     StatusId?: int,
      *     VisibleOnWebshopFrom?: string|null,
@@ -81,7 +81,7 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addProduct(array $parameters = []): Int32Logic4Response
+    public function addProduct(array $parameters): Int32Logic4Response
     {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -569,15 +569,14 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     SupplierId?: int,
-     *     ProductId?: int,
+     *     SupplierId: int,
+     *     ProductId: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
-    public function removeProductSupplier(
-        array $parameters = [],
-    ): Int32Logic4Response {
+    public function removeProductSupplier(array $parameters): Int32Logic4Response
+    {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1.1/Products/RemoveProductSupplier', ['json' => $parameters]),
@@ -589,14 +588,14 @@ class ProductRequest extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     SupplierId?: int,
-     *     ProductId?: int,
+     *     SupplierId: int,
+     *     ProductId: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function setActiveProductSupplier(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -663,9 +662,9 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     ProductId?: int,
+     *     ProductId: int,
      *     TypeId?: int|null,
-     *     Barcode?: string,
+     *     Barcode: string,
      *     Quantity?: int,
      *     UnitId?: int|null,
      * } $parameters
@@ -673,7 +672,7 @@ class ProductRequest extends Request
      * @throws Logic4ApiException
      */
     public function updateProductAddExtraBarcode(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -712,13 +711,13 @@ class ProductRequest extends Request
      * @param array{
      *     ProductGroup1Id?: int,
      *     BrandId?: int,
-     *     ProductId?: int,
+     *     ProductId: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function updateProductMainGroupAndBrand(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -732,14 +731,13 @@ class ProductRequest extends Request
      *
      * @param array{
      *     ProductPrices?: array<array{Quantity?: int, BuyPrice?: number, SellPrice?: number}>,
-     *     ProductId?: int,
+     *     ProductId: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
-    public function updateProductPrices(
-        array $parameters = [],
-    ): Int32Logic4Response {
+    public function updateProductPrices(array $parameters): Int32Logic4Response
+    {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductPrices', ['json' => $parameters]),
@@ -749,14 +747,14 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     ProductId?: int,
-     *     Barcode?: string,
+     *     ProductId: int,
+     *     Barcode: string,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function updateProductRemoveExtraBarcode(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -812,15 +810,14 @@ class ProductRequest extends Request
      *     RepackagingQty?: int|null,
      *     RepackagingUnitId?: int|null,
      *     InternalNote?: string|null,
-     *     SupplierId?: int,
-     *     ProductId?: int,
+     *     SupplierId: int,
+     *     ProductId: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
-    public function updateProductSupplier(
-        array $parameters = [],
-    ): Int32Logic4Response {
+    public function updateProductSupplier(array $parameters): Int32Logic4Response
+    {
         return Int32Logic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductSupplier', ['json' => $parameters]),
@@ -830,15 +827,15 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     ProductId?: int,
-     *     SupplierId?: int,
+     *     ProductId: int,
+     *     SupplierId: int,
      *     ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number|null, Quantity?: int, LastSyncDate?: string}>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function updateProductSupplierProductPrice(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
