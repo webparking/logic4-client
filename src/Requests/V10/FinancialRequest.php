@@ -33,11 +33,11 @@ class FinancialRequest extends Request
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string|null,
-     *     BookingDateTime?: string|null,
-     *     FinancialBookId?: int|null,
+     *     Reference?: string,
+     *     BookingDateTime?: string,
+     *     FinancialBookId?: int,
      *     JournalStatusId?: int|null,
-     *     Mutations?: array<array{CreditorId?: int|null, DebtorId?: int|null, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>|null,
+     *     Mutations?: array<array{CreditorId?: int|null, DebtorId?: int|null, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -61,11 +61,11 @@ class FinancialRequest extends Request
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string|null,
-     *     BookingDateTime?: string|null,
-     *     FinancialBookId?: int|null,
+     *     Reference?: string,
+     *     BookingDateTime?: string,
+     *     FinancialBookId?: int,
      *     JournalStatusId?: int|null,
-     *     Mutations?: array<array{VatCode?: int, LedgerId?: int, Description?: string|null, AmountIncl?: number}>|null,
+     *     Mutations?: array<array{VatCode?: int, LedgerId?: int, Description?: string|null, AmountIncl?: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -103,8 +103,8 @@ class FinancialRequest extends Request
      *     FinancialBookId?: int|null,
      *     BookingDateTimeFrom?: string|null,
      *     BookingDateTimeTo?: string|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     Reference?: string|null,
      *     UserId?: int|null,
      *     BookingNumberByUser?: int|null,
@@ -159,8 +159,8 @@ class FinancialRequest extends Request
      *     LedgerCode?: int|null,
      *     DateTimeFrom?: string|null,
      *     DateTimeTo?: string|null,
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, FinancialJournal>
@@ -304,8 +304,8 @@ class FinancialRequest extends Request
      *
      * @param array{
      *     Xml?: string|null,
-     *     BookId?: int|null,
-     *     StatusId?: int|null,
+     *     BookId?: int,
+     *     StatusId?: int,
      *     UserId?: int|null,
      *     CreditorId?: int|null,
      * } $parameters
@@ -326,8 +326,8 @@ class FinancialRequest extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     BookingId?: int|null,
-     *     StatusId?: int|null,
+     *     BookingId?: int,
+     *     StatusId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException

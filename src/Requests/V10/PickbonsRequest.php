@@ -98,7 +98,7 @@ class PickbonsRequest extends Request
      * Verkrijg pickbonnen op basis van het meegegeven filter.
      *
      * @param array{
-     *     OnlyUnprocessedItems?: bool|null,
+     *     OnlyUnprocessedItems?: bool,
      *     OrderCreatedFrom?: string|null,
      *     WarehouseZoneId?: int|null,
      *     WarehouseId?: int|null,
@@ -187,10 +187,10 @@ class PickbonsRequest extends Request
      * Verwerk een pickbon.
      *
      * @param array{
-     *     AmountOfColli?: int|null,
-     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>|null,
-     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>|null,
-     *     OrderHeadPickbonId?: int|null,
+     *     AmountOfColli?: int,
+     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>,
+     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>,
+     *     OrderHeadPickbonId?: int,
      *     InterimLocationId?: int|null,
      *     Remarks?: string|null,
      * } $parameters
@@ -210,10 +210,10 @@ class PickbonsRequest extends Request
      * Verwerk meerdere pickbonnen.
      *
      * @param array<array{
-     *     AmountOfColli?: int|null,
-     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>|null,
-     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>|null,
-     *     OrderHeadPickbonId?: int|null,
+     *     AmountOfColli?: int,
+     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>,
+     *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>,
+     *     OrderHeadPickbonId?: int,
      *     InterimLocationId?: int|null,
      *     Remarks?: string|null,
      * }> $parameters

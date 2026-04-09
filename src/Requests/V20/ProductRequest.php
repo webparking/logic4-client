@@ -16,7 +16,7 @@ class ProductRequest extends Request
      * Verkrijg de afmetingen van meerdere artikelen.
      *
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -33,7 +33,7 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -50,9 +50,9 @@ class ProductRequest extends Request
 
     /**
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
-     *     ProductIds?: array<int>|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     ProductIds?: array<int>,
      *     WebsiteDomainId?: int|null,
      *     GlobalizationId?: int|null,
      *     ProductId?: int|null,

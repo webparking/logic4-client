@@ -16,8 +16,8 @@ class BuyOrderRequest extends Request
      * <strong>Let op:</strong> het kan zijn dat niet alle inkoopregels van een bepaalde order worden opgehaald, doordat de uitvoer wordt gelimiteerd via de Skip- en TakeRecords.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     ProductId?: int|null,
      *     ProductCode?: string|null,
      *     BuyOrderStatusId?: int|null,
@@ -44,8 +44,8 @@ class BuyOrderRequest extends Request
      * TakeRecords wordt gelimiteerd op 10.000.
      *
      * @param array{
-     *     SkipRecords?: int|null,
-     *     TakeRecords?: int|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     DateTimeChangedFrom?: string|null,
      *     DateTimeChangedTo?: string|null,
      *     BranchId?: int|null,

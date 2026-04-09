@@ -61,7 +61,7 @@ class ProductTemplateRequest extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     VisibleOnWebsite?: bool|null,
      *     Skip?: int|null,
      *     Take?: int|null,
@@ -82,7 +82,7 @@ class ProductTemplateRequest extends Request
 
     /**
      * @param array{
-     *     ProductIds?: array<int>|null,
+     *     ProductIds?: array<int>,
      *     VisibleOnWebsite?: bool|null,
      *     Skip?: int|null,
      *     Take?: int|null,
@@ -105,8 +105,8 @@ class ProductTemplateRequest extends Request
 
     /**
      * @param array{
-     *     TemplatePropertyId?: int|null,
-     *     PropertyValuesPerProduct?: array<array{ProductId?: int, Values?: array<string>|null}>|null,
+     *     TemplatePropertyId?: int,
+     *     PropertyValuesPerProduct?: array<array{ProductId?: int, Values?: array<string>}>,
      * } $parameters
      *
      * @throws Logic4ApiException
