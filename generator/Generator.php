@@ -13,8 +13,8 @@ use Webparking\Logic4Client\Enums\PaginateType;
 
 class Generator
 {
-    public static string $swaggerUrl = 'https://api.logic4server.nl/swagger/index.js';
-    public string $remoteApi = 'https://api.logic4server.nl/swagger/%s/swagger.json';
+    public static string $scalarUrl = 'https://api.logic4server.nl/scalar/';
+    public static string $baseUrl = 'https://api.logic4server.nl/';
     public string $localApi = __DIR__.'/../logic4-api-%s.json';
 
     public string $baseDirectory = __DIR__.'/../src/';
@@ -36,28 +36,36 @@ class Generator
         }
     }
 
-    /** @return array<string> */
+    /** @return array<string, string> version => url */
     public static function resolveVersions(): array
     {
-        $contents = file_get_contents(self::$swaggerUrl);
+        $contents = file_get_contents(self::$scalarUrl);
 
         Assert::string($contents, 'Could not fetch API documentation');
 
-        preg_match('/configObject = JSON.parse\(\'(.*)\'\);/', $contents, $matches);
+        preg_match('/initialize\([^,]+,\s*\w+,\s*(\{.+\})\s*,\s*\'/s', $contents, $matches);
 
-        $versions = json_decode($matches[1], true, 512, \JSON_THROW_ON_ERROR);
+        Assert::keyExists($matches, 1, 'Could not find Scalar configuration');
 
-        Assert::keyExists($versions, 'urls', 'Could not find API versions');
+        $config = json_decode($matches[1], true, 512, \JSON_THROW_ON_ERROR);
 
-        return array_diff(
-            array_map(static fn ($version) => explode('/', $version['url'], 2)[0], $versions['urls']),
-            ['latest'],
-        );
+        Assert::keyExists($config, 'sources', 'Could not find API sources');
+
+        $versions = [];
+        foreach ($config['sources'] as $source) {
+            if (preg_match('/Version v(\d+\.\d+)/', $source['title'], $versionMatch)
+                && !str_starts_with($versionMatch[1], '3.')
+            ) {
+                $versions[$versionMatch[1]] = self::$baseUrl.$source['url'];
+            }
+        }
+
+        return $versions;
     }
 
-    public function generate(string $version): void
+    public function generate(string $version, string $remoteUrl): void
     {
-        $localFile = $this->downloadApiDocumentation($version);
+        $localFile = $this->downloadApiDocumentation($version, $remoteUrl);
 
         $openapi = Reader::readFromJsonFile($localFile, resolveReferences: false);
 
@@ -96,17 +104,16 @@ class Generator
         }
     }
 
-    public function downloadApiDocumentation(string $version): string
+    public function downloadApiDocumentation(string $version, string $remoteUrl): string
     {
         $localFile = \sprintf($this->localApi, $this->getVersion($version));
-        $remoteFile = \sprintf($this->remoteApi, $version);
 
         if ($this->refresh && is_file($localFile)) {
             unlink($localFile);
         }
 
         if (!is_file($localFile)) {
-            file_put_contents($localFile, file_get_contents($remoteFile));
+            file_put_contents($localFile, file_get_contents($remoteUrl));
         }
 
         return $localFile;
