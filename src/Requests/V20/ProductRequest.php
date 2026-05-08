@@ -16,13 +16,13 @@ class ProductRequest extends Request
      * Verkrijg de afmetingen van meerdere artikelen.
      *
      * @param array{
-     *     ProductIds?: array<int>,
+     *     ProductIds: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function getProductDimensions(
-        array $parameters = [],
+        array $parameters,
     ): ProductDimensionsLogic4ResponseList {
         return ProductDimensionsLogic4ResponseList::make(
             $this->buildResponse(

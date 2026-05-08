@@ -202,15 +202,15 @@ class RelationsRequest extends Request
      * Crediteur externe identifier toevoegen of updaten.
      *
      * @param array{
-     *     CreditorId?: int,
-     *     TypeId?: int,
+     *     CreditorId: int,
+     *     TypeId: int,
      *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function addUpdateCreditorThirdPartyExternalIdentifier(
-        array $parameters = [],
+        array $parameters,
     ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
@@ -280,15 +280,15 @@ class RelationsRequest extends Request
      * Debiteur externe identifier toevoegen of updaten.
      *
      * @param array{
-     *     DebtorId?: int,
-     *     TypeId?: int,
+     *     DebtorId: int,
+     *     TypeId: int,
      *     Value?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function addUpdateCustomerThirdPartyExternalIdentifier(
-        array $parameters = [],
+        array $parameters,
     ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(

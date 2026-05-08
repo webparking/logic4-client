@@ -62,8 +62,10 @@ class Helpers
             }
         } elseif ('object' === $property->type) {
             $properties = [];
+            $requiredProps = $property->required ?? [];
             foreach ($property->properties as $parameterName => $propertyValue) {
-                $properties[] = \sprintf('%s?: %s', $parameterName, self::resolveParameterType($propertyValue));
+                $separator = \in_array($parameterName, $requiredProps, true) ? ':' : '?:';
+                $properties[] = \sprintf('%s%s %s', $parameterName, $separator, self::resolveParameterType($propertyValue));
             }
 
             $type = \sprintf('array{%s}', implode(', ', $properties));
@@ -76,10 +78,11 @@ class Helpers
 
     /**
      * @param Reference[]|Schema[] $properties
+     * @param string[]             $required
      *
      * @return array<mixed>
      */
-    public static function makePhpDoc(array $properties, string $format): array
+    public static function makePhpDoc(array $properties, string $format, array $required = []): array
     {
         $parameters = [];
         foreach ($properties as $name => $property) {
@@ -88,7 +91,8 @@ class Helpers
             }
 
             if ($property instanceof Schema) {
-                $parameters[] = \sprintf($format, \sprintf('%s?: %s', $name, self::resolveParameterType($property)));
+                $separator = \in_array($name, $required, true) ? ':' : '?:';
+                $parameters[] = \sprintf($format, \sprintf('%s%s %s', $name, $separator, self::resolveParameterType($property)));
             }
         }
 

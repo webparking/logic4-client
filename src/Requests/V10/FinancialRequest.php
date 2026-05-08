@@ -33,11 +33,11 @@ class FinancialRequest extends Request
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string,
-     *     BookingDateTime?: string,
-     *     FinancialBookId?: int,
+     *     Reference: string,
+     *     BookingDateTime: string,
+     *     FinancialBookId: int,
      *     JournalStatusId?: int|null,
-     *     Mutations?: array<array{CreditorId?: int|null, DebtorId?: int|null, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>,
+     *     Mutations: array<array{CreditorId?: int|null, DebtorId?: int|null, BookingDateTime: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -45,7 +45,7 @@ class FinancialRequest extends Request
      * @deprecated Let op! Versie 1.0 is verouderd. Gebruik een nieuwere versie. - Financiële dagboekboeking met mutaties aanmaken
      */
     public function addFinancialBookingWithMutations(
-        array $parameters = [],
+        array $parameters,
     ): BooleanLogic4Response {
         return BooleanLogic4Response::make(
             $this->buildResponse(
@@ -61,17 +61,17 @@ class FinancialRequest extends Request
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string,
-     *     BookingDateTime?: string,
-     *     FinancialBookId?: int,
+     *     Reference: string,
+     *     BookingDateTime: string,
+     *     FinancialBookId: int,
      *     JournalStatusId?: int|null,
-     *     Mutations?: array<array{VatCode?: int, LedgerId?: int, Description?: string|null, AmountIncl?: number}>,
+     *     Mutations: array<array{VatCode: int, LedgerId: int, Description?: string|null, AmountIncl: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function addFinancialGeneralBookingWithMutations(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -326,14 +326,14 @@ class FinancialRequest extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     BookingId?: int,
-     *     StatusId?: int,
+     *     BookingId: int,
+     *     StatusId: int,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function updateFinancialBookingStatus(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(

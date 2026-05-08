@@ -36,7 +36,7 @@ class ProductStockMutation
             productId: $data['ProductId'] ?? 0,
             amount: $data['Amount'] ?? 0.0,
             remarks: $data['Remarks'] ?? null,
-            stockLocationId: $data['StockLocationId'] ?? 0,
+            stockLocationId: $data['StockLocationId'],
             stockMutationTypeId: $data['StockMutationTypeId'] ?? 0,
         );
     }

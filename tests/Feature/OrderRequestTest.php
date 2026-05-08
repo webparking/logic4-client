@@ -66,6 +66,8 @@ final class OrderRequestTest extends TestCase
                         [
                             'DebtorId' => 51,
                             'Id' => 9912,
+                            'CreationDate' => '2024-03-01T12:00:00',
+                            'OrderRows' => [],
                         ],
                     ],
                     'RecordsCounter' => 1,

@@ -20,7 +20,7 @@ class EmailAttachment
     {
         return new self(
             id: $data['Id'] ?? 0,
-            emailMessageId: $data['EmailMessageId'] ?? 0,
+            emailMessageId: $data['EmailMessageId'],
             name: $data['Name'] ?? null,
             contentId: $data['ContentId'] ?? null,
             isEmbeddedContent: $data['IsEmbeddedContent'] ?? false,

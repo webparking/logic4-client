@@ -14,22 +14,22 @@ class FinancialRequest extends Request
      * Maak een financiele inkoop dagboekboeking met mutaties aan.
      *
      * @param array{
-     *     Description?: string,
+     *     Description: string,
      *     FinancialCostCenterId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string,
-     *     BookingDateTime?: string,
-     *     FinancialBookId?: int,
+     *     Reference: string,
+     *     BookingDateTime: string,
+     *     FinancialBookId: int,
      *     JournalStatusId?: int|null,
-     *     Mutations?: array<array{CreditorId?: int, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>,
+     *     Mutations: array<array{CreditorId: int, BookingDateTime: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function addFinancialBuyBookingWithMutations(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(
@@ -42,22 +42,22 @@ class FinancialRequest extends Request
      * Maak een financiele verkoop dagboekboeking met mutaties aan.
      *
      * @param array{
-     *     Description?: string,
+     *     Description: string,
      *     FinancialCostCenterId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string,
-     *     BookingDateTime?: string,
-     *     FinancialBookId?: int,
+     *     Reference: string,
+     *     BookingDateTime: string,
+     *     FinancialBookId: int,
      *     JournalStatusId?: int|null,
-     *     Mutations?: array<array{DebtorId?: int, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>,
+     *     Mutations: array<array{DebtorId: int, BookingDateTime: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function addFinancialSaleBookingWithMutations(
-        array $parameters = [],
+        array $parameters,
     ): Int32Logic4Response {
         return Int32Logic4Response::make(
             $this->buildResponse(

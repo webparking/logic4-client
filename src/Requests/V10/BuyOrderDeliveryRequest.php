@@ -25,14 +25,14 @@ class BuyOrderDeliveryRequest extends Request
      *     Remarks?: string|null,
      *     Description?: string|null,
      *     BranchId?: int|null,
-     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>,
+     *     Rows: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>,
      *     PickingListNumber?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function createBuyOrderDelivery(
-        array $parameters = [],
+        array $parameters,
     ): StringLogic4Response {
         return StringLogic4Response::make(
             $this->buildResponse(
@@ -54,14 +54,14 @@ class BuyOrderDeliveryRequest extends Request
      *     Remarks?: string|null,
      *     Description?: string|null,
      *     BranchId?: int|null,
-     *     Rows?: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>,
+     *     Rows: array<array{BuyOrderRowId?: int|null, BuyPrice?: number|null, DebtorName?: string|null, OrderId?: int|null, ProductId?: int, Qty_Delivered?: number, Remarks?: string|null, StockLocationId?: int|null, AmountOfLabelsToPrint?: int|null}>,
      *     PickingListNumber?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function createBuyOrderDeliveryAndOrderMovement(
-        array $parameters = [],
+        array $parameters,
     ): BuyOrderDeliveryAndOrderMovementLogic4Response {
         return BuyOrderDeliveryAndOrderMovementLogic4Response::make(
             $this->buildResponse(
