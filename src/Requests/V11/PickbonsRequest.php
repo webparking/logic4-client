@@ -7,12 +7,14 @@ namespace Webparking\Logic4Client\Requests\V11;
 use Webparking\Logic4Client\Data\V11\OrderHeadPickbon;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V11\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\StringLogic4Response;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfint;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseOfstring;
 
 class PickbonsRequest extends Request
 {
     /**
+     * Maak nieuwe pickbon(nen) aan voor een gehele order op het moment dat de 'nog te leveren' regels volledig gepickt kunnen worden.
+     *
      * @param array{
      *     OrderId?: int,
      *     UseNewWorkflow?: bool,
@@ -22,8 +24,8 @@ class PickbonsRequest extends Request
      */
     public function createCompletePickbonForOrder(
         array $parameters = [],
-    ): Int32Logic4ResponseList {
-        return Int32Logic4ResponseList::make(
+    ): Logic4ResponseListOfint {
+        return Logic4ResponseListOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Pickbons/CreateCompletePickbonForOrder', ['json' => $parameters]),
             )
@@ -65,8 +67,8 @@ class PickbonsRequest extends Request
      */
     public function postSoftBlockPickbons(
         array $parameters = [],
-    ): StringLogic4Response {
-        return StringLogic4Response::make(
+    ): Logic4ResponseOfstring {
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Pickbons/PostSoftBlockPickbons', ['json' => $parameters]),
             )
@@ -78,7 +80,7 @@ class PickbonsRequest extends Request
      *
      * @param array<array{
      *     AmountOfColli?: int,
-     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>,
+     *     Corrections?: array<array{}>,
      *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>,
      *     OrderHeadPickbonId?: int,
      *     InterimLocationId?: int|null,
@@ -87,9 +89,10 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function processPickbons(array $parameters = []): StringLogic4Response
-    {
-        return StringLogic4Response::make(
+    public function processPickbons(
+        array $parameters = [],
+    ): Logic4ResponseOfstring {
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Pickbons/ProcessPickbons', ['json' => $parameters]),
             )

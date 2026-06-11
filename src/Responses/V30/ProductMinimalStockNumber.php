@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Webparking\Logic4Client\Responses\V30;
+
+class ProductMinimalStockNumber
+{
+    /** @param array<\Webparking\Logic4Client\Data\V30\WarehouseMinimalStockNumber> $minimalStockWarehouses */
+    public function __construct(
+        public int $productId,
+        public ?int $minimalStockForAdministrationLevel,
+        public ?int $minimalStockProductLevel,
+        public ?array $minimalStockWarehouses,
+    ) {
+    }
+
+    /** @param array<mixed> $data */
+    public static function make(array $data): self
+    {
+        return new self(
+            productId: $data['ProductId'] ?? 0,
+            minimalStockForAdministrationLevel: $data['MinimalStockForAdministrationLevel'] ?? null,
+            minimalStockProductLevel: $data['MinimalStockProductLevel'] ?? null,
+            minimalStockWarehouses: array_map(static fn (array $item) => \Webparking\Logic4Client\Data\V30\WarehouseMinimalStockNumber::make($item), $data['MinimalStockWarehouses'] ?? []),
+        );
+    }
+}

@@ -6,12 +6,12 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\CRMActivityLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CRMActivityStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CRMActivityTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CRMProjectLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CRMProjectStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CRMProjectTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCRMActivity;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCRMActivityStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCRMActivityType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCRMProject;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCRMProjectStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCRMProjectType;
 
 class CRMRequest extends Request
 {
@@ -38,13 +38,11 @@ class CRMRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - CRM activiteiten o.b.v. filter
      */
     public function getCRMActivities(
         array $parameters = [],
-    ): CRMActivityLogic4ResponseList {
-        return CRMActivityLogic4ResponseList::make(
+    ): Logic4ResponseListOfCRMActivity {
+        return Logic4ResponseListOfCRMActivity::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/CRM/GetCRMActivities', ['json' => $parameters]),
             )
@@ -56,9 +54,9 @@ class CRMRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCRMActivityStatusses(): CRMActivityStatusLogic4ResponseList
-    {
-        return CRMActivityStatusLogic4ResponseList::make(
+    public function getCRMActivityStatusses(
+    ): Logic4ResponseListOfCRMActivityStatus {
+        return Logic4ResponseListOfCRMActivityStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/CRM/GetCRMActivityStatusses'),
             )
@@ -70,9 +68,9 @@ class CRMRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCRMActivityTypes(): CRMActivityTypeLogic4ResponseList
+    public function getCRMActivityTypes(): Logic4ResponseListOfCRMActivityType
     {
-        return CRMActivityTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfCRMActivityType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/CRM/GetCRMActivityTypes'),
             )
@@ -97,8 +95,8 @@ class CRMRequest extends Request
      */
     public function getCRMProjects(
         array $parameters = [],
-    ): CRMProjectLogic4ResponseList {
-        return CRMProjectLogic4ResponseList::make(
+    ): Logic4ResponseListOfCRMProject {
+        return Logic4ResponseListOfCRMProject::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/CRM/GetCRMProjects', ['json' => $parameters]),
             )
@@ -110,9 +108,9 @@ class CRMRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCRMProjectStatusses(): CRMProjectStatusLogic4ResponseList
+    public function getCRMProjectStatusses(): Logic4ResponseListOfCRMProjectStatus
     {
-        return CRMProjectStatusLogic4ResponseList::make(
+        return Logic4ResponseListOfCRMProjectStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/CRM/GetCRMProjectStatusses'),
             )
@@ -124,9 +122,9 @@ class CRMRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCRMProjectTypes(): CRMProjectTypeLogic4ResponseList
+    public function getCRMProjectTypes(): Logic4ResponseListOfCRMProjectType
     {
-        return CRMProjectTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfCRMProjectType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/CRM/GetCRMProjectTypes'),
             )
@@ -138,9 +136,9 @@ class CRMRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCRMProjectTypes2(): CRMProjectTypeLogic4ResponseList
+    public function getCRMProjectTypes2(): Logic4ResponseListOfCRMProjectType
     {
-        return CRMProjectTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfCRMProjectType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/CRM/GetCRMProjectTypes2'),
             )

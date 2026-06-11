@@ -9,7 +9,7 @@ class ContactCharacteristic
     public function __construct(
         public int $contactId,
         public ?int $debtorId,
-        public string $contactType,
+        public ?ContactTypeEnum $contactType,
         public ?string $relationCharacteristic,
     ) {
     }
@@ -20,7 +20,7 @@ class ContactCharacteristic
         return new self(
             contactId: $data['ContactId'] ?? 0,
             debtorId: $data['DebtorId'] ?? null,
-            contactType: $data['ContactType'] ?? '',
+            contactType: isset($data['ContactType']) ? ContactTypeEnum::make($data['ContactType']) : null,
             relationCharacteristic: $data['RelationCharacteristic'] ?? null,
         );
     }

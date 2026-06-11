@@ -7,17 +7,19 @@ namespace Webparking\Logic4Client\Requests\V10;
 use Webparking\Logic4Client\Data\V10\EmailMessage;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\EmailAddressLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\EmailAttachmentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\EmailBoxLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\EmailMessageStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\EmailUserLogic4Response;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfEmailAddress;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfEmailAttachment;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfEmailBox;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfEmailMessageStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfEmailUser;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfint;
 
 class EmailRequest extends Request
 {
     /**
+     * Voeg een nieuwe bijlage toe aan een email zonder de byte array.
+     *
      * @param array{
      *     Id?: int,
      *     EmailMessageId?: int,
@@ -30,8 +32,8 @@ class EmailRequest extends Request
      */
     public function addEmailAttachment(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/AddEmailAttachment', ['json' => $parameters]),
             )
@@ -39,6 +41,8 @@ class EmailRequest extends Request
     }
 
     /**
+     * Voeg een nieuwe bijlages toe aan een email zonder de byte array.
+     *
      * @param array<array{
      *     Id?: int,
      *     EmailMessageId?: int,
@@ -51,8 +55,8 @@ class EmailRequest extends Request
      */
     public function addEmailAttachments(
         array $parameters = [],
-    ): EmailAttachmentLogic4ResponseList {
-        return EmailAttachmentLogic4ResponseList::make(
+    ): Logic4ResponseListOfEmailAttachment {
+        return Logic4ResponseListOfEmailAttachment::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/AddEmailAttachments', ['json' => $parameters]),
             )
@@ -76,9 +80,9 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addEmailBox(array $parameters = []): BooleanLogic4Response
+    public function addEmailBox(array $parameters = []): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/AddEmailBox', ['json' => $parameters]),
             )
@@ -86,6 +90,8 @@ class EmailRequest extends Request
     }
 
     /**
+     * Voeg een nieuwe email toe in de conceptenmap van de gebruiker.
+     *
      * @param array{
      *     Id?: int,
      *     Subject?: string|null,
@@ -109,9 +115,9 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addEmailMessage(array $parameters = []): Int32Logic4Response
+    public function addEmailMessage(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/AddEmailMessage', ['json' => $parameters]),
             )
@@ -119,11 +125,13 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verwijder een emailbijlage o.b.v. email-attachment Id.
+     *
      * @throws Logic4ApiException
      */
-    public function deleteEmailAttachment(int $value): BooleanLogic4Response
+    public function deleteEmailAttachment(int $value): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/DeleteEmailAttachment', ['json' => $value]),
             )
@@ -135,9 +143,9 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteEmailBox(int $value): BooleanLogic4Response
+    public function deleteEmailBox(int $value): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/DeleteEmailBox', ['json' => $value]),
             )
@@ -145,11 +153,13 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verwijder een email.
+     *
      * @throws Logic4ApiException
      */
-    public function deleteEmailMessage(int $value): BooleanLogic4Response
+    public function deleteEmailMessage(int $value): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/DeleteEmailMessage', ['json' => $value]),
             )
@@ -157,20 +167,22 @@ class EmailRequest extends Request
     }
 
     /**
+     * Update minimale gegevens van een email.
+     *
      * @param array{
      *     EmailIds?: array<int>,
      *     EmailBoxId?: int|null,
      *     EmailStatusId?: int|null,
      *     IsRead?: bool|null,
-     *     Action?: string,
+     *     Action?: mixed,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function emailMessagesAction(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/EmailMessagesAction', ['json' => $parameters]),
             )
@@ -178,6 +190,8 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verkrijg emailbijlagen van een emailmessage.
+     *
      * @param array{
      *     EmailMessageId?: int,
      * } $parameters
@@ -186,8 +200,8 @@ class EmailRequest extends Request
      */
     public function getEmailAttachments(
         array $parameters = [],
-    ): EmailAttachmentLogic4ResponseList {
-        return EmailAttachmentLogic4ResponseList::make(
+    ): Logic4ResponseListOfEmailAttachment {
+        return Logic4ResponseListOfEmailAttachment::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/GetEmailAttachments', ['json' => $parameters]),
             )
@@ -195,6 +209,8 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verkrijg emailboxen o.b.v. meegestuurde user Id.
+     *
      * @param array{
      *     ParentId?: int|null,
      *     ShowOnlyTopLevelEmailboxes?: bool|null,
@@ -204,8 +220,8 @@ class EmailRequest extends Request
      */
     public function getEmailBoxes(
         array $parameters = [],
-    ): EmailBoxLogic4ResponseList {
-        return EmailBoxLogic4ResponseList::make(
+    ): Logic4ResponseListOfEmailBox {
+        return Logic4ResponseListOfEmailBox::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/GetEmailBoxes', ['json' => $parameters]),
             )
@@ -213,6 +229,8 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verkrijg emailmessages o.b.v. het meegestuurde filter.
+     *
      * @param array{
      *     EmailId?: int|null,
      *     EmailboxId?: int|null,
@@ -251,11 +269,13 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verkrijg emailberichten statussen.
+     *
      * @throws Logic4ApiException
      */
     public function getEmailMessageStatuses(
-    ): EmailMessageStatusLogic4ResponseList {
-        return EmailMessageStatusLogic4ResponseList::make(
+    ): Logic4ResponseListOfEmailMessageStatus {
+        return Logic4ResponseListOfEmailMessageStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Email/GetEmailMessageStatuses'),
             )
@@ -263,11 +283,13 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verkrijg een emailuser o.b.v. meegestuurde user Id.
+     *
      * @throws Logic4ApiException
      */
-    public function getEmailUser(): EmailUserLogic4Response
+    public function getEmailUser(): Logic4ResponseOfEmailUser
     {
-        return EmailUserLogic4Response::make(
+        return Logic4ResponseOfEmailUser::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Email/GetEmailUser'),
             )
@@ -275,11 +297,13 @@ class EmailRequest extends Request
     }
 
     /**
+     * Verkrijg email-snelkeuzes.
+     *
      * @throws Logic4ApiException
      */
-    public function getUsedEmailAddresses(): EmailAddressLogic4ResponseList
+    public function getUsedEmailAddresses(): Logic4ResponseListOfEmailAddress
     {
-        return EmailAddressLogic4ResponseList::make(
+        return Logic4ResponseListOfEmailAddress::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Email/GetUsedEmailAddresses'),
             )
@@ -302,9 +326,10 @@ class EmailRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateEmailBox(array $parameters = []): BooleanLogic4Response
-    {
-        return BooleanLogic4Response::make(
+    public function updateEmailBox(
+        array $parameters = [],
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Email/UpdateEmailBox', ['json' => $parameters]),
             )
@@ -312,6 +337,8 @@ class EmailRequest extends Request
     }
 
     /**
+     * Update een bestaande email.
+     *
      * @param array{
      *     Id?: int,
      *     Subject?: string|null,
@@ -337,8 +364,8 @@ class EmailRequest extends Request
      */
     public function updateEmailMessage(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->put('/v1/Email/UpdateEmailMessage', ['json' => $parameters]),
             )

@@ -6,9 +6,9 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\OrderShipmentLogic4Response;
-use Webparking\Logic4Client\Responses\V10\OrderShipmentLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderShipment;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfOrderShipment;
 
 class ShipmentRequest extends Request
 {
@@ -27,8 +27,8 @@ class ShipmentRequest extends Request
      */
     public function addShipmentForInvoiceOrOrder(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Shipments/AddShipmentForInvoiceOrOrder', ['json' => $parameters]),
             )
@@ -37,7 +37,7 @@ class ShipmentRequest extends Request
 
     /**
      * Verzending toevoegen aan een order of factuur. De nieuw aangemaakte verzending wordt teruggegeven als response.
-     * Indien de optie 'SendEmail' 'True' is word deze shipment opgepakt door T&T verwerk service in de desktop applicatie
+     * Indien de optie 'SendEmail' 'True' is word deze shipment opgepakt door T&amp;T verwerk service in de desktop applicatie
      * voor het verzenden van een email.
      *
      * @param array{
@@ -53,8 +53,8 @@ class ShipmentRequest extends Request
      */
     public function addShipmentForInvoiceOrOrderWithEmailing(
         array $parameters = [],
-    ): OrderShipmentLogic4Response {
-        return OrderShipmentLogic4Response::make(
+    ): Logic4ResponseOfOrderShipment {
+        return Logic4ResponseOfOrderShipment::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Shipments/AddShipmentForInvoiceOrOrderWithEmailing', ['json' => $parameters]),
             )
@@ -68,8 +68,8 @@ class ShipmentRequest extends Request
      */
     public function deleteShipmentForInvoiceOrOrder(
         int $id,
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1/Shipments/DeleteShipmentForInvoiceOrOrder', ['query' => ['id' => $id]]),
             )
@@ -83,8 +83,8 @@ class ShipmentRequest extends Request
      */
     public function getShipmentsForInvoiceOrOrder(
         int $value,
-    ): OrderShipmentLogic4ResponseList {
-        return OrderShipmentLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrderShipment {
+        return Logic4ResponseListOfOrderShipment::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Shipments/GetShipmentsForInvoiceOrOrder', ['json' => $value]),
             )

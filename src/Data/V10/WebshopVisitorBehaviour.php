@@ -14,7 +14,7 @@ class WebshopVisitorBehaviour
         public ?int $composedProductParentId,
         public ?float $qtyDec,
         public ?string $commission,
-        public string $webshopUserProductListType,
+        public ?WebsiteProductListType $webshopUserProductListType,
         public ?int $debtorId,
         public ?int $websiteDomainId,
     ) {
@@ -31,7 +31,7 @@ class WebshopVisitorBehaviour
             composedProductParentId: $data['ComposedProductParentId'] ?? null,
             qtyDec: $data['QtyDec'] ?? null,
             commission: $data['Commission'] ?? null,
-            webshopUserProductListType: $data['WebshopUserProductListType'] ?? '',
+            webshopUserProductListType: isset($data['WebshopUserProductListType']) ? WebsiteProductListType::make($data['WebshopUserProductListType']) : null,
             debtorId: $data['DebtorId'] ?? null,
             websiteDomainId: $data['WebsiteDomainId'] ?? null,
         );

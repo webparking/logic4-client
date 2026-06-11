@@ -7,20 +7,20 @@ namespace Webparking\Logic4Client\Requests\V10;
 use Webparking\Logic4Client\Data\V10\AssemblyAction;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\InvoiceOpenPaymentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderActionLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderActionTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4Response;
-use Webparking\Logic4Client\Responses\V10\OrderOpenPaymentLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderRowV11Logic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ReturnCategoryLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ReturnProblemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ReturnSolutionLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfint;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfInvoiceOpenPayment;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrder;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderAction;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderActionType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderOpenPayment;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderRowV11;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfReturnCategory;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfReturnProblem;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfReturnSolution;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfint;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfOrderOpenPayment;
 
 class OrderRequest extends Request
 {
@@ -34,8 +34,8 @@ class OrderRequest extends Request
      */
     public function addOrderRowSerialNumbers(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/AddOrderRowSerialNumbers', ['json' => $parameters]),
             )
@@ -49,7 +49,7 @@ class OrderRequest extends Request
      *     OrderId?: int|null,
      *     InvoiceId?: int|null,
      *     AmountIncl?: number,
-     *     Description?: string,
+     *     Description?: string|null,
      *     BookingId?: int,
      *     MatchingLedgerId?: int,
      *     DateTime?: string|null,
@@ -58,9 +58,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addPayment(array $parameters = []): BooleanLogic4Response
+    public function addPayment(array $parameters = []): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/AddPayment', ['json' => $parameters]),
             )
@@ -73,7 +73,6 @@ class OrderRequest extends Request
      * Bij het succesvol aanmaken/updaten wordt het (nieuwe) factuurnummer in de response gevuld.
      *
      * @param array{
-     *     CheckForOrderCostAndPaymentRegulation?: bool,
      *     DebtorId?: int|null,
      *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: int|null, TypeId?: int|null, Value?: string|null},
      *     Id?: int|null,
@@ -114,12 +113,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.3. - Factuur toevoegen of updaten
      */
-    public function addUpdateInvoice(array $parameters = []): Int32Logic4Response
+    public function addUpdateInvoice(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/AddUpdateInvoice', ['json' => $parameters]),
             )
@@ -132,7 +129,6 @@ class OrderRequest extends Request
      * Bij het succesvol aanmaken/updaten wordt het (nieuwe) ordernummer in de response gevuld.
      *
      * @param array{
-     *     CheckForOrderCostAndPaymentRegulation?: bool,
      *     DebtorId?: int|null,
      *     CustomerThirdPartyExternalIdentifer?: array{DebtorId?: int|null, TypeId?: int|null, Value?: string|null},
      *     Id?: int|null,
@@ -173,12 +169,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.3. - Order toevoegen of updaten
      */
-    public function addUpdateOrder(array $parameters = []): Int32Logic4Response
+    public function addUpdateOrder(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/AddUpdateOrder', ['json' => $parameters]),
             )
@@ -229,12 +223,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Update gegevens van een orderregel
      */
-    public function addUpdateOrderRow(array $parameters = []): Int32Logic4Response
+    public function addUpdateOrderRow(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/AddUpdateOrderRow', ['json' => $parameters]),
             )
@@ -249,8 +241,8 @@ class OrderRequest extends Request
      */
     public function createAndProcessInvoiceForOrder(
         int $value,
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/CreateAndProcessInvoiceForOrder', ['json' => $value]),
             )
@@ -266,7 +258,7 @@ class OrderRequest extends Request
      *     Totals?: array{AmountEx?: number, VATPercentage?: number, Calc_TotalPayed?: number|null, AmountIncl?: number, IsPaid?: bool, ShippingCost?: number, ShippingCostIncl?: number|null},
      *     OriginalOrderId?: int,
      *     OriginalOrderDate?: string,
-     *     OriginalOrderZipCode?: string,
+     *     OriginalOrderZipCode?: string|null,
      *     ProblemId?: int,
      *     SolutionId?: int,
      *     ReceivedReturnOrderDate?: string|null,
@@ -311,12 +303,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Retourorders toevoegen
      */
-    public function createReturnOrder(array $parameters = []): Int32Logic4Response
+    public function createReturnOrder(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/CreateReturnOrder', ['json' => $parameters]),
             )
@@ -355,9 +345,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getAssemblyActionsTypes(): OrderActionTypeLogic4ResponseList
+    public function getAssemblyActionsTypes(): Logic4ResponseListOfOrderActionType
     {
-        return OrderActionTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfOrderActionType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetAssemblyActionsTypes'),
             )
@@ -366,7 +356,7 @@ class OrderRequest extends Request
 
     /**
      * Verkrijg factuurregels o.b.v. het meegestuurde filter.
-     *
+     * <br />
      * Levert maximaal 10.000 regels.
      *
      * @param array{
@@ -382,8 +372,8 @@ class OrderRequest extends Request
      */
     public function getInvoiceRows(
         array $parameters = [],
-    ): OrderRowV11Logic4ResponseList {
-        return OrderRowV11Logic4ResponseList::make(
+    ): Logic4ResponseListOfOrderRowV11 {
+        return Logic4ResponseListOfOrderRowV11::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetInvoiceRows', ['json' => $parameters]),
             )
@@ -424,12 +414,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.2. - Facturen ophalen
      */
-    public function getInvoices(array $parameters = []): OrderLogic4ResponseList
+    public function getInvoices(array $parameters = []): Logic4ResponseListOfOrder
     {
-        return OrderLogic4ResponseList::make(
+        return Logic4ResponseListOfOrder::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetInvoices', ['json' => $parameters]),
             )
@@ -450,8 +438,8 @@ class OrderRequest extends Request
      */
     public function getOpenPaymentInvoices(
         array $parameters = [],
-    ): InvoiceOpenPaymentLogic4ResponseList {
-        return InvoiceOpenPaymentLogic4ResponseList::make(
+    ): Logic4ResponseListOfInvoiceOpenPayment {
+        return Logic4ResponseListOfInvoiceOpenPayment::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOpenPaymentInvoices', ['json' => $parameters]),
             )
@@ -462,7 +450,7 @@ class OrderRequest extends Request
      * Verkrijg het nog te betalen bedrag van nog niet uitgeleverde orders.
      *
      * @param array{
-     *     TimeFrame?: string|null,
+     *     TimeFrame?: mixed,
      *     HistoryPoints?: int|null,
      *     OrderstatusIds?: array<int>,
      *     WebsiteDomainIds?: array<int>,
@@ -472,13 +460,11 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Openstaande bedragen niet uitgeleverde orders ophalen
      */
     public function getOpenPaymentOrders(
         array $parameters = [],
-    ): OrderOpenPaymentLogic4ResponseList {
-        return OrderOpenPaymentLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrderOpenPayment {
+        return Logic4ResponseListOfOrderOpenPayment::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOpenPaymentOrders', ['json' => $parameters]),
             )
@@ -489,7 +475,7 @@ class OrderRequest extends Request
      * Verkrijg het nog te betalen bedrag van nog niet uitgeleverde orders in totalen.
      *
      * @param array{
-     *     TimeFrame?: string|null,
+     *     TimeFrame?: mixed,
      *     HistoryPoints?: int|null,
      *     OrderstatusIds?: array<int>,
      *     WebsiteDomainIds?: array<int>,
@@ -502,8 +488,8 @@ class OrderRequest extends Request
      */
     public function getOpenPaymentOrdersTotals(
         array $parameters = [],
-    ): OrderOpenPaymentLogic4Response {
-        return OrderOpenPaymentLogic4Response::make(
+    ): Logic4ResponseOfOrderOpenPayment {
+        return Logic4ResponseOfOrderOpenPayment::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOpenPaymentOrdersTotals', ['json' => $parameters]),
             )
@@ -524,8 +510,8 @@ class OrderRequest extends Request
      */
     public function getOrderActions(
         array $parameters = [],
-    ): OrderActionLogic4ResponseList {
-        return OrderActionLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrderAction {
+        return Logic4ResponseListOfOrderAction::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOrderActions', ['json' => $parameters]),
             )
@@ -537,9 +523,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getOrderActionsTypes(): OrderActionTypeLogic4ResponseList
+    public function getOrderActionsTypes(): Logic4ResponseListOfOrderActionType
     {
-        return OrderActionTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfOrderActionType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetOrderActionsTypes'),
             )
@@ -562,9 +548,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getOrderIds(array $parameters = []): Int32Logic4ResponseList
+    public function getOrderIds(array $parameters = []): Logic4ResponseListOfint
     {
-        return Int32Logic4ResponseList::make(
+        return Logic4ResponseListOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOrderIds', ['json' => $parameters]),
             )
@@ -573,7 +559,7 @@ class OrderRequest extends Request
 
     /**
      * Verkrijg ordersregels o.b.v. het meegestuurde filter.
-     *
+     * <br />
      * Levert maximaal 10.000 regels.
      *
      * @param array{
@@ -589,8 +575,8 @@ class OrderRequest extends Request
      */
     public function getOrderRows(
         array $parameters = [],
-    ): OrderRowV11Logic4ResponseList {
-        return OrderRowV11Logic4ResponseList::make(
+    ): Logic4ResponseListOfOrderRowV11 {
+        return Logic4ResponseListOfOrderRowV11::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOrderRows', ['json' => $parameters]),
             )
@@ -631,12 +617,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.3. - Orders ophalen
      */
-    public function getOrders(array $parameters = []): OrderLogic4ResponseList
+    public function getOrders(array $parameters = []): Logic4ResponseListOfOrder
     {
-        return OrderLogic4ResponseList::make(
+        return Logic4ResponseListOfOrder::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetOrders', ['json' => $parameters]),
             )
@@ -648,9 +632,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getOrderStatuses(): OrderStatusLogic4ResponseList
+    public function getOrderStatuses(): Logic4ResponseListOfOrderStatus
     {
-        return OrderStatusLogic4ResponseList::make(
+        return Logic4ResponseListOfOrderStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetOrderStatuses'),
             )
@@ -662,9 +646,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getReturnCategories(): ReturnCategoryLogic4ResponseList
+    public function getReturnCategories(): Logic4ResponseListOfReturnCategory
     {
-        return ReturnCategoryLogic4ResponseList::make(
+        return Logic4ResponseListOfReturnCategory::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetReturnCategories'),
             )
@@ -709,13 +693,11 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Retourorders ophalen
      */
     public function getReturnOrders(
         array $parameters = [],
-    ): OrderLogic4ResponseList {
-        return OrderLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrder {
+        return Logic4ResponseListOfOrder::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/GetReturnOrders', ['json' => $parameters]),
             )
@@ -726,12 +708,10 @@ class OrderRequest extends Request
      * Verkrijg alle order retourproblemen.
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Order retourproblemen
      */
-    public function getReturnProblems(): ReturnProblemLogic4ResponseList
+    public function getReturnProblems(): Logic4ResponseListOfReturnProblem
     {
-        return ReturnProblemLogic4ResponseList::make(
+        return Logic4ResponseListOfReturnProblem::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetReturnProblems'),
             )
@@ -742,24 +722,20 @@ class OrderRequest extends Request
      * Verkrijg alle order retouroplossingen.
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Order retouroplossingen
      */
-    public function getReturnSolutions(): ReturnSolutionLogic4ResponseList
+    public function getReturnSolutions(): Logic4ResponseListOfReturnSolution
     {
-        return ReturnSolutionLogic4ResponseList::make(
+        return Logic4ResponseListOfReturnSolution::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetReturnSolutions'),
             )
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getSerialnumberTypes(): OrderLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getSerialnumberTypes(): Logic4ResponseListOfOrder
     {
-        return OrderLogic4ResponseList::make(
+        return Logic4ResponseListOfOrder::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Orders/GetSerialnumberTypes'),
             )
@@ -773,9 +749,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function processInvoice(int $value): Int32Logic4Response
+    public function processInvoice(int $value): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/ProcessInvoice', ['json' => $value]),
             )
@@ -783,7 +759,9 @@ class OrderRequest extends Request
     }
 
     /**
-     * Email wordt standaard niet verstuurd als de debuteur of de betaalmethode facturen via email uit heeft staan.
+     * Verstuur een electrische factuur via email.
+     * Email wordt standaard niet verstuurd als de debiteur of de betaalmethode facturen via email uit heeft staan.
+     * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
      *     InvoiceId?: int,
@@ -795,8 +773,8 @@ class OrderRequest extends Request
      */
     public function sendEmailForInvoice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/SendEmailForInvoice', ['json' => $parameters]),
             )
@@ -815,8 +793,8 @@ class OrderRequest extends Request
      */
     public function updateAgreedDeliveryDatesForOrderRows(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/UpdateAgreedDeliveryDatesForOrderRows', ['json' => $parameters]),
             )
@@ -833,13 +811,11 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Contactadres wijzigen van een order of factuur
      */
     public function updateContactAddressForOrderOrInvoice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/UpdateContactAddressForOrderOrInvoice', ['json' => $parameters]),
             )
@@ -856,13 +832,11 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Afleveradres wijzigen van een order of factuur
      */
     public function updateDeliveryAddressForOrderOrInvoice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/UpdateDeliveryAddressForOrderOrInvoice', ['json' => $parameters]),
             )
@@ -879,13 +853,11 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Factuuradres wijzigen van een order of factuur
      */
     public function updateInvoiceAddressForOrderOrInvoice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/UpdateInvoiceAddressForOrderOrInvoice', ['json' => $parameters]),
             )
@@ -904,8 +876,8 @@ class OrderRequest extends Request
      */
     public function updateOrderStatus(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Orders/UpdateOrderStatus', ['json' => $parameters]),
             )

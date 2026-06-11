@@ -7,7 +7,7 @@ namespace Webparking\Logic4Client\Requests\V12;
 use Webparking\Logic4Client\Data\V12\Order;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V12\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V12\Logic4ResponseOfint;
 
 class OrderRequest extends Request
 {
@@ -59,12 +59,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.2 is verouderd. Gebruik versie v1.3. - Order toevoegen of updaten
      */
-    public function addUpdateOrder(array $parameters = []): Int32Logic4Response
+    public function addUpdateOrder(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.2/Orders/AddUpdateOrder', ['json' => $parameters]),
             )

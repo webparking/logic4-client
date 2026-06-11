@@ -96,6 +96,9 @@ class ProductV11
         public ?array $tags,
         public ?int $defaultPickLocation,
         public ?int $defaultBulkLocation,
+        public bool $hidePricesOnWebsite,
+        public bool $showOfferButtonOnWebsite,
+        public bool $hideStartingPricesOnWebsite,
     ) {
     }
 
@@ -183,6 +186,9 @@ class ProductV11
             tags: $data['Tags'] ?? null,
             defaultPickLocation: $data['DefaultPickLocation'] ?? null,
             defaultBulkLocation: $data['DefaultBulkLocation'] ?? null,
+            hidePricesOnWebsite: $data['HidePricesOnWebsite'] ?? false,
+            showOfferButtonOnWebsite: $data['ShowOfferButtonOnWebsite'] ?? false,
+            hideStartingPricesOnWebsite: $data['HideStartingPricesOnWebsite'] ?? false,
         );
     }
 }

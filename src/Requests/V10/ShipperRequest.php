@@ -6,9 +6,9 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\DeliveryOptionLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ShipperTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ShippingMethodLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfDeliveryOption;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfShipperType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfShippingMethod;
 
 class ShipperRequest extends Request
 {
@@ -25,8 +25,8 @@ class ShipperRequest extends Request
      */
     public function getDeliveryOptions(
         array $parameters = [],
-    ): DeliveryOptionLogic4ResponseList {
-        return DeliveryOptionLogic4ResponseList::make(
+    ): Logic4ResponseListOfDeliveryOption {
+        return Logic4ResponseListOfDeliveryOption::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Shippers/GetDeliveryOptions', ['json' => $parameters]),
             )
@@ -38,9 +38,9 @@ class ShipperRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getShipperTypes(): ShipperTypeLogic4ResponseList
+    public function getShipperTypes(): Logic4ResponseListOfShipperType
     {
-        return ShipperTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfShipperType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Shippers/GetShipperTypes'),
             )
@@ -52,9 +52,9 @@ class ShipperRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getShippingMethods(): ShippingMethodLogic4ResponseList
+    public function getShippingMethods(): Logic4ResponseListOfShippingMethod
     {
-        return ShippingMethodLogic4ResponseList::make(
+        return Logic4ResponseListOfShippingMethod::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Shippers/GetShippingMethods'),
             )

@@ -23,7 +23,7 @@ class EmailMessage
         public ?\Carbon\Carbon $isReplyedOn,
         public ?\Carbon\Carbon $isForwardedOn,
         public ?EmailMessageStatus $status,
-        public array $toEmailAddresses,
+        public ?array $toEmailAddresses,
         public ?EmailAddress $fromEmailAddress,
         public ?array $CCEmailAddresses,
         public ?array $BCCEmailAddresses,

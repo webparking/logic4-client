@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\ApiUserLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfApiUser;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfstring;
 
 class UserRequest extends Request
 {
@@ -16,9 +16,9 @@ class UserRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getAllUsers(): ApiUserLogic4ResponseList
+    public function getAllUsers(): Logic4ResponseListOfApiUser
     {
-        return ApiUserLogic4ResponseList::make(
+        return Logic4ResponseListOfApiUser::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/User/GetAllUsers'),
             )
@@ -30,9 +30,9 @@ class UserRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getNotice(): StringLogic4Response
+    public function getNotice(): Logic4ResponseOfstring
     {
-        return StringLogic4Response::make(
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/User/GetNotice'),
             )
@@ -44,9 +44,9 @@ class UserRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateNotice(mixed $value): StringLogic4Response
+    public function updateNotice(mixed $value): Logic4ResponseOfstring
     {
-        return StringLogic4Response::make(
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/User/UpdateNotice', ['json' => $value]),
             )

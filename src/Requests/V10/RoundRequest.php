@@ -8,11 +8,11 @@ use Webparking\Logic4Client\Data\V10\GetRound;
 use Webparking\Logic4Client\Data\V10\GetRoundOrder;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V10\TypeRoundOrderStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\TypeRoundStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\VehicleLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfTypeRoundOrderStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfTypeRoundStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfVehicle;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfint;
 
 class RoundRequest extends Request
 {
@@ -33,9 +33,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addRound(array $parameters = []): Int32Logic4Response
+    public function addRound(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Round/AddRound', ['json' => $parameters]),
             )
@@ -59,9 +59,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addRoundOrder(array $parameters = []): Int32Logic4Response
+    public function addRoundOrder(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Round/AddRoundOrder', ['json' => $parameters]),
             )
@@ -73,9 +73,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteRound(int $roundId): BooleanLogic4Response
+    public function deleteRound(int $roundId): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1/Round/DeleteRound', ['query' => ['roundId' => $roundId]]),
             )
@@ -87,9 +87,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function deleteRoundOrder(int $roundOrderId): BooleanLogic4Response
+    public function deleteRoundOrder(int $roundOrderId): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1/Round/DeleteRoundOrder', ['query' => ['roundOrderId' => $roundOrderId]]),
             )
@@ -128,8 +128,8 @@ class RoundRequest extends Request
      * @throws Logic4ApiException
      */
     public function getRoundOrderStatuses(
-    ): TypeRoundOrderStatusLogic4ResponseList {
-        return TypeRoundOrderStatusLogic4ResponseList::make(
+    ): Logic4ResponseListOfTypeRoundOrderStatus {
+        return Logic4ResponseListOfTypeRoundOrderStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Round/GetRoundOrderStatuses'),
             )
@@ -170,9 +170,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getRoundStatuses(): TypeRoundStatusLogic4ResponseList
+    public function getRoundStatuses(): Logic4ResponseListOfTypeRoundStatus
     {
-        return TypeRoundStatusLogic4ResponseList::make(
+        return Logic4ResponseListOfTypeRoundStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Round/GetRoundStatuses'),
             )
@@ -184,9 +184,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getVehicles(): VehicleLogic4ResponseList
+    public function getVehicles(): Logic4ResponseListOfVehicle
     {
-        return VehicleLogic4ResponseList::make(
+        return Logic4ResponseListOfVehicle::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Round/GetVehicles'),
             )
@@ -213,9 +213,9 @@ class RoundRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateRound(array $parameters = []): BooleanLogic4Response
+    public function updateRound(array $parameters = []): Logic4ResponseOfboolean
     {
-        return BooleanLogic4Response::make(
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Round/UpdateRound', ['json' => $parameters]),
             )
@@ -239,8 +239,8 @@ class RoundRequest extends Request
      */
     public function updateRoundOrder(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Round/UpdateRoundOrder', ['json' => $parameters]),
             )

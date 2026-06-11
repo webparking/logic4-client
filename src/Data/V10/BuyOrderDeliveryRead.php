@@ -18,7 +18,7 @@ class BuyOrderDeliveryRead
         public ?string $remarks,
         public ?string $description,
         public ?int $branchId,
-        public array $rows,
+        public ?array $rows,
         public ?string $pickingListNumber,
     ) {
     }

@@ -6,13 +6,13 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderHeadPickbonLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OrderHeadPickbonRowLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\PickbonSoftBlockedLogic4Response;
-use Webparking\Logic4Client\Responses\V10\PickbonSoftBlockedLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
-use Webparking\Logic4Client\Responses\V10\WarehouseZoneLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfint;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderHeadPickbon;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOrderHeadPickbonRow;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfPickbonSoftBlocked;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfWarehouseZone;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfPickbonSoftBlocked;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfstring;
 
 class PickbonsRequest extends Request
 {
@@ -20,13 +20,11 @@ class PickbonsRequest extends Request
      * Maak nieuwe pickbon(nen) aan voor een gehele order op het moment dat de 'nog te leveren' regels volledig gepickt kunnen worden.
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Maak nieuwe pickbon(nen) aan wanneer de 'nog te leveren' regels volledig gepickt kunnen worden
      */
     public function createCompletePickbonForOrder(
         int $value,
-    ): Int32Logic4ResponseList {
-        return Int32Logic4ResponseList::make(
+    ): Logic4ResponseListOfint {
+        return Logic4ResponseListOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/CreateCompletePickbonForOrder', ['json' => $value]),
             )
@@ -38,9 +36,9 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function createPickbonForOrder(int $value): Int32Logic4ResponseList
+    public function createPickbonForOrder(int $value): Logic4ResponseListOfint
     {
-        return Int32Logic4ResponseList::make(
+        return Logic4ResponseListOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/CreatePickbonForOrder', ['json' => $value]),
             )
@@ -54,8 +52,8 @@ class PickbonsRequest extends Request
      */
     public function getIsPickbonSoftBlocked(
         int $value,
-    ): PickbonSoftBlockedLogic4Response {
-        return PickbonSoftBlockedLogic4Response::make(
+    ): Logic4ResponseOfPickbonSoftBlocked {
+        return Logic4ResponseOfPickbonSoftBlocked::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/GetIsPickbonSoftBlocked', ['json' => $value]),
             )
@@ -69,8 +67,8 @@ class PickbonsRequest extends Request
      */
     public function getOrderHeadPickbonRows(
         int $value,
-    ): OrderHeadPickbonRowLogic4ResponseList {
-        return OrderHeadPickbonRowLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrderHeadPickbonRow {
+        return Logic4ResponseListOfOrderHeadPickbonRow::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/GetOrderHeadPickbonRows', ['json' => $value]),
             )
@@ -86,8 +84,8 @@ class PickbonsRequest extends Request
      */
     public function getOrderHeadPickbonRowsForMultiplePickbons(
         array $parameters = [],
-    ): OrderHeadPickbonRowLogic4ResponseList {
-        return OrderHeadPickbonRowLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrderHeadPickbonRow {
+        return Logic4ResponseListOfOrderHeadPickbonRow::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/GetOrderHeadPickbonRowsForMultiplePickbons', ['json' => $parameters]),
             )
@@ -106,13 +104,11 @@ class PickbonsRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Verkrijg pickbonnen op basis van het meegegeven filter
      */
     public function getOrderHeadPickbons(
         array $parameters = [],
-    ): OrderHeadPickbonLogic4ResponseList {
-        return OrderHeadPickbonLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrderHeadPickbon {
+        return Logic4ResponseListOfOrderHeadPickbon::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/GetOrderHeadPickbons', ['json' => $parameters]),
             )
@@ -128,8 +124,8 @@ class PickbonsRequest extends Request
      */
     public function getPickbonsAreSoftBlocked(
         array $parameters = [],
-    ): PickbonSoftBlockedLogic4ResponseList {
-        return PickbonSoftBlockedLogic4ResponseList::make(
+    ): Logic4ResponseListOfPickbonSoftBlocked {
+        return Logic4ResponseListOfPickbonSoftBlocked::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/GetPickbonsAreSoftBlocked', ['json' => $parameters]),
             )
@@ -141,9 +137,9 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getWarehouseZones(): WarehouseZoneLogic4ResponseList
+    public function getWarehouseZones(): Logic4ResponseListOfWarehouseZone
     {
-        return WarehouseZoneLogic4ResponseList::make(
+        return Logic4ResponseListOfWarehouseZone::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Pickbons/GetWarehouseZones'),
             )
@@ -155,9 +151,9 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function postSoftBlockPickbon(int $value): StringLogic4Response
+    public function postSoftBlockPickbon(int $value): Logic4ResponseOfstring
     {
-        return StringLogic4Response::make(
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/PostSoftBlockPickbon', ['json' => $value]),
             )
@@ -170,13 +166,11 @@ class PickbonsRequest extends Request
      * @param array<int> $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Soft-block meerdere pickbonnen
      */
     public function postSoftBlockPickbons(
         array $parameters = [],
-    ): StringLogic4Response {
-        return StringLogic4Response::make(
+    ): Logic4ResponseOfstring {
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/PostSoftBlockPickbons', ['json' => $parameters]),
             )
@@ -188,7 +182,7 @@ class PickbonsRequest extends Request
      *
      * @param array{
      *     AmountOfColli?: int,
-     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>,
+     *     Corrections?: array<array{}>,
      *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>,
      *     OrderHeadPickbonId?: int,
      *     InterimLocationId?: int|null,
@@ -197,9 +191,9 @@ class PickbonsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function processPickbon(array $parameters = []): StringLogic4Response
+    public function processPickbon(array $parameters = []): Logic4ResponseOfstring
     {
-        return StringLogic4Response::make(
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/ProcessPickbon', ['json' => $parameters]),
             )
@@ -211,7 +205,7 @@ class PickbonsRequest extends Request
      *
      * @param array<array{
      *     AmountOfColli?: int,
-     *     Corrections?: array<array{OrderRowId?: int, OrderHeadPickbonId?: int, Qty?: number}>,
+     *     Corrections?: array<array{}>,
      *     Mutations?: array<array{OrderHeadPickbonRowId?: int, WarehouseStockLocationId?: int, MutationAmount?: number}>,
      *     OrderHeadPickbonId?: int,
      *     InterimLocationId?: int|null,
@@ -219,12 +213,11 @@ class PickbonsRequest extends Request
      * }> $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Verwerk meerdere pickbonnen
      */
-    public function processPickbons(array $parameters = []): StringLogic4Response
-    {
-        return StringLogic4Response::make(
+    public function processPickbons(
+        array $parameters = [],
+    ): Logic4ResponseOfstring {
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Pickbons/ProcessPickbons', ['json' => $parameters]),
             )

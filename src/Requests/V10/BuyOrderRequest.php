@@ -6,11 +6,11 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\BuyOrderBaseInfoLogic4Response;
-use Webparking\Logic4Client\Responses\V10\BuyOrderBaseInfoLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\BuyOrderRowLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfBuyOrderBaseInfo;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfBuyOrderRow;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfBuyOrderBaseInfo;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfDictionaryOfintAndListOfProductBuyOrderDeliveryRow;
 
 class BuyOrderRequest extends Request
 {
@@ -34,9 +34,10 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addBuyOrderRow(array $parameters = []): BooleanLogic4Response
-    {
-        return BooleanLogic4Response::make(
+    public function addBuyOrderRow(
+        array $parameters = [],
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/AddBuyOrderRow', ['json' => $parameters]),
             )
@@ -70,13 +71,11 @@ class BuyOrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik een nieuwere versie. - Inkooporderregel aanmaken of updaten
      */
     public function addUpdateBuyOrderRow(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/AddUpdateBuyOrderRow', ['json' => $parameters]),
             )
@@ -103,8 +102,8 @@ class BuyOrderRequest extends Request
      */
     public function createBuyOrder(
         array $parameters = [],
-    ): BuyOrderBaseInfoLogic4Response {
-        return BuyOrderBaseInfoLogic4Response::make(
+    ): Logic4ResponseOfBuyOrderBaseInfo {
+        return Logic4ResponseOfBuyOrderBaseInfo::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/CreateBuyOrder', ['json' => $parameters]),
             )
@@ -116,9 +115,9 @@ class BuyOrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getBuyOrderRows(int $value): BuyOrderRowLogic4ResponseList
+    public function getBuyOrderRows(int $value): Logic4ResponseListOfBuyOrderRow
     {
-        return BuyOrderRowLogic4ResponseList::make(
+        return Logic4ResponseListOfBuyOrderRow::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/GetBuyOrderRows', ['json' => $value]),
             )
@@ -138,13 +137,11 @@ class BuyOrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Inkoopordersregels ophalen o.b.v. filter
      */
     public function getBuyOrderRowsByFilter(
         array $parameters = [],
-    ): BuyOrderRowLogic4ResponseList {
-        return BuyOrderRowLogic4ResponseList::make(
+    ): Logic4ResponseListOfBuyOrderRow {
+        return Logic4ResponseListOfBuyOrderRow::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/GetBuyOrderRowsByFilter', ['json' => $parameters]),
             )
@@ -164,8 +161,8 @@ class BuyOrderRequest extends Request
      */
     public function getBuyOrderRowsPerProduct(
         array $parameters = [],
-    ): Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response {
-        return Int32ProductBuyOrderDeliveryRowListDictionaryLogic4Response::make(
+    ): Logic4ResponseOfDictionaryOfintAndListOfProductBuyOrderDeliveryRow {
+        return Logic4ResponseOfDictionaryOfintAndListOfProductBuyOrderDeliveryRow::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/GetBuyOrderRowsPerProduct', ['json' => $parameters]),
             )
@@ -190,13 +187,11 @@ class BuyOrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Inkooporders ophalen o.b.v. filter.
      */
     public function getBuyOrders(
         array $parameters = [],
-    ): BuyOrderBaseInfoLogic4ResponseList {
-        return BuyOrderBaseInfoLogic4ResponseList::make(
+    ): Logic4ResponseListOfBuyOrderBaseInfo {
+        return Logic4ResponseListOfBuyOrderBaseInfo::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/GetBuyOrders', ['json' => $parameters]),
             )
@@ -207,7 +202,7 @@ class BuyOrderRequest extends Request
      * Wijzig een bestaande inkooporder.
      *
      * @param array{
-     *     Id?: int,
+     *     Id?: int|null,
      *     CreditorId?: int,
      *     Remarks?: string|null,
      *     BranchId?: int|null,
@@ -219,8 +214,8 @@ class BuyOrderRequest extends Request
      */
     public function updateBuyOrder(
         array $parameters = [],
-    ): BuyOrderBaseInfoLogic4Response {
-        return BuyOrderBaseInfoLogic4Response::make(
+    ): Logic4ResponseOfBuyOrderBaseInfo {
+        return Logic4ResponseOfBuyOrderBaseInfo::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/BuyOrders/UpdateBuyOrder', ['json' => $parameters]),
             )
@@ -249,8 +244,8 @@ class BuyOrderRequest extends Request
      */
     public function updateBuyOrderRow(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1/BuyOrders/UpdateBuyOrderRow', ['json' => $parameters]),
             )

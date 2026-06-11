@@ -7,70 +7,60 @@ namespace Webparking\Logic4Client\Requests\V10;
 use Webparking\Logic4Client\Data\V10\ITSIssue;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\ITSFreeValueLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ITSIssueGroupLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ITSIssueLevelLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ITSIssueStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ITSIssueTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ITSProjectLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ITSTaskPriorityLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfITSFreeValue;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfITSIssueGroup;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfITSIssueLevel;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfITSIssueStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfITSIssueType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfITSProject;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfITSTaskPriority;
 
 class ITSRequest extends Request
 {
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getFreeValues1(): ITSFreeValueLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getFreeValues1(): Logic4ResponseListOfITSFreeValue
     {
-        return ITSFreeValueLogic4ResponseList::make(
+        return Logic4ResponseListOfITSFreeValue::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetFreeValues1'),
             )
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getFreeValues2(): ITSFreeValueLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getFreeValues2(): Logic4ResponseListOfITSFreeValue
     {
-        return ITSFreeValueLogic4ResponseList::make(
+        return Logic4ResponseListOfITSFreeValue::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetFreeValues2'),
             )
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getFreeValues3(): ITSFreeValueLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getFreeValues3(): Logic4ResponseListOfITSFreeValue
     {
-        return ITSFreeValueLogic4ResponseList::make(
+        return Logic4ResponseListOfITSFreeValue::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetFreeValues3'),
             )
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getIssueGroups(): ITSIssueGroupLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getIssueGroups(): Logic4ResponseListOfITSIssueGroup
     {
-        return ITSIssueGroupLogic4ResponseList::make(
+        return Logic4ResponseListOfITSIssueGroup::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetIssueGroups'),
             )
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getIssueLevels(): ITSIssueLevelLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getIssueLevels(): Logic4ResponseListOfITSIssueLevel
     {
-        return ITSIssueLevelLogic4ResponseList::make(
+        return Logic4ResponseListOfITSIssueLevel::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetIssueLevels'),
             )
@@ -103,8 +93,6 @@ class ITSRequest extends Request
      * @return \Generator<array-key, ITSIssue>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - ITS issues ophalen o.b.v. filter
      */
     public function getIssues(array $parameters = []): \Generator
     {
@@ -115,24 +103,20 @@ class ITSRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getIssueStatusses(): ITSIssueStatusLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getIssueStatusses(): Logic4ResponseListOfITSIssueStatus
     {
-        return ITSIssueStatusLogic4ResponseList::make(
+        return Logic4ResponseListOfITSIssueStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetIssueStatusses'),
             )
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getIssueTypes(): ITSIssueTypeLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getIssueTypes(): Logic4ResponseListOfITSIssueType
     {
-        return ITSIssueTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfITSIssueType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetIssueTypes'),
             )
@@ -144,21 +128,19 @@ class ITSRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getProjects(): ITSProjectLogic4ResponseList
+    public function getProjects(): Logic4ResponseListOfITSProject
     {
-        return ITSProjectLogic4ResponseList::make(
+        return Logic4ResponseListOfITSProject::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetProjects'),
             )
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
-    public function getTaskPriorities(): ITSTaskPriorityLogic4ResponseList
+    /** @throws Logic4ApiException */
+    public function getTaskPriorities(): Logic4ResponseListOfITSTaskPriority
     {
-        return ITSTaskPriorityLogic4ResponseList::make(
+        return Logic4ResponseListOfITSTaskPriority::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ITS/GetTaskPriorities'),
             )

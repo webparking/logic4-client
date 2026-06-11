@@ -7,17 +7,17 @@ namespace Webparking\Logic4Client\Requests\V10;
 use Webparking\Logic4Client\Data\V10\WebshopVisitorBehaviour;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\DecimalNullableLogic4Response;
-use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductShiftPriceLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductV11WebshopUserProductLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ShippingMethodLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\WebshopOrderlistProductLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\WebshopSearchWordLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\WebshopUserLogic4Response;
-use Webparking\Logic4Client\Responses\V10\WebshopUserProductTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\WebshopUserTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfPaymentMethod;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductShiftPrice;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfShippingMethod;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfWebshopOrderlistProduct;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfWebshopSearchWord;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfWebshopUserProductOfProductV11;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfWebshopUserProductType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfWebshopUserType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfdecimal;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfWebshopUser;
 
 class WebshopRequest extends Request
 {
@@ -26,7 +26,7 @@ class WebshopRequest extends Request
      *
      * @param array{
      *     VisitorCode?: string|null,
-     *     WebshopUserProductListType?: string,
+     *     WebshopUserProductListType?: mixed,
      *     WebshopPricelistId?: int|null,
      *     GetHighestShiftPrice?: bool|null,
      *     CountryIdForSellPrice?: int|null,
@@ -41,8 +41,8 @@ class WebshopRequest extends Request
      */
     public function deleteWebshopUserProductList(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/DeleteWebshopUserProductList', ['json' => $parameters]),
             )
@@ -56,8 +56,8 @@ class WebshopRequest extends Request
      */
     public function deleteWebshopUserProductOnWebshopUserProductList(
         int $value,
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/DeleteWebshopUserProductOnWebshopUserProductList', ['json' => $value]),
             )
@@ -65,12 +65,13 @@ class WebshopRequest extends Request
     }
 
     /**
+     * Verkrijg webshopgebruikergedrag o.b.v. diverse filters (zie eindpunt /Webshop/GetWebshopUserProductListTypes voor de beschikbare types).
      * Wanneer het type "LastViewed" is geselecteerd, houd er dan rekening mee dat alleen de laatste 8 bekeken artikelen worden opgeslagen.
      * Wanneer een samengesteld artikel tot de collectie behoort, wordt alleen dit moederartikel in de aangegeven hoeveelheid getoond;
      * de aantallen kindartikelen zijn altijd in verhouding tot 1 moederartikel.
      *
      * @param array{
-     *     WebshopUserProductListType?: string,
+     *     WebshopUserProductListType?: mixed,
      *     WebsiteDomainId?: int|null,
      *     DebtorId?: int|null,
      *     FromCreatedDateTime?: string|null,
@@ -107,8 +108,8 @@ class WebshopRequest extends Request
      */
     public function getWebshopCheckOutPaymentMethods(
         array $parameters = [],
-    ): PaymentMethodLogic4ResponseList {
-        return PaymentMethodLogic4ResponseList::make(
+    ): Logic4ResponseListOfPaymentMethod {
+        return Logic4ResponseListOfPaymentMethod::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopCheckOutPaymentMethods', ['json' => $parameters]),
             )
@@ -137,8 +138,8 @@ class WebshopRequest extends Request
      */
     public function getWebshopCheckOutShippingMethods(
         array $parameters = [],
-    ): ShippingMethodLogic4ResponseList {
-        return ShippingMethodLogic4ResponseList::make(
+    ): Logic4ResponseListOfShippingMethod {
+        return Logic4ResponseListOfShippingMethod::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopCheckOutShippingMethods', ['json' => $parameters]),
             )
@@ -159,8 +160,8 @@ class WebshopRequest extends Request
      */
     public function getWebshopProductShiftPrices(
         array $parameters = [],
-    ): ProductShiftPriceLogic4ResponseList {
-        return ProductShiftPriceLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductShiftPrice {
+        return Logic4ResponseListOfProductShiftPrice::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopProductShiftPrices', ['json' => $parameters]),
             )
@@ -179,13 +180,11 @@ class WebshopRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Webshop zoekresultaten
      */
     public function getWebshopSearchWords(
         array $parameters = [],
-    ): WebshopSearchWordLogic4ResponseList {
-        return WebshopSearchWordLogic4ResponseList::make(
+    ): Logic4ResponseListOfWebshopSearchWord {
+        return Logic4ResponseListOfWebshopSearchWord::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopSearchWords', ['json' => $parameters]),
             )
@@ -204,8 +203,8 @@ class WebshopRequest extends Request
      */
     public function getWebshopUser(
         array $parameters = [],
-    ): WebshopUserLogic4Response {
-        return WebshopUserLogic4Response::make(
+    ): Logic4ResponseOfWebshopUser {
+        return Logic4ResponseOfWebshopUser::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopUser', ['json' => $parameters]),
             )
@@ -224,8 +223,8 @@ class WebshopRequest extends Request
      */
     public function getWebshopUserAvailableBudget(
         array $parameters = [],
-    ): DecimalNullableLogic4Response {
-        return DecimalNullableLogic4Response::make(
+    ): Logic4ResponseOfdecimal {
+        return Logic4ResponseOfdecimal::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopUserAvailableBudget', ['json' => $parameters]),
             )
@@ -236,8 +235,8 @@ class WebshopRequest extends Request
      * Verkrijg webshopgebruiker o.b.v. meegestuurde credentials.
      *
      * @param array{
-     *     UserName?: string,
-     *     Password?: string,
+     *     UserName?: string|null,
+     *     Password?: string|null,
      *     WebsiteDomainId?: int|null,
      *     IgnorePasswordCheck?: bool,
      * } $parameters
@@ -246,8 +245,8 @@ class WebshopRequest extends Request
      */
     public function getWebshopUserByLogin(
         array $parameters = [],
-    ): WebshopUserLogic4Response {
-        return WebshopUserLogic4Response::make(
+    ): Logic4ResponseOfWebshopUser {
+        return Logic4ResponseOfWebshopUser::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopUserByLogin', ['json' => $parameters]),
             )
@@ -264,13 +263,11 @@ class WebshopRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Bestellijsten
      */
     public function getWebshopUserOrderlist(
         array $parameters = [],
-    ): WebshopOrderlistProductLogic4ResponseList {
-        return WebshopOrderlistProductLogic4ResponseList::make(
+    ): Logic4ResponseListOfWebshopOrderlistProduct {
+        return Logic4ResponseListOfWebshopOrderlistProduct::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopUserOrderlist', ['json' => $parameters]),
             )
@@ -283,8 +280,8 @@ class WebshopRequest extends Request
      * @throws Logic4ApiException
      */
     public function getWebshopUserOrderlistProductTypes(
-    ): WebshopUserProductTypeLogic4ResponseList {
-        return WebshopUserProductTypeLogic4ResponseList::make(
+    ): Logic4ResponseListOfWebshopUserProductType {
+        return Logic4ResponseListOfWebshopUserProductType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Webshop/GetWebshopUserOrderlistProductTypes'),
             )
@@ -296,7 +293,7 @@ class WebshopRequest extends Request
      *
      * @param array{
      *     VisitorCode?: string|null,
-     *     WebshopUserProductListType?: string,
+     *     WebshopUserProductListType?: mixed,
      *     WebshopPricelistId?: int|null,
      *     GetHighestShiftPrice?: bool|null,
      *     CountryIdForSellPrice?: int|null,
@@ -308,13 +305,11 @@ class WebshopRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Verkrijg een WebshopUserProductlijst
      */
     public function getWebshopUserProductList(
         array $parameters = [],
-    ): ProductV11WebshopUserProductLogic4ResponseList {
-        return ProductV11WebshopUserProductLogic4ResponseList::make(
+    ): Logic4ResponseListOfWebshopUserProductOfProductV11 {
+        return Logic4ResponseListOfWebshopUserProductOfProductV11::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Webshop/GetWebshopUserProductList', ['json' => $parameters]),
             )
@@ -327,8 +322,8 @@ class WebshopRequest extends Request
      * @throws Logic4ApiException
      */
     public function getWebshopUserProductListTypes(
-    ): WebshopUserProductTypeLogic4ResponseList {
-        return WebshopUserProductTypeLogic4ResponseList::make(
+    ): Logic4ResponseListOfWebshopUserProductType {
+        return Logic4ResponseListOfWebshopUserProductType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Webshop/GetWebshopUserProductListTypes'),
             )
@@ -340,9 +335,9 @@ class WebshopRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getWebShopUserTypes(): WebshopUserTypeLogic4ResponseList
+    public function getWebShopUserTypes(): Logic4ResponseListOfWebshopUserType
     {
-        return WebshopUserTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfWebshopUserType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Webshop/GetWebShopUserTypes'),
             )
@@ -361,8 +356,8 @@ class WebshopRequest extends Request
      */
     public function updateQtyWebshopUserProduct(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->put('/v1/Webshop/UpdateQtyWebshopUserProduct', ['json' => $parameters]),
             )

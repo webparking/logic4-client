@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\DatabaseConfigurationLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfDatabaseConfiguration;
 
 class BackOfficeRequest extends Request
 {
@@ -17,8 +17,8 @@ class BackOfficeRequest extends Request
      * @throws Logic4ApiException
      */
     public function getDatabaseConfiguration(
-    ): DatabaseConfigurationLogic4Response {
-        return DatabaseConfigurationLogic4Response::make(
+    ): Logic4ResponseOfDatabaseConfiguration {
+        return Logic4ResponseOfDatabaseConfiguration::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Backoffice/GetDatabaseConfiguration'),
             )
@@ -29,7 +29,7 @@ class BackOfficeRequest extends Request
      * Maak een nieuwe taak aan.
      *
      * @param array{
-     *     Type?: string,
+     *     Type?: mixed,
      *     SerializedJson?: string|null,
      * } $parameters
      *
@@ -37,8 +37,8 @@ class BackOfficeRequest extends Request
      */
     public function postCreateBackofficeAction(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Backoffice/PostCreateBackofficeAction', ['json' => $parameters]),
             )

@@ -7,7 +7,7 @@ namespace Webparking\Logic4Client\Requests\V13;
 use Webparking\Logic4Client\Data\V13\Order;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V13\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V13\Logic4ResponseOfint;
 
 class OrderRequest extends Request
 {
@@ -59,9 +59,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addUpdateInvoice(array $parameters = []): Int32Logic4Response
+    public function addUpdateInvoice(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.3/Orders/AddUpdateInvoice', ['json' => $parameters]),
             )
@@ -118,9 +118,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addUpdateOrder(array $parameters = []): Int32Logic4Response
+    public function addUpdateOrder(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.3/Orders/AddUpdateOrder', ['json' => $parameters]),
             )

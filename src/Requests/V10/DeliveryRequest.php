@@ -7,7 +7,7 @@ namespace Webparking\Logic4Client\Requests\V10;
 use Webparking\Logic4Client\Data\V10\SalesOrderDelivery;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\SalesOrderDeliveryRowLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfSalesOrderDeliveryRow;
 
 class DeliveryRequest extends Request
 {
@@ -22,8 +22,8 @@ class DeliveryRequest extends Request
      */
     public function createDeliveryForOrderRows(
         array $parameters = [],
-    ): SalesOrderDeliveryRowLogic4ResponseList {
-        return SalesOrderDeliveryRowLogic4ResponseList::make(
+    ): Logic4ResponseListOfSalesOrderDeliveryRow {
+        return Logic4ResponseListOfSalesOrderDeliveryRow::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Delivery/CreateDeliveryForOrderRows', ['json' => $parameters]),
             )
@@ -31,6 +31,8 @@ class DeliveryRequest extends Request
     }
 
     /**
+     * Zoeken op verkooporder uitleveringen.
+     *
      * @param array{
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
@@ -47,8 +49,6 @@ class DeliveryRequest extends Request
      * @return \Generator<array-key, SalesOrderDelivery>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Zoeken op verkooporder uitleveringen.
      */
     public function getDeliveries(array $parameters = []): \Generator
     {

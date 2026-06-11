@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Requests\V11;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V11\BuyOrderDeliveryAndOrderMovementLogic4Response;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseOfBuyOrderDeliveryAndOrderMovement;
 
 class BuyOrderDeliveryRequest extends Request
 {
@@ -17,7 +17,7 @@ class BuyOrderDeliveryRequest extends Request
      * @param array{
      *     OrderId?: int|null,
      *     ProcessMutationButDoNotCreatePickbon?: bool,
-     *     Status?: string,
+     *     Status?: mixed,
      *     SupplierId?: int|null,
      *     BuyOrderId?: int|null,
      *     Remarks?: string|null,
@@ -31,8 +31,8 @@ class BuyOrderDeliveryRequest extends Request
      */
     public function createBuyOrderDeliveryAndOrderMovement(
         array $parameters = [],
-    ): BuyOrderDeliveryAndOrderMovementLogic4Response {
-        return BuyOrderDeliveryAndOrderMovementLogic4Response::make(
+    ): Logic4ResponseOfBuyOrderDeliveryAndOrderMovement {
+        return Logic4ResponseOfBuyOrderDeliveryAndOrderMovement::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/BuyOrderDeliveries/CreateBuyOrderDeliveryAndOrderMovement', ['json' => $parameters]),
             )

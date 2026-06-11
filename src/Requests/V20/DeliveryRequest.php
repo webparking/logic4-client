@@ -11,6 +11,8 @@ use Webparking\Logic4Client\Request;
 class DeliveryRequest extends Request
 {
     /**
+     * Zoeken op verkooporder uitleveringen.
+     *
      * @param array{
      *     DateTimeFrom?: string|null,
      *     DateTimeTo?: string|null,

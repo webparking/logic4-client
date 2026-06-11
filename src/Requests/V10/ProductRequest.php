@@ -9,34 +9,34 @@ use Webparking\Logic4Client\Data\V10\ProductV11;
 use Webparking\Logic4Client\Data\V10\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\BasicProductDataLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\BrandLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\Logic4Response;
-use Webparking\Logic4Client\Responses\V10\PackingMaterialDepositTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductAssemblyRecipeItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductBarcodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductCodeWithSupplierCodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductCompositionItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductDimensionsLogic4Response;
-use Webparking\Logic4Client\Responses\V10\ProductPickLocationBasedOnSystemSettingsLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductPriceInformationLogic4Response;
-use Webparking\Logic4Client\Responses\V10\ProductPricelistLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductReviewLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductShippingInformationLogic4Response;
-use Webparking\Logic4Client\Responses\V10\ProductStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductSupplierLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductUnitLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductVariantBalkLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\VariantBalkCategoryLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\WebsiteDomainsForProductLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfBasicProductData;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfBrand;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfint;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfPackingMaterialDepositType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductAssemblyRecipeItem;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductBarcode;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductCodeWithSupplierCode;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductCompositionItem;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductPickLocationBasedOnSystemSettings;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductPricelist;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductReview;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductSupplier;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductUnit;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductVariantBalk;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfVariantBalkCategory;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfWebsiteDomainsForProduct;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfint;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfProductDimensions;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfProductPriceInformation;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfProductShippingInformation;
 
 class ProductRequest extends Request
 {
     /**
-     * Koppelen van een website aan een product, max 1000 producten per call.
+     * Koppelen van een website aan een product, max 1000 producten per request.
      * Als een webshopdomein al reeds gekoppeld is, dan wordt deze overgeslagen.
      *
      * @param array{
@@ -48,8 +48,8 @@ class ProductRequest extends Request
      */
     public function addWebsiteDomainForProducts(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/AddWebsiteDomainForProducts', ['json' => $parameters]),
             )
@@ -57,8 +57,9 @@ class ProductRequest extends Request
     }
 
     /**
-     * Verwijder een website dat gekoppeld zit aan een product, max 1000 producten per call.
-     * Enkel gevonden records worden verwijderd, er vindt geen controle plaats op ProductId en/of WebsiteDomainId. Id's die niet gevonden worden, worden overgeslagen.
+     * Verwijder een website dat gekoppeld zit aan een product, max 1000 producten per request.
+     * Enkel gevonden records worden verwijderd, er vindt geen controle plaats op ProductId en/of WebsiteDomainId.
+     * Id's die niet gevonden worden, worden overgeslagen.
      *
      * @param array{
      *     ProductIds?: array<int>,
@@ -86,8 +87,8 @@ class ProductRequest extends Request
      */
     public function getBarcodesForProductIds(
         array $parameters = [],
-    ): ProductBarcodeLogic4ResponseList {
-        return ProductBarcodeLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductBarcode {
+        return Logic4ResponseListOfProductBarcode::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetBarcodesForProductIds', ['json' => $parameters]),
             )
@@ -103,8 +104,8 @@ class ProductRequest extends Request
      */
     public function getBasicProductDataForProducts(
         array $parameters = [],
-    ): BasicProductDataLogic4ResponseList {
-        return BasicProductDataLogic4ResponseList::make(
+    ): Logic4ResponseListOfBasicProductData {
+        return Logic4ResponseListOfBasicProductData::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetBasicProductDataForProducts', ['json' => $parameters]),
             )
@@ -115,12 +116,10 @@ class ProductRequest extends Request
      * Haal alle merken op.
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.2. - Merken
      */
-    public function getBrands(): BrandLogic4ResponseList
+    public function getBrands(): Logic4ResponseListOfBrand
     {
-        return BrandLogic4ResponseList::make(
+        return Logic4ResponseListOfBrand::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Products/GetBrands'),
             )
@@ -134,8 +133,8 @@ class ProductRequest extends Request
      */
     public function getComposedProductComposition(
         int $value,
-    ): ProductCompositionItemLogic4ResponseList {
-        return ProductCompositionItemLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductCompositionItem {
+        return Logic4ResponseListOfProductCompositionItem::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetComposedProductComposition', ['json' => $value]),
             )
@@ -143,11 +142,13 @@ class ProductRequest extends Request
     }
 
     /**
+     * Haal emballagetypen op.
+     *
      * @throws Logic4ApiException
      */
     public function getPackageMaterialDepositTypes(
-    ): PackingMaterialDepositTypeLogic4ResponseList {
-        return PackingMaterialDepositTypeLogic4ResponseList::make(
+    ): Logic4ResponseListOfPackingMaterialDepositType {
+        return Logic4ResponseListOfPackingMaterialDepositType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Products/GetPackageMaterialDepositTypes'),
             )
@@ -166,8 +167,8 @@ class ProductRequest extends Request
      */
     public function getPriceInformationForProduct(
         array $parameters = [],
-    ): ProductPriceInformationLogic4Response {
-        return ProductPriceInformationLogic4Response::make(
+    ): Logic4ResponseOfProductPriceInformation {
+        return Logic4ResponseOfProductPriceInformation::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetPriceInformationForProduct', ['json' => $parameters]),
             )
@@ -184,13 +185,11 @@ class ProductRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik een nieuwere versie. - Prijslijsten
      */
     public function getPricelists(
         array $parameters = [],
-    ): ProductPricelistLogic4ResponseList {
-        return ProductPricelistLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductPricelist {
+        return Logic4ResponseListOfProductPricelist::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetPricelists', ['json' => $parameters]),
             )
@@ -204,8 +203,8 @@ class ProductRequest extends Request
      */
     public function getProductAssemblyRecipe(
         int $value,
-    ): ProductAssemblyRecipeItemLogic4ResponseList {
-        return ProductAssemblyRecipeItemLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductAssemblyRecipeItem {
+        return Logic4ResponseListOfProductAssemblyRecipeItem::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductAssemblyRecipe', ['json' => $value]),
             )
@@ -213,7 +212,7 @@ class ProductRequest extends Request
     }
 
     /**
-     * Verkrijg productcodes o.b.v. leverancier productcodes (maximaal 10000).
+     * Verkrijg productcodes o.b.v. leverancier productcodes (maximaal 10.000).
      *
      * @param array{
      *     SupplierId?: int,
@@ -224,8 +223,8 @@ class ProductRequest extends Request
      */
     public function getProductCodesBySupplierProductCodes(
         array $parameters = [],
-    ): ProductCodeWithSupplierCodeLogic4ResponseList {
-        return ProductCodeWithSupplierCodeLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductCodeWithSupplierCode {
+        return Logic4ResponseListOfProductCodeWithSupplierCode::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductCodesBySupplierProductCodes', ['json' => $parameters]),
             )
@@ -240,13 +239,11 @@ class ProductRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Afmetingen van het artikel
      */
     public function getProductDimensions(
         array $parameters = [],
-    ): ProductDimensionsLogic4Response {
-        return ProductDimensionsLogic4Response::make(
+    ): Logic4ResponseOfProductDimensions {
+        return Logic4ResponseOfProductDimensions::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductDimensions', ['json' => $parameters]),
             )
@@ -266,8 +263,8 @@ class ProductRequest extends Request
      */
     public function getProductPickStockLocationIds(
         array $parameters = [],
-    ): ProductPickLocationBasedOnSystemSettingsLogic4ResponseList {
-        return ProductPickLocationBasedOnSystemSettingsLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductPickLocationBasedOnSystemSettings {
+        return Logic4ResponseListOfProductPickLocationBasedOnSystemSettings::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductPickStockLocationIds', ['json' => $parameters]),
             )
@@ -287,8 +284,8 @@ class ProductRequest extends Request
      */
     public function getProductReviews(
         array $parameters = [],
-    ): ProductReviewLogic4ResponseList {
-        return ProductReviewLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductReview {
+        return Logic4ResponseListOfProductReview::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductReviews', ['json' => $parameters]),
             )
@@ -314,7 +311,7 @@ class ProductRequest extends Request
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
      *     ProductIds?: array<int>,
-     *     ProductFilterListChoice?: string|null,
+     *     ProductFilterListChoice?: mixed,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
      *     ActiveOffers?: bool|null,
@@ -326,6 +323,7 @@ class ProductRequest extends Request
      *     LoadExternalStockActiveSupplier?: bool|null,
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
+     *     FromId?: int|null,
      *     LoadProductGroups?: bool|null,
      *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,
@@ -342,8 +340,6 @@ class ProductRequest extends Request
      * @return \Generator<array-key, ProductV11>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.4. - Artikelen ophalen
      */
     public function getProducts(array $parameters = []): \Generator
     {
@@ -365,8 +361,8 @@ class ProductRequest extends Request
      */
     public function getProductShippingInformation(
         array $parameters = [],
-    ): ProductShippingInformationLogic4Response {
-        return ProductShippingInformationLogic4Response::make(
+    ): Logic4ResponseOfProductShippingInformation {
+        return Logic4ResponseOfProductShippingInformation::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductShippingInformation', ['json' => $parameters]),
             )
@@ -390,7 +386,7 @@ class ProductRequest extends Request
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
      *     ProductIds?: array<int>,
-     *     ProductFilterListChoice?: string|null,
+     *     ProductFilterListChoice?: mixed,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
      *     ActiveOffers?: bool|null,
@@ -402,6 +398,7 @@ class ProductRequest extends Request
      *     LoadExternalStockActiveSupplier?: bool|null,
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
+     *     FromId?: int|null,
      *     LoadProductGroups?: bool|null,
      *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,
@@ -419,8 +416,8 @@ class ProductRequest extends Request
      */
     public function getProductsIds(
         array $parameters = [],
-    ): Int32Logic4ResponseList {
-        return Int32Logic4ResponseList::make(
+    ): Logic4ResponseListOfint {
+        return Logic4ResponseListOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetProductsIds', ['json' => $parameters]),
             )
@@ -452,9 +449,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getStatuses(): ProductStatusLogic4ResponseList
+    public function getStatuses(): Logic4ResponseListOfProductStatus
     {
-        return ProductStatusLogic4ResponseList::make(
+        return Logic4ResponseListOfProductStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Products/GetStatuses'),
             )
@@ -462,14 +459,14 @@ class ProductRequest extends Request
     }
 
     /**
-     * Verkrijg alle leveranciers van een product.
+     * Verkrijg alle leveranciers van één product.
      *
      * @throws Logic4ApiException
      */
     public function getSuppliersForProduct(
         int $value,
-    ): ProductSupplierLogic4ResponseList {
-        return ProductSupplierLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductSupplier {
+        return Logic4ResponseListOfProductSupplier::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetSuppliersForProduct', ['json' => $value]),
             )
@@ -503,9 +500,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getUnits(): ProductUnitLogic4ResponseList
+    public function getUnits(): Logic4ResponseListOfProductUnit
     {
-        return ProductUnitLogic4ResponseList::make(
+        return Logic4ResponseListOfProductUnit::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Products/GetUnits'),
             )
@@ -513,6 +510,8 @@ class ProductRequest extends Request
     }
 
     /**
+     * Haal artikel variantbalk categorie gegevens op, waaronder de mogelijke waarden en vertalingen.
+     *
      * @param array{
      *     VariantBalkCategoryIds?: array<int>,
      * } $parameters
@@ -521,8 +520,8 @@ class ProductRequest extends Request
      */
     public function getVariantbalkCategories(
         array $parameters = [],
-    ): VariantBalkCategoryLogic4ResponseList {
-        return VariantBalkCategoryLogic4ResponseList::make(
+    ): Logic4ResponseListOfVariantBalkCategory {
+        return Logic4ResponseListOfVariantBalkCategory::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetVariantbalkCategories', ['json' => $parameters]),
             )
@@ -530,6 +529,9 @@ class ProductRequest extends Request
     }
 
     /**
+     * Haal artikel variantbalk gegevens op, waaronder de mogelijke waarden, vertalingen en de categorieën.
+     * Voor nieuwe vertalingen kan het maximaal 10 minuten duren voordat deze terugkomen in de resultaten.
+     *
      * @param array{
      *     VariantBalkIds?: array<int>,
      * } $parameters
@@ -538,8 +540,8 @@ class ProductRequest extends Request
      */
     public function getVariantbalks(
         array $parameters = [],
-    ): ProductVariantBalkLogic4ResponseList {
-        return ProductVariantBalkLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductVariantBalk {
+        return Logic4ResponseListOfProductVariantBalk::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetVariantbalks', ['json' => $parameters]),
             )
@@ -547,7 +549,7 @@ class ProductRequest extends Request
     }
 
     /**
-     * Het ophalen van gekoppelde webshops per product, max. 1000 producten per call.
+     * Het ophalen van gekoppelde webshops per product, max. 1000 producten per request.
      *
      * @param array{
      *     ProductIds?: array<int>,
@@ -557,8 +559,8 @@ class ProductRequest extends Request
      */
     public function getWebsiteDomainsForProducts(
         array $parameters = [],
-    ): WebsiteDomainsForProductLogic4ResponseList {
-        return WebsiteDomainsForProductLogic4ResponseList::make(
+    ): Logic4ResponseListOfWebsiteDomainsForProduct {
+        return Logic4ResponseListOfWebsiteDomainsForProduct::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Products/GetWebsiteDomainsForProducts', ['json' => $parameters]),
             )
@@ -566,18 +568,17 @@ class ProductRequest extends Request
     }
 
     /**
-     * Een SEO informatie record word op basis van een combinatie van ProductId, GlobalizationId en WebsiteDomainId geselecteerd.
+     * Verander de SEO informatie voor een product op basis van taal en webshopdomein.
+     * Een SEO informatie record wordt op basis van een combinatie van ProductId, GlobalizationId en WebsiteDomainId geselecteerd.
      * WebsiteDomainId mag null zijn, dan geldt de gegeven SEO informatie voor alle webhopdomeinen.
-     *
-     * Als een record niet bestaat wordt deze aangemaakt. Lege records worden automatisch verwijdert.
+     * <br />
+     * Als een record niet bestaat wordt deze aangemaakt. Lege records worden automatisch verwijderd.
      * Niet-lege records moeten ten minste een Title of Description hebben.
-     *
-     *
-     * Bij het meegeven van een lege string of 'null' voor informatie velden, wordt bestaande informatie leeg gehaald.
+     * <br />
+     * Bij het meegeven van een lege string of 'null' voor informatievelden, wordt bestaande informatie leeg gehaald.
      * Velden die niet in de request staan worden niet gewijzigd.
-     *
-     *
-     * Als een product geen SEO informatie heeft voor een bepaalde taal en webshopdomein vindt er een fallback plaats op de basis informatie van het artikel.
+     * <br />
+     * Als een product geen SEO informatie heeft voor een bepaalde taal en webshopdomein vindt er een fallback plaats op de basisinformatie van het artikel.
      *
      * @param array{
      *     WebsiteDomainId?: int|null,
@@ -594,8 +595,8 @@ class ProductRequest extends Request
      */
     public function updateProductSEOInformation(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1/Products/UpdateProductSEOInformation', ['json' => $parameters]),
             )

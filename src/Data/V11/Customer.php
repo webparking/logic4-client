@@ -9,7 +9,6 @@ class Customer
     /** @param array<int> $pricelistIds */
     public function __construct(
         public int $id,
-        public ?string $loginName,
         public ?int $relationGroupId,
         public ?int $relationGroup2Id,
         public bool $hide,
@@ -29,6 +28,7 @@ class Customer
         public ?string $firstName,
         public ?string $lastName,
         public ?string $emailAddress,
+        public ?string $loginName,
         public ?int $paymentMethodId,
         public ?array $pricelistIds,
         public ?string $telephoneNumber,
@@ -65,7 +65,6 @@ class Customer
     {
         return new self(
             id: $data['Id'] ?? 0,
-            loginName: $data['LoginName'] ?? null,
             relationGroupId: $data['RelationGroupId'] ?? null,
             relationGroup2Id: $data['RelationGroup2Id'] ?? null,
             hide: $data['Hide'] ?? false,
@@ -85,6 +84,7 @@ class Customer
             firstName: $data['FirstName'] ?? null,
             lastName: $data['LastName'] ?? null,
             emailAddress: $data['EmailAddress'] ?? null,
+            loginName: $data['LoginName'] ?? null,
             paymentMethodId: $data['PaymentMethodId'] ?? null,
             pricelistIds: $data['PricelistIds'] ?? null,
             telephoneNumber: $data['TelephoneNumber'] ?? null,

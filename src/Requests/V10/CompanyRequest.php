@@ -6,12 +6,12 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\AdministrationLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\BranchLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CompanyInformationLogic4Response;
-use Webparking\Logic4Client\Responses\V10\CompanyValuesLogic4Response;
-use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
-use Webparking\Logic4Client\Responses\V10\UserstatusLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfAdministration;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfBranch;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfUserstatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfCompanyInformation;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfCompanyValues;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfstring;
 
 class CompanyRequest extends Request
 {
@@ -20,9 +20,9 @@ class CompanyRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getAdministrationsForUser(): AdministrationLogic4ResponseList
-    {
-        return AdministrationLogic4ResponseList::make(
+    public function getAdministrationsForUser(
+    ): Logic4ResponseListOfAdministration {
+        return Logic4ResponseListOfAdministration::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Company/GetAdministrationsForUser'),
             )
@@ -34,9 +34,9 @@ class CompanyRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getBranches(): BranchLogic4ResponseList
+    public function getBranches(): Logic4ResponseListOfBranch
     {
-        return BranchLogic4ResponseList::make(
+        return Logic4ResponseListOfBranch::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Company/GetBranches'),
             )
@@ -48,9 +48,9 @@ class CompanyRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCompanyInformation(): CompanyInformationLogic4Response
+    public function getCompanyInformation(): Logic4ResponseOfCompanyInformation
     {
-        return CompanyInformationLogic4Response::make(
+        return Logic4ResponseOfCompanyInformation::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Company/GetCompanyInformation'),
             )
@@ -62,9 +62,9 @@ class CompanyRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getCompanyValues(): CompanyValuesLogic4Response
+    public function getCompanyValues(): Logic4ResponseOfCompanyValues
     {
-        return CompanyValuesLogic4Response::make(
+        return Logic4ResponseOfCompanyValues::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Company/GetCompanyValues'),
             )
@@ -76,9 +76,9 @@ class CompanyRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getNotice(): StringLogic4Response
+    public function getNotice(): Logic4ResponseOfstring
     {
-        return StringLogic4Response::make(
+        return Logic4ResponseOfstring::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Company/GetNotice'),
             )
@@ -90,9 +90,9 @@ class CompanyRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getUserStatuses(): UserstatusLogic4ResponseList
+    public function getUserStatuses(): Logic4ResponseListOfUserstatus
     {
-        return UserstatusLogic4ResponseList::make(
+        return Logic4ResponseListOfUserstatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Company/GetUserStatuses'),
             )

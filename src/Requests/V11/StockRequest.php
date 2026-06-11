@@ -12,8 +12,8 @@ use Webparking\Logic4Client\Data\V11\ProductStockSuppliers;
 use Webparking\Logic4Client\Data\V11\ProductSupplierNextDelivery;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V11\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V11\ProductStockMutationTypeV11Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductStockMutationTypeV11;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseOfboolean;
 
 class StockRequest extends Request
 {
@@ -41,7 +41,7 @@ class StockRequest extends Request
     }
 
     /**
-     * Verkrijg de eerst volgende leverdata van alle actieve leveranciers, vanaf een specifieke datum.
+     * Verkrijg de eerstvolgende leverdata van alle actieve leveranciers, vanaf een specifieke datum.
      *
      * @param array{
      *     NextDeliveryDate?: string,
@@ -63,7 +63,7 @@ class StockRequest extends Request
     }
 
     /**
-     * Haal voorraadmutaties op. Maximaal 10000 records per keer kunnen worden opgehaald.
+     * Haal voorraadmutaties op. Maximaal 10.000 records per keer kunnen worden opgehaald.
      *
      * @param array{
      *     SkipRecords?: int,
@@ -97,8 +97,8 @@ class StockRequest extends Request
      * @throws Logic4ApiException
      */
     public function getProductStockMutationTypes(
-    ): ProductStockMutationTypeV11Logic4ResponseList {
-        return ProductStockMutationTypeV11Logic4ResponseList::make(
+    ): Logic4ResponseListOfProductStockMutationTypeV11 {
+        return Logic4ResponseListOfProductStockMutationTypeV11::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.1/Stock/GetProductStockMutationTypes'),
             )
@@ -194,8 +194,8 @@ class StockRequest extends Request
      */
     public function postCreateStockMovement(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Stock/PostCreateStockMovement', ['json' => $parameters]),
             )
@@ -218,8 +218,8 @@ class StockRequest extends Request
      */
     public function setExternalStockForSupplier(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Stock/SetExternalStockForSupplier', ['json' => $parameters]),
             )
@@ -239,8 +239,8 @@ class StockRequest extends Request
      */
     public function updateDefaultPickLocations(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Stock/UpdateDefaultPickLocations', ['json' => $parameters]),
             )

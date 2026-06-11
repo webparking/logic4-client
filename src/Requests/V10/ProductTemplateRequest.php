@@ -10,7 +10,7 @@ use Webparking\Logic4Client\Data\V10\ProductTemplateProperty;
 use Webparking\Logic4Client\Data\V10\ProductTemplateValuesWithTranslation;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfint;
 
 class ProductTemplateRequest extends Request
 {
@@ -91,8 +91,6 @@ class ProductTemplateRequest extends Request
      * @return \Generator<array-key, ProductTemplateValuesWithTranslation>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Artikel template waarden met vertalingen
      */
     public function getProductTemplateValuesWithTranslations(array $parameters = []): \Generator
     {
@@ -113,8 +111,8 @@ class ProductTemplateRequest extends Request
      */
     public function setProductTemplatePropertyValues(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/ProductTemplates/SetProductTemplatePropertyValues', ['json' => $parameters]),
             )

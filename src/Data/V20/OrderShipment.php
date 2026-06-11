@@ -8,7 +8,9 @@ class OrderShipment
 {
     public function __construct(
         public int $id,
+        public ?int $deliveryId,
         public ?\Carbon\Carbon $dateTimeAdded,
+        public ?bool $sendEmail,
         public int $orderId,
         public int $shipperId,
         public ?string $barcode,
@@ -21,7 +23,9 @@ class OrderShipment
     {
         return new self(
             id: $data['Id'] ?? 0,
+            deliveryId: $data['DeliveryId'] ?? null,
             dateTimeAdded: isset($data['DateTimeAdded']) ? \Carbon\Carbon::parse($data['DateTimeAdded']) : null,
+            sendEmail: $data['SendEmail'] ?? null,
             orderId: $data['OrderId'] ?? 0,
             shipperId: $data['ShipperId'] ?? 0,
             barcode: $data['Barcode'] ?? null,

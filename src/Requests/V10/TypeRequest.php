@@ -6,11 +6,11 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\CountryLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\GlobalizationTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\OperatingSystemTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductRelationTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProvinceLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCountry;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfGlobalizationType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfOperatingSystemType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductRelationType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProvince;
 
 class TypeRequest extends Request
 {
@@ -25,8 +25,8 @@ class TypeRequest extends Request
      */
     public function getCountries(
         array $parameters = [],
-    ): CountryLogic4ResponseList {
-        return CountryLogic4ResponseList::make(
+    ): Logic4ResponseListOfCountry {
+        return Logic4ResponseListOfCountry::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Types/GetCountries', ['json' => $parameters]),
             )
@@ -34,13 +34,13 @@ class TypeRequest extends Request
     }
 
     /**
-     * Verkrijg alle globalisaties.
+     * Verkrijg alle globalisaties (talen).
      *
      * @throws Logic4ApiException
      */
-    public function getGlobalizationTypes(): GlobalizationTypeLogic4ResponseList
+    public function getGlobalizationTypes(): Logic4ResponseListOfGlobalizationType
     {
-        return GlobalizationTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfGlobalizationType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Types/GetGlobalizationTypes'),
             )
@@ -53,8 +53,8 @@ class TypeRequest extends Request
      * @throws Logic4ApiException
      */
     public function getOperatingSystemTypes(
-    ): OperatingSystemTypeLogic4ResponseList {
-        return OperatingSystemTypeLogic4ResponseList::make(
+    ): Logic4ResponseListOfOperatingSystemType {
+        return Logic4ResponseListOfOperatingSystemType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Types/GetOperatingSystemTypes'),
             )
@@ -62,11 +62,13 @@ class TypeRequest extends Request
     }
 
     /**
+     * Verkrijg alle product-relatietypes.
+     *
      * @throws Logic4ApiException
      */
     public function getProductRelationTypes(
-    ): ProductRelationTypeLogic4ResponseList {
-        return ProductRelationTypeLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductRelationType {
+        return Logic4ResponseListOfProductRelationType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Types/GetProductRelationTypes'),
             )
@@ -85,8 +87,8 @@ class TypeRequest extends Request
      */
     public function getProvinces(
         array $parameters = [],
-    ): ProvinceLogic4ResponseList {
-        return ProvinceLogic4ResponseList::make(
+    ): Logic4ResponseListOfProvince {
+        return Logic4ResponseListOfProvince::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Types/GetProvinces', ['json' => $parameters]),
             )

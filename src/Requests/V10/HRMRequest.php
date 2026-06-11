@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\HRMTimeRegistrationRowListLogic4Response;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfListOfHRMTimeRegistrationRow;
 
 class HRMRequest extends Request
 {
@@ -33,8 +33,8 @@ class HRMRequest extends Request
      */
     public function addTimeRegistrations(
         array $parameters = [],
-    ): HRMTimeRegistrationRowListLogic4Response {
-        return HRMTimeRegistrationRowListLogic4Response::make(
+    ): Logic4ResponseOfListOfHRMTimeRegistrationRow {
+        return Logic4ResponseOfListOfHRMTimeRegistrationRow::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/HRM/AddTimeRegistrations', ['json' => $parameters]),
             )

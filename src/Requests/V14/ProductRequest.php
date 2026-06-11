@@ -12,7 +12,7 @@ class ProductRequest extends Request
 {
     /**
      * Verkrijg artikelen o.b.v. het meegestuurde filter. Het aantal op te vragen artikelen is gelimiteerd tot 10000.
-     *
+     * <br />
      * Vanaf v1.4 is de werking van <b>BuyPrice</b> gewijzigd. Dit veld bevat nu de inkoopprijs exclusief toeslagen.
      * In voorgaande versies was dit veld inclusief toeslagen. Deze waarde is nu verplaatst naar het nieuwe veld <b>CostPrice</b>.
      *
@@ -34,7 +34,7 @@ class ProductRequest extends Request
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
      *     ProductIds?: array<int>,
-     *     ProductFilterListChoice?: string|null,
+     *     ProductFilterListChoice?: mixed,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
      *     ActiveOffers?: bool|null,
@@ -46,6 +46,7 @@ class ProductRequest extends Request
      *     LoadExternalStockActiveSupplier?: bool|null,
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
+     *     FromId?: int|null,
      *     LoadProductGroups?: bool|null,
      *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,

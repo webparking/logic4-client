@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Data\V10;
 
 class ProductSupplier
 {
-    /** @param array<Int32DecimalKeyValuePair> $creditorBuyPrices */
+    /** @param array<KeyValuePairOfintAnddecimal> $creditorBuyPrices */
     public function __construct(
         public int $productId,
         public ?string $creditorName,
@@ -26,7 +26,7 @@ class ProductSupplier
             creditorProductCode: $data['CreditorProductCode'] ?? null,
             isActive: $data['IsActive'] ?? false,
             creditorId: $data['CreditorId'] ?? 0,
-            creditorBuyPrices: array_map(static fn (array $item) => Int32DecimalKeyValuePair::make($item), $data['CreditorBuyPrices'] ?? []),
+            creditorBuyPrices: array_map(static fn (array $item) => KeyValuePairOfintAnddecimal::make($item), $data['CreditorBuyPrices'] ?? []),
         );
     }
 }

@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V20;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V20\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V20\ProductStockInformationV2Logic4ResponseList;
+use Webparking\Logic4Client\Responses\V20\Logic4ResponseListOfProductStockInformationV2;
+use Webparking\Logic4Client\Responses\V20\Logic4ResponseOfint;
 
 class StockRequest extends Request
 {
@@ -28,8 +28,8 @@ class StockRequest extends Request
      */
     public function createProductStockMutation(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v2/Stock/CreateProductStockMutation', ['json' => $parameters]),
             )
@@ -48,8 +48,8 @@ class StockRequest extends Request
      */
     public function getStockInformationForProduct(
         array $parameters = [],
-    ): ProductStockInformationV2Logic4ResponseList {
-        return ProductStockInformationV2Logic4ResponseList::make(
+    ): Logic4ResponseListOfProductStockInformationV2 {
+        return Logic4ResponseListOfProductStockInformationV2::make(
             $this->buildResponse(
                 $this->getClient()->post('/v2/Stock/GetStockInformationForProduct', ['json' => $parameters]),
             )

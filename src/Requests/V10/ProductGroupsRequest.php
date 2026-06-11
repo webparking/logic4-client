@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\ProductGroupLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ProductGroupTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductGroup;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductGroupType;
 
 class ProductGroupsRequest extends Request
 {
@@ -26,13 +26,11 @@ class ProductGroupsRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Artikelgroepen
      */
     public function getProductGroups(
         array $parameters = [],
-    ): ProductGroupLogic4ResponseList {
-        return ProductGroupLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductGroup {
+        return Logic4ResponseListOfProductGroup::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/ProductGroups/GetProductGroups', ['json' => $parameters]),
             )
@@ -44,9 +42,9 @@ class ProductGroupsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getProductGroupTypes(): ProductGroupTypeLogic4ResponseList
+    public function getProductGroupTypes(): Logic4ResponseListOfProductGroupType
     {
-        return ProductGroupTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfProductGroupType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/ProductGroups/GetProductGroupTypes'),
             )

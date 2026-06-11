@@ -8,6 +8,7 @@ class SalesOrderDelivery
 {
     /** @param array<SalesOrderDeliveryDetailRow> $details */
     public function __construct(
+        public int $deliveryId,
         public ?int $orderId,
         public int $orderStatusId,
         public ?\Carbon\Carbon $deliveryDate,
@@ -23,6 +24,7 @@ class SalesOrderDelivery
     public static function make(array $data): self
     {
         return new self(
+            deliveryId: $data['DeliveryId'] ?? 0,
             orderId: $data['OrderId'] ?? null,
             orderStatusId: $data['OrderStatusId'] ?? 0,
             deliveryDate: isset($data['DeliveryDate']) ? \Carbon\Carbon::parse($data['DeliveryDate']) : null,

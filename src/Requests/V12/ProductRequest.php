@@ -9,16 +9,19 @@ use Webparking\Logic4Client\Data\V12\ProductSupplier;
 use Webparking\Logic4Client\Data\V12\ProductV11;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V12\ProductExtraBarcodeTypeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V12\Logic4ResponseListOfProductExtraBarcodeType;
 
 class ProductRequest extends Request
 {
     /**
+     * Haal artikel barcode types op.
+     * Deze types worden gebruikt in bijvoorbeeld de UpdateProductAddExtraBarcode functionaliteit.
+     *
      * @throws Logic4ApiException
      */
-    public function getBarcodeTypes(): ProductExtraBarcodeTypeLogic4ResponseList
+    public function getBarcodeTypes(): Logic4ResponseListOfProductExtraBarcodeType
     {
-        return ProductExtraBarcodeTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfProductExtraBarcodeType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.2/Products/GetBarcodeTypes'),
             )
@@ -67,7 +70,7 @@ class ProductRequest extends Request
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
      *     ProductIds?: array<int>,
-     *     ProductFilterListChoice?: string|null,
+     *     ProductFilterListChoice?: mixed,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
      *     ActiveOffers?: bool|null,
@@ -79,6 +82,7 @@ class ProductRequest extends Request
      *     LoadExternalStockActiveSupplier?: bool|null,
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
+     *     FromId?: int|null,
      *     LoadProductGroups?: bool|null,
      *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,

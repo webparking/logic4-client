@@ -10,30 +10,33 @@ use Webparking\Logic4Client\Data\V11\ProductVariantBalkChildrenGroup;
 use Webparking\Logic4Client\Data\V11\ProductWithRelatedProducts;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V11\BasicProductDataLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\BrandLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\GetProductImageLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V11\Int32Logic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductAssemblyRecipeItemLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductBarcodeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductCompositionItemLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfBasicProductData;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfBrand;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfGetProductImage;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfint;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductAssemblyRecipeItem;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductBarcode;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductCompositionItem;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductPickLocationBasedOnSystemSettings;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductPricelist;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductReview;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductSEOInformation;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductStatus;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductSupplier;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfProductUnit;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseOfint;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseOfProductPriceInformation;
 use Webparking\Logic4Client\Responses\V11\ProductExtraBarcodeType;
-use Webparking\Logic4Client\Responses\V11\ProductPickLocationBasedOnSystemSettingsLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductPriceInformationLogic4Response;
-use Webparking\Logic4Client\Responses\V11\ProductPricelistLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductReviewLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductSEOInformationLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductSupplierLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V11\ProductUnitLogic4ResponseList;
 
 class ProductRequest extends Request
 {
     /**
+     * Toevoegen van een product.
+     * Geeft een productId terug als resultaat indien het opslaan goed is verlopen.
+     *
      * @param array{
-     *     ProductCode?: string,
-     *     ProductDescription1?: string,
+     *     ProductCode?: string|null,
+     *     ProductDescription1?: string|null,
      *     ProductDescription2?: string|null,
      *     BrandId?: int,
      *     ProductGroup1?: int,
@@ -44,7 +47,7 @@ class ProductRequest extends Request
      *     Suppliers?: array<array{SupplierId?: int, Supplier_ProductCode?: string|null, ProductName?: string|null, ProductCountIncrement?: int|null, ShippingTime?: int|null, MinOrderQuantity?: int|null, RepackagingUnitId?: int|null, RepackagingQty?: int|null, InternalNote?: string|null, DiscountGroupId?: int|null, ProductPrices?: array<array{BuyPrice?: number, SellPrice?: number|null, Quantity?: int, LastSyncDate?: string}>}>,
      *     Barcode1?: string|null,
      *     Barcode2?: string|null,
-     *     ExtraBarcodes?: array<array{Barcode?: string, Quantity?: int, UnitId?: int|null}>,
+     *     ExtraBarcodes?: array<array{Barcode?: string|null, Quantity?: int, UnitId?: int|null}>,
      *     VendorCode?: string|null,
      *     StatusId?: int,
      *     VisibleOnWebshopFrom?: string|null,
@@ -77,13 +80,16 @@ class ProductRequest extends Request
      *     DepthOutsidePackage?: number,
      *     MinStockCount?: int|null,
      *     MaxStockCount?: int|null,
+     *     HidePricesOnWebsite?: bool,
+     *     ShowOfferButtonOnWebsite?: bool,
+     *     HideStartingPricesOnWebsite?: bool,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
-    public function addProduct(array $parameters = []): Int32Logic4Response
+    public function addProduct(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/AddProduct', ['json' => $parameters]),
             )
@@ -91,6 +97,7 @@ class ProductRequest extends Request
     }
 
     /**
+     * Voeg een afbeelding toe aan het artikel
      * - Maximale grootte van het bericht is 5MB
      * - Return waarde is een AfbeeldingId als de opdracht is geslaagd.
      *
@@ -104,9 +111,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addProductImage(array $parameters = []): Int32Logic4Response
+    public function addProductImage(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/AddProductImage', ['json' => $parameters]),
             )
@@ -114,13 +121,15 @@ class ProductRequest extends Request
     }
 
     /**
+     * Verwijder een afbeelding van het artikel.
+     *
      * @throws Logic4ApiException
      */
     public function deleteProductImage(
         int $productid,
         int $imageid,
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1.1/Products/DeleteProductImage', ['query' => ['productid' => $productid, 'imageid' => $imageid]]),
             )
@@ -136,8 +145,8 @@ class ProductRequest extends Request
      */
     public function getBarcodesForProductIds(
         array $parameters = [],
-    ): ProductBarcodeLogic4ResponseList {
-        return ProductBarcodeLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductBarcode {
+        return Logic4ResponseListOfProductBarcode::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetBarcodesForProductIds', ['json' => $parameters]),
             )
@@ -145,12 +154,12 @@ class ProductRequest extends Request
     }
 
     /**
+     * Haal artikel barcode types op.
+     * Deze types worden gebruikt in bijvoorbeeld de UpdateProductAddExtraBarcode functionaliteit.
+     *
      * @return array<array-key, ProductExtraBarcodeType>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.2. - Haal artikel barcode types op.
-     * Deze types worden gebruikt in bijvoorbeeld de UpdateProductAddExtraBarcode functionaliteit.
      */
     public function getBarcodeTypes(): array
     {
@@ -171,8 +180,8 @@ class ProductRequest extends Request
      */
     public function getBasicProductDataForProducts(
         array $parameters = [],
-    ): BasicProductDataLogic4ResponseList {
-        return BasicProductDataLogic4ResponseList::make(
+    ): Logic4ResponseListOfBasicProductData {
+        return Logic4ResponseListOfBasicProductData::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetBasicProductDataForProducts', ['json' => $parameters]),
             )
@@ -183,12 +192,10 @@ class ProductRequest extends Request
      * Haal alle merken op.
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.2. - Merken
      */
-    public function getBrands(): BrandLogic4ResponseList
+    public function getBrands(): Logic4ResponseListOfBrand
     {
-        return BrandLogic4ResponseList::make(
+        return Logic4ResponseListOfBrand::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.1/Products/GetBrands'),
             )
@@ -202,8 +209,8 @@ class ProductRequest extends Request
      */
     public function getComposedProductComposition(
         int $value,
-    ): ProductCompositionItemLogic4ResponseList {
-        return ProductCompositionItemLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductCompositionItem {
+        return Logic4ResponseListOfProductCompositionItem::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetComposedProductComposition', ['json' => $value]),
             )
@@ -222,8 +229,8 @@ class ProductRequest extends Request
      */
     public function getPriceInformationForProduct(
         array $parameters = [],
-    ): ProductPriceInformationLogic4Response {
-        return ProductPriceInformationLogic4Response::make(
+    ): Logic4ResponseOfProductPriceInformation {
+        return Logic4ResponseOfProductPriceInformation::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetPriceInformationForProduct', ['json' => $parameters]),
             )
@@ -240,13 +247,11 @@ class ProductRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik een nieuwere versie. - Prijslijsten
      */
     public function getPricelists(
         array $parameters = [],
-    ): ProductPricelistLogic4ResponseList {
-        return ProductPricelistLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductPricelist {
+        return Logic4ResponseListOfProductPricelist::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetPricelists', ['json' => $parameters]),
             )
@@ -260,8 +265,8 @@ class ProductRequest extends Request
      */
     public function getProductAssemblyRecipe(
         int $value,
-    ): ProductAssemblyRecipeItemLogic4ResponseList {
-        return ProductAssemblyRecipeItemLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductAssemblyRecipeItem {
+        return Logic4ResponseListOfProductAssemblyRecipeItem::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetProductAssemblyRecipe', ['json' => $value]),
             )
@@ -269,14 +274,14 @@ class ProductRequest extends Request
     }
 
     /**
-     * @throws Logic4ApiException
+     * Haal de afbeeldinginformatie op van een artikel.
      *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v2.0. - Haal de afbeeldinginformatie op van een artikel
+     * @throws Logic4ApiException
      */
     public function getProductImages(
         int $productid,
-    ): GetProductImageLogic4ResponseList {
-        return GetProductImageLogic4ResponseList::make(
+    ): Logic4ResponseListOfGetProductImage {
+        return Logic4ResponseListOfGetProductImage::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.1/Products/GetProductImages', ['query' => ['productid' => $productid]]),
             )
@@ -296,8 +301,8 @@ class ProductRequest extends Request
      */
     public function getProductPickStockLocationIds(
         array $parameters = [],
-    ): ProductPickLocationBasedOnSystemSettingsLogic4ResponseList {
-        return ProductPickLocationBasedOnSystemSettingsLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductPickLocationBasedOnSystemSettings {
+        return Logic4ResponseListOfProductPickLocationBasedOnSystemSettings::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetProductPickStockLocationIds', ['json' => $parameters]),
             )
@@ -317,8 +322,8 @@ class ProductRequest extends Request
      */
     public function getProductReviews(
         array $parameters = [],
-    ): ProductReviewLogic4ResponseList {
-        return ProductReviewLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductReview {
+        return Logic4ResponseListOfProductReview::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetProductReviews', ['json' => $parameters]),
             )
@@ -346,7 +351,7 @@ class ProductRequest extends Request
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
      *     ProductIds?: array<int>,
-     *     ProductFilterListChoice?: string|null,
+     *     ProductFilterListChoice?: mixed,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
      *     ActiveOffers?: bool|null,
@@ -358,6 +363,7 @@ class ProductRequest extends Request
      *     LoadExternalStockActiveSupplier?: bool|null,
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
+     *     FromId?: int|null,
      *     LoadProductGroups?: bool|null,
      *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,
@@ -394,13 +400,11 @@ class ProductRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik een nieuwere versie. - SEO informatie voor artikel
      */
     public function getProductSEOInformations(
         array $parameters = [],
-    ): ProductSEOInformationLogic4ResponseList {
-        return ProductSEOInformationLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductSEOInformation {
+        return Logic4ResponseListOfProductSEOInformation::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetProductSEOInformations', ['json' => $parameters]),
             )
@@ -424,7 +428,7 @@ class ProductRequest extends Request
      *     WebshopPriceListId?: int|null,
      *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
      *     ProductIds?: array<int>,
-     *     ProductFilterListChoice?: string|null,
+     *     ProductFilterListChoice?: mixed,
      *     ProductHistoryBasedOnInvoices?: bool|null,
      *     WebshopUserOrderlistProductType?: int|null,
      *     ActiveOffers?: bool|null,
@@ -436,6 +440,7 @@ class ProductRequest extends Request
      *     LoadExternalStockActiveSupplier?: bool|null,
      *     SkipRecords?: int|null,
      *     TakeRecords?: int|null,
+     *     FromId?: int|null,
      *     LoadProductGroups?: bool|null,
      *     LoadExtraBarcodes?: bool,
      *     OnlyShowParentProducts?: bool|null,
@@ -453,8 +458,8 @@ class ProductRequest extends Request
      */
     public function getProductsIds(
         array $parameters = [],
-    ): Int32Logic4ResponseList {
-        return Int32Logic4ResponseList::make(
+    ): Logic4ResponseListOfint {
+        return Logic4ResponseListOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetProductsIds', ['json' => $parameters]),
             )
@@ -482,6 +487,8 @@ class ProductRequest extends Request
     }
 
     /**
+     * Haal gerelateerde artikelen op.
+     *
      * @param array{
      *     ProductIds?: array<int>,
      *     RelatedTypeId?: int|null,
@@ -507,9 +514,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getStatuses(): ProductStatusLogic4ResponseList
+    public function getStatuses(): Logic4ResponseListOfProductStatus
     {
-        return ProductStatusLogic4ResponseList::make(
+        return Logic4ResponseListOfProductStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.1/Products/GetStatuses'),
             )
@@ -517,14 +524,14 @@ class ProductRequest extends Request
     }
 
     /**
-     * Verkrijg alle leveranciers van een product.
+     * Verkrijg alle leveranciers van één product.
      *
      * @throws Logic4ApiException
      */
     public function getSuppliersForProduct(
         int $value,
-    ): ProductSupplierLogic4ResponseList {
-        return ProductSupplierLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductSupplier {
+        return Logic4ResponseListOfProductSupplier::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/GetSuppliersForProduct', ['json' => $value]),
             )
@@ -558,9 +565,9 @@ class ProductRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getUnits(): ProductUnitLogic4ResponseList
+    public function getUnits(): Logic4ResponseListOfProductUnit
     {
-        return ProductUnitLogic4ResponseList::make(
+        return Logic4ResponseListOfProductUnit::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1.1/Products/GetUnits'),
             )
@@ -568,6 +575,9 @@ class ProductRequest extends Request
     }
 
     /**
+     * Verwijder een leverancier voor een artikel.
+     * Geeft een productId terug als resultaat indien het verwijderen goed is verlopen.
+     *
      * @param array{
      *     SupplierId?: int,
      *     ProductId?: int,
@@ -577,8 +587,8 @@ class ProductRequest extends Request
      */
     public function removeProductSupplier(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->delete('/v1.1/Products/RemoveProductSupplier', ['json' => $parameters]),
             )
@@ -586,6 +596,8 @@ class ProductRequest extends Request
     }
 
     /**
+     * Maak een leverancier voor een artikel actief.
+     * Geeft een productId terug als resultaat indien het opslaan goed is verlopen.
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
@@ -597,8 +609,8 @@ class ProductRequest extends Request
      */
     public function setActiveProductSupplier(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/SetActiveProductSupplier', ['json' => $parameters]),
             )
@@ -606,6 +618,9 @@ class ProductRequest extends Request
     }
 
     /**
+     * Updaten van een product.
+     * Geeft een productId terug als resultaat indien het opslaan goed is verlopen.
+     *
      * @param array{
      *     ProductId?: int,
      *     ProductDescription1?: string|null,
@@ -648,13 +663,20 @@ class ProductRequest extends Request
      *     MinStockCount?: int|null,
      *     MaxStockCount?: int|null,
      *     TemplateId?: int|null,
+     *     HidePricesOnWebsite?: bool,
+     *     ShowOfferButtonOnWebsite?: bool,
+     *     HideStartingPricesOnWebsite?: bool,
+     *     OfferStartDate?: string|null,
+     *     OfferEndDate?: string|null,
+     *     OfferFromPrice?: number|null,
+     *     OfferToPrice?: number|null,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
-    public function updateProduct(array $parameters = []): Int32Logic4Response
+    public function updateProduct(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1.1/Products/UpdateProduct', ['json' => $parameters]),
             )
@@ -662,10 +684,13 @@ class ProductRequest extends Request
     }
 
     /**
+     * Voeg een barcode toe aan een artikel
+     * Geeft een productId terug als resultaat indien het opslaan goed is verlopen.
+     *
      * @param array{
      *     ProductId?: int,
      *     TypeId?: int|null,
-     *     Barcode?: string,
+     *     Barcode?: string|null,
      *     Quantity?: int,
      *     UnitId?: int|null,
      * } $parameters
@@ -674,8 +699,8 @@ class ProductRequest extends Request
      */
     public function updateProductAddExtraBarcode(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductAddExtraBarcode', ['json' => $parameters]),
             )
@@ -683,6 +708,7 @@ class ProductRequest extends Request
     }
 
     /**
+     * Update een afbeelding van het artikel
      * - Maximale grootte van het bericht is 5MB
      * - Return waarde is een AfbeeldingId als de opdracht is geslaagd.
      *
@@ -698,8 +724,8 @@ class ProductRequest extends Request
      */
     public function updateProductImage(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->put('/v1.1/Products/UpdateProductImage', ['json' => $parameters]),
             )
@@ -707,6 +733,7 @@ class ProductRequest extends Request
     }
 
     /**
+     * Updaten van de artikel hoofdgroep en merk.
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
@@ -719,8 +746,8 @@ class ProductRequest extends Request
      */
     public function updateProductMainGroupAndBrand(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1.1/Products/UpdateProductMainGroupAndBrand', ['json' => $parameters]),
             )
@@ -728,6 +755,9 @@ class ProductRequest extends Request
     }
 
     /**
+     * Updaten van de artikel staffel prijzen.
+     * Geeft een productId terug als resultaat indien het opslaan goed is verlopen.
+     * Niet aangeleverde staffels zullen automatisch worden verwijderd.
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
@@ -739,8 +769,8 @@ class ProductRequest extends Request
      */
     public function updateProductPrices(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductPrices', ['json' => $parameters]),
             )
@@ -748,17 +778,20 @@ class ProductRequest extends Request
     }
 
     /**
+     * Verwijder een barcode van een artikel
+     * Geeft een productId terug als resultaat indien het opslaan goed is verlopen.
+     *
      * @param array{
      *     ProductId?: int,
-     *     Barcode?: string,
+     *     Barcode?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
      */
     public function updateProductRemoveExtraBarcode(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductRemoveExtraBarcode', ['json' => $parameters]),
             )
@@ -766,18 +799,17 @@ class ProductRequest extends Request
     }
 
     /**
-     * Een SEO informatie record word op basis van een combinatie van ProductId, GlobalizationId en WebsiteDomainId geselecteerd.
+     * Verander de SEO informatie voor een product op basis van taal en webshopdomein.
+     * Een SEO informatie record wordt op basis van een combinatie van ProductId, GlobalizationId en WebsiteDomainId geselecteerd.
      * WebsiteDomainId mag null zijn, dan geldt de gegeven SEO informatie voor alle webhopdomeinen.
-     *
-     * Als een record niet bestaat wordt deze aangemaakt. Lege records worden automatisch verwijdert.
+     * <br />
+     * Als een record niet bestaat wordt deze aangemaakt. Lege records worden automatisch verwijderd.
      * Niet-lege records moeten ten minste een Title of Description hebben.
-     *
-     *
-     * Bij het meegeven van een lege string of 'null' voor informatie velden, wordt bestaande informatie leeg gehaald.
+     * <br />
+     * Bij het meegeven van een lege string of 'null' voor informatievelden, wordt bestaande informatie leeg gehaald.
      * Velden die niet in de request staan worden niet gewijzigd.
-     *
-     *
-     * Als een product geen SEO informatie heeft voor een bepaalde taal en webshopdomein vindt er een fallback plaats op de basis informatie van het artikel.
+     * <br />
+     * Als een product geen SEO informatie heeft voor een bepaalde taal en webshopdomein vindt er een fallback plaats op de basisinformatie van het artikel.
      *
      * @param array{
      *     WebsiteDomainId?: int|null,
@@ -794,8 +826,8 @@ class ProductRequest extends Request
      */
     public function updateProductSEOInformation(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1.1/Products/UpdateProductSEOInformation', ['json' => $parameters]),
             )
@@ -803,6 +835,9 @@ class ProductRequest extends Request
     }
 
     /**
+     * Updaten van de artikel leverancier.
+     * Geeft een productId terug als resultaat indien het opslaan goed is verlopen.
+     *
      * @param array{
      *     Supplier_ProductCode?: string|null,
      *     ProductName?: string|null,
@@ -820,8 +855,8 @@ class ProductRequest extends Request
      */
     public function updateProductSupplier(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductSupplier', ['json' => $parameters]),
             )
@@ -829,6 +864,8 @@ class ProductRequest extends Request
     }
 
     /**
+     * Update de prijzen van de leverancier. Geeft een productId terug als resultaat.
+     *
      * @param array{
      *     ProductId?: int,
      *     SupplierId?: int,
@@ -839,8 +876,8 @@ class ProductRequest extends Request
      */
     public function updateProductSupplierProductPrice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Products/UpdateProductSupplierProductPrice', ['json' => $parameters]),
             )

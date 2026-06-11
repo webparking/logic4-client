@@ -6,8 +6,8 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V10\ProductPricelistLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfProductPricelist;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfint;
 
 class PriceListsRequest extends Request
 {
@@ -24,8 +24,8 @@ class PriceListsRequest extends Request
      */
     public function getPricelists(
         array $parameters = [],
-    ): ProductPricelistLogic4ResponseList {
-        return ProductPricelistLogic4ResponseList::make(
+    ): Logic4ResponseListOfProductPricelist {
+        return Logic4ResponseListOfProductPricelist::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/PriceLists/GetPricelists', ['json' => $parameters]),
             )
@@ -33,6 +33,8 @@ class PriceListsRequest extends Request
     }
 
     /**
+     * Contractprijzen bijwerken binnen de prijslijst.
+     *
      * @param array{
      *     PriceListId?: int,
      *     ProductStaggeredPrices?: array<array{ProductId?: int, Prices?: array<array{Qty?: int, PriceEx?: number, DateFrom?: string|null, DateTo?: string|null}>}>,
@@ -42,8 +44,8 @@ class PriceListsRequest extends Request
      */
     public function updatePriceListForProducts(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->put('/v1/PriceLists/UpdatePriceListForProducts', ['json' => $parameters]),
             )

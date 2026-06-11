@@ -9,8 +9,8 @@ use Webparking\Logic4Client\Data\V11\ReturnProblemV11;
 use Webparking\Logic4Client\Data\V11\ReturnSolution;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V11\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V11\OrderLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseListOfOrder;
+use Webparking\Logic4Client\Responses\V11\Logic4ResponseOfint;
 
 class OrderRequest extends Request
 {
@@ -61,12 +61,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.3. - Factuur toevoegen of updaten
      */
-    public function addUpdateInvoice(array $parameters = []): Int32Logic4Response
+    public function addUpdateInvoice(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/AddUpdateInvoice', ['json' => $parameters]),
             )
@@ -120,12 +118,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.3. - Order toevoegen of updaten
      */
-    public function addUpdateOrder(array $parameters = []): Int32Logic4Response
+    public function addUpdateOrder(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/AddUpdateOrder', ['json' => $parameters]),
             )
@@ -134,7 +130,7 @@ class OrderRequest extends Request
 
     /**
      * Voeg een nieuwe orderregel toe of update een bestaande. Om een bestaande te updaten dient het veld 'Id' gevuld te zijn met een bestaand orderregelnummer.
-     *
+     * <br />
      * De optie "OrderRowWithProductComposition": {"AddProductCompositionByParentProductToOrder": true} heeft het volgende gedrag.
      * - Bij een nieuw product worden samenstellingen toegevoegd als het product een samengesteld product is.
      * - Bij een bestaand product worden samenstellingen toegevoegd mits er nog geen samenstellingen aanwezig zijn, anders komt er een foutmelding terug.
@@ -183,9 +179,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addUpdateOrderRow(array $parameters = []): Int32Logic4Response
+    public function addUpdateOrderRow(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/AddUpdateOrderRow', ['json' => $parameters]),
             )
@@ -201,7 +197,7 @@ class OrderRequest extends Request
      *     Totals?: array{ShippingCost?: number, ShippingCostIncl?: number|null},
      *     OriginalOrderId?: int,
      *     OriginalOrderDate?: string,
-     *     OriginalOrderZipCode?: string,
+     *     OriginalOrderZipCode?: string|null,
      *     ProblemId?: int,
      *     SolutionId?: int,
      *     ReceivedReturnOrderDate?: string|null,
@@ -247,9 +243,9 @@ class OrderRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function createReturnOrder(array $parameters = []): Int32Logic4Response
+    public function createReturnOrder(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/CreateReturnOrder', ['json' => $parameters]),
             )
@@ -290,12 +286,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.2. - Facturen ophalen
      */
-    public function getInvoices(array $parameters = []): OrderLogic4ResponseList
+    public function getInvoices(array $parameters = []): Logic4ResponseListOfOrder
     {
-        return OrderLogic4ResponseList::make(
+        return Logic4ResponseListOfOrder::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/GetInvoices', ['json' => $parameters]),
             )
@@ -303,14 +297,13 @@ class OrderRequest extends Request
     }
 
     /**
-     * Verkrijg het nog te betalen bedrag van nog niet uitgeleverde orders.
-     *
+     * Verkrijg het nog te betalen bedrag van nog niet uitgeleverde orders.<br />
      * Indien historypoints zijn aangegeven, moet timeframe een van de volgende waarden hebben: ['Day', 'Week', 'Month', 'Quarter', 'Year'].
      *
      * @param array{
      *     SkipRecords?: int,
      *     TakeRecords?: int,
-     *     TimeFrame?: string|null,
+     *     TimeFrame?: mixed,
      *     HistoryPoints?: int|null,
      *     OrderstatusIds?: array<int>,
      *     WebsiteDomainIds?: array<int>,
@@ -366,12 +359,10 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.3. - Orders ophalen
      */
-    public function getOrders(array $parameters = []): OrderLogic4ResponseList
+    public function getOrders(array $parameters = []): Logic4ResponseListOfOrder
     {
-        return OrderLogic4ResponseList::make(
+        return Logic4ResponseListOfOrder::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/GetOrders', ['json' => $parameters]),
             )
@@ -416,13 +407,11 @@ class OrderRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v2.0. - Retourorders ophalen
      */
     public function getReturnOrders(
         array $parameters = [],
-    ): OrderLogic4ResponseList {
-        return OrderLogic4ResponseList::make(
+    ): Logic4ResponseListOfOrder {
+        return Logic4ResponseListOfOrder::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/GetReturnOrders', ['json' => $parameters]),
             )
@@ -484,8 +473,8 @@ class OrderRequest extends Request
      */
     public function updateContactAddressForOrderOrInvoice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/UpdateContactAddressForOrderOrInvoice', ['json' => $parameters]),
             )
@@ -505,8 +494,8 @@ class OrderRequest extends Request
      */
     public function updateDeliveryAddressForOrderOrInvoice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/UpdateDeliveryAddressForOrderOrInvoice', ['json' => $parameters]),
             )
@@ -526,8 +515,8 @@ class OrderRequest extends Request
      */
     public function updateInvoiceAddressForOrderOrInvoice(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1.1/Orders/UpdateInvoiceAddressForOrderOrInvoice', ['json' => $parameters]),
             )

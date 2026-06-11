@@ -13,20 +13,20 @@ use Webparking\Logic4Client\Data\V10\CustomerContact;
 use Webparking\Logic4Client\Data\V10\DebtorCharacteristic;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\AddressTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\BooleanLogic4Response;
-use Webparking\Logic4Client\Responses\V10\ContactTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CreditorDiscountTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CreditorThirdPartyExternalIdentiferLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\CustomerThirdPartyExternalIdentiferLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\GenderLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\Int32Logic4Response;
-use Webparking\Logic4Client\Responses\V10\RelationStatusLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\RelationTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\RepresentativeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\SecondTypeContactGroupLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\ThirdPartyExternalIdentifierTypeLogic4ResponseList;
-use Webparking\Logic4Client\Responses\V10\TypeContactGroupLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfAddressType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfContactType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCreditorDiscountType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCreditorThirdPartyExternalIdentifer;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfCustomerThirdPartyExternalIdentifer;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfGender;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfRelationStatus;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfRelationType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfRepresentative;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfSecondTypeContactGroup;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfThirdPartyExternalIdentifierType;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfTypeContactGroup;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfboolean;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseOfint;
 
 class RelationsRequest extends Request
 {
@@ -48,8 +48,8 @@ class RelationsRequest extends Request
      */
     public function addCreditorDiscount(
         array $parameters = [],
-    ): Int32Logic4Response {
-        return Int32Logic4Response::make(
+    ): Logic4ResponseOfint {
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddCreditorDiscount', ['json' => $parameters]),
             )
@@ -69,6 +69,7 @@ class RelationsRequest extends Request
      *     FirstName?: string|null,
      *     LastName?: string|null,
      *     EmailAddress?: string|null,
+     *     LoginName?: string|null,
      *     PaymentMethodId?: int|null,
      *     PricelistIds?: array<int>,
      *     TelephoneNumber?: string|null,
@@ -106,9 +107,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addCustomer(array $parameters = []): Int32Logic4Response
+    public function addCustomer(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddCustomer', ['json' => $parameters]),
             )
@@ -146,9 +147,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addUpdateAddress(array $parameters = []): Int32Logic4Response
+    public function addUpdateAddress(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddUpdateAddress', ['json' => $parameters]),
             )
@@ -189,9 +190,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function addUpdateContact(array $parameters = []): Int32Logic4Response
+    public function addUpdateContact(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddUpdateContact', ['json' => $parameters]),
             )
@@ -211,8 +212,8 @@ class RelationsRequest extends Request
      */
     public function addUpdateCreditorThirdPartyExternalIdentifier(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddUpdateCreditorThirdPartyExternalIdentifier', ['json' => $parameters]),
             )
@@ -221,6 +222,7 @@ class RelationsRequest extends Request
 
     /**
      * Debiteur toevoegen of updaten.
+     * Gebruik als alternatief de gesplitste functies UpdateCustomer en AddCustomer.
      *
      * @param array{
      *     Id?: int|null,
@@ -263,13 +265,10 @@ class RelationsRequest extends Request
      * } $parameters
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik een nieuwere versie. - Debiteur toevoegen of updaten.
-     * Gebruik als alternatief de gesplitste functies UpdateCustomer en AddCustomer.
      */
-    public function addUpdateCustomer(array $parameters = []): Int32Logic4Response
+    public function addUpdateCustomer(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddUpdateCustomer', ['json' => $parameters]),
             )
@@ -289,8 +288,8 @@ class RelationsRequest extends Request
      */
     public function addUpdateCustomerThirdPartyExternalIdentifier(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/AddUpdateCustomerThirdPartyExternalIdentifier', ['json' => $parameters]),
             )
@@ -310,8 +309,8 @@ class RelationsRequest extends Request
      */
     public function deleteCreditorThirdPartyExternalIdentifier(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/DeleteCreditorThirdPartyExternalIdentifier', ['json' => $parameters]),
             )
@@ -331,8 +330,8 @@ class RelationsRequest extends Request
      */
     public function deleteCustomerThirdPartyExternalIdentifier(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/DeleteCustomerThirdPartyExternalIdentifier', ['json' => $parameters]),
             )
@@ -357,8 +356,6 @@ class RelationsRequest extends Request
      * @return \Generator<array-key, CustomerAddress>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Adressen ophalen
      */
     public function getAddresses(array $parameters = []): \Generator
     {
@@ -374,9 +371,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getAddressTypes(): AddressTypeLogic4ResponseList
+    public function getAddressTypes(): Logic4ResponseListOfAddressType
     {
-        return AddressTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfAddressType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetAddressTypes'),
             )
@@ -401,8 +398,6 @@ class RelationsRequest extends Request
      * @return \Generator<array-key, CustomerContact>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Contacten ophalen
      */
     public function getContacts(array $parameters = []): \Generator
     {
@@ -414,10 +409,12 @@ class RelationsRequest extends Request
     }
 
     /**
+     * Haal kenmerken met bijbehorende vertegenwoordiger op voor contacten.
+     *
      * @param array{
      *     ContactIds?: array<int>,
      *     DebtorId?: int|null,
-     *     ContactType?: string|null,
+     *     ContactType?: mixed,
      *     LastCharacteristicChangeDateTime?: string|null,
      *     SkipRecords?: int,
      *     TakeRecords?: int,
@@ -437,11 +434,13 @@ class RelationsRequest extends Request
     }
 
     /**
+     * Contact types ophalen.
+     *
      * @throws Logic4ApiException
      */
-    public function getContactTypes(): ContactTypeLogic4ResponseList
+    public function getContactTypes(): Logic4ResponseListOfContactType
     {
-        return ContactTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfContactType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetContactTypes'),
             )
@@ -476,8 +475,8 @@ class RelationsRequest extends Request
      * @throws Logic4ApiException
      */
     public function getCreditorDiscountTypes(
-    ): CreditorDiscountTypeLogic4ResponseList {
-        return CreditorDiscountTypeLogic4ResponseList::make(
+    ): Logic4ResponseListOfCreditorDiscountType {
+        return Logic4ResponseListOfCreditorDiscountType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetCreditorDiscountTypes'),
             )
@@ -500,8 +499,6 @@ class RelationsRequest extends Request
      * @return \Generator<array-key, Creditor>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Crediteuren ophalen
      */
     public function getCreditors(array $parameters = []): \Generator
     {
@@ -525,8 +522,8 @@ class RelationsRequest extends Request
      */
     public function getCreditorThirdPartyExternalIdentifiers(
         array $parameters = [],
-    ): CreditorThirdPartyExternalIdentiferLogic4ResponseList {
-        return CreditorThirdPartyExternalIdentiferLogic4ResponseList::make(
+    ): Logic4ResponseListOfCreditorThirdPartyExternalIdentifer {
+        return Logic4ResponseListOfCreditorThirdPartyExternalIdentifer::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/GetCreditorThirdPartyExternalIdentifiers', ['json' => $parameters]),
             )
@@ -549,8 +546,6 @@ class RelationsRequest extends Request
      * @return \Generator<array-key, Customer>
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Debiteuren ophalen
      */
     public function getCustomers(array $parameters = []): \Generator
     {
@@ -562,6 +557,8 @@ class RelationsRequest extends Request
     }
 
     /**
+     * Haal kenmerken met bijbehorende vertegenwoordiger op voor debiteuren.
+     *
      * @param array{
      *     DebtorIds?: array<int>,
      *     LastCharacteristicChangeDateTime?: string|null,
@@ -595,8 +592,8 @@ class RelationsRequest extends Request
      */
     public function getCustomerThirdPartyExternalIdentifiers(
         array $parameters = [],
-    ): CustomerThirdPartyExternalIdentiferLogic4ResponseList {
-        return CustomerThirdPartyExternalIdentiferLogic4ResponseList::make(
+    ): Logic4ResponseListOfCustomerThirdPartyExternalIdentifer {
+        return Logic4ResponseListOfCustomerThirdPartyExternalIdentifer::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/GetCustomerThirdPartyExternalIdentifiers', ['json' => $parameters]),
             )
@@ -608,9 +605,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getGenders(): GenderLogic4ResponseList
+    public function getGenders(): Logic4ResponseListOfGender
     {
-        return GenderLogic4ResponseList::make(
+        return Logic4ResponseListOfGender::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetGenders'),
             )
@@ -622,9 +619,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getRelationStatuses(): RelationStatusLogic4ResponseList
+    public function getRelationStatuses(): Logic4ResponseListOfRelationStatus
     {
-        return RelationStatusLogic4ResponseList::make(
+        return Logic4ResponseListOfRelationStatus::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetRelationStatuses'),
             )
@@ -636,9 +633,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getRelationTypes(): RelationTypeLogic4ResponseList
+    public function getRelationTypes(): Logic4ResponseListOfRelationType
     {
-        return RelationTypeLogic4ResponseList::make(
+        return Logic4ResponseListOfRelationType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetRelationTypes'),
             )
@@ -649,12 +646,10 @@ class RelationsRequest extends Request
      * Verkrijg alle vertegenwoordigers.
      *
      * @throws Logic4ApiException
-     *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - Vertegenwoordigers ophalen
      */
-    public function getRepresentatives(): RepresentativeLogic4ResponseList
+    public function getRepresentatives(): Logic4ResponseListOfRepresentative
     {
-        return RepresentativeLogic4ResponseList::make(
+        return Logic4ResponseListOfRepresentative::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetRepresentatives'),
             )
@@ -667,8 +662,8 @@ class RelationsRequest extends Request
      * @throws Logic4ApiException
      */
     public function getSecondContactGroupTypes(
-    ): SecondTypeContactGroupLogic4ResponseList {
-        return SecondTypeContactGroupLogic4ResponseList::make(
+    ): Logic4ResponseListOfSecondTypeContactGroup {
+        return Logic4ResponseListOfSecondTypeContactGroup::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetSecondContactGroupTypes'),
             )
@@ -681,8 +676,8 @@ class RelationsRequest extends Request
      * @throws Logic4ApiException
      */
     public function getThirdPartyExternalIdentfierTypes(
-    ): ThirdPartyExternalIdentifierTypeLogic4ResponseList {
-        return ThirdPartyExternalIdentifierTypeLogic4ResponseList::make(
+    ): Logic4ResponseListOfThirdPartyExternalIdentifierType {
+        return Logic4ResponseListOfThirdPartyExternalIdentifierType::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetThirdPartyExternalIdentfierTypes'),
             )
@@ -694,9 +689,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function getTypeContactGroups(): TypeContactGroupLogic4ResponseList
+    public function getTypeContactGroups(): Logic4ResponseListOfTypeContactGroup
     {
-        return TypeContactGroupLogic4ResponseList::make(
+        return Logic4ResponseListOfTypeContactGroup::make(
             $this->buildResponse(
                 $this->getClient()->get('/v1/Relations/GetTypeContactGroups'),
             )
@@ -722,8 +717,8 @@ class RelationsRequest extends Request
      */
     public function updateCreditorDiscount(
         array $parameters = [],
-    ): BooleanLogic4Response {
-        return BooleanLogic4Response::make(
+    ): Logic4ResponseOfboolean {
+        return Logic4ResponseOfboolean::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Relations/UpdateCreditorDiscount', ['json' => $parameters]),
             )
@@ -742,6 +737,7 @@ class RelationsRequest extends Request
      *     FirstName?: string|null,
      *     LastName?: string|null,
      *     EmailAddress?: string|null,
+     *     LoginName?: string|null,
      *     PaymentMethodId?: int|null,
      *     PricelistIds?: array<int>,
      *     TelephoneNumber?: string|null,
@@ -779,9 +775,9 @@ class RelationsRequest extends Request
      *
      * @throws Logic4ApiException
      */
-    public function updateCustomer(array $parameters = []): Int32Logic4Response
+    public function updateCustomer(array $parameters = []): Logic4ResponseOfint
     {
-        return Int32Logic4Response::make(
+        return Logic4ResponseOfint::make(
             $this->buildResponse(
                 $this->getClient()->patch('/v1/Relations/UpdateCustomer', ['json' => $parameters]),
             )

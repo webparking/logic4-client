@@ -6,7 +6,7 @@ namespace Webparking\Logic4Client\Requests\V10;
 
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
-use Webparking\Logic4Client\Responses\V10\SubscriberLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\Logic4ResponseListOfSubscriber;
 
 class MarketingRequest extends Request
 {
@@ -22,8 +22,8 @@ class MarketingRequest extends Request
      */
     public function getSubscribers(
         array $parameters = [],
-    ): SubscriberLogic4ResponseList {
-        return SubscriberLogic4ResponseList::make(
+    ): Logic4ResponseListOfSubscriber {
+        return Logic4ResponseListOfSubscriber::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Marketing/GetSubscribers', ['json' => $parameters]),
             )
