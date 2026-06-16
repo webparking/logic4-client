@@ -57,9 +57,10 @@ class ComponentClassGenerator
                 $type = $this->resolve($parameter->getReference(), 'Data', $version);
                 $typedParameters[$parameterName] = $type;
             } else {
-                $type = Helpers::phpType($parameter->type, $parameter->type);
+                $primaryType = Helpers::primaryType($parameter->type);
+                $type = Helpers::phpType($parameter->type, $primaryType ?? 'mixed');
 
-                if ('string' === $parameter->type && 'date-time' === $parameter->format) {
+                if ('string' === $primaryType && 'date-time' === $parameter->format) {
                     $type = Carbon::class;
 
                     $dateParameters[] = $parameterName;
@@ -71,14 +72,15 @@ class ComponentClassGenerator
                         $arrayParameters[$parameterName] = $commentType;
                         $commentType = '\\'.$commentType;
                     } else {
-                        $commentType = $parameter->items?->type ?? 'mixed';
+                        $commentType = $parameter->items ? Helpers::primaryType($parameter->items->type) : null;
+                        $commentType ??= 'mixed';
                     }
 
                     $constructor->addComment('@param array<'.$commentType.'> $'.$this->propertyName($parameterName));
                 }
             }
 
-            $nullable = !\in_array($parameterName, ['Records', 'ValidationMessages'], true) && (($parameter->nullable ?? false) || class_exists($type));
+            $nullable = !\in_array($parameterName, ['Records', 'ValidationMessages'], true) && (Helpers::isNullable($parameter) || class_exists($type));
 
             $constructor
                 ->addPromotedParameter($this->propertyName($parameterName))

@@ -54,7 +54,6 @@ class Generator
         $versions = [];
         foreach ($config['sources'] as $source) {
             if (preg_match('/Version v(\d+\.\d+)/', $source['title'], $versionMatch)
-                && !str_starts_with($versionMatch[1], '3.')
             ) {
                 $versions[$versionMatch[1]] = self::$baseUrl.$source['url'];
             }
@@ -135,21 +134,22 @@ class Generator
                 $responseReference = $operation->responses['200']->content['application/json']->schema ?? null;
 
                 if ($responseReference instanceof Schema) {
-                    $returnType = $responseReference->type;
+                    $returnType = Helpers::primaryType($responseReference->type);
 
                     $arrayType = null;
-                    if ('array' === $returnType) {
+                    if ('array' === $returnType && $responseReference->items instanceof Reference) {
                         $arrayType = $this->componentClassGenerator->resolve(
                             $responseReference->items->getReference(),
                             'Responses',
                             $this->getVersion($version)
                         );
+                    } elseif ('array' === $returnType && $responseReference->items instanceof Schema) {
+                        $itemType = Helpers::primaryType($responseReference->items->type);
+                        $arrayType = Helpers::phpType($itemType, $itemType ?? 'mixed');
                     }
 
                     $classMethod = $requestGenerator->addMethod($method, $uri, $operation, $returnType, arrayType: $arrayType);
-                } else {
-                    Assert::isInstanceOf($responseReference, Reference::class);
-
+                } elseif ($responseReference instanceof Reference) {
                     $requestSchema = $requestProperties instanceof Reference
                         ? $this->resolveReference($requestProperties->getReference())->properties
                         : [];
@@ -179,6 +179,8 @@ class Generator
                     }
 
                     $classMethod = $requestGenerator->addMethod($method, $uri, $operation, returnType: $returnType, paginated: $paginatedResponse ?: null);
+                } else {
+                    $classMethod = $requestGenerator->addMethod($method, $uri, $operation, void: true);
                 }
 
                 if ($operation->description) {
