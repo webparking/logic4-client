@@ -163,6 +163,14 @@ class RequestClassGenerator
                         PHP
                 );
             }
+        } elseif ('string' === $returnType) {
+            $method->setBody(
+                <<<PHP
+                    return \$this->buildStringResponse(
+                        \$this->getClient()->{$httpMethod}('{$uri}'{$parametersPhp}),
+                    );
+                    PHP
+            );
         } else {
             $method->setBody(
                 <<<PHP

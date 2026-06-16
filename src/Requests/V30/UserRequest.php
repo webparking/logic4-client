@@ -34,7 +34,7 @@ class UserRequest extends Request
      */
     public function getNotice(): string
     {
-        return $this->buildResponse(
+        return $this->buildStringResponse(
             $this->getClient()->get('/v3/User/GetNotice'),
         );
     }

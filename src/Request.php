@@ -31,6 +31,11 @@ abstract class Request
         return json_decode((string) $response->getBody(), true, 512, \JSON_THROW_ON_ERROR);
     }
 
+    protected function buildStringResponse(ResponseInterface $response): string
+    {
+        return (string) $response->getBody();
+    }
+
     /**
      * @param array<mixed> $body
      *

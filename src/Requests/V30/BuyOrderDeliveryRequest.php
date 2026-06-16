@@ -32,7 +32,7 @@ class BuyOrderDeliveryRequest extends Request
      */
     public function createBuyOrderDelivery(array $parameters = []): string
     {
-        return $this->buildResponse(
+        return $this->buildStringResponse(
             $this->getClient()->post('/v3/BuyOrderDeliveries/CreateBuyOrderDelivery', ['json' => $parameters]),
         );
     }

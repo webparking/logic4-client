@@ -151,7 +151,7 @@ class PickbonsRequest extends Request
      */
     public function processPickbons(array $parameters = []): string
     {
-        return $this->buildResponse(
+        return $this->buildStringResponse(
             $this->getClient()->post('/v3/Pickbons/ProcessPickbons', ['json' => $parameters]),
         );
     }
