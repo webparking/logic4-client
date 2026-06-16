@@ -13,9 +13,7 @@ use Webparking\Logic4Client\Responses\V12\ProductExtraBarcodeTypeLogic4ResponseL
 
 class ProductRequest extends Request
 {
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getBarcodeTypes(): ProductExtraBarcodeTypeLogic4ResponseList
     {
         return ProductExtraBarcodeTypeLogic4ResponseList::make(

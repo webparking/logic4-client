@@ -13,6 +13,8 @@ use Webparking\Logic4Client\Enums\PaginateType;
 
 class Generator
 {
+    public const string GENERATED_MAJOR_VERSION = '3';
+
     public static string $scalarUrl = 'https://api.logic4server.nl/scalar/';
     public static string $baseUrl = 'https://api.logic4server.nl/';
     public string $localApi = __DIR__.'/../logic4-api-%s.json';

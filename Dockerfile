@@ -1,5 +1,5 @@
 FROM ${DEPENDENCY_PROXY}composer:latest AS composer
-FROM ${DEPENDENCY_PROXY}php:8.1-fpm-alpine
+FROM ${DEPENDENCY_PROXY}php:8.3-fpm-alpine
 
 ARG PUID=1000
 ARG PGID=1000

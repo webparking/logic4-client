@@ -142,9 +142,7 @@ class ProductRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getPackageMaterialDepositTypes(
     ): PackingMaterialDepositTypeLogic4ResponseList {
         return PackingMaterialDepositTypeLogic4ResponseList::make(

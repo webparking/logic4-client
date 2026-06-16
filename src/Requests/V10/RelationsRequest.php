@@ -436,9 +436,7 @@ class RelationsRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getContactTypes(): ContactTypeLogic4ResponseList
     {
         return ContactTypeLogic4ResponseList::make(
