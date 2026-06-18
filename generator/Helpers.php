@@ -97,6 +97,40 @@ class Helpers
         return $parameters;
     }
 
+    public static function isEnum(Schema $schema): bool
+    {
+        return [] !== ($schema->enum ?? []);
+    }
+
+    public static function enumPhpType(Schema $schema): string
+    {
+        $primary = self::primaryType($schema->type);
+
+        if (null !== $primary) {
+            return self::phpType($primary, $primary);
+        }
+
+        foreach ($schema->enum ?? [] as $value) {
+            if (\is_int($value)) {
+                return 'int';
+            }
+
+            if (\is_float($value)) {
+                return 'float';
+            }
+
+            if (\is_bool($value)) {
+                return 'bool';
+            }
+
+            if (\is_string($value)) {
+                return 'string';
+            }
+        }
+
+        return 'string';
+    }
+
     public static function phpType(mixed $type, string $default = 'mixed'): string
     {
         if (\is_array($type)) {

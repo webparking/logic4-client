@@ -9,7 +9,7 @@ class ContactCharacteristic
     public function __construct(
         public int $contactId,
         public ?int $debtorId,
-        public ?\Webparking\Logic4Client\Data\V30\ContactTypeEnum $contactType,
+        public ?string $contactType,
         public ?string $relationCharacteristic,
     ) {
     }
@@ -20,7 +20,7 @@ class ContactCharacteristic
         return new self(
             contactId: $data['ContactId'] ?? 0,
             debtorId: $data['DebtorId'] ?? null,
-            contactType: isset($data['ContactType']) ? \Webparking\Logic4Client\Data\V30\ContactTypeEnum::make($data['ContactType']) : null,
+            contactType: $data['ContactType'] ?? null,
             relationCharacteristic: $data['RelationCharacteristic'] ?? null,
         );
     }
