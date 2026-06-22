@@ -14,7 +14,7 @@ class WebshopVisitorBehaviour
         public ?int $composedProductParentId,
         public ?float $qtyDec,
         public ?string $commission,
-        public ?\Webparking\Logic4Client\Data\V30\WebsiteProductListType $webshopUserProductListType,
+        public ?string $webshopUserProductListType,
         public ?int $debtorId,
         public ?int $websiteDomainId,
     ) {
@@ -31,7 +31,7 @@ class WebshopVisitorBehaviour
             composedProductParentId: $data['ComposedProductParentId'] ?? null,
             qtyDec: $data['QtyDec'] ?? null,
             commission: $data['Commission'] ?? null,
-            webshopUserProductListType: isset($data['WebshopUserProductListType']) ? \Webparking\Logic4Client\Data\V30\WebsiteProductListType::make($data['WebshopUserProductListType']) : null,
+            webshopUserProductListType: $data['WebshopUserProductListType'] ?? null,
             debtorId: $data['DebtorId'] ?? null,
             websiteDomainId: $data['WebsiteDomainId'] ?? null,
         );

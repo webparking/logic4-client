@@ -8,7 +8,7 @@ class ProductResource
 {
     public function __construct(
         public ?string $fileName,
-        public ?DatabankViewOption $type,
+        public ?string $type,
         public ?string $description,
         public ?int $sorting,
         public ?string $url,
@@ -20,7 +20,7 @@ class ProductResource
     {
         return new self(
             fileName: $data['FileName'] ?? null,
-            type: isset($data['Type']) ? DatabankViewOption::make($data['Type']) : null,
+            type: $data['Type'] ?? null,
             description: $data['Description'] ?? null,
             sorting: $data['Sorting'] ?? null,
             url: $data['Url'] ?? null,
