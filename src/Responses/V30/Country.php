@@ -12,6 +12,7 @@ class Country
         public int $zoneId,
         public ?array $names,
         public ?string $isoCode,
+        public ?string $countryCode,
     ) {
     }
 
@@ -23,6 +24,7 @@ class Country
             zoneId: $data['ZoneId'] ?? 0,
             names: array_map(static fn (array $item) => \Webparking\Logic4Client\Data\V30\Translation::make($item), $data['Names'] ?? []),
             isoCode: $data['IsoCode'] ?? null,
+            countryCode: $data['CountryCode'] ?? null,
         );
     }
 }

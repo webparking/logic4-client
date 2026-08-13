@@ -12,6 +12,7 @@ use Webparking\Logic4Client\Responses\V30\ContactType;
 use Webparking\Logic4Client\Responses\V30\Creditor;
 use Webparking\Logic4Client\Responses\V30\CreditorDiscount;
 use Webparking\Logic4Client\Responses\V30\CreditorDiscountType;
+use Webparking\Logic4Client\Responses\V30\CreditorOutstandingPost;
 use Webparking\Logic4Client\Responses\V30\CreditorThirdPartyExternalIdentifer;
 use Webparking\Logic4Client\Responses\V30\Customer;
 use Webparking\Logic4Client\Responses\V30\CustomerAddress;
@@ -451,6 +452,30 @@ class RelationsRequest extends Request
             static fn (array $data) => CreditorDiscountType::make($data),
             $this->buildResponse(
                 $this->getClient()->get('/v3/Relations/GetCreditorDiscountTypes'),
+            ),
+        );
+    }
+
+    /**
+     * Crediteur openstaande posten ophalen.
+     *
+     * @param array{
+     *     Date?: string|null,
+     *     CreditorId?: int|null,
+     *     Reference?: string|null,
+     *     StatusId?: int|null,
+     * } $parameters
+     *
+     * @return array<array-key, CreditorOutstandingPost>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getCreditorOutstandingPosts(array $parameters = []): array
+    {
+        return array_map(
+            static fn (array $data) => CreditorOutstandingPost::make($data),
+            $this->buildResponse(
+                $this->getClient()->post('/v3/Relations/GetCreditorOutstandingPosts', ['json' => $parameters]),
             ),
         );
     }
