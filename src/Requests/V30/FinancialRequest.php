@@ -11,7 +11,7 @@ use Webparking\Logic4Client\Responses\V30\FinancialBookBooking;
 use Webparking\Logic4Client\Responses\V30\FinancialJournal;
 use Webparking\Logic4Client\Responses\V30\FinancialJournalStatus;
 use Webparking\Logic4Client\Responses\V30\Ledger;
-use Webparking\Logic4Client\Responses\V30\PaymentMethod;
+use Webparking\Logic4Client\Responses\V30\PaymentMethodV3;
 use Webparking\Logic4Client\Responses\V30\TypeCostCenter;
 use Webparking\Logic4Client\Responses\V30\TypeEntityCode;
 use Webparking\Logic4Client\Responses\V30\TypeFinancialBookingStatus;
@@ -258,14 +258,14 @@ class FinancialRequest extends Request
     /**
      * Verkrijg alle betaalmethodes.
      *
-     * @return array<array-key, PaymentMethod>
+     * @return array<array-key, PaymentMethodV3>
      *
      * @throws Logic4ApiException
      */
     public function getPaymentMethods(): array
     {
         return array_map(
-            static fn (array $data) => PaymentMethod::make($data),
+            static fn (array $data) => PaymentMethodV3::make($data),
             $this->buildResponse(
                 $this->getClient()->get('/v3/Financial/GetPaymentMethods'),
             ),
@@ -352,8 +352,21 @@ class FinancialRequest extends Request
      * Eerst worden er crediteuren gematched op basis van het KvK-nummer en het btw-nummer.
      * Alléén als dit geen resultaat levert, probeert het systeem te matchen op bedrijfsnaam, postcode en stadsnaam (alleen velden die in de UBL gevuld zijn worden gebruikt.)
      * Nadat er gematched is wordt er een crediteur gekozen of gecreëerd afhankelijk van het volgende:
+     * - Als er één unieke match wordt gevonden, wordt deze crediteur gekoppeld aan de inkoopboeking.
+     * - Als er geen match wordt gevonden, wordt automatisch een nieuwe crediteur aangemaakt.
+     * - Als er meerdere crediteuren zijn gematched, wordt er ook een nieuwe crediteur aangemaakt in plaats van dat er een bestaande gebruikt wordt.
      * <br />
-     * <ul></ul>.
+     * <b>Grootboek per regel:</b> Het systeem leest het grootboeknummer uit de UBL per InvoiceLine via het element
+     * cac:AdditionalItemProperty met naam "Ledger". De waarde is het grootboeknummer (niet het ledger ID).
+     * Deze zijn via het eindpunt /Financial/GetLedgers op te vragen.
+     * Indien het grootboek niet wordt gevonden of geblokkeerd is, wordt het default grootboek van de crediteur gebruikt.
+     * <br />
+     * <b>BTW code overrule:</b> Per InvoiceLine kan de BTW code worden overruled via cac:AdditionalItemProperty met
+     * naam "L4VatCodeIdOverrule" en als waarde het VatCodeId. Het BTW percentage in de UBL moet overeenkomen met het
+     * percentage van de gekozen BTW code, anders wordt de boeking afgewezen.
+     * <br />
+     * <b>Gesloten periode:</b> Indien de boekingsdatum in een gesloten periode valt, wordt de boeking niet aangemaakt
+     * en retourneert het endpoint een foutmelding.
      *
      * @param array{
      *     Xml?: string|null,
@@ -361,6 +374,11 @@ class FinancialRequest extends Request
      *     StatusId?: int,
      *     UserId?: int|null,
      *     CreditorId?: int|null,
+     *     Description?: string|null,
+     *     FreeValue1?: string|null,
+     *     FreeValue2?: string|null,
+     *     FreeValue3?: string|null,
+     *     BookingDateTime?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
