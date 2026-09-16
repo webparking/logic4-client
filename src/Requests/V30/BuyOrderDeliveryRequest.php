@@ -131,7 +131,9 @@ class BuyOrderDeliveryRequest extends Request
 
     /**
      * Wijzig de inkooplevering.
-     * Enkel statusId 3 of 5 zijn toegestaan.
+     * De status van volledig verwerkte inkoopleveringen (statusId=5) kan niet worden aangepast.
+     * Toegestane waarden voor statusId zijn 2 (levering verwerkt, wacht op factuur), 3 (wacht op controle),
+     * 5 (volledig verwerkt) en 7 (levering verwerkt, factuur deels verwerkt).
      *
      * @param array{
      *     Id?: int,

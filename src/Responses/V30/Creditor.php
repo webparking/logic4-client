@@ -28,6 +28,7 @@ class Creditor
         public ?\Webparking\Logic4Client\Data\V30\CreditorTypeDto $creditorType,
         public ?string $telephoneNumber,
         public ?string $vatNumber,
+        public ?string $bankAccount,
     ) {
     }
 
@@ -56,6 +57,7 @@ class Creditor
             creditorType: isset($data['CreditorType']) ? \Webparking\Logic4Client\Data\V30\CreditorTypeDto::make($data['CreditorType']) : null,
             telephoneNumber: $data['TelephoneNumber'] ?? null,
             vatNumber: $data['VatNumber'] ?? null,
+            bankAccount: $data['BankAccount'] ?? null,
         );
     }
 }

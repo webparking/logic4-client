@@ -28,6 +28,7 @@ class WarehouseStockLocation
         public ?string $columnName,
         public ?string $rowName,
         public ?string $warehouseName,
+        public bool $isUsedAsInTransitLocation,
     ) {
     }
 
@@ -56,6 +57,7 @@ class WarehouseStockLocation
             columnName: $data['ColumnName'] ?? null,
             rowName: $data['RowName'] ?? null,
             warehouseName: $data['WarehouseName'] ?? null,
+            isUsedAsInTransitLocation: $data['IsUsedAsInTransitLocation'] ?? false,
         );
     }
 }
