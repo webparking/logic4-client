@@ -11,13 +11,11 @@ use cebe\openapi\spec\Schema;
 use Webmozart\Assert\Assert;
 use Webparking\Logic4Client\Enums\PaginateType;
 
-class Generator
+final class Generator
 {
     public const string GENERATED_MAJOR_VERSION = '3';
 
-    public static string $scalarUrl = 'https://api.logic4server.nl/scalar/';
-    public static string $baseUrl = 'https://api.logic4server.nl/';
-    public string $localApi = __DIR__.'/../logic4-api-%s.json';
+    public string $localApi = __DIR__.'/../logic4-api-%s-%s.json';
 
     public string $baseDirectory = __DIR__.'/../src/';
     public string $baseNamespace = 'Webparking\Logic4Client';
@@ -27,6 +25,10 @@ class Generator
     private ComponentClassGenerator $componentClassGenerator;
     private bool $setupHasRun = false;
     private bool $refresh = false;
+
+    public function __construct(private readonly ApiDocumentationSource $documentationSource)
+    {
+    }
 
     public function setup(): void
     {
@@ -39,25 +41,36 @@ class Generator
     }
 
     /** @return array<string, string> version => url */
-    public static function resolveVersions(): array
+    public function resolveVersions(): array
     {
-        $contents = file_get_contents(self::$scalarUrl);
+        $contents = $this->download($this->documentationSource->scalarUrl());
 
-        Assert::string($contents, 'Could not fetch API documentation');
+        return $this->resolveVersionsFromScalar($contents);
+    }
 
+    /** @return array<string, string> version => url */
+    public function resolveVersionsFromScalar(string $contents): array
+    {
         preg_match('/initialize\([^,]+,\s*\w+,\s*(\{.+\})\s*,\s*\'/s', $contents, $matches);
 
         Assert::keyExists($matches, 1, 'Could not find Scalar configuration');
 
         $config = json_decode($matches[1], true, 512, \JSON_THROW_ON_ERROR);
 
+        Assert::isArray($config, 'Invalid Scalar configuration');
         Assert::keyExists($config, 'sources', 'Could not find API sources');
+        Assert::isArray($config['sources'], 'Invalid Scalar API sources');
 
         $versions = [];
         foreach ($config['sources'] as $source) {
-            if (preg_match('/Version v(\d+\.\d+)/', $source['title'], $versionMatch)
-            ) {
-                $versions[$versionMatch[1]] = self::$baseUrl.$source['url'];
+            Assert::isArray($source, 'Invalid Scalar API source');
+            Assert::keyExists($source, 'title', 'Scalar API source has no title');
+            Assert::keyExists($source, 'url', 'Scalar API source has no URL');
+            Assert::string($source['title'], 'Invalid Scalar API source title');
+            Assert::string($source['url'], 'Invalid Scalar API source URL');
+
+            if (preg_match('/Version v(\d+\.\d+)/', $source['title'], $versionMatch)) {
+                $versions[$versionMatch[1]] = $this->documentationSource->openApiUrl($source['url']);
             }
         }
 
@@ -107,14 +120,18 @@ class Generator
 
     public function downloadApiDocumentation(string $version, string $remoteUrl): string
     {
-        $localFile = \sprintf($this->localApi, $this->getVersion($version));
+        $localFile = \sprintf(
+            $this->localApi,
+            $this->documentationSource->value,
+            $this->getVersion($version),
+        );
 
         if ($this->refresh && is_file($localFile)) {
             unlink($localFile);
         }
 
         if (!is_file($localFile)) {
-            file_put_contents($localFile, file_get_contents($remoteUrl));
+            file_put_contents($localFile, $this->download($remoteUrl));
         }
 
         return $localFile;
@@ -218,5 +235,22 @@ class Generator
     public function setRefresh(bool $refresh): void
     {
         $this->refresh = $refresh;
+    }
+
+    private function download(string $url): string
+    {
+        $context = stream_context_create([
+            'http' => [
+                'follow_location' => 0,
+                'timeout' => 30,
+                'user_agent' => 'webparking/logic4-client-generator',
+            ],
+        ]);
+
+        $contents = file_get_contents($url, false, $context);
+
+        Assert::string($contents, \sprintf('Could not fetch API documentation from %s', $url));
+
+        return $contents;
     }
 }
