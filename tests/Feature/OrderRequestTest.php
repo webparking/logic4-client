@@ -16,7 +16,7 @@ final class OrderRequestTest extends TestCase
 {
     public function testGetOrderStatuses(): void
     {
-        $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
+        $client = \Mockery::mock(Client::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('get')
                 ->once()
                 ->with('/v1/Orders/GetOrderStatuses')
@@ -51,7 +51,7 @@ final class OrderRequestTest extends TestCase
 
     public function testPostReturnOrders(): void
     {
-        $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
+        $client = \Mockery::mock(Client::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('post')
                 ->once()
                 ->with('/v2/Orders/GetReturnOrders', [

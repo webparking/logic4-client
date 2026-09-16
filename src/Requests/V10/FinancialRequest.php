@@ -17,6 +17,7 @@ use Webparking\Logic4Client\Responses\V10\PaymentMethodLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\StringLogic4Response;
 use Webparking\Logic4Client\Responses\V10\TypeCostCenterLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\TypeEntityCodeLogic4ResponseList;
+use Webparking\Logic4Client\Responses\V10\TypeFinancialBookingStatusLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\TypeLedgerColumnLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\TypeTransactionCodeLogic4ResponseList;
 use Webparking\Logic4Client\Responses\V10\VatCodeLogic4ResponseList;
@@ -28,15 +29,15 @@ class FinancialRequest extends Request
      *
      * @param array{
      *     Description?: string|null,
-     *     FinancialCostCenterId?: integer|null,
+     *     FinancialCostCenterId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string|null,
-     *     BookingDateTime?: string|null,
-     *     FinancialBookId?: integer|null,
-     *     JournalStatusId?: integer|null,
-     *     Mutations?: array<array{CreditorId?: integer|null, DebtorId?: integer|null, BookingDateTime?: string, PaymentMethodId?: integer|null, FinancialCostCenterId?: integer|null, AmountIncl?: number}>|null,
+     *     Reference?: string,
+     *     BookingDateTime?: string,
+     *     FinancialBookId?: int,
+     *     JournalStatusId?: int|null,
+     *     Mutations?: array<array{CreditorId?: int|null, DebtorId?: int|null, BookingDateTime?: string, PaymentMethodId?: int|null, FinancialCostCenterId?: int|null, AmountIncl?: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -60,11 +61,11 @@ class FinancialRequest extends Request
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
-     *     Reference?: string|null,
-     *     BookingDateTime?: string|null,
-     *     FinancialBookId?: integer|null,
-     *     JournalStatusId?: integer|null,
-     *     Mutations?: array<array{VatCode?: integer, LedgerId?: integer, Description?: string|null, AmountIncl?: number}>|null,
+     *     Reference?: string,
+     *     BookingDateTime?: string,
+     *     FinancialBookId?: int,
+     *     JournalStatusId?: int|null,
+     *     Mutations?: array<array{VatCode?: int, LedgerId?: int, Description?: string|null, AmountIncl?: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -80,23 +81,37 @@ class FinancialRequest extends Request
     }
 
     /**
+     * Voor deze aanroep zijn extra rechten vereist.
+     *
+     * @throws Logic4ApiException
+     */
+    public function getBookingStatusTypes(
+    ): TypeFinancialBookingStatusLogic4ResponseList {
+        return TypeFinancialBookingStatusLogic4ResponseList::make(
+            $this->buildResponse(
+                $this->getClient()->get('/v1/Financial/GetBookingStatusTypes'),
+            )
+        );
+    }
+
+    /**
      * Financieel dagboekboeking met mutaties verkrijgen o.b.v. het aangeleverde filter.
      * Levert alleen boekingen uit verkoop, inkoop of memoriale dagboeken.
      *
      * @param array{
-     *     BookingId?: integer|null,
-     *     FinancialBookId?: integer|null,
+     *     BookingId?: int|null,
+     *     FinancialBookId?: int|null,
      *     BookingDateTimeFrom?: string|null,
      *     BookingDateTimeTo?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     Reference?: string|null,
-     *     UserId?: integer|null,
-     *     BookingNumberByUser?: integer|null,
+     *     UserId?: int|null,
+     *     BookingNumberByUser?: int|null,
      *     Description?: string|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     StatusId?: integer|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     StatusId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
@@ -119,8 +134,8 @@ class FinancialRequest extends Request
      * Verkrijg de beschikbare financiële dagboeken o.b.v. het aangeleverde filter.
      *
      * @param array{
-     *     LedgerId?: integer|null,
-     *     FinancialBookType?: integer|null,
+     *     LedgerId?: int|null,
+     *     FinancialBookType?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -141,11 +156,11 @@ class FinancialRequest extends Request
      * Voor deze aanroep zijn extra rechten vereist.
      *
      * @param array{
-     *     LedgerCode?: integer|null,
+     *     LedgerCode?: int|null,
      *     DateTimeFrom?: string|null,
      *     DateTimeTo?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, FinancialJournal>
@@ -274,13 +289,25 @@ class FinancialRequest extends Request
     }
 
     /**
-     * Plaats een UBL document in het inkoopboek. Deze worden opgeslagen als voorstellen, en moeten nog worden gecontroleerd voordat ze kunnen worden verwerkt.
+     * Importeer UBL factuur naar het inkoopboek.
+     * <para />.
+     *
+     * Indien het veld CreditorID wordt meegegeven in de request, wordt de betreffende crediteur direct gekoppeld aan de nieuwe inkoopboeking.
+     * Wanneer het veld CreditorID leeg wordt gelaten, probeert het systeem automatisch een crediteur te matchen. Dit gebeurt op basis van een aantal regels.
+     * <para />
+     *
+     * Eerst worden er crediteuren gematched op basis van het KvK-nummer en het btw-nummer.
+     * Alléén als dit geen resultaat levert, probeert het systeem te matchen op bedrijfsnaam, postcode en stadsnaam (alleen velden die in de UBL gevult zijn worden gebruikt.)
+     * Nadat er gematched is wordt er een crediteur gekozen of gecreëert afhankelijk van het volgende:
+     *
+     * <ul><list type="bullet"><li><item><description>Als er één unieke match wordt gevonden, wordt deze crediteur gekoppeld aan de inkoopboeking.</description></item></li><li><item><description>Als er geen match wordt gevonden, wordt automatisch een nieuwe crediteur aangemaakt.</description></item></li><li><item><description>Als er meerdere crediteuren zijn gematched, wordt er ook een nieuwe crediteur aangemaakt in plaats van dat er een bestaande gebruikt wordt.</description></item></li></list></ul>
      *
      * @param array{
      *     Xml?: string|null,
-     *     BookId?: integer|null,
-     *     StatusId?: integer|null,
-     *     UserId?: integer|null,
+     *     BookId?: int,
+     *     StatusId?: int,
+     *     UserId?: int|null,
+     *     CreditorId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -291,6 +318,26 @@ class FinancialRequest extends Request
         return StringLogic4Response::make(
             $this->buildResponse(
                 $this->getClient()->post('/v1/Financial/PostUblInvoiceToBuyBooking', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
+     * Voor deze aanroep zijn extra rechten vereist.
+     *
+     * @param array{
+     *     BookingId?: int,
+     *     StatusId?: int,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function updateFinancialBookingStatus(
+        array $parameters = [],
+    ): Int32Logic4Response {
+        return Int32Logic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->patch('/v1/Financial/UpdateFinancialBookingStatus', ['json' => $parameters]),
             )
         );
     }

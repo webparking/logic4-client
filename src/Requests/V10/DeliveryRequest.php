@@ -15,7 +15,7 @@ class DeliveryRequest extends Request
      * Maak een nieuwe uitlevering aan o.b.v. opgestuurde orderregels. Het systeem bepaalt automatisch vanaf welke voorraadlocatie de voorraad afgeboekt wordt.
      *
      * @param array{
-     *     DeliveryRows?: array<array{RowId?: integer, AmountToDeliver?: number}>|null,
+     *     DeliveryRows?: array<array{RowId?: int, AmountToDeliver?: number}>,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -34,21 +34,21 @@ class DeliveryRequest extends Request
      * @param array{
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
-     *     OrderId?: integer|null,
-     *     DebtorId?: integer|null,
-     *     OrderShipperMethodeId?: integer|null,
-     *     OrderStatusId?: integer|null,
-     *     BranchId?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     Skip?: integer|null,
-     *     Take?: integer|null,
+     *     OrderId?: int|null,
+     *     DebtorId?: int|null,
+     *     OrderShipperMethodeId?: int|null,
+     *     OrderStatusId?: int|null,
+     *     BranchId?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     Skip?: int,
+     *     Take?: int,
      * } $parameters
      *
      * @return \Generator<array-key, SalesOrderDelivery>
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v2.0. - Zoeken op verkooporder uitleveringen.
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - Zoeken op verkooporder uitleveringen.
      */
     public function getDeliveries(array $parameters = []): \Generator
     {

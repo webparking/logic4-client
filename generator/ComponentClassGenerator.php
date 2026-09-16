@@ -51,15 +51,24 @@ class ComponentClassGenerator
         $typedParameters = [];
         $arrayParameters = [];
         $dateParameters = [];
+        $enumParameters = [];
 
         foreach ($component->properties as $parameterName => $parameter) {
-            if ($parameter instanceof Reference) {
+            $referenced = $parameter instanceof Reference
+                ? $this->referencedComponent($parameter)
+                : null;
+
+            if ($referenced instanceof Schema && Helpers::isEnum($referenced)) {
+                $type = Helpers::enumPhpType($referenced);
+                $enumParameters[] = $parameterName;
+            } elseif ($parameter instanceof Reference) {
                 $type = $this->resolve($parameter->getReference(), 'Data', $version);
                 $typedParameters[$parameterName] = $type;
             } else {
-                $type = Helpers::phpType($parameter->type, $parameter->type);
+                $primaryType = Helpers::primaryType($parameter->type);
+                $type = Helpers::phpType($parameter->type, $primaryType ?? 'mixed');
 
-                if ('string' === $parameter->type && 'date-time' === $parameter->format) {
+                if ('string' === $primaryType && 'date-time' === $parameter->format) {
                     $type = Carbon::class;
 
                     $dateParameters[] = $parameterName;
@@ -71,14 +80,15 @@ class ComponentClassGenerator
                         $arrayParameters[$parameterName] = $commentType;
                         $commentType = '\\'.$commentType;
                     } else {
-                        $commentType = $parameter->items?->type ?? 'mixed';
+                        $commentType = $parameter->items ? Helpers::primaryType($parameter->items->type) : null;
+                        $commentType ??= 'mixed';
                     }
 
                     $constructor->addComment('@param array<'.$commentType.'> $'.$this->propertyName($parameterName));
                 }
             }
 
-            $nullable = !\in_array($parameterName, ['Records', 'ValidationMessages'], true) && (($parameter->nullable ?? false) || class_exists($type));
+            $nullable = !\in_array($parameterName, ['Records', 'ValidationMessages'], true) && (Helpers::isNullable($parameter) || class_exists($type) || \in_array($parameterName, $enumParameters, true));
 
             $constructor
                 ->addPromotedParameter($this->propertyName($parameterName))
@@ -146,6 +156,13 @@ class ComponentClassGenerator
         );
 
         return $className;
+    }
+
+    private function referencedComponent(Reference $reference): ?Schema
+    {
+        $componentName = str_replace('#/components/schemas/', '', $reference->getReference());
+
+        return $this->components[$componentName] ?? null;
     }
 
     private function propertyName(string $name): string

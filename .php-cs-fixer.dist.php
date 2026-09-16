@@ -12,6 +12,7 @@ return (new PhpCsFixer\Config())
         '@PHPUnit84Migration:risky' => true,
         'ordered_imports' => true,
         'phpdoc_line_span' => [
+            'class' => 'single',
             'const' => 'single',
             'method' => 'single',
             'property' => 'single',

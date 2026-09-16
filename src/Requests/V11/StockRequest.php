@@ -21,9 +21,9 @@ class StockRequest extends Request
      * Ophalen van externe voorraadstanden voor actieve leveranciers.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     ProductStockFrom?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     ProductStockFrom?: int|null,
      *     DateTimeLastUpdateSince?: string|null,
      * } $parameters
      *
@@ -44,9 +44,9 @@ class StockRequest extends Request
      * Verkrijg de eerst volgende leverdata van alle actieve leveranciers, vanaf een specifieke datum.
      *
      * @param array{
-     *     NextDeliveryDate?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     NextDeliveryDate?: string,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ProductSupplierNextDelivery>
@@ -66,16 +66,16 @@ class StockRequest extends Request
      * Haal voorraadmutaties op. Maximaal 10000 records per keer kunnen worden opgehaald.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     PickbonIds?: array<integer>|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     PickbonIds?: array<int>,
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
-     *     BuyOrderId?: integer|null,
-     *     StocklocationId?: integer|null,
-     *     ITSIssueId?: integer|null,
+     *     BuyOrderId?: int|null,
+     *     StocklocationId?: int|null,
+     *     ITSIssueId?: int|null,
      *     ProductCode?: string|null,
-     *     WareHouseId?: integer|null,
+     *     WareHouseId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductStockMutation>
@@ -109,14 +109,14 @@ class StockRequest extends Request
      * Voorraadcontrole heads ophalen op basis van het ProductStockControlHeadFilter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     StockLocationId?: integer|null,
-     *     UserId?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     StockLocationId?: int|null,
+     *     UserId?: int|null,
      *     CreatedDateFrom?: string|null,
      *     CreatedDateTo?: string|null,
-     *     IsProcessed?: boolean|null,
-     *     ProductStockControlHeadId?: integer|null,
+     *     IsProcessed?: bool|null,
+     *     ProductStockControlHeadId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductStockControlHead>
@@ -136,9 +136,9 @@ class StockRequest extends Request
      * Ophalen van voorraadstanden voor specifieke magazijnen.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     WareHouseId?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     WareHouseId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ProductStock>
@@ -158,9 +158,9 @@ class StockRequest extends Request
      * Verkrijg de producten die op de locatie aanwezig zouden moeten zijn.
      *
      * @param array{
-     *     LocationId?: integer|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     LocationId?: int,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ProductStockControlRow>
@@ -181,13 +181,13 @@ class StockRequest extends Request
      * Return True wanneer gelukt, anders foutmelding.
      *
      * @param array{
-     *     Items?: array<array{ProductId?: integer, MutationAmount?: number, OrderHeadPickbonId?: integer|null}>|null,
-     *     FromStockLocationId?: integer|null,
-     *     FromWarehouseId?: integer|null,
-     *     ToStockLocationId?: integer|null,
+     *     Items?: array<array{ProductId?: int, MutationAmount?: number, OrderHeadPickbonId?: int|null}>,
+     *     FromStockLocationId?: int|null,
+     *     FromWarehouseId?: int|null,
+     *     ToStockLocationId?: int,
      *     Notes?: string|null,
      *     Name?: string|null,
-     *     DatabaseAdministrationId?: integer|null,
+     *     DatabaseAdministrationId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -203,12 +203,36 @@ class StockRequest extends Request
     }
 
     /**
+     * Wijzig externe voorraadstand van een leverancier.
+     *
+     * @param array{
+     *     SupplierProductCode?: string|null,
+     *     ProductId?: int|null,
+     *     ProductCode?: string|null,
+     *     SupplierId?: int|null,
+     *     Quantity?: int|null,
+     *     ProductNextDelivery?: string|null,
+     * } $parameters
+     *
+     * @throws Logic4ApiException
+     */
+    public function setExternalStockForSupplier(
+        array $parameters = [],
+    ): BooleanLogic4Response {
+        return BooleanLogic4Response::make(
+            $this->buildResponse(
+                $this->getClient()->post('/v1.1/Stock/SetExternalStockForSupplier', ['json' => $parameters]),
+            )
+        );
+    }
+
+    /**
      * Verander de standaard picklocatie van artikelen naar een andere voorraad locatie.
      *
      * @param array<array{
-     *     ProductId?: integer|null,
-     *     WarehouseStockLocationId?: integer|null,
-     *     WarehouseId?: integer|null,
+     *     ProductId?: int,
+     *     WarehouseStockLocationId?: int,
+     *     WarehouseId?: int|null,
      * }> $parameters
      *
      * @throws Logic4ApiException

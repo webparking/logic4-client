@@ -42,18 +42,18 @@ final class AccessTokenManagerTest extends TestCase
     public function testGetFromLogic4WhenNotInCache(): void
     {
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
-            $mock->shouldReceive('has')
+            $mock->shouldReceive('get')
                 ->once()
-                ->withArgs(function (string $key): bool {
+                ->withArgs(static function (string $key): bool {
                     static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
 
                     return true;
                 })
-                ->andReturnFalse();
+                ->andReturnNull();
 
             $mock->shouldReceive('set')
                 ->once()
-                ->withArgs(function (string $key, string $value, int $ttl): bool {
+                ->withArgs(static function (string $key, string $value, int $ttl): bool {
                     static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
                     static::assertSame('the-new-access-token', $value);
                     static::assertSame(3600, $ttl);
@@ -62,10 +62,10 @@ final class AccessTokenManagerTest extends TestCase
                 });
         });
 
-        $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
+        $client = \Mockery::mock(Client::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('post')
                 ->once()
-                ->withArgs(function (string $url, array $contents): bool {
+                ->withArgs(static function (string $url, array $contents): bool {
                     static::assertSame('https://idp.logic4server.nl/token', $url);
                     static::assertSame([
                         'form_params' => [
@@ -96,18 +96,9 @@ final class AccessTokenManagerTest extends TestCase
     public function testGetFromCache(): void
     {
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
-            $mock->shouldReceive('has')
-                ->once()
-                ->withArgs(function (string $key): bool {
-                    static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
-
-                    return true;
-                })
-                ->andReturnTrue();
-
             $mock->shouldReceive('get')
                 ->once()
-                ->withArgs(function (string $key): bool {
+                ->withArgs(static function (string $key): bool {
                     static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
 
                     return true;
@@ -127,17 +118,17 @@ final class AccessTokenManagerTest extends TestCase
     public function testExceptionThrownWhenFailedToFetchAccessToken(): void
     {
         $cache = \Mockery::mock(CacheInterface::class, static function (MockInterface $mock): void {
-            $mock->shouldReceive('has')
+            $mock->shouldReceive('get')
                 ->once()
-                ->withArgs(function (string $key): bool {
+                ->withArgs(static function (string $key): bool {
                     static::assertSame('logic4:access_token:'.base64_encode('publicKey companyKey user__name_(2):api administration.administration-1'), $key);
 
                     return true;
                 })
-                ->andReturnFalse();
+                ->andReturnNull();
         });
 
-        $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
+        $client = \Mockery::mock(Client::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('post')
                 ->once()
                 ->with('https://idp.logic4server.nl/token', \Mockery::type('array'))

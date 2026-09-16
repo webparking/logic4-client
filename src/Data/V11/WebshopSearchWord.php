@@ -12,6 +12,7 @@ class WebshopSearchWord
         public ?string $searchTerm,
         public ?string $visitorCode,
         public int $resultCount,
+        public int $globalisationId,
     ) {
     }
 
@@ -24,6 +25,7 @@ class WebshopSearchWord
             searchTerm: $data['SearchTerm'] ?? null,
             visitorCode: $data['VisitorCode'] ?? null,
             resultCount: $data['ResultCount'] ?? 0,
+            globalisationId: $data['GlobalisationId'] ?? 0,
         );
     }
 }

@@ -21,6 +21,8 @@ class Appointment
         public ?int $orderId,
         public ?int $CRMProjectId,
         public ?int $plannedDeliveryId,
+        public ?string $subject,
+        public ?string $description,
     ) {
     }
 
@@ -42,6 +44,8 @@ class Appointment
             orderId: $data['OrderId'] ?? null,
             CRMProjectId: $data['CRM_ProjectId'] ?? null,
             plannedDeliveryId: $data['PlannedDeliveryId'] ?? null,
+            subject: $data['Subject'] ?? null,
+            description: $data['Description'] ?? null,
         );
     }
 }

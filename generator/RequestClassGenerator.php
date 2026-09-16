@@ -28,7 +28,7 @@ class RequestClassGenerator
         $this->class->setExtends(Request::class);
     }
 
-    public function addMethod(string $httpMethod, string $uri, Operation $operation, ?string $returnType = null, ?PaginateType $paginated = null): Method
+    public function addMethod(string $httpMethod, string $uri, Operation $operation, ?string $returnType = null, ?PaginateType $paginated = null, ?string $arrayType = null, bool $void = false): Method
     {
         $action = last(explode('/', ltrim($uri, '/')));
         $requestSchema = $operation->requestBody?->content['application/json']?->schema;
@@ -44,7 +44,7 @@ class RequestClassGenerator
                 continue;
             }
 
-            $parameterType = Helpers::phpType($parameter->schema->type, $parameter->schema->type);
+            $parameterType = Helpers::phpType($parameter->schema->type, Helpers::primaryType($parameter->schema->type) ?? 'mixed');
 
             $method
                 ->addParameter($parameter->name)
@@ -61,7 +61,8 @@ class RequestClassGenerator
                 $parameterDoc = "array{\n".implode("\n", Helpers::makePhpDoc($requestProperties, '    %s,'))."\n}";
             } else {
                 if ($requestSchema->items instanceof Schema) {
-                    $parameterDoc = "array<{$requestSchema->items->type}>";
+                    $itemType = Helpers::primaryType($requestSchema->items->type) ?? 'mixed';
+                    $parameterDoc = "array<{$itemType}>";
                 } else {
                     $requestProperties = $requestSchema->items->resolve()->properties;
 
@@ -92,6 +93,17 @@ class RequestClassGenerator
             ? ', '.preg_replace('/\'\{\$(.*)\}\'/', '\$$1', var_export($requestParameters, true))
             : '';
 
+        if ($void) {
+            $method->setReturnType('void');
+            $method->setBody(
+                <<<PHP
+                    \$this->getClient()->{$httpMethod}('{$uri}'{$parametersPhp});
+                    PHP
+            );
+
+            return $method;
+        }
+
         $returnType = Helpers::phpType($returnType, $returnType ?? 'mixed');
 
         if ($paginated && class_exists($returnType)) {
@@ -102,7 +114,29 @@ class RequestClassGenerator
             $method->addComment("\n@return ".(class_exists($returnType) ? '\\'.$returnType : $returnType));
         }
 
-        if (class_exists($returnType)) {
+        if ('array' === $returnType && $arrayType && class_exists($arrayType)) {
+            $method->addComment("\n@return array<array-key, \\$arrayType>");
+            $method->setBody(
+                <<<PHP
+                    return array_map(
+                        static fn (array \$data) => \\$arrayType::make(\$data),
+                        \$this->buildResponse(
+                            \$this->getClient()->{$httpMethod}('{$uri}'{$parametersPhp}),
+                        ),
+                    );
+                    PHP
+            );
+
+        } elseif ('array' === $returnType && $arrayType) {
+            $method->addComment("\n@return array<array-key, {$arrayType}>");
+            $method->setBody(
+                <<<PHP
+                    return \$this->buildResponse(
+                        \$this->getClient()->{$httpMethod}('{$uri}'{$parametersPhp}),
+                    );
+                    PHP
+            );
+        } elseif (class_exists($returnType)) {
             if ($paginated) {
                 $paginateMethod = match ($paginated) {
                     PaginateType::TakeRecords => "\$this->paginateRecords('{$uri}', \$parameters);",
@@ -129,6 +163,14 @@ class RequestClassGenerator
                         PHP
                 );
             }
+        } elseif ('string' === $returnType) {
+            $method->setBody(
+                <<<PHP
+                    return \$this->buildStringResponse(
+                        \$this->getClient()->{$httpMethod}('{$uri}'{$parametersPhp}),
+                    );
+                    PHP
+            );
         } else {
             $method->setBody(
                 <<<PHP

@@ -47,8 +47,8 @@ class AccessTokenManager
     {
         $cacheKey = 'logic4:access_token:'.base64_encode($this->makeClientId().':'.$this->makeScope());
 
-        if ($this->cache->has($cacheKey)) {
-            return $this->cache->get($cacheKey);
+        if (null !== $accessToken = $this->cache->get($cacheKey)) {
+            return $accessToken;
         }
 
         $response = $this->client

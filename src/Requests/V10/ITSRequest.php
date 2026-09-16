@@ -17,9 +17,7 @@ use Webparking\Logic4Client\Responses\V10\ITSTaskPriorityLogic4ResponseList;
 
 class ITSRequest extends Request
 {
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getFreeValues1(): ITSFreeValueLogic4ResponseList
     {
         return ITSFreeValueLogic4ResponseList::make(
@@ -29,9 +27,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getFreeValues2(): ITSFreeValueLogic4ResponseList
     {
         return ITSFreeValueLogic4ResponseList::make(
@@ -41,9 +37,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getFreeValues3(): ITSFreeValueLogic4ResponseList
     {
         return ITSFreeValueLogic4ResponseList::make(
@@ -53,9 +47,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueGroups(): ITSIssueGroupLogic4ResponseList
     {
         return ITSIssueGroupLogic4ResponseList::make(
@@ -65,9 +57,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueLevels(): ITSIssueLevelLogic4ResponseList
     {
         return ITSIssueLevelLogic4ResponseList::make(
@@ -81,30 +71,30 @@ class ITSRequest extends Request
      * Verkrijg ITS issues o.b.v. het meegestuurde filter en de opgegeven gebruiker.
      *
      * @param array{
-     *     Id?: integer|null,
+     *     Id?: int|null,
      *     StartDate?: string|null,
      *     EndDate?: string|null,
      *     LastModifiedSince?: string|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     InvoiceId?: integer|null,
-     *     StatusId?: integer|null,
-     *     ResponsibleUserId?: integer|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     InvoiceId?: int|null,
+     *     StatusId?: int|null,
+     *     ResponsibleUserId?: int|null,
      *     IssueMustBeCompletedTo?: string|null,
      *     IssueMustBeCompletedFrom?: string|null,
-     *     TypeId?: integer|null,
-     *     GroupId?: integer|null,
-     *     ProjectId?: integer|null,
-     *     OrderId?: integer|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     TypeId?: int|null,
+     *     GroupId?: int|null,
+     *     ProjectId?: int|null,
+     *     OrderId?: int|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, ITSIssue>
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - ITS issues ophalen o.b.v. filter
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - ITS issues ophalen o.b.v. filter
      */
     public function getIssues(array $parameters = []): \Generator
     {
@@ -115,9 +105,7 @@ class ITSRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueStatusses(): ITSIssueStatusLogic4ResponseList
     {
         return ITSIssueStatusLogic4ResponseList::make(
@@ -127,9 +115,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getIssueTypes(): ITSIssueTypeLogic4ResponseList
     {
         return ITSIssueTypeLogic4ResponseList::make(
@@ -153,9 +139,7 @@ class ITSRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getTaskPriorities(): ITSTaskPriorityLogic4ResponseList
     {
         return ITSTaskPriorityLogic4ResponseList::make(

@@ -15,8 +15,9 @@ final class GeneratorTest extends TestCase
 
         static::assertNotEmpty($versions);
 
-        foreach ($versions as $version) {
+        foreach ($versions as $version => $url) {
             static::assertMatchesRegularExpression('/^\d+\.\d+$/', $version);
+            static::assertStringStartsWith('https://api.logic4server.nl/openapi/', $url);
         }
     }
 }

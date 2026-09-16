@@ -18,7 +18,7 @@ class TypeRequest extends Request
      * Verkrijg alle landen o.b.v het opgestuurde filter.
      *
      * @param array{
-     *     TypeZoneId?: integer|null,
+     *     TypeZoneId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -61,9 +61,7 @@ class TypeRequest extends Request
         );
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getProductRelationTypes(
     ): ProductRelationTypeLogic4ResponseList {
         return ProductRelationTypeLogic4ResponseList::make(
@@ -77,7 +75,7 @@ class TypeRequest extends Request
      * Verkrijg alle provincies o.b.v. het opgestuurde filter.
      *
      * @param array{
-     *     CountryId?: integer|null,
+     *     CountryId?: int|null,
      *     ISOcode?: string|null,
      * } $parameters
      *

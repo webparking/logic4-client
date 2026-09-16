@@ -52,8 +52,10 @@ class ClientFactory
     {
         $this->handlerStack = $handlerStack;
 
-        $this->handlerStack->push(Middleware::mapRequest(function ($request) {
-            $accessToken = $this->tokenManager->getAccessToken();
+        $tokenManager = $this->tokenManager;
+
+        $this->handlerStack->push(Middleware::mapRequest(static function ($request) use ($tokenManager) {
+            $accessToken = $tokenManager->getAccessToken();
 
             return $request->withHeader('Authorization', "Bearer {$accessToken}");
         }));
@@ -65,7 +67,7 @@ class ClientFactory
 
     private function makeRequestExceptionMiddleware(): \Closure
     {
-        return static fn (callable $handler): callable => static fn (RequestInterface $request, array $options) => $handler($request, $options)->then(function (ResponseInterface $response) use ($request): ResponseInterface {
+        return static fn (callable $handler): callable => static fn (RequestInterface $request, array $options) => $handler($request, $options)->then(static function (ResponseInterface $response) use ($request): ResponseInterface {
             if ($response->getStatusCode() >= 400) {
                 $previous = RequestException::create($request, $response);
 

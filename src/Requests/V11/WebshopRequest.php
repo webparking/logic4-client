@@ -17,23 +17,25 @@ class WebshopRequest extends Request
      * Voeg een WebshopUserProduct toe aan een WebshopUserProductlijst.
      *
      * @param array{
-     *     Id?: integer|null,
-     *     DateTimeAdded?: string|null,
-     *     ProductId?: integer|null,
+     *     Id?: int,
+     *     DateTimeAdded?: string,
+     *     ComposedProductParentId?: int|null,
+     *     WebshopUserId?: int|null,
+     *     ProductInformation?: array{SubUnit_ParentId?: int|null, ProductId?: int, ProductCode?: string|null, ProductName1?: string|null, ProductName2?: string|null, ProductInfo?: string|null, StatusId?: int, Statusname?: string|null, BrandId?: int, Brandname?: string|null, Imagename1?: string|null, ImageUrl1?: string|null, Imagename2?: string|null, ImageUrl2?: string|null, Imagename3?: string|null, ImageUrl3?: string|null, Unit?: string|null, UnitId?: int, MinSaleAmount?: int, MinSaleAmountWebshop?: int|null, MinSaleBuyAmountDropShipment?: int|null, SaleCountIncrement?: int|null, SaleCountIncrementWebshop?: int|null, SaleCountIncrementDropShipment?: int|null, MinBuyAmount?: int|null, VatPercent?: number, VatCodeId?: int|null, SellPriceGross?: number, Weight?: number, Volume?: number, Offer?: array{StartDate?: string|null, EndDate?: string|null, FromPrice?: number|null, ToPrice?: number|null, OfferGroupId?: int|null, ProductId?: int}, SellPriceAdvice?: number|null, BuyPrice?: number, ProductGroupId1?: int, ProductGroupId2?: int|null, ProductGroupId3?: int|null, ProductGroupId4?: int|null, BuyCountIncrement?: int|null, SellPriceLowestForWebshop?: number|null, ExcludePriceFromPricelistCalculations?: bool, AdditionalBuyPriceAmount?: number|null, AdditionalBuyPricePercentage?: number|null, IsComposedProduct?: bool|null, IsAssemblyProduct?: bool, ComposedProductSetChildSellPricesToZero?: bool, ComposedProductSetSellPriceToZero?: bool|null, FreeStock?: number, ExternalStockActiveSupplier?: int|null, CreditorDiscountGroupId?: int|null, DateTimeLastChanged?: string, DateTimeAdded?: string, BarCode1?: string|null, FreeValues?: array<array{Key?: string|null, Value?: string|null}>, Sorting?: int|null, NextDelivery?: string|null, Descriptions?: array<array{GlobalisationCode?: string|null, GlobalisationId?: int, Value?: string|null}>, ShiftPrices?: array<array{Qty?: int, BuyPrice?: number, Margin?: number, SellPriceExcl?: number, SellPriceGrossExcl?: number, Description?: string|null, DiscountType?: string|null}>, ProductGroups?: array<array{Id?: int, Name?: string|null, ParentProductGroupId?: int|null, Shortname?: string|null, PictureUrl?: string|null, SortValue?: int, PictureName?: string|null, ProductGroupTypeId?: int, IsVisibleOnWebshop?: bool, DepthLevel?: int, ShowUnitOnWebsite?: bool, Translations?: array<array{Product_GroupId?: int, GlobalisationId?: int, H1Tag?: string|null, Keywords?: string|null, Name?: string|null, ProductGroupInfo?: string|null, Value?: string|null, MetaDescription?: string|null, WebsiteDomainId?: int|null, ShortName?: string|null, GlobalisationCode?: string|null}>}>, Barcode2?: string|null, BarcodeExtraList?: array<array{Barcode?: string|null, Qty?: int}>, SystemBarcode?: string|null, ProductGroup1ProductGroupTypeId?: int, WareHouses?: array<array{WarehouseId?: int, WarehouseName?: string|null, MinimalStock?: number, MaxStock?: number|null, DefaultStockLocationId?: int|null}>, MinimalStock?: int|null, PCSinInsidePackage?: int, PCSinOutsidePackage?: int, ProductType1?: array{Id?: int, Value?: string|null}, ProductType2?: array{Id?: int, Value?: string|null}, ProductType3?: array{Id?: int, Value?: string|null}, ProductType4?: array{Id?: int, Value?: string|null}, ProductType5?: array{Id?: int, Value?: string|null}, StandardAmount?: number|null, VendorCode?: string|null, ProductTemplateId?: int|null, ProductTemplateName?: string|null, HasVariants?: bool, VariantParentProductId?: int|null, Tags?: array<string>, DefaultPickLocation?: int|null, DefaultBulkLocation?: int|null},
+     *     ProductId?: int,
      *     QtyDec?: number|null,
      *     Commission?: string|null,
-     *     ExcludedFromAnnualBudget?: boolean|null,
-     *     ComposedProductParentId?: integer|null,
-     *     TypeId?: integer|null,
-     *     WebshopUserId?: integer|null,
-     *     DebtorId?: integer|null,
-     *     ProductInformation?: array{SubUnit_ParentId?: integer|null, ProductId?: integer, ProductCode?: string|null, ProductName1?: string|null, ProductName2?: string|null, ProductInfo?: string|null, StatusId?: integer, Statusname?: string|null, BrandId?: integer, Brandname?: string|null, Imagename1?: string|null, ImageUrl1?: string|null, Imagename2?: string|null, ImageUrl2?: string|null, Imagename3?: string|null, ImageUrl3?: string|null, Unit?: string|null, UnitId?: integer, MinSaleAmount?: integer, MinSaleAmountWebshop?: integer|null, MinSaleBuyAmountDropShipment?: integer|null, SaleCountIncrement?: integer|null, SaleCountIncrementWebshop?: integer|null, SaleCountIncrementDropShipment?: integer|null, MinBuyAmount?: integer|null, VatPercent?: number, VatCodeId?: integer|null, SellPriceGross?: number, Weight?: number, Volume?: number, Offer?: array{StartDate?: string|null, EndDate?: string|null, FromPrice?: number|null, ToPrice?: number|null, OfferGroupId?: integer|null, ProductId?: integer}, SellPriceAdvice?: number|null, BuyPrice?: number, ProductGroupId1?: integer, BuyCountIncrement?: integer|null, SellPriceLowestForWebshop?: number|null, ExcludePriceFromPricelistCalculations?: boolean, AdditionalBuyPriceAmount?: number|null, AdditionalBuyPricePercentage?: number|null, IsComposedProduct?: boolean|null, IsAssemblyProduct?: boolean, ComposedProductSetChildSellPricesToZero?: boolean, ComposedProductSetSellPriceToZero?: boolean|null, FreeStock?: number, ExternalStockActiveSupplier?: integer|null, CreditorDiscountGroupId?: integer|null, DateTimeLastChanged?: string, DateTimeAdded?: string, BarCode1?: string|null, FreeValues?: array<array{Key?: string|null, Value?: string|null}>|null, Sorting?: integer|null, NextDelivery?: string|null, Descriptions?: array<array{GlobalisationCode?: string|null, GlobalisationId?: integer, Value?: string|null}>|null, ShiftPrices?: array<array{Qty?: integer, BuyPrice?: number, Margin?: number, SellPriceExcl?: number, SellPriceGrossExcl?: number, Description?: string|null, DiscountType?: string|null}>|null, ProductGroups?: array<array{Id?: integer, Name?: string|null, ParentProductGroupId?: integer|null, Shortname?: string|null, PictureUrl?: string|null, SortValue?: integer, PictureName?: string|null, ProductGroupTypeId?: integer, IsVisibleOnWebshop?: boolean, DepthLevel?: integer, ShowUnitOnWebsite?: boolean, Translations?: array<array{Product_GroupId?: integer, GlobalisationId?: integer, H1Tag?: string|null, Keywords?: string|null, Name?: string|null, ProductGroupInfo?: string|null, Value?: string|null, MetaDescription?: string|null, WebsiteDomainId?: integer|null, ShortName?: string|null, GlobalisationCode?: string|null}>|null}>|null, Barcode2?: string|null, BarcodeExtraList?: array<array{Barcode?: string|null, Qty?: integer}>|null, SystemBarcode?: string|null, ProductGroup1ProductGroupTypeId?: integer, WareHouses?: array<array{WarehouseId?: integer, WarehouseName?: string|null, MinimalStock?: number, MaxStock?: number|null, DefaultStockLocationId?: integer|null}>|null, MinimalStock?: integer|null, PCSinInsidePackage?: integer, PCSinOutsidePackage?: integer, ProductType1?: array{Id?: integer, Value?: string|null}, ProductType2?: array{Id?: integer, Value?: string|null}, ProductType3?: array{Id?: integer, Value?: string|null}, ProductType4?: array{Id?: integer, Value?: string|null}, ProductType5?: array{Id?: integer, Value?: string|null}, StandardAmount?: number|null, VendorCode?: string|null, ProductTemplateId?: integer|null, ProductTemplateName?: string|null, HasVariants?: boolean, VariantParentProductId?: integer|null, Tags?: array<string>|null}|null,
+     *     ExcludedFromAnnualBudget?: bool,
+     *     TypeId?: int,
+     *     DebtorId?: int|null,
      *     VisitorCode?: string|null,
-     *     WebsiteDomainId?: integer|null,
+     *     WebsiteDomainId?: int|null,
      *     ShoppingCartKey?: string|null,
      * } $parameters
      *
      * @throws Logic4ApiException
+     *
+     * @deprecated Let op! Versie 1.1 is verouderd. Gebruik versie v1.3. - WebshopUserProduct toevoegen aan WebshopUserProductlijst
      */
     public function addWebshopUserProductToWebshopUserProductList(
         array $parameters = [],
@@ -49,13 +51,13 @@ class WebshopRequest extends Request
      * Verkrijg zoekresultaten van een webshop o.b.v. meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      *     SearchTerm?: string|null,
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
-     *     GlobilizationId?: integer|null,
-     *     DomainId?: integer|null,
+     *     GlobilizationId?: int|null,
+     *     DomainId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, WebshopSearchWord>
@@ -75,11 +77,11 @@ class WebshopRequest extends Request
      * Verkrijg een bestellijst o.b.v. webshopgebruikersnummer of debiteurnummer voor de producttypes zie eindpunt /Webshop/GetWebshopUserOrderlistProductTypes.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     WebshopUserProductListType?: integer|null,
-     *     DebtorId?: integer|null,
-     *     WebshopUserId?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     WebshopUserProductListType?: int|null,
+     *     DebtorId?: int|null,
+     *     WebshopUserId?: int|null,
      * } $parameters
      *
      * @return \Generator<array-key, WebshopOrderlistProduct>
@@ -100,15 +102,15 @@ class WebshopRequest extends Request
      *
      * @param array{
      *     VisitorCode?: string|null,
-     *     WebshopUserProductListType?: string|null,
-     *     WebshopPricelistId?: integer|null,
-     *     GetHighestShiftPrice?: boolean|null,
-     *     CountryIdForSellPrice?: integer|null,
-     *     BranchIdForSellPrice?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     DebtorWebshopProductTypeId?: integer|null,
-     *     DebtorId?: integer|null,
-     *     WebshopUserId?: integer|null,
+     *     WebshopUserProductListType?: string,
+     *     WebshopPricelistId?: int|null,
+     *     GetHighestShiftPrice?: bool|null,
+     *     CountryIdForSellPrice?: int|null,
+     *     BranchIdForSellPrice?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     DebtorWebshopProductTypeId?: int|null,
+     *     DebtorId?: int|null,
+     *     WebshopUserId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException

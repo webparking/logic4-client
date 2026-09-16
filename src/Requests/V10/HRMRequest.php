@@ -14,18 +14,18 @@ class HRMRequest extends Request
      * Voeg urenregistraties toe in batch.
      *
      * @param array<array{
-     *     UserId?: integer|null,
-     *     PeriodId?: integer|null,
-     *     Date?: string|null,
-     *     ActivityId?: integer|null,
-     *     ITSTaskId?: integer|null,
-     *     CRMProjectId?: integer|null,
-     *     ITSIssueId?: integer|null,
+     *     UserId?: int,
+     *     PeriodId?: int|null,
+     *     Date?: string,
+     *     ActivityId?: int,
+     *     ITSTaskId?: int|null,
+     *     CRMProjectId?: int|null,
+     *     ITSIssueId?: int|null,
      *     Description?: string|null,
-     *     Minutes?: integer|null,
-     *     CreatePeriod?: boolean|null,
-     *     PeriodeStatusId?: integer|null,
-     *     RowIsAddedToPeriod?: boolean|null,
+     *     Minutes?: int,
+     *     CreatePeriod?: bool,
+     *     PeriodeStatusId?: int|null,
+     *     RowIsAddedToPeriod?: bool,
      *     Exception?: string|null,
      * }> $parameters
      *

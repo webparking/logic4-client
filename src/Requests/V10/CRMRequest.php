@@ -19,27 +19,27 @@ class CRMRequest extends Request
      * Verkrijg CRM activiteiten o.b.v. het meegestuurde filter en de opgegeven gebruiker.
      *
      * @param array{
-     *     CrmProjectId?: integer|null,
+     *     CrmProjectId?: int|null,
      *     CreatedDateFrom?: string|null,
      *     CreatedDateTo?: string|null,
-     *     StatusIds?: array<integer>|null,
-     *     CreatedByUserIds?: array<integer>|null,
-     *     CarriedOutByUserId?: integer|null,
+     *     StatusIds?: array<int>,
+     *     CreatedByUserIds?: array<int>,
+     *     CarriedOutByUserId?: int|null,
      *     StartDateFrom?: string|null,
      *     StartDateTo?: string|null,
      *     Name?: string|null,
-     *     TypeId?: integer|null,
-     *     CrmProjectStatusId?: integer|null,
-     *     CrmProjectTypeId?: integer|null,
+     *     TypeId?: int|null,
+     *     CrmProjectStatusId?: int|null,
+     *     CrmProjectTypeId?: int|null,
      *     CrmProjectName?: string|null,
-     *     ShowOnlyOpenActivities?: boolean|null,
-     *     UserIdForRights?: integer|null,
-     *     CarriedOutByUserIds?: array<integer>|null,
+     *     ShowOnlyOpenActivities?: bool|null,
+     *     UserIdForRights?: int|null,
+     *     CarriedOutByUserIds?: array<int>,
      * } $parameters
      *
      * @throws Logic4ApiException
      *
-     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v1.1. - CRM activiteiten o.b.v. filter
+     * @deprecated Let op! Versie 1.0 is verouderd. Gebruik versie v3.0. - CRM activiteiten o.b.v. filter
      */
     public function getCRMActivities(
         array $parameters = [],
@@ -83,14 +83,14 @@ class CRMRequest extends Request
      * Verkrijg CRM projecten o.b.v. het meegestuurde filter en de opgegeven gebruiker.
      *
      * @param array{
-     *     CrmProjectId?: integer|null,
+     *     CrmProjectId?: int|null,
      *     StartDate?: string|null,
      *     EndDate?: string|null,
-     *     StatusIds?: array<integer>|null,
-     *     ResponsibleUserIds?: array<integer>|null,
+     *     StatusIds?: array<int>,
+     *     ResponsibleUserIds?: array<int>,
      *     Name?: string|null,
-     *     TypeId?: integer|null,
-     *     UserIdForRights?: integer|null,
+     *     TypeId?: int|null,
+     *     UserIdForRights?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException

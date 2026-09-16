@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webparking\Logic4Client\Requests\V12;
 
 use Webparking\Logic4Client\Data\V12\Brand;
+use Webparking\Logic4Client\Data\V12\ProductSupplier;
 use Webparking\Logic4Client\Data\V12\ProductV11;
 use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
@@ -12,9 +13,7 @@ use Webparking\Logic4Client\Responses\V12\ProductExtraBarcodeTypeLogic4ResponseL
 
 class ProductRequest extends Request
 {
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getBarcodeTypes(): ProductExtraBarcodeTypeLogic4ResponseList
     {
         return ProductExtraBarcodeTypeLogic4ResponseList::make(
@@ -28,8 +27,8 @@ class ProductRequest extends Request
      * Haal merken op o.b.v. het filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, Brand>
@@ -51,44 +50,44 @@ class ProductRequest extends Request
      * @param array{
      *     DateTimeChangedFrom?: string|null,
      *     DateTimeChangedTo?: string|null,
-     *     LoadFreeValuesTypes?: boolean|null,
-     *     BrandIds?: array<integer>|null,
-     *     IsVisibleInLogic4?: boolean|null,
-     *     IsVisibleOnWebShop?: boolean|null,
-     *     AllShowOnWebsite?: boolean|null,
-     *     ProductGroupId?: integer|null,
-     *     UseChildProductGroups?: boolean|null,
+     *     LoadFreeValuesTypes?: bool,
+     *     BrandIds?: array<int>,
+     *     IsVisibleInLogic4?: bool|null,
+     *     IsVisibleOnWebShop?: bool|null,
+     *     AllShowOnWebsite?: bool|null,
+     *     ProductGroupId?: int|null,
+     *     UseChildProductGroups?: bool|null,
      *     ProductCode?: string|null,
      *     Barcode?: string|null,
-     *     Barcodes?: array<string>|null,
-     *     DebtorId?: integer|null,
-     *     WebshopUserId?: integer|null,
-     *     WebshopPriceListId?: integer|null,
-     *     UseDropShipmentAmountsForWebshopPrices?: boolean|null,
-     *     ProductIds?: array<integer>|null,
+     *     Barcodes?: array<string>,
+     *     DebtorId?: int|null,
+     *     WebshopUserId?: int|null,
+     *     WebshopPriceListId?: int|null,
+     *     UseDropShipmentAmountsForWebshopPrices?: bool|null,
+     *     ProductIds?: array<int>,
      *     ProductFilterListChoice?: string|null,
-     *     ProductHistoryBasedOnInvoices?: boolean|null,
-     *     WebshopUserOrderlistProductType?: integer|null,
-     *     ActiveOffers?: boolean|null,
-     *     OfferGroupId?: integer|null,
+     *     ProductHistoryBasedOnInvoices?: bool|null,
+     *     WebshopUserOrderlistProductType?: int|null,
+     *     ActiveOffers?: bool|null,
+     *     OfferGroupId?: int|null,
      *     FastSearchText?: string|null,
-     *     GetHighestShiftPrice?: boolean|null,
-     *     CountryIdForSellPrice?: integer|null,
-     *     BranchIdForSellPrice?: integer|null,
-     *     LoadExternalStockActiveSupplier?: boolean|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     LoadProductGroups?: boolean|null,
-     *     LoadExtraBarcodes?: boolean|null,
-     *     OnlyShowParentProducts?: boolean|null,
-     *     GlobalisationId?: integer|null,
-     *     WebsiteDomainId?: integer|null,
-     *     WareHouseId?: integer|null,
-     *     UseECommerceProductGroups?: boolean|null,
-     *     UseECommerceProductGroupsToLoadProductGroups?: boolean|null,
-     *     LoadStockForWarehouses?: boolean|null,
-     *     LoadAllWebshopGroupsLinkedToProduct?: boolean|null,
-     *     LoadProductTypes?: boolean|null,
+     *     GetHighestShiftPrice?: bool|null,
+     *     CountryIdForSellPrice?: int|null,
+     *     BranchIdForSellPrice?: int|null,
+     *     LoadExternalStockActiveSupplier?: bool|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     LoadProductGroups?: bool|null,
+     *     LoadExtraBarcodes?: bool,
+     *     OnlyShowParentProducts?: bool|null,
+     *     GlobalisationId?: int|null,
+     *     WebsiteDomainId?: int|null,
+     *     WareHouseId?: int|null,
+     *     UseECommerceProductGroups?: bool,
+     *     UseECommerceProductGroupsToLoadProductGroups?: bool,
+     *     LoadStockForWarehouses?: bool,
+     *     LoadAllWebshopGroupsLinkedToProduct?: bool,
+     *     LoadProductTypes?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, ProductV11>
@@ -101,6 +100,29 @@ class ProductRequest extends Request
 
         foreach ($iterator as $record) {
             yield ProductV11::make($record);
+        }
+    }
+
+    /**
+     * Verkrijg alle leveranciers van één of meerdere producten op basis van ProductId's (max. 1000). Of gebruik 'TakeRecords' (max. 10.000).
+     * Vanaf v1.2 worden velden met de waarde null niet teruggegeven.
+     *
+     * @param array{
+     *     ProductIds?: array<int>,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     * } $parameters
+     *
+     * @return \Generator<array-key, ProductSupplier>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getSuppliersForProducts(array $parameters = []): \Generator
+    {
+        $iterator = $this->paginateRecords('/v1.2/Products/GetSuppliersForProducts', $parameters);
+
+        foreach ($iterator as $record) {
+            yield ProductSupplier::make($record);
         }
     }
 }

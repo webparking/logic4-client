@@ -50,6 +50,9 @@ class ProductV11
         public ?float $sellPriceAdvice,
         public float $buyPrice,
         public int $productGroupId1,
+        public ?int $productGroupId2,
+        public ?int $productGroupId3,
+        public ?int $productGroupId4,
         public ?int $buyCountIncrement,
         public ?float $sellPriceLowestForWebshop,
         public bool $excludePriceFromPricelistCalculations,
@@ -91,6 +94,8 @@ class ProductV11
         public bool $hasVariants,
         public ?int $variantParentProductId,
         public ?array $tags,
+        public ?int $defaultPickLocation,
+        public ?int $defaultBulkLocation,
     ) {
     }
 
@@ -132,6 +137,9 @@ class ProductV11
             sellPriceAdvice: $data['SellPriceAdvice'] ?? null,
             buyPrice: $data['BuyPrice'] ?? 0.0,
             productGroupId1: $data['ProductGroupId1'] ?? 0,
+            productGroupId2: $data['ProductGroupId2'] ?? null,
+            productGroupId3: $data['ProductGroupId3'] ?? null,
+            productGroupId4: $data['ProductGroupId4'] ?? null,
             buyCountIncrement: $data['BuyCountIncrement'] ?? null,
             sellPriceLowestForWebshop: $data['SellPriceLowestForWebshop'] ?? null,
             excludePriceFromPricelistCalculations: $data['ExcludePriceFromPricelistCalculations'] ?? false,
@@ -173,6 +181,8 @@ class ProductV11
             hasVariants: $data['HasVariants'] ?? false,
             variantParentProductId: $data['VariantParentProductId'] ?? null,
             tags: $data['Tags'] ?? null,
+            defaultPickLocation: $data['DefaultPickLocation'] ?? null,
+            defaultBulkLocation: $data['DefaultBulkLocation'] ?? null,
         );
     }
 }

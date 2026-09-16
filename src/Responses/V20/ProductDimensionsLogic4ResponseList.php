@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Webparking\Logic4Client\Responses\V10;
+namespace Webparking\Logic4Client\Responses\V20;
 
-class OrderRowLogic4ResponseList
+class ProductDimensionsLogic4ResponseList
 {
     /**
-     * @param array<\Webparking\Logic4Client\Data\V10\OrderRow> $records
-     * @param array<string>                                     $validationMessages
+     * @param array<\Webparking\Logic4Client\Data\V20\ProductDimensions> $records
+     * @param array<string>                                              $validationMessages
      */
     public function __construct(
         public array $records,
@@ -21,7 +21,7 @@ class OrderRowLogic4ResponseList
     public static function make(array $data): self
     {
         return new self(
-            records: array_map(static fn (array $item) => \Webparking\Logic4Client\Data\V10\OrderRow::make($item), $data['Records'] ?? []),
+            records: array_map(static fn (array $item) => \Webparking\Logic4Client\Data\V20\ProductDimensions::make($item), $data['Records'] ?? []),
             recordsCounter: $data['RecordsCounter'] ?? 0,
             validationMessages: $data['ValidationMessages'] ?? [],
         );

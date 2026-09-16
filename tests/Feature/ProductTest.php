@@ -15,7 +15,7 @@ final class ProductTest extends TestCase
 {
     public function testPostRequestWithNumericBody(): void
     {
-        $client = \Mockery::mock(Client::class, function (MockInterface $mock): void {
+        $client = \Mockery::mock(Client::class, static function (MockInterface $mock): void {
             $mock->shouldReceive('post')
                 ->once()
                 ->with('/v1.1/Products/GetSuppliersForProduct', ['json' => 777])

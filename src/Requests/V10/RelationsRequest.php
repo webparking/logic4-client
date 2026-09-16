@@ -34,9 +34,9 @@ class RelationsRequest extends Request
      * Crediteur discount toevoegen. Retourneert de Id.
      *
      * @param array{
-     *     TypeId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     BrandId?: integer|null,
+     *     TypeId?: int,
+     *     CreditorId?: int,
+     *     BrandId?: int,
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
      *     Percentage?: number|null,
@@ -60,44 +60,45 @@ class RelationsRequest extends Request
      * Debiteur toevoegen.
      *
      * @param array{
-     *     Id?: integer|null,
+     *     Id?: int|null,
+     *     ValidateVat?: bool,
      *     IsoCode?: string|null,
      *     CountryCode?: string|null,
-     *     CountryId?: integer|null,
+     *     CountryId?: int,
      *     CompanyName?: string|null,
      *     FirstName?: string|null,
      *     LastName?: string|null,
      *     EmailAddress?: string|null,
-     *     PaymentMethodId?: integer|null,
-     *     PricelistIds?: array<integer>|null,
+     *     PaymentMethodId?: int|null,
+     *     PricelistIds?: array<int>,
      *     TelephoneNumber?: string|null,
      *     MobileNumber?: string|null,
      *     Faxnumber?: string|null,
      *     ChamberOfCommerceCode?: string|null,
      *     Website?: string|null,
      *     Discount?: number|null,
-     *     StandardReportIdForPickingList?: integer|null,
-     *     StandardReportIdForSalesOrderDelivery?: integer|null,
+     *     StandardReportIdForPickingList?: int|null,
+     *     StandardReportIdForSalesOrderDelivery?: int|null,
      *     City?: string|null,
      *     Zipcode?: string|null,
      *     Street?: string|null,
      *     HouseNumber?: string|null,
      *     HouseNumberAddition?: string|null,
      *     VatNumber?: string|null,
-     *     DontPrintPaperInvoiceForDebtor?: boolean|null,
-     *     ReceiveInvoiceElectronically?: boolean|null,
-     *     ElectronicInvoiceAttachmentType?: integer|null,
-     *     StandardInvoiceLayoutReportId?: integer|null,
+     *     DontPrintPaperInvoiceForDebtor?: bool,
+     *     ReceiveInvoiceElectronically?: bool,
+     *     ElectronicInvoiceAttachmentType?: int|null,
+     *     StandardInvoiceLayoutReportId?: int|null,
      *     Preposition?: string|null,
      *     CreditLimit?: number|null,
-     *     ShippingMethodId?: integer|null,
-     *     GlobalisationId?: integer|null,
-     *     VatCodeId?: integer|null,
-     *     StatusId?: integer|null,
-     *     RepresentativeId?: integer|null,
-     *     RelationTypeId?: integer|null,
-     *     GenderId?: integer|null,
-     *     StandardPackagingSlipLayoutReportId?: integer|null,
+     *     ShippingMethodId?: int|null,
+     *     GlobalisationId?: int|null,
+     *     VatCodeId?: int|null,
+     *     StatusId?: int|null,
+     *     RepresentativeId?: int|null,
+     *     RelationTypeId?: int|null,
+     *     GenderId?: int|null,
+     *     StandardPackagingSlipLayoutReportId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
@@ -118,18 +119,18 @@ class RelationsRequest extends Request
      * Adres toevoegen of updaten.
      *
      * @param array{
-     *     Type?: array{Id?: integer, Name?: string|null}|null,
-     *     Province?: array{Id?: integer, Name?: string|null}|null,
+     *     Type?: array{Id?: int, Name?: string|null},
+     *     Province?: array{Id?: int, Name?: string|null},
      *     Email?: string|null,
      *     ContactName?: string|null,
      *     CompanyName?: string|null,
      *     Address1?: string|null,
      *     Address2?: string|null,
-     *     Id?: integer|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     IsMainContact?: boolean|null,
-     *     IsHidden?: boolean|null,
+     *     Id?: int|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     IsMainContact?: bool,
+     *     IsHidden?: bool|null,
      *     OwnContactNumber?: string|null,
      *     CountryCode?: string|null,
      *     IsoCode?: string|null,
@@ -139,8 +140,8 @@ class RelationsRequest extends Request
      *     HouseNumber?: string|null,
      *     HouseNumberAddition?: string|null,
      *     TelephoneNumber?: string|null,
-     *     CountryId?: integer|null,
-     *     ZoneId?: integer|null,
+     *     CountryId?: int,
+     *     ZoneId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -161,18 +162,18 @@ class RelationsRequest extends Request
      *     EmailAddress?: string|null,
      *     FirstName?: string|null,
      *     Function?: string|null,
-     *     Gender?: array{Id?: integer, Name?: string|null}|null,
+     *     Gender?: array{Id?: int, Name?: string|null},
      *     Initials?: string|null,
      *     InsertionName?: string|null,
      *     LastName?: string|null,
      *     MobileNumber?: string|null,
      *     CreatedDateTime?: string|null,
      *     ChangedDateTime?: string|null,
-     *     Id?: integer|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     IsMainContact?: boolean|null,
-     *     IsHidden?: boolean|null,
+     *     Id?: int|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     IsMainContact?: bool,
+     *     IsHidden?: bool|null,
      *     OwnContactNumber?: string|null,
      *     CountryCode?: string|null,
      *     IsoCode?: string|null,
@@ -182,8 +183,8 @@ class RelationsRequest extends Request
      *     HouseNumber?: string|null,
      *     HouseNumberAddition?: string|null,
      *     TelephoneNumber?: string|null,
-     *     CountryId?: integer|null,
-     *     ZoneId?: integer|null,
+     *     CountryId?: int,
+     *     ZoneId?: int,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -201,8 +202,8 @@ class RelationsRequest extends Request
      * Crediteur externe identifier toevoegen of updaten.
      *
      * @param array{
-     *     CreditorId?: integer|null,
-     *     TypeId?: integer|null,
+     *     CreditorId?: int,
+     *     TypeId?: int,
      *     Value?: string|null,
      * } $parameters
      *
@@ -222,43 +223,43 @@ class RelationsRequest extends Request
      * Debiteur toevoegen of updaten.
      *
      * @param array{
-     *     Id?: integer|null,
+     *     Id?: int|null,
      *     IsoCode?: string|null,
      *     CountryCode?: string|null,
-     *     CountryId?: integer|null,
+     *     CountryId?: int,
      *     CompanyName?: string|null,
      *     FirstName?: string|null,
      *     LastName?: string|null,
      *     EmailAddress?: string|null,
-     *     PaymentMethodId?: integer|null,
-     *     PricelistIds?: array<integer>|null,
-     *     VatCode?: array{Id?: integer, Percent?: number, Name?: string|null}|null,
+     *     PaymentMethodId?: int|null,
+     *     PricelistIds?: array<int>,
+     *     VatCode?: array{Id?: int, Percent?: number, Name?: string|null},
      *     TelephoneNumber?: string|null,
      *     MobileNumber?: string|null,
      *     Faxnumber?: string|null,
      *     ChamberOfCommerceCode?: string|null,
      *     Website?: string|null,
-     *     Status?: array{Id?: integer, Description?: string|null}|null,
+     *     Status?: array{Id?: int, Description?: string|null},
      *     Discount?: number|null,
-     *     Representative?: array{Id?: integer, Name?: string|null}|null,
-     *     Type?: array{Id?: integer, Description?: string|null}|null,
-     *     StandardReportIdForPickingList?: integer|null,
-     *     StandardReportIdForSalesOrderDelivery?: integer|null,
+     *     Representative?: array{Id?: int, Name?: string|null},
+     *     Type?: array{Id?: int, Description?: string|null},
+     *     StandardReportIdForPickingList?: int|null,
+     *     StandardReportIdForSalesOrderDelivery?: int|null,
      *     City?: string|null,
      *     Zipcode?: string|null,
      *     Street?: string|null,
      *     HouseNumber?: string|null,
      *     HouseNumberAddition?: string|null,
      *     VatNumber?: string|null,
-     *     DontPrintPaperInvoiceForDebtor?: boolean|null,
-     *     ReceiveInvoiceElectronically?: boolean|null,
-     *     ElectronicInvoiceAttachmentType?: integer|null,
-     *     StandardInvoiceLayoutReportId?: integer|null,
-     *     Gender?: array{Id?: integer, Name?: string|null}|null,
+     *     DontPrintPaperInvoiceForDebtor?: bool,
+     *     ReceiveInvoiceElectronically?: bool,
+     *     ElectronicInvoiceAttachmentType?: int|null,
+     *     StandardInvoiceLayoutReportId?: int|null,
+     *     Gender?: array{Id?: int, Name?: string|null},
      *     Preposition?: string|null,
      *     CreditLimit?: number|null,
-     *     ShippingMethodId?: integer|null,
-     *     GlobalisationId?: integer|null,
+     *     ShippingMethodId?: int|null,
+     *     GlobalisationId?: int|null,
      * } $parameters
      *
      * @throws Logic4ApiException
@@ -279,8 +280,8 @@ class RelationsRequest extends Request
      * Debiteur externe identifier toevoegen of updaten.
      *
      * @param array{
-     *     DebtorId?: integer|null,
-     *     TypeId?: integer|null,
+     *     DebtorId?: int,
+     *     TypeId?: int,
      *     Value?: string|null,
      * } $parameters
      *
@@ -300,8 +301,8 @@ class RelationsRequest extends Request
      * Verwijder een crediteur derde partij externe identifier.
      *
      * @param array{
-     *     CreditorId?: integer|null,
-     *     TypeId?: integer|null,
+     *     CreditorId?: int|null,
+     *     TypeId?: int|null,
      *     Value?: string|null,
      * } $parameters
      *
@@ -321,8 +322,8 @@ class RelationsRequest extends Request
      * Verwijder een debiteur derde partij externe identifier.
      *
      * @param array{
-     *     DebtorId?: integer|null,
-     *     TypeId?: integer|null,
+     *     DebtorId?: int|null,
+     *     TypeId?: int|null,
      *     Value?: string|null,
      * } $parameters
      *
@@ -342,14 +343,14 @@ class RelationsRequest extends Request
      * Verkrijg adressen o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     Id?: integer|null,
-     *     AddressTypeId?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     Id?: int|null,
+     *     AddressTypeId?: int|null,
      *     PhoneNumber?: string|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     ExcludeHiddenContacts?: boolean|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     ExcludeHiddenContacts?: bool,
      *     OwnContactNumber?: string|null,
      * } $parameters
      *
@@ -386,14 +387,14 @@ class RelationsRequest extends Request
      * Verkrijg contacten o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     Id?: integer|null,
-     *     AddressTypeId?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     Id?: int|null,
+     *     AddressTypeId?: int|null,
      *     PhoneNumber?: string|null,
-     *     DebtorId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     ExcludeHiddenContacts?: boolean|null,
+     *     DebtorId?: int|null,
+     *     CreditorId?: int|null,
+     *     ExcludeHiddenContacts?: bool,
      *     OwnContactNumber?: string|null,
      * } $parameters
      *
@@ -414,12 +415,12 @@ class RelationsRequest extends Request
 
     /**
      * @param array{
-     *     ContactIds?: array<integer>|null,
-     *     DebtorId?: integer|null,
+     *     ContactIds?: array<int>,
+     *     DebtorId?: int|null,
      *     ContactType?: string|null,
      *     LastCharacteristicChangeDateTime?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, ContactCharacteristic>
@@ -435,9 +436,7 @@ class RelationsRequest extends Request
         }
     }
 
-    /**
-     * @throws Logic4ApiException
-     */
+    /** @throws Logic4ApiException */
     public function getContactTypes(): ContactTypeLogic4ResponseList
     {
         return ContactTypeLogic4ResponseList::make(
@@ -451,9 +450,9 @@ class RelationsRequest extends Request
      * Crediteur discounts ophalen (maximaal 1000).
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     Ids?: array<integer>|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
+     *     Ids?: array<int>,
      * } $parameters
      *
      * @return \Generator<array-key, CreditorDiscount>
@@ -487,13 +486,13 @@ class RelationsRequest extends Request
      * Verkrijg crediteuren o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     Id?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     Id?: int|null,
      *     PhoneNumber?: string|null,
-     *     WebsiteDomainId?: integer|null,
+     *     WebsiteDomainId?: int|null,
      *     EmailAddress?: string|null,
-     *     EmailAddressIsExact?: boolean|null,
+     *     EmailAddressIsExact?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, Creditor>
@@ -515,8 +514,8 @@ class RelationsRequest extends Request
      * Verkrijg crediteur externe identifiers o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     CreditorId?: integer|null,
-     *     TypeId?: integer|null,
+     *     CreditorId?: int|null,
+     *     TypeId?: int|null,
      *     Value?: string|null,
      * } $parameters
      *
@@ -536,13 +535,13 @@ class RelationsRequest extends Request
      * Verkrijg debiteuren o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
-     *     Id?: integer|null,
+     *     SkipRecords?: int|null,
+     *     TakeRecords?: int|null,
+     *     Id?: int|null,
      *     PhoneNumber?: string|null,
-     *     WebsiteDomainId?: integer|null,
+     *     WebsiteDomainId?: int|null,
      *     EmailAddress?: string|null,
-     *     EmailAddressIsExact?: boolean|null,
+     *     EmailAddressIsExact?: bool,
      * } $parameters
      *
      * @return \Generator<array-key, Customer>
@@ -562,10 +561,10 @@ class RelationsRequest extends Request
 
     /**
      * @param array{
-     *     DebtorIds?: array<integer>|null,
+     *     DebtorIds?: array<int>,
      *     LastCharacteristicChangeDateTime?: string|null,
-     *     SkipRecords?: integer|null,
-     *     TakeRecords?: integer|null,
+     *     SkipRecords?: int,
+     *     TakeRecords?: int,
      * } $parameters
      *
      * @return \Generator<array-key, DebtorCharacteristic>
@@ -585,8 +584,8 @@ class RelationsRequest extends Request
      * Verkrijg debiteur externe identifiers o.b.v. het meegestuurde filter.
      *
      * @param array{
-     *     DebtorId?: integer|null,
-     *     TypeId?: integer|null,
+     *     DebtorId?: int|null,
+     *     TypeId?: int|null,
      *     Value?: string|null,
      * } $parameters
      *
@@ -706,10 +705,10 @@ class RelationsRequest extends Request
      * Crediteur discount updaten. Retourneert true indien succesvol.
      *
      * @param array{
-     *     Id?: integer|null,
-     *     TypeId?: integer|null,
-     *     CreditorId?: integer|null,
-     *     BrandId?: integer|null,
+     *     Id?: int,
+     *     TypeId?: int,
+     *     CreditorId?: int,
+     *     BrandId?: int,
      *     DateFrom?: string|null,
      *     DateTo?: string|null,
      *     Percentage?: number|null,
@@ -733,44 +732,44 @@ class RelationsRequest extends Request
      * Waarden van een bestaande debiteur updaten.
      *
      * @param array{
-     *     Id?: integer|null,
+     *     Id?: int,
      *     IsoCode?: string|null,
      *     CountryCode?: string|null,
-     *     CountryId?: integer|null,
+     *     CountryId?: int,
      *     CompanyName?: string|null,
      *     FirstName?: string|null,
      *     LastName?: string|null,
      *     EmailAddress?: string|null,
-     *     PaymentMethodId?: integer|null,
-     *     PricelistIds?: array<integer>|null,
+     *     PaymentMethodId?: int|null,
+     *     PricelistIds?: array<int>,
      *     TelephoneNumber?: string|null,
      *     MobileNumber?: string|null,
      *     Faxnumber?: string|null,
      *     ChamberOfCommerceCode?: string|null,
      *     Website?: string|null,
      *     Discount?: number|null,
-     *     StandardReportIdForPickingList?: integer|null,
-     *     StandardReportIdForSalesOrderDelivery?: integer|null,
+     *     StandardReportIdForPickingList?: int|null,
+     *     StandardReportIdForSalesOrderDelivery?: int|null,
      *     City?: string|null,
      *     Zipcode?: string|null,
      *     Street?: string|null,
      *     HouseNumber?: string|null,
      *     HouseNumberAddition?: string|null,
      *     VatNumber?: string|null,
-     *     DontPrintPaperInvoiceForDebtor?: boolean|null,
-     *     ReceiveInvoiceElectronically?: boolean|null,
-     *     ElectronicInvoiceAttachmentType?: integer|null,
-     *     StandardInvoiceLayoutReportId?: integer|null,
+     *     DontPrintPaperInvoiceForDebtor?: bool,
+     *     ReceiveInvoiceElectronically?: bool,
+     *     ElectronicInvoiceAttachmentType?: int|null,
+     *     StandardInvoiceLayoutReportId?: int|null,
      *     Preposition?: string|null,
      *     CreditLimit?: number|null,
-     *     ShippingMethodId?: integer|null,
-     *     GlobalisationId?: integer|null,
-     *     VatCodeId?: integer|null,
-     *     StatusId?: integer|null,
-     *     RepresentativeId?: integer|null,
-     *     RelationTypeId?: integer|null,
-     *     GenderId?: integer|null,
-     *     StandardPackagingSlipLayoutReportId?: integer|null,
+     *     ShippingMethodId?: int|null,
+     *     GlobalisationId?: int|null,
+     *     VatCodeId?: int|null,
+     *     StatusId?: int|null,
+     *     RepresentativeId?: int|null,
+     *     RelationTypeId?: int|null,
+     *     GenderId?: int|null,
+     *     StandardPackagingSlipLayoutReportId?: int|null,
      *     FreeValue1?: string|null,
      *     FreeValue2?: string|null,
      *     FreeValue3?: string|null,
