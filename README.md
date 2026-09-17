@@ -126,6 +126,23 @@ The endpoints can automatically be generated using the `generate` command. This 
 make generate
 ``` 
 
+Production documentation remains the default source. To generate the client from the Logic4 QA documentation instead, run:
+
+```bash
+composer generate-beta-endpoints
+```
+
+### Beta releases
+
+The `Build Logic4 QA beta` workflow checks the QA documentation daily. Scheduled runs only build, test, and upload a beta candidate when the generated client differs from `master`; they cannot publish a package.
+
+Publishing requires a manual workflow run from `master` with `publish` enabled, a semantic `base_version` such as `4.1.0` or the `BETA_BASE_VERSION` repository variable, and approval through the `beta-release` GitHub environment. A successful run creates a tag such as `v4.1.0-beta.1` and marks its GitHub release as a prerelease.
+
+Install a specific beta with:
+
+```bash
+composer require webparking/logic4-client:4.1.0-beta.1
+```
+
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-

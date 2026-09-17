@@ -53,7 +53,12 @@
             "composer check-coverage"
         ],
         "generate-endpoints": [
-            "@php generate.php",
+            "@php generate.php --source=production",
+            "vendor/bin/rector process --no-diffs --ansi --memory-limit=2G",
+            "vendor/bin/php-cs-fixer fix"
+        ],
+        "generate-beta-endpoints": [
+            "@php generate.php --source=qa --refresh",
             "vendor/bin/rector process --no-diffs --ansi --memory-limit=2G",
             "vendor/bin/php-cs-fixer fix"
         ]
