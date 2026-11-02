@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions about Logic4 or feature requests for its API
+    url: https://www.logic4.nl/
+    about: This client is not maintained by Logic4 and only follows what Logic4 documents. Contact Logic4 for questions about the API itself or for new functionality.
+  - name: Security issues
+    url: https://github.com/webparking/logic4-client/security/advisories/new
+    about: Report vulnerabilities privately instead of opening an issue.

@@ -1,0 +1,57 @@
+name: Bug report
+description: Something in the client does not behave as documented
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Questions about Logic4 itself or its API belong with Logic4 support; this client is not maintained by Logic4.
+
+        Never paste credentials, access tokens or `Authorization` headers.
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version
+      description: Output of `composer show webparking/logic4-client | grep versions`
+      placeholder: v4.0.1
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: "8.3.12"
+    validations:
+      required: true
+  - type: input
+    id: request-method
+    attributes:
+      label: Request class and method
+      description: Include the version namespace.
+      placeholder: Requests\V30\ProductRequest::getProducts()
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The exception message, the wrong value, or the missing property. Redact anything sensitive.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: Minimal code to reproduce
+      render: php
+  - type: input
+    id: scalar-link
+    attributes:
+      label: Link to the endpoint in Logic4's documentation
+      placeholder: https://api.logic4server.nl/scalar/
