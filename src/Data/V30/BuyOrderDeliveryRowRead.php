@@ -9,6 +9,7 @@ class BuyOrderDeliveryRowRead
     public function __construct(
         public ?float $buyPrice,
         public int $id,
+        public ?int $buyOrderId,
         public ?string $productCode,
         public ?string $vendorCode,
         public ?string $productCodeSupplier,
@@ -29,6 +30,7 @@ class BuyOrderDeliveryRowRead
         return new self(
             buyPrice: $data['BuyPrice'] ?? null,
             id: $data['Id'] ?? 0,
+            buyOrderId: $data['BuyOrderId'] ?? null,
             productCode: $data['ProductCode'] ?? null,
             vendorCode: $data['VendorCode'] ?? null,
             productCodeSupplier: $data['ProductCodeSupplier'] ?? null,
