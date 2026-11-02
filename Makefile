@@ -24,6 +24,10 @@ generate: ## Generates request classes based on API definition
 	"$(EXEC)" php generate.php
 	make rector
 	make cs-fix
+	make docs
+
+docs: ## Generates the endpoint reference in docs/endpoints
+	"$(EXEC)" composer generate-endpoint-docs
 
 ##@ Analyze
 analyze: phpstan cs ## Run code analyzers

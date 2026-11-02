@@ -50,7 +50,7 @@ jobs:
           commit-message: "Update endpoints"
           title: "Update endpoints based on changes in Logic4 documentation"
           body: |
-            I have found some changes in the Logic4 documentation! This PR updates the generators. Here are the changed files:
+            I have found some changes in the Logic4 documentation! This PR updates the generated client and the endpoint reference in `docs/endpoints`. Here are the changed files:
             ```
              ${{ env.CHANGED_FILES }}
             ```

@@ -65,12 +65,19 @@
         "generate-endpoints": [
             "@php generate.php --source=production",
             "vendor/bin/rector process --no-diffs --ansi --memory-limit=2G",
-            "vendor/bin/php-cs-fixer fix"
+            "vendor/bin/php-cs-fixer fix",
+            "@php generate-endpoint-docs.php"
         ],
         "generate-beta-endpoints": [
             "@php generate.php --source=qa --refresh",
             "vendor/bin/rector process --no-diffs --ansi --memory-limit=2G",
             "vendor/bin/php-cs-fixer fix"
+        ],
+        "generate-endpoint-docs": [
+            "@php generate-endpoint-docs.php"
+        ],
+        "check-endpoint-docs": [
+            "@php generate-endpoint-docs.php --check"
         ]
     },
     "config": {

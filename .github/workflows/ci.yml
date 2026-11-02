@@ -49,6 +49,10 @@ jobs:
         if: matrix.php-version == '8.3'
         run: composer run-script test
 
+      - name: Check endpoint reference
+        if: matrix.php-version == '8.3'
+        run: composer check-endpoint-docs
+
       - name: Run compatibility tests
         if: matrix.php-version == '8.5'
         run: vendor/bin/phpunit
