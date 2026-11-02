@@ -1,7 +1,17 @@
 {
     "name": "webparking/logic4-client",
-    "description": "A package to connect with Logic4",
+    "description": "Unofficial PHP client for the Logic4 API, generated from Logic4's OpenAPI documentation",
     "type": "library",
+    "keywords": [
+        "logic4",
+        "api",
+        "client",
+        "sdk",
+        "laravel",
+        "erp",
+        "openapi"
+    ],
+    "homepage": "https://github.com/webparking/logic4-client",
     "license": "MIT",
     "require": {
         "php": "^8.3",
@@ -55,12 +65,19 @@
         "generate-endpoints": [
             "@php generate.php --source=production",
             "vendor/bin/rector process --no-diffs --ansi --memory-limit=2G",
-            "vendor/bin/php-cs-fixer fix"
+            "vendor/bin/php-cs-fixer fix",
+            "@php generate-endpoint-docs.php"
         ],
         "generate-beta-endpoints": [
             "@php generate.php --source=qa --refresh",
             "vendor/bin/rector process --no-diffs --ansi --memory-limit=2G",
             "vendor/bin/php-cs-fixer fix"
+        ],
+        "generate-endpoint-docs": [
+            "@php generate-endpoint-docs.php"
+        ],
+        "check-endpoint-docs": [
+            "@php generate-endpoint-docs.php --check"
         ]
     },
     "config": {

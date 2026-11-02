@@ -1,0 +1,48 @@
+name: Missing documented endpoint
+description: An endpoint that Logic4 already documents is missing from the client or generated incorrectly
+labels:
+  - logic4
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template only for endpoints that already appear in Logic4's API documentation and that the client does not support or generates incorrectly. The client follows Logic4's documentation; it cannot add functionality Logic4 does not offer. Requests for new Logic4 features belong with Logic4 itself.
+
+        Check the [endpoint reference](https://github.com/webparking/logic4-client/tree/master/docs/endpoints) first; the endpoint may already exist in another version namespace.
+  - type: input
+    id: endpoint
+    attributes:
+      label: Endpoint path
+      placeholder: /v3/Products/GetProductMedia
+    validations:
+      required: true
+  - type: dropdown
+    id: api-version
+    attributes:
+      label: Logic4 API version
+      options:
+        - v3.1
+        - v3.0
+        - v2.0
+        - v1.4
+        - v1.3
+        - v1.2
+        - v1.1
+        - v1.0
+    validations:
+      required: true
+  - type: input
+    id: scalar-link
+    attributes:
+      label: Link to the endpoint in Logic4's documentation
+      description: The endpoint must be listed there. Production docs are at https://api.logic4server.nl/scalar/.
+      placeholder: https://api.logic4server.nl/scalar/
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is missing or wrong
+      description: For example a missing method, a wrong return type, or a property that is never filled.
+    validations:
+      required: true

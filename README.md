@@ -6,143 +6,149 @@
 ![Downloads](https://img.shields.io/packagist/dt/webparking/logic4-client.svg?style=flat-round)
 
 # Logic4 client
-Please note that this API client is not created or maintained by Logic4. For questions about Logic4 or it's API please contact Logic4 support. 
 
-## Installation 
-You can install the package via composer:
+Unofficial PHP client for the Logic4 API. The request classes, response objects and endpoint reference are generated from Logic4's own OpenAPI documentation and checked for changes every day. The client covers Logic4 API v1.0 through v3.1, takes care of the OAuth access token and returns typed objects instead of raw arrays.
+
+This package is not created or maintained by Logic4. For questions about Logic4 or its API, contact Logic4 support.
+
+## Requirements
+
+- PHP 8.3 or newer
+- A [PSR-16](https://www.php-fig.org/psr/psr-16/) cache implementation to store the access token
+- Laravel is optional; the client works in any PHP application
+
+## Installation
+
 ```bash
 composer require webparking/logic4-client
-``` 
-
-## Configuration
-In order to use the Logic4 API, you need to configure the `AccessTokenManager` with your credentials. You can do this by calling the `configure` method on the `AccessTokenManager` instance.
- 
-The following configuration options are required
-- `public_key` - The public key of your Logic4 account
-- `company_key` - The company key of your Logic4 account
-- `username` - The username of your Logic4 account
-- `secret_key` - The secret key of your Logic4 account
-- `password` - The password of your Logic4 account
-- `administration_id` - The administration id of your Logic4 account
-
-The access token is automatically refreshed when it expires and stored in the cache. The cache object is set using the `$cache` property on the `AccessTokenManager` class and should implement the `Psr\SimpleCache\CacheInterface` interface.
-
-After configuring the `AccessTokenManager` you can use any request class in your application without having to worry about the access token and other middleware.
-
-### Example configuration
-```php
-# In this example, we load the configuration from a .env file.
-$dotEnv = Dotenv\Dotenv::createImmutable(__DIR__);
-$credentials = $dotEnv->load()
-
-# We use the ArrayStore for testing purposes, but you can use any cache implementation that implements the Psr\SimpleCache\CacheInterface interface.
-$cache = new \Illuminate\Cache\Repository(new \Illuminate\Cache\ArrayStore());
-    
-$tokenManager = new \Webparking\Logic4Client\AccessTokenManager($cache);
-$tokenManager->configure($credentials);
-
-# Initialize the ClientFactory using the AccessTokenManager
-$clientFactory = new \Webparking\Logic4Client\ClientFactory($tokenManager);
-
-# Initialize the request class using the ClientFactory
-$request = new \Webparking\Logic4Client\Requests\ProductRequest($clientFactory);
-$request->getProducts([
-    'DebtorId' => 1,
-]);
 ```
 
-## Laravel integration
-Integration with Laravel is easily done by configuring the `AccessTokenManager` after it has been resolved by the Laravel IoC Container.
-
-Add the following code to your `AppServiceProvider` class:
-
-```php
-use Webparking\Logic4Client\AccessTokenManager;
-
-$this->app
-    ->afterResolving(AccessTokenManager::class, fn (AccessTokenManager $tokenManager) => $tokenManager->configure([
-        'public_key' => config('services.logic4.public_key'),
-        'company_key' => config('services.logic4.company_key'),
-        'username' => config('services.logic4.username'),
-        'secret_key' => config('services.logic4.secret_key'),
-        'password' => config('services.logic4.password'),
-        'administration_id' => config('services.logic4.administration_id'),
-    ]));
-```
-
-This makes it possible to directly use any request class in your application without having to worry about the access token and other middleware.
-
-### Example request
-
-```php
-use Webparking\Logic4Client\Requests\ProductRequest;
-use Webparking\Logic4Client\Data\Product;
-use Illuminate\Support\Collection;
-
-/** @return array<Product> */
-public function index(ProductRequest $productRequest, int $debtorId): array
-{
-    $products = $productRequest->getProducts([
-        'DebtorId' => $debtorId,
-    ]);
-    
-    return iterator_to_array($products);
-}
-```
-
-## Testing
-You can test the package by running `./vendor/bin/phpunit` in the root of the project. Make sure install the dependencies by running `composer install` before running the tests.
-
-```bash
-composer install
-./vendor/bin/phpunit
-```
-
-### Preventing stray requests
-If you would like to ensure that all requests sent via the client have been mocked throughout your individual test or complete test suite, you can call the `preventStrayRequests` method on the `\Webparking\Logic4Client\ClientFactory` class. After calling this method, any requests that do not have a corresponding mock will throw an exception rather than making the actual request:
-
-```php
-// turns on stray request prevention
-\Webparking\Logic4Client\ClientFactory::preventStrayRequests();
-
-// an exception is thrown if the request is not mocked
-$request->getProducts(['DebtorId' => 1]);
-
-// turns off stray request prevention
-\Webparking\Logic4Client\ClientFactory::preventStrayRequests(false);
-
-// no exception is thrown and will make the actual request
-$request->getProducts(['DebtorId' => 1]);
-```
-
-## Contributing
-Please report any issue you find in the issues page. Pull requests are more than welcome.
-
-### Generating endpoints
-
-The endpoints can automatically be generated using the `generate` command. This command will generate a request class for each endpoint and a client class that can be used to instantiate the request classes.
-
-```bash
-make generate
-``` 
-
-Production documentation remains the default source. To generate the client from the Logic4 QA documentation instead, run:
-
-```bash
-composer generate-beta-endpoints
-```
-
-### Beta releases
-
-The `Build Logic4 QA beta` workflow checks the QA documentation daily. Scheduled runs only build, test, and upload a beta candidate when the generated client differs from `master`; they cannot publish a package.
-
-Publishing requires a manual workflow run from `master` with `publish` enabled, a semantic `base_version` such as `4.1.0` or the `BETA_BASE_VERSION` repository variable, and approval through the `beta-release` GitHub environment. A successful run creates a tag such as `v4.1.0-beta.1` and marks its GitHub release as a prerelease.
-
-Install a specific beta with:
+Beta builds generated from Logic4's QA environment are published as prereleases:
 
 ```bash
 composer require webparking/logic4-client:4.1.0-beta.1
 ```
 
+## Quick start
+
+Any PSR-16 cache works for the access token. This example uses `symfony/cache`:
+
+```php
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Psr16Cache;
+use Webparking\Logic4Client\AccessTokenManager;
+use Webparking\Logic4Client\ClientFactory;
+use Webparking\Logic4Client\Requests\V11\ProductRequest;
+
+$tokenManager = new AccessTokenManager(new Psr16Cache(new FilesystemAdapter()));
+$tokenManager->configure([
+    'public_key' => $_ENV['LOGIC4_PUBLIC_KEY'],
+    'company_key' => $_ENV['LOGIC4_COMPANY_KEY'],
+    'username' => $_ENV['LOGIC4_USERNAME'],
+    'secret_key' => $_ENV['LOGIC4_SECRET_KEY'],
+    'password' => $_ENV['LOGIC4_PASSWORD'],
+    'administration_id' => $_ENV['LOGIC4_ADMINISTRATION_ID'],
+]);
+
+$products = new ProductRequest(new ClientFactory($tokenManager));
+
+foreach ($products->getProducts(['DebtorId' => 1]) as $product) {
+    echo $product->productId, \PHP_EOL;
+}
+```
+
+Every request class lives in a namespace named after the Logic4 API version it talks to: `Requests\V11\ProductRequest` calls `/v1.1/Products/...` and `Requests\V30\ProductRequest` calls `/v3/Products/...`. Pick the highest version that has the endpoint you need. See [Choosing an API version](docs/api-versions.md).
+
+## Laravel
+
+Laravel binds `Psr\SimpleCache\CacheInterface` to your default cache store, so the container can build `AccessTokenManager` on its own. Supply the credentials once, in the `register()` method of a service provider:
+
+```php
+use Illuminate\Support\ServiceProvider;
+use Webparking\Logic4Client\AccessTokenManager;
+
+final class Logic4ServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        $this->app->afterResolving(AccessTokenManager::class, static fn (AccessTokenManager $tokenManager) => $tokenManager->configure([
+            'public_key' => config('services.logic4.public_key'),
+            'company_key' => config('services.logic4.company_key'),
+            'username' => config('services.logic4.username'),
+            'secret_key' => config('services.logic4.secret_key'),
+            'password' => config('services.logic4.password'),
+            'administration_id' => config('services.logic4.administration_id'),
+        ]));
+    }
+}
+```
+
+Request classes can then be injected anywhere:
+
+```php
+use Webparking\Logic4Client\Requests\V11\ProductRequest;
+
+final class ProductController
+{
+    public function __invoke(ProductRequest $products): array
+    {
+        return iterator_to_array($products->getProducts(['DebtorId' => 1]));
+    }
+}
+```
+
+The full setup, including `config/services.php`, is in [Getting started](docs/getting-started.md).
+
+## Responses
+
+Endpoint methods return one of three shapes. The method signature and its `@return` docblock tell you which.
+
+| Shape | Where | Example | How to read it |
+| --- | --- | --- | --- |
+| `\Generator<DTO>` | Paginated lists in V10 to V20 | `V11\ProductRequest::getProducts()` | `foreach` over it. Pages of 1000 records load as you go. `iterator_to_array()` loads everything. |
+| `*Logic4ResponseList` | Other lists in V10 to V20 | `V10\ProductGroupsRequest::getProductGroups()` | `->records`, `->recordsCounter`, `->validationMessages` |
+| `array`, `string`, `int`, `bool`, `void` or a single object | V30 and V31 | `V30\ProductRequest::getProducts()` | Plain PHP values. Objects live in `Responses\V30`. |
+
+Details and pagination options are in [Responses](docs/responses.md).
+
+## Errors
+
+Every HTTP status of 400 or higher becomes a `Logic4ApiException`, with the Guzzle exception attached as `previous`:
+
+```php
+use Webparking\Logic4Client\Exceptions\Logic4ApiException;
+
+try {
+    $groups = $request->getProductGroups(['IsTopLevelGroup' => true]);
+} catch (Logic4ApiException $exception) {
+    report($exception->getPrevious() ?? $exception);
+}
+```
+
+Transport failures, token failures and validation messages are covered in [Errors](docs/errors.md).
+
+## Testing your integration
+
+Give a request class a mocked Guzzle client with `setClient()`, or enable `ClientFactory::preventStrayRequests()` in your test case so every unmocked call throws. Examples for Mockery, Guzzle's `MockHandler` and Laravel are in [Testing](docs/testing.md).
+
+## Documentation
+
+- [Getting started](docs/getting-started.md): credentials, plain PHP and Laravel setup, request lifecycle
+- [Choosing an API version](docs/api-versions.md): what the `V10` to `V31` namespaces mean and which ones still change
+- [Responses](docs/responses.md): generators, envelopes, plain values, pagination
+- [Errors](docs/errors.md): exceptions, validation messages, retries
+- [Configuration](docs/configuration.md): every constructor argument, cache behaviour, QA environment
+- [Testing](docs/testing.md): mocking patterns for your own test suite
+- [Endpoint reference](docs/endpoints/README.md): every request class and method per API version
+- [Changelog](CHANGELOG.md) and [upgrade guide](UPGRADE.md)
+- Logic4's own API documentation: [production](https://api.logic4server.nl/scalar/) and [QA](https://qa.api.logic4server.nl/scalar/)
+
+## Contributing
+
+Bug reports and pull requests are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) explains the development environment, the generator and the release process. Security issues go through [SECURITY.md](SECURITY.md).
+
+The client only follows what Logic4 documents. Open an issue when a documented endpoint is missing or generated incorrectly; requests for new Logic4 functionality belong with Logic4 itself.
+
 ## License
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+The MIT License (MIT). Please see the [license file](LICENSE.md) for more information.
