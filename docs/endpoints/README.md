@@ -10,5 +10,5 @@ One page per Logic4 API version namespace, generated from `src/Requests` by `com
 | [`V13`](V13.md) | v1.3 | `/v1.3/` | 3 | 5 | 0 |
 | [`V14`](V14.md) | v1.4 | `/v1.4/` | 1 | 1 | 0 |
 | [`V20`](V20.md) | v2.0 | `/v2/` | 5 | 8 | 0 |
-| [`V30`](V30.md) | v3.0 | `/v3/` | 29 | 289 | 0 |
+| [`V30`](V30.md) | v3.0 | `/v3/` | 29 | 290 | 0 |
 | [`V31`](V31.md) | v3.1 | `/v3.1/` | 1 | 1 | 0 |
