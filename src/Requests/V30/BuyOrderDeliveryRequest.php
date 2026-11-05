@@ -8,6 +8,7 @@ use Webparking\Logic4Client\Exceptions\Logic4ApiException;
 use Webparking\Logic4Client\Request;
 use Webparking\Logic4Client\Responses\V30\BuyOrderDeliveryAndOrderMovement;
 use Webparking\Logic4Client\Responses\V30\BuyOrderDeliveryRead;
+use Webparking\Logic4Client\Responses\V30\BuyOrderDeliveryRowExtendedRead;
 use Webparking\Logic4Client\Responses\V30\BuyOrderDeliveryStatusValue;
 use Webparking\Logic4Client\Responses\V30\BuyOrderDeliveryTypeValue;
 
@@ -91,6 +92,34 @@ class BuyOrderDeliveryRequest extends Request
             static fn (array $data) => BuyOrderDeliveryRead::make($data),
             $this->buildResponse(
                 $this->getClient()->post('/v3/BuyOrderDeliveries/GetBuyOrderDeliveries', ['json' => $parameters]),
+            ),
+        );
+    }
+
+    /**
+     * Verkrijg inkoopleveringsregels o.b.v. inkoopleveringsnummers, inkoopordernummers en/of pakbonnummers van de leverancier.
+     * Per filter mogen maximaal 1000 waarden worden meegegeven (in totaal maximaal 2000), een leeg filter wordt genegeerd.
+     * Minimaal één filter is verplicht.
+     * Het aantal op te vragen inkoopleveringsregels is gelimiteerd tot 10000.
+     *
+     * @param array{
+     *     Skip?: int|null,
+     *     Take?: int|null,
+     *     BuyOrderDeliveryIds?: array<int>,
+     *     BuyOrderIds?: array<int>,
+     *     PickingListNumbers?: array<string>,
+     * } $parameters
+     *
+     * @return array<array-key, BuyOrderDeliveryRowExtendedRead>
+     *
+     * @throws Logic4ApiException
+     */
+    public function getBuyOrderDeliveryRows(array $parameters = []): array
+    {
+        return array_map(
+            static fn (array $data) => BuyOrderDeliveryRowExtendedRead::make($data),
+            $this->buildResponse(
+                $this->getClient()->post('/v3/BuyOrderDeliveries/GetBuyOrderDeliveryRows', ['json' => $parameters]),
             ),
         );
     }

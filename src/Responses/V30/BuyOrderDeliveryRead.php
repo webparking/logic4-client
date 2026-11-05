@@ -6,13 +6,17 @@ namespace Webparking\Logic4Client\Responses\V30;
 
 class BuyOrderDeliveryRead
 {
-    /** @param array<\Webparking\Logic4Client\Data\V30\BuyOrderDeliveryRowRead> $rows */
+    /**
+     * @param array<\Webparking\Logic4Client\Data\V30\BuyOrderDeliveryQtyAssignedRead> $assignedQuantities
+     * @param array<\Webparking\Logic4Client\Data\V30\BuyOrderDeliveryRowRead>         $rows
+     */
     public function __construct(
         public int $buyOrderDeliveryId,
         public ?\Carbon\Carbon $dateTimeCreated,
         public ?\Carbon\Carbon $dateTimeProcessed,
         public int $statusId,
         public int $typeId,
+        public ?array $assignedQuantities,
         public ?int $supplierId,
         public ?int $buyOrderId,
         public ?string $remarks,
@@ -32,6 +36,7 @@ class BuyOrderDeliveryRead
             dateTimeProcessed: isset($data['DateTimeProcessed']) ? \Carbon\Carbon::parse($data['DateTimeProcessed']) : null,
             statusId: $data['StatusId'] ?? 0,
             typeId: $data['TypeId'] ?? 0,
+            assignedQuantities: array_map(static fn (array $item) => \Webparking\Logic4Client\Data\V30\BuyOrderDeliveryQtyAssignedRead::make($item), $data['AssignedQuantities'] ?? []),
             supplierId: $data['SupplierId'] ?? null,
             buyOrderId: $data['BuyOrderId'] ?? null,
             remarks: $data['Remarks'] ?? null,

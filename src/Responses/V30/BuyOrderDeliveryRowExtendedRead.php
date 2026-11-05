@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Webparking\Logic4Client\Responses\V30;
+
+class BuyOrderDeliveryRowExtendedRead
+{
+    public function __construct(
+        public int $buyOrderDeliveryId,
+        public ?int $supplierId,
+        public ?string $pickingListNumber,
+        public ?float $buyPrice,
+        public int $id,
+        public ?int $buyOrderId,
+        public ?string $productCode,
+        public ?string $vendorCode,
+        public ?string $productCodeSupplier,
+        public ?int $buyOrderRowId,
+        public ?string $debtorName,
+        public ?int $orderId,
+        public int $productId,
+        public float $qtyDelivered,
+        public ?string $remarks,
+        public ?int $stockLocationId,
+        public ?int $amountOfLabelsToPrint,
+    ) {
+    }
+
+    /** @param array<mixed> $data */
+    public static function make(array $data): self
+    {
+        return new self(
+            buyOrderDeliveryId: $data['BuyOrderDeliveryId'] ?? 0,
+            supplierId: $data['SupplierId'] ?? null,
+            pickingListNumber: $data['PickingListNumber'] ?? null,
+            buyPrice: $data['BuyPrice'] ?? null,
+            id: $data['Id'] ?? 0,
+            buyOrderId: $data['BuyOrderId'] ?? null,
+            productCode: $data['ProductCode'] ?? null,
+            vendorCode: $data['VendorCode'] ?? null,
+            productCodeSupplier: $data['ProductCodeSupplier'] ?? null,
+            buyOrderRowId: $data['BuyOrderRowId'] ?? null,
+            debtorName: $data['DebtorName'] ?? null,
+            orderId: $data['OrderId'] ?? null,
+            productId: $data['ProductId'] ?? 0,
+            qtyDelivered: $data['Qty_Delivered'] ?? 0.0,
+            remarks: $data['Remarks'] ?? null,
+            stockLocationId: $data['StockLocationId'] ?? null,
+            amountOfLabelsToPrint: $data['AmountOfLabelsToPrint'] ?? null,
+        );
+    }
+}
